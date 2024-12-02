@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -42,8 +44,97 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1311-get-watched-videos-by-your-friends\/"
+    },
+    "headline": "Leetcode 1311: Get Watched Videos by Your Friends",
+    "description": "In-depth solution and explanation for Leetcode 1311: Get Watched Videos by Your Friends in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": ""
+    },
+    "datePublished": "2024-06-28T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Array\",\"Hash Table\",\"Breadth-First Search\",\"Graph\",\"Sorting\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "keywords": "[\"Array\",\"Hash Table\",\"Breadth-First Search\",\"Graph\",\"Sorting\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1314-matrix-block-sum\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1310-xor-queries-of-a-subarray\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -184,7 +275,7 @@
                                     <i class="far fa-star"></i>
                                     Jun 28, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -201,269 +292,482 @@
                     
                     <div class="article-post">
                         <hr>
-<p>You are given <code>n</code> people with unique IDs and two lists: <code>watchedVideos</code> and <code>friends</code>. For a given ID and a level <code>k</code>, find the list of videos watched by people at exactly level <code>k</code> from you. Return the videos ordered by their frequency (in increasing order), and alphabetically if there is a tie in frequency.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input consists of two arrays: <code>watchedVideos</code> (list of lists of strings) and <code>friends</code> (list of lists of integers). Each list contains videos watched by each person and their corresponding friends, respectively.</li>
-<li><strong>Example:</strong> <code>Input: watchedVideos = [[&quot;Music&quot;,&quot;Gaming&quot;],[&quot;Vlog&quot;],[&quot;Music&quot;,&quot;Gaming&quot;],[&quot;Cooking&quot;]], friends = [[1,2],[0,3],[0,3],[1,2]], id = 0, level = 1</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>2 &lt;= n &lt;= 100</li>
-<li>1 &lt;= watchedVideos[i].length &lt;= 100</li>
-<li>1 &lt;= watchedVideos[i][j].length &lt;= 8</li>
-<li>0 &lt;= friends[i].length &lt; n</li>
-<li>0 &lt;= friends[i][j] &lt; n</li>
-<li>0 &lt;= id &lt; n</li>
-<li>1 &lt;= level &lt; n</li>
-<li>if friends[i] contains j, then friends[j] contains i</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> The output is a list of videos sorted first by frequency in increasing order, and alphabetically for ties in frequency.</li>
-<li><strong>Example:</strong> <code>Output: [&quot;Gaming&quot;,&quot;Music&quot;]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The output list must contain videos ordered by frequency and alphabetically for tied frequencies.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> Identify and sort the videos watched by people at exactly level <code>k</code> from the given <code>id</code>.</p>
-<ul>
-<li>Use breadth-first search (BFS) to traverse the graph of friends, identifying people at level <code>k</code> from the given <code>id</code>.</li>
-<li>Track the frequency of videos watched by people at level <code>k</code>.</li>
-<li>Sort the videos based on their frequency and alphabetically for ties.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>The input arrays are valid and all constraints are respected.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li><strong>Input:</strong> <code>Input: watchedVideos = [[&quot;Music&quot;,&quot;Gaming&quot;],[&quot;Vlog&quot;],[&quot;Music&quot;,&quot;Gaming&quot;],[&quot;Cooking&quot;]], friends = [[1,2],[0,3],[0,3],[1,2]], id = 0, level = 1</code>  <br>
-<strong>Explanation:</strong> The BFS traversal identifies the people at level 1 from the given ID (0), and the videos they watched are counted. The result is the list of videos ordered by their frequency.</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>We will use a breadth-first search (BFS) approach to explore friends at different levels and track video frequencies.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>BFS is ideal for finding people at a specific level in an unweighted graph like the friendship network.</li>
-<li>Start by exploring the friends of the given <code>id</code> at level 1, then expand to higher levels if necessary.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>If there are no friends at the specified level, the result should be an empty list.</li>
-<li>Handle the case where <code>n</code> is large, ensuring the solution is efficient.</li>
-<li>Consider the case where all people watched the same video, and the video list should return only that video.</li>
-<li>Ensure the solution efficiently handles the constraints, including large numbers of videos and friends.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> watchedVideosByFriends(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;&amp;</span> wv, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> f, <span style="color:#0b0;font-weight:bold">int</span> id, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> f.size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> vis(n, <span style="color:#a2f">false</span>);
-</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
-</span></span><span style="display:flex;"><span>    q.push(id);
-</span></span><span style="display:flex;"><span>    vis[id] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(k<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> top <span style="color:#666">=</span> q.front();
-</span></span><span style="display:flex;"><span>            q.pop();
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: f[top]) {
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>vis[it]) {
-</span></span><span style="display:flex;"><span>                    vis[it] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>                    q.push(it);
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> fr <span style="color:#666">=</span> q.front();
-</span></span><span style="display:flex;"><span>        q.pop();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">x</span>: wv[fr]) {
-</span></span><span style="display:flex;"><span>            mp[x]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;&gt;</span> ans;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: mp) {
-</span></span><span style="display:flex;"><span>        ans.push_back({it.second, it.first});
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    sort(ans.begin(), ans.end());
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: ans)
-</span></span><span style="display:flex;"><span>        res.push_back(it.second);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+
+
+
+
+
+
+
+
+
+
+<div class=""> Given a 1-indexed integer array nums of length n, an element nums[i] is considered special if the index i divides the length n (i.e., n % i == 0). Your task is to find the sum of the squares of all special elements in the array. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> A 1-indexed integer array nums of length n.</div>
+                        <div class=""> <b>Example:</b> nums = [5, 3, 2, 7]</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length == n &lt;= 50</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 50</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> Return the sum of the squares of all special elements in nums.</div>
+                        <div class=""> <b>Example:</b> Output: 58</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Output is an integer.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> Identify all special elements in the array and calculate the sum of their squares.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Iterate through all elements of nums with their respective 1-based indices.</div>
+                            
+                                <div style="margin-left: 20px;"> • Check if the index i divides the length n.</div>
+                            
+                                <div style="margin-left: 20px;"> • If i divides n, calculate the square of nums[i] and add it to the result.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the sum after processing all indices.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> Limits and conditions for the input and output.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Array length n is between 1 and 50 inclusive.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each element in nums is between 1 and 50 inclusive.</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The input array nums is always 1-indexed.</div>
+                            
+                                <div style="margin-left: 20px;"> • The length of nums is a positive integer.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [4, 5, 6]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> n = 3. Special elements are nums[1] (4) and nums[3] (6). Sum of squares = 4^2 &#43; 6^2 = 16 &#43; 36 = 52.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [1, 3, 7, 2]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> n = 4. Special elements are nums[1] (1), nums[2] (3), and nums[4] (2). Sum of squares = 1^2 &#43; 3^2 &#43; 2^2 = 1 &#43; 9 &#43; 4 = 14.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> Iterate through the array using a loop and check divisibility conditions for each 1-based index. Accumulate the sum of the squares for all qualifying elements.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The index i should divide the length n of the array.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1-based indexing needs careful handling to align with array operations.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • A direct loop from 1 to n with modulus checks will suffice for this problem due to small constraints.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Initialize a variable to store the sum of squares.</div>
+                            
+                                <div style="margin-left: 20px;"> • Loop through the array using 1-based indexing.</div>
+                            
+                                <div style="margin-left: 20px;"> • Check if n % i == 0 for the current index i.</div>
+                            
+                                <div style="margin-left: 20px;"> • If true, add the square of nums[i-1] to the sum.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the accumulated sum after the loop completes.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Not applicable as per constraints (n &gt;= 1).</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Test cases with nums having maximum length and maximum values.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Test cases where all elements in nums are the same.</div>
+                            
+                                <div style="margin-left: 20px;"> • Test cases where nums contains minimal values (all 1s).</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure the code properly handles 1-based indexing.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Looping</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Conditional Function Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sumOfSquares</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">%</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">==</span> <span style="color:#666">0</span>) ans <span style="color:#666">+=</span> nums[i] <span style="color:#666">*</span> nums[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function &lsquo;watchedVideosByFriends&rsquo; helps to determine the most watched videos by friends within a specific distance, &lsquo;k&rsquo;. It uses breadth-first search (BFS) to explore the friend network, then counts how many times each video is watched by the friends up to &lsquo;k&rsquo; steps away.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> watchedVideosByFriends(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;&amp;</span> wv, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> f, <span style="color:#0b0;font-weight:bold">int</span> id, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span></code></pre></div><p>The function &lsquo;watchedVideosByFriends&rsquo; is declared, which takes in a list of video watch data &lsquo;wv&rsquo;, a list of friend relationships &lsquo;f&rsquo;, and the starting person &lsquo;id&rsquo; and the maximum number of friend hops &lsquo;k&rsquo;.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> f.size();
-</span></span></code></pre></div><p>The size of the friend list &lsquo;f&rsquo; is assigned to variable &rsquo;n&rsquo;, which helps manage array bounds when processing the friends list.</p>
-</li>
-<li>
-<p><strong>Vector Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> vis(n, <span style="color:#a2f">false</span>);
-</span></span></code></pre></div><p>A boolean vector &lsquo;vis&rsquo; is initialized to track whether a person has already been visited during the BFS traversal.</p>
-</li>
-<li>
-<p><strong>Queue Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
-</span></span></code></pre></div><p>A queue &lsquo;q&rsquo; is initialized to manage the BFS traversal, storing people who need to be processed.</p>
-</li>
-<li>
-<p><strong>Queue Operation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push(id);
-</span></span></code></pre></div><p>The starting person &lsquo;id&rsquo; is added to the queue to begin the BFS traversal.</p>
-</li>
-<li>
-<p><strong>Visiting Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vis[id] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div><p>The &lsquo;vis&rsquo; vector is updated to mark the starting person as visited.</p>
-</li>
-<li>
-<p><strong>While Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(k<span style="color:#666">--</span>) {
-</span></span></code></pre></div><p>The outer while loop iterates &lsquo;k&rsquo; times, processing friends up to &lsquo;k&rsquo; hops away.</p>
-</li>
-<li>
-<p><strong>Queue Size Calculation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
-</span></span></code></pre></div><p>The size of the queue is stored in &lsquo;sz&rsquo;, representing the number of people to be processed in the current level of BFS.</p>
-</li>
-<li>
-<p><strong>While Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
-</span></span></code></pre></div><p>A nested while loop processes each person in the queue at the current level of BFS.</p>
-</li>
-<li>
-<p><strong>Queue Front Operation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> top <span style="color:#666">=</span> q.front();
-</span></span></code></pre></div><p>The person at the front of the queue is stored in &rsquo;top&rsquo;. This person will be processed.</p>
-</li>
-<li>
-<p><strong>Queue Operation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop();
-</span></span></code></pre></div><p>The front person is removed from the queue after being processed.</p>
-</li>
-<li>
-<p><strong>Iterating Through Friends</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: f[top]) {
-</span></span></code></pre></div><p>For each friend of &rsquo;top&rsquo; (the current person), the code checks if the friend has already been visited.</p>
-</li>
-<li>
-<p><strong>Visiting Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>vis[it]) {
-</span></span></code></pre></div><p>If the friend has not been visited, the code marks them as visited and pushes them to the queue for further processing.</p>
-</li>
-<li>
-<p><strong>Visiting Update</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    vis[it] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div><p>The friend &lsquo;it&rsquo; is marked as visited in the &lsquo;vis&rsquo; vector.</p>
-</li>
-<li>
-<p><strong>Queue Operation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    q.push(it);
-</span></span></code></pre></div><p>The friend &lsquo;it&rsquo; is added to the queue to be processed in subsequent iterations.</p>
-</li>
-<li>
-<p><strong>Map Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span></code></pre></div><p>A map &lsquo;mp&rsquo; is initialized to track how many times each video has been watched by friends within &lsquo;k&rsquo; hops.</p>
-</li>
-<li>
-<p><strong>Map Processing</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
-</span></span></code></pre></div><p>This loop processes the remaining people in the queue after &lsquo;k&rsquo; levels of BFS.</p>
-</li>
-<li>
-<p><strong>Queue Front Operation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> fr <span style="color:#666">=</span> q.front();
-</span></span></code></pre></div><p>The front person in the queue is processed.</p>
-</li>
-<li>
-<p><strong>Queue Operation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q.pop();
-</span></span></code></pre></div><p>The front person is removed from the queue.</p>
-</li>
-<li>
-<p><strong>Iterating Through Videos</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">x</span>: wv[fr]) {
-</span></span></code></pre></div><p>For each video watched by the current person &lsquo;fr&rsquo;, the map &lsquo;mp&rsquo; is updated to count how many times each video is watched.</p>
-</li>
-<li>
-<p><strong>Map Update</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mp[x]<span style="color:#666">++</span>;
-</span></span></code></pre></div><p>The map &lsquo;mp&rsquo; is updated to increment the count of video &lsquo;x&rsquo; for the current person.</p>
-</li>
-<li>
-<p><strong>Sorting</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(ans.begin(), ans.end());
-</span></span></code></pre></div><p>The &lsquo;ans&rsquo; vector is sorted by the video watch count, and in case of ties, by video name alphabetically.</p>
-</li>
-<li>
-<p><strong>Result Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
-</span></span></code></pre></div><p>A vector &lsquo;res&rsquo; is initialized to store the final sorted list of videos.</p>
-</li>
-<li>
-<p><strong>Result Population</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: ans)
-</span></span></code></pre></div><p>This loop populates the &lsquo;res&rsquo; vector with the video names from the sorted &lsquo;ans&rsquo; list.</p>
-</li>
-<li>
-<p><strong>Result Insertion</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.push_back(it.second);
-</span></span></code></pre></div><p>Each video name is added to the result vector &lsquo;res&rsquo;.</p>
-</li>
-<li>
-<p><strong>Return Statement</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><p>The function returns the sorted list of video names that are the most watched by friends within &lsquo;k&rsquo; hops.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n + m log m) - In the best case, only one level is processed and sorting is applied to a small set of videos.</li>
-<li><strong>Average Case:</strong> O(n + m log m) - Where n is the number of people and m is the number of videos watched.</li>
-<li><strong>Worst Case:</strong> O(n + m log m) - The BFS traversal visits all friends, and sorting is done on all videos for the level.</li>
-</ul>
-<p>The time complexity is O(n + m log m), where n is the number of people and m is the number of videos.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n + m) - Even in the best case, space is required to store the frequency of videos and the BFS queue.</li>
-<li><strong>Worst Case:</strong> O(n + m) - The space complexity depends on the space needed for BFS traversal and the frequency map.</li>
-</ul>
-<p>The space complexity is O(n + m), where n is the number of people and m is the number of videos.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sumOfSquares</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line declares the function `sumOfSquares`, which accepts a reference to an integer vector `nums` and returns an integer result. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The variable `ans` is initialized to 0 and will store the sum of the squares of the appropriate elements in the `nums` array. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The variable `n` is initialized to store the size of the array `nums`, which will be used to find divisors of the array&#39;s size. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Looping</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A for-loop starts that iterates from 0 to `n-1`, covering all the indices of the `nums` array. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Conditional Function Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">%</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">==</span> <span style="color:#666">0</span>) ans <span style="color:#666">+=</span> nums[i] <span style="color:#666">*</span> nums[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Inside the loop, a condition checks if the index `i &#43; 1` is a divisor of `n` (i.e., if `n % (i &#43; 1) == 0`). If true, the square of `nums[i]` is added to `ans`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> After completing the loop, the function returns the value of `ans`, which contains the sum of the squares of the elements whose indices are divisors of `n`. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The solution involves a single pass through the array, checking divisibility and accumulating results.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The solution uses constant additional space for computation.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/get-watched-videos-by-your-friends/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 <table>
@@ -475,6 +779,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -726,90 +1031,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1311-get-watched-videos-by-your-friends\/"
-    },
-    "headline": "Leetcode 1311: Get Watched Videos by Your Friends",
-    "description": "In-depth solution and explanation for Leetcode 1311: Get Watched Videos by Your Friends in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": ""
-    },
-    "datePublished": "2024-06-28T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Array\",\"Hash Table\",\"Breadth-First Search\",\"Graph\",\"Sorting\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "keywords": "[\"Array\",\"Hash Table\",\"Breadth-First Search\",\"Graph\",\"Sorting\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1314-matrix-block-sum\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1310-xor-queries-of-a-subarray\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -40,8 +42,105 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-609-find-duplicate-file-in-system\/"
+    },
+    "headline": "Leetcode 609: Find Duplicate File in System",
+    "description": "In-depth solution and explanation for Leetcode 609: Find Duplicate File in System in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/609.webp"
+    },
+    "datePublished": "2024-09-07T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Array\",\"Hash Table\",\"String\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "video": {
+      "@type": "VideoObject",
+      "name": "Video explanation for Leetcode 609: Find Duplicate File in System",
+      "embedUrl": "https://www.youtube.com/watch?v=3GP6BA1oXQw",
+      "uploadDate": "2021-02-15",
+      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/3GP6BA1oXQw\/maxresdefault.jpg"
+    },
+    
+    "keywords": "[\"Array\",\"Hash Table\",\"String\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-611-valid-triangle-number\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-606-construct-string-from-binary-tree\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -182,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 7, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -211,196 +310,552 @@
     
   </figure>
   </h2>
-<p>Given a list of directory paths, each containing file names and their content, return the groups of duplicate files that have the same content.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> Each string represents a directory path followed by multiple files and their contents in the format &lsquo;filename(content)&rsquo;.</li>
-<li><strong>Example:</strong> <code>paths = [&quot;root/x 1.txt(abc) 2.txt(def)&quot;, &quot;root/y 3.txt(abc)&quot;, &quot;root/y/z 4.txt(def)&quot;, &quot;root 5.txt(ghj)&quot;]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= paths.length &lt;= 2 * 10^4</li>
-<li>1 &lt;= paths[i].length &lt;= 3000</li>
-<li>1 &lt;= sum(paths[i].length) &lt;= 5 * 10^5</li>
-<li>paths[i] consist of English letters, digits, &lsquo;/&rsquo;, &lsquo;.&rsquo;, &lsquo;(&rsquo;, &lsquo;)&rsquo;, and &rsquo; &lsquo;.</li>
-<li>No two files in the same directory have the same name.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> Return a list of groups of file paths that have identical content.</li>
-<li><strong>Example:</strong> <code>[[&quot;root/x/1.txt&quot;, &quot;root/y/3.txt&quot;], [&quot;root/x/2.txt&quot;, &quot;root/y/z/4.txt&quot;]]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The returned list should group files with the same content.</li>
-<li>Files should be in the order they appear in the input list.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> Identify and group files that share identical content.</p>
-<ul>
-<li>Parse each directory info to extract file paths and content.</li>
-<li>Use a map to store file contents as keys and their corresponding file paths as values.</li>
-<li>Group file paths that have the same content into a list.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>File contents are represented as strings enclosed in parentheses.</li>
-<li>File names are unique within a given directory.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li><strong>Input:</strong> <code>paths = [&quot;root/x 1.txt(abc) 2.txt(def)&quot;, &quot;root/y 3.txt(abc)&quot;, &quot;root/y/z 4.txt(def)&quot;, &quot;root 5.txt(ghj)&quot;]</code>  <br>
-<strong>Explanation:</strong> Here, file &lsquo;1.txt&rsquo; in &lsquo;root/x&rsquo; and &lsquo;3.txt&rsquo; in &lsquo;root/y&rsquo; both have content &lsquo;abc&rsquo;, so they are grouped together. Similarly, &lsquo;2.txt&rsquo; in &lsquo;root/x&rsquo; and &lsquo;4.txt&rsquo; in &lsquo;root/y/z&rsquo; have identical content &lsquo;def&rsquo;, so they form another group.</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>The approach involves mapping file contents to their file paths and grouping files with identical content.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>Files with identical content should be grouped together regardless of their location.</li>
-<li>A hash map can be used to store and retrieve file content efficiently.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>An empty list of paths.</li>
-<li>Handling large file systems with more than 10^4 paths.</li>
-<li>Files with empty content or unique content.</li>
-<li>Make sure to handle files of different sizes efficiently.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> findDuplicate(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> paths) {
-</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> result;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">path</span>: paths) {
-</span></span><span style="display:flex;"><span>        stringstream <span style="color:#00a000">ss</span>(path);
-</span></span><span style="display:flex;"><span>        string root;
-</span></span><span style="display:flex;"><span>        string s;
-</span></span><span style="display:flex;"><span>        getline(ss, root, <span style="color:#b44">&#39; &#39;</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(getline(ss, s, <span style="color:#b44">&#39; &#39;</span>)) {
-</span></span><span style="display:flex;"><span>            string fileName <span style="color:#666">=</span> root <span style="color:#666">+</span> <span style="color:#b44">&#39;/&#39;</span> <span style="color:#666">+</span> s.substr(<span style="color:#666">0</span>, s.find(<span style="color:#b44">&#39;(&#39;</span>));
-</span></span><span style="display:flex;"><span>            string fileContent <span style="color:#666">=</span> s.substr(s.find(<span style="color:#b44">&#39;(&#39;</span>) <span style="color:#666">+</span> <span style="color:#666">1</span>, s.find(<span style="color:#b44">&#39;)&#39;</span>) <span style="color:#666">-</span> s.find(<span style="color:#b44">&#39;(&#39;</span>)<span style="color:#666">-</span><span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>            mp[fileContent].push_back(fileName);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">file</span> : mp) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(file.second.size() <span style="color:#666">&gt;</span> <span style="color:#666">1</span>)
-</span></span><span style="display:flex;"><span>        result.push_back(file.second);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result;
+
+
+
+
+
+
+
+
+
+
+<div class=""> A company has <code>n</code> employees with a unique ID for each employee from 0 to n-1. The head of the company is the one with <code>headID</code>. Each employee has one direct manager. The head will inform his direct subordinates, and they will inform their subordinates, and so on until all employees know about the urgent news. Each employee needs <code>informTime[i]</code> minutes to inform their direct subordinates. Return the total time required to inform all employees. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> The input consists of an integer `n`, the number of employees in the company, the integer `headID`, which identifies the head of the company, an array `manager[]` of size `n` where `manager[i]` is the ID of the direct manager of employee `i`, and an array `informTime[]` of size `n` where `informTime[i]` is the time it takes for employee `i` to inform all of their direct subordinates.</div>
+                        <div class=""> <b>Example:</b> n = 6, headID = 2, manager = [2, 2, -1, 2, 2, 2], informTime = [0, 0, 1, 0, 0, 0]</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= headID &lt; n</div>
+                            
+                                <div style="margin-left: 20px;"> • manager.length == n</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= manager[i] &lt; n</div>
+                            
+                                <div style="margin-left: 20px;"> • manager[headID] == -1</div>
+                            
+                                <div style="margin-left: 20px;"> • informTime.length == n</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= informTime[i] &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • informTime[i] == 0 if employee i has no subordinates.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> The output is an integer representing the total time required for all employees to be informed about the urgent news.</div>
+                        <div class=""> <b>Example:</b> 1</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output will be a single integer.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The goal is to determine the total time needed for all employees to receive the news, considering the time each employee takes to inform their subordinates.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Construct a graph representing the tree structure of employee-manager relationships.</div>
+                            
+                                <div style="margin-left: 20px;"> • Use a depth-first search (DFS) approach to calculate the time required for each employee to inform their subordinates.</div>
+                            
+                                <div style="margin-left: 20px;"> • For each employee, calculate the maximum time taken among their subordinates and add the time they take to inform them.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The problem needs to handle large inputs efficiently, ensuring the algorithm works within the constraints.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • The tree structure is guaranteed to be valid.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each employee has at most one manager.</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The manager-subordinate relationships form a tree structure, ensuring that all employees can be informed.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 6, headID = 2, manager = [2,2,-1,2,2,2], informTime = [0,0,1,0,0,0]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The head (employee 2) informs all the direct subordinates. The subordinates then take 1 minute to inform their own subordinates.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 5, headID = 0, manager = [-1, 0, 0, 1, 1], informTime = [0, 10, 0, 0, 0]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The head (employee 0) informs employees 1 and 2 in 10 minutes. Employee 1 further informs employees 3 and 4.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> The problem is solved using depth-first search (DFS) to traverse the tree structure and calculate the time taken to inform all employees.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The problem essentially involves traversing a tree structure and calculating the total time recursively.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • Using DFS, we can compute the maximum time required to inform all subordinates for each employee.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Construct the tree using a graph representation.</div>
+                            
+                                <div style="margin-left: 20px;"> • Use a recursive DFS function to traverse the tree and calculate the time taken to inform each employee&#39;s subordinates.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the maximum time taken by the root (head) employee.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If the tree has only one employee (head), the result will be 0.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure the solution works efficiently for large values of `n` up to 100,000.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If all employees take 0 minutes to inform others, the result will be 0.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The problem constraints guarantee a valid tree structure and that all employees can be informed.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Map Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Looping</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Graph Construction</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Recursive Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Base Case</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Variable Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Iterate Over Subordinates</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numOfMinutes</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> headID, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> manager, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> informTime) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> gph;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> manager.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    gph[manager[i]].push_back(i);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dfs(headID, gph, informTime);
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function <code>findDuplicate</code> identifies duplicate files based on their content from a list of file paths. It uses a hash map to group file paths by their content and returns a list of file groups with more than one file having the same content.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> findDuplicate(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> paths) {
-</span></span></code></pre></div><p>Declares the function <code>findDuplicate</code> which takes a reference to a vector of file paths as input and returns a vector of vectors containing duplicate file paths.</p>
-</li>
-<li>
-<p><strong>Variable Initialization (mp)</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> mp;
-</span></span></code></pre></div><p>Initializes an unordered map <code>mp</code> where the key is the content of a file and the value is a vector of file paths containing that content.</p>
-</li>
-<li>
-<p><strong>Variable Initialization (result)</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> result;
-</span></span></code></pre></div><p>Initializes an empty vector <code>result</code> which will store groups of duplicate file paths.</p>
-</li>
-<li>
-<p><strong>Loop Through Paths</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">path</span>: paths) {
-</span></span></code></pre></div><p>Iterates over each file path in the input <code>paths</code> vector.</p>
-</li>
-<li>
-<p><strong>String Stream Setup</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        stringstream <span style="color:#00a000">ss</span>(path);
-</span></span></code></pre></div><p>Initializes a stringstream <code>ss</code> with the current file path <code>path</code> to extract the root and file details.</p>
-</li>
-<li>
-<p><strong>Root String Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        string root;
-</span></span></code></pre></div><p>Declares a string variable <code>root</code> to store the root directory of the file.</p>
-</li>
-<li>
-<p><strong>File String Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        string s;
-</span></span></code></pre></div><p>Declares a string variable <code>s</code> to store individual file names and their content.</p>
-</li>
-<li>
-<p><strong>Extract Root Directory</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        getline(ss, root, <span style="color:#b44">&#39; &#39;</span>);
-</span></span></code></pre></div><p>Extracts the root directory (before the first space) from the stringstream and assigns it to <code>root</code>.</p>
-</li>
-<li>
-<p><strong>Loop Through Files in Directory</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(getline(ss, s, <span style="color:#b44">&#39; &#39;</span>)) {
-</span></span></code></pre></div><p>Iterates over the rest of the file details in the stringstream. Each file is separated by a space.</p>
-</li>
-<li>
-<p><strong>File Name Extraction</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            string fileName <span style="color:#666">=</span> root <span style="color:#666">+</span> <span style="color:#b44">&#39;/&#39;</span> <span style="color:#666">+</span> s.substr(<span style="color:#666">0</span>, s.find(<span style="color:#b44">&#39;(&#39;</span>));
-</span></span></code></pre></div><p>Extracts the file name (before the opening parenthesis) and constructs the full file path using the root directory.</p>
-</li>
-<li>
-<p><strong>File Content Extraction</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            string fileContent <span style="color:#666">=</span> s.substr(s.find(<span style="color:#b44">&#39;(&#39;</span>) <span style="color:#666">+</span> <span style="color:#666">1</span>, s.find(<span style="color:#b44">&#39;)&#39;</span>) <span style="color:#666">-</span> s.find(<span style="color:#b44">&#39;(&#39;</span>)<span style="color:#666">-</span><span style="color:#666">1</span>);
-</span></span></code></pre></div><p>Extracts the content of the file from within the parentheses.</p>
-</li>
-<li>
-<p><strong>Store in Map</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mp[fileContent].push_back(fileName);
-</span></span></code></pre></div><p>Stores the file path in the map <code>mp</code> under the corresponding file content as the key.</p>
-</li>
-<li>
-<p><strong>Loop Through Map</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">file</span> : mp) {
-</span></span></code></pre></div><p>Iterates over each entry in the map <code>mp</code>, where the key is the file content and the value is a vector of file paths.</p>
-</li>
-<li>
-<p><strong>Check for Duplicates</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(file.second.size() <span style="color:#666">&gt;</span> <span style="color:#666">1</span>)
-</span></span></code></pre></div><p>Checks if there are multiple files with the same content (i.e., a duplicate).</p>
-</li>
-<li>
-<p><strong>Store Duplicates</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        result.push_back(file.second);
-</span></span></code></pre></div><p>Adds the group of duplicate file paths to the <code>result</code> vector.</p>
-</li>
-<li>
-<p><strong>Return Result</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result;
-</span></span></code></pre></div><p>Returns the vector <code>result</code> containing groups of duplicate file paths.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(N)</li>
-<li><strong>Average Case:</strong> O(N)</li>
-<li><strong>Worst Case:</strong> O(N)</li>
-</ul>
-<p>In the worst case, we may have to process each file and content, so the time complexity is linear in the number of files.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(N)</li>
-<li><strong>Worst Case:</strong> O(N)</li>
-</ul>
-<p>The space complexity is also O(N) due to storing file paths and contents in a map.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(<span style="color:#0b0;font-weight:bold">int</span> cur, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>gph, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>it) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>gph.count(cur)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: gph[cur])
+</span></span><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, dfs(x, gph, it));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx <span style="color:#666">+</span> it[cur];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numOfMinutes</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> headID, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> manager, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> informTime) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function `numOfMinutes` is the main entry point. It takes the number of employees `n`, the head of the company `headID`, a list of managers for each employee, and a list of the time taken by each employee to inform others. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Map Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> gph;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We declare a map `gph` where the key represents a manager&#39;s ID and the value is a vector of employees they manage. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Looping</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> manager.size(); i<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We loop through the list of managers and create the graph where each employee is linked to their manager. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Graph Construction</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    gph[manager[i]].push_back(i);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For each employee `i`, we add them as a subordinate to their manager in the graph. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dfs</span>(headID, gph, informTime);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We initiate the depth-first search starting from the `headID`, using the constructed graph and the `informTime` list to calculate the total time. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Recursive Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(<span style="color:#0b0;font-weight:bold">int</span> cur, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>gph, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>it) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The `dfs` function performs a depth-first search to find the maximum time needed to inform all subordinates of a particular employee. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Base Case</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>gph.count(cur)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current employee does not have any subordinates (i.e., they don&#39;t appear in the graph), return 0. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Variable Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We declare a variable `mx` to track the maximum time it takes to inform subordinates. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Iterate Over Subordinates</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: gph[cur])
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We iterate over all subordinates of the current employee. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, dfs(x, gph, it));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For each subordinate, we recursively calculate the time needed to inform them and their subordinates, updating `mx` with the maximum time. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx <span style="color:#666">+</span> it[cur];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> After processing all subordinates, we return the maximum time plus the time it takes for the current employee to inform others. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) as each employee is visited once during DFS.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the recursion stack and the graph representation of the tree.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/find-duplicate-file-in-system/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 
@@ -420,6 +875,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -663,98 +1119,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-609-find-duplicate-file-in-system\/"
-    },
-    "headline": "Leetcode 609: Find Duplicate File in System",
-    "description": "In-depth solution and explanation for Leetcode 609: Find Duplicate File in System in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/609.webp"
-    },
-    "datePublished": "2024-09-07T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Array\",\"Hash Table\",\"String\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "video": {
-      "@type": "VideoObject",
-      "name": "Video explanation for Leetcode 609: Find Duplicate File in System",
-      "embedUrl": "https://www.youtube.com/watch?v=3GP6BA1oXQw",
-      "uploadDate": "2021-02-15",
-      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/3GP6BA1oXQw\/maxresdefault.jpg"
-    },
-    
-    "keywords": "[\"Array\",\"Hash Table\",\"String\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-611-valid-triangle-number\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-606-construct-string-from-binary-tree\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

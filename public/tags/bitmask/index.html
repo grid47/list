@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -34,8 +36,14 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -119,14 +127,529 @@
     
   </figure>
   </h2>
-<p>In a store, there are n items available for sale, each with a given price. You are also given a list of special offers where you can buy multiple items at a discounted price. Your task is to determine the minimum total price to purchase the required quantities of each item, while utilizing the special offers optimally. You can use any offer as many times as you like, but cannot buy more items than you need.</p></h4>            
+
+
+
+
+
+
+
+
+
+
+<div class=""> Given an array of integers <code>nums</code> and a positive integer <code>limit</code>, determine the length of the longest subarray where the absolute difference between the minimum and maximum elements is less than or equal to <code>limit</code>. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> The input consists of an array of integers `nums` and an integer `limit`.</div>
+                        <div class=""> <b>Example:</b> nums = [6,3,5,8], limit = 3</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= limit &lt;= 10^9</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> The output is an integer representing the size of the longest subarray satisfying the given condition.</div>
+                        <div class=""> <b>Example:</b> 2</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output is a non-negative integer.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> To calculate the size of the longest subarray where the absolute difference between the minimum and maximum elements is less than or equal to the given `limit`.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Step 1: Use a multiset to track the current subarray&#39;s elements.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 2: For every element in `nums`, add it to the multiset and check if the max difference exceeds the `limit`.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 3: If the condition is violated, remove elements from the start of the current subarray until it satisfies the condition again.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: Keep track of the maximum subarray size.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> Ensure the solution is efficient for large arrays and large values of `nums[i]` and `limit`.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Use a sliding window technique to maintain efficiency.</div>
+                            
+                                <div style="margin-left: 20px;"> • Handle edge cases with a limit of 0.</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The array `nums` contains at least one element.</div>
+                            
+                                <div style="margin-left: 20px;"> • The input values are within the given constraints.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [6,3,5,8], limit = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The longest subarray is [6,3] or [5,8], each with a size of 2.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [9,2,4,6], limit = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subarray [2,4,6] has a max difference of 4 and is the longest subarray with size 3.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> Use a sliding window approach with a multiset to efficiently maintain the current subarray&#39;s minimum and maximum values.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The problem requires maintaining a subarray that satisfies a condition on the maximum and minimum values.</div>
+                            
+                                <div style="margin-left: 20px;"> • A sliding window with dynamic size can help efficiently process the array.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • We can use a multiset or two deques to maintain the max and min values of the current window.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Step 1: Initialize a multiset or two deques for tracking min and max values.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 2: Iterate through the array and add elements to the current subarray.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 3: Remove elements from the front of the subarray if the condition is violated.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: Track the size of the longest valid subarray.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • No empty input is allowed as `nums` will always have at least one element.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The solution must handle arrays with up to 10^5 elements efficiently.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Handle cases with `limit = 0` where only subarrays with identical elements are valid.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure the solution remains efficient even for extreme values of `limit` or `nums[i]`.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Insert Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Erase Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestSubarray</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> limit) {
+</span></span><span style="display:flex;"><span>    multiset<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ms;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        ms.insert(nums[i]);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>ms.empty() <span style="color:#666">&amp;&amp;</span> <span style="color:#666">*</span>ms.rbegin() <span style="color:#666">-</span> <span style="color:#666">*</span>ms.begin() <span style="color:#666">&gt;</span> limit) {
+</span></span><span style="display:flex;"><span>            ms.erase(ms.find(nums[j<span style="color:#666">++</span>]));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestSubarray</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> limit) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the function `longestSubarray`, which takes a vector of integers `nums` and an integer `limit` as input. It returns the length of the longest subarray where the difference between the maximum and minimum elements is within the limit. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    multiset<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ms;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes a `multiset` named `ms` to store elements of the subarray in sorted order. This allows efficient access to the minimum and maximum elements. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes two variables: `res` to store the length of the longest valid subarray found and `j` to represent the starting index of the sliding window. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Starts a loop where `i` iterates through each element of the `nums` vector. This loop represents the end of the sliding window. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Insert Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ms.insert(nums[i]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Inserts the current element `nums[i]` into the `multiset` to maintain the sorted order of the subarray. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>ms.empty() <span style="color:#666">&amp;&amp;</span> <span style="color:#666">*</span>ms.rbegin() <span style="color:#666">-</span> <span style="color:#666">*</span>ms.begin() <span style="color:#666">&gt;</span> limit) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks whether the difference between the maximum (`*ms.rbegin()`) and minimum (`*ms.begin()`) elements of the `multiset` exceeds the `limit`. If so, the subarray is invalid, and the sliding window is adjusted. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Erase Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ms.erase(ms.find(nums[j<span style="color:#666">++</span>]));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Erases the element at index `j` from the `multiset` and increments `j` to shrink the sliding window from the left side. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Update Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Updates the result `res` with the length of the current valid subarray, which is `i - j &#43; 1`, and stores the maximum length found. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the value of `res`, which represents the length of the longest valid subarray found. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n) where n is the length of `nums`.</div>
+                        <div class=""> <b>Average Case:</b> O(n) for maintaining the sliding window and set operations.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) for iterating through the array.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear as each element is added and removed from the sliding window at most once.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1) if subarrays are very small.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) for the multiset or deque in extreme cases.</div> 
+                        <div class=""> <b>Description:</b> The space complexity depends on the size of the sliding window and is O(n) in the worst case.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
+<p><a href="https://leetcode.com/problems/shopping-offers/description/"><code>Link to LeetCode Lab</code></a></p></h4>            
         </div>
         <div class="card-footer bg-white">
             <div class="wrapfooter">
                 
                 
                 
-                <span class="post-date">Sep 4, 2024 - 8 min read </span>
+                <span class="post-date">Sep 4, 2024 - 5 min read </span>
                 <span class="post-read-more"><a href="http://localhost:1313/leetcode/solution-638-shopping-offers/" title="Read Story"><svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"><path d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z" fill-rule="evenodd"></path></svg></a></span>
                 <div class="clearfix"></div>
             </div>
@@ -145,7 +668,7 @@
         </div>
         <div class="card-body">
             <h2 class="card-title"><a class="text-dark" href="http://localhost:1313/leetcode/solution-698-partition-to-k-equal-sum-subsets/">Leetcode 698: Partition to K Equal Sum Subsets</a></h2>
-            <h4 class="card-text"><h2 id="hahahugoshortcode1261s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+            <h4 class="card-text"><h2 id="hahahugoshortcode1255s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/698.webp" 
            alt="A set of numbers where they are partitioned into equal sum subsets, with each valid partition softly glowing." 
@@ -158,14 +681,562 @@
     
   </figure>
   </h2>
-<p>Given an integer array nums and an integer k, your task is to determine if it is possible to divide this array into k non-empty subsets such that each subset has an equal sum.</p></h4>            
+
+
+
+
+
+
+
+
+
+
+<div class=""> You are given a binary matrix of size m x n, where each element is either 0 or 1. A position (i, j) in the matrix is considered special if mat[i][j] = 1 and all other elements in the same row i and column j are 0. Your task is to find how many such special positions exist in the matrix. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> You are given a matrix &#39;mat&#39; of size m x n, where each element is either 0 or 1.</div>
+                        <div class=""> <b>Example:</b> Input: mat = [[1, 0, 0], [0, 0, 1], [1, 0, 0]]</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • mat[i][j] is either 0 or 1</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> Return an integer representing the number of special positions in the matrix.</div>
+                        <div class=""> <b>Example:</b> Output: 1</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> To find special positions, we need to check each 1 in the matrix and verify that all other elements in its row and column are 0.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1. Traverse the entire matrix to calculate how many 1&#39;s are present in each row and column.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. For each element in the matrix, check if it&#39;s 1, and if the row and column of that element contain no other 1&#39;s.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. Count the number of such positions that meet the condition.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The matrix can have up to 100 rows and columns, so the solution must be efficient.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Matrix dimensions are between 1 and 100 (inclusive).</div>
+                            
+                                <div style="margin-left: 20px;"> • Each element in the matrix is either 0 or 1.</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The matrix will not be empty, and the elements are constrained to 0 or 1.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: mat = [[1, 0, 0], [0, 0, 1], [1, 0, 0]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, only the position (1, 2) is special because mat[1][2] == 1 and all other elements in row 1 and column 2 are 0. Therefore, the output is 1.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: mat = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, the positions (0, 0), (1, 1), and (2, 2) are all special. Therefore, the output is 3.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> To solve this problem, we need to determine the special positions by first counting how many 1&#39;s are present in each row and column, then checking each 1 in the matrix to ensure there are no other 1&#39;s in its row and column.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • A brute force approach would involve checking each element in the matrix for the special condition, which could lead to a time complexity of O(m * n^2).</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • A more efficient approach would involve counting the number of 1&#39;s in each row and column first, then performing a single check for each element, which would improve the solution&#39;s efficiency.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1. Create arrays to store the number of 1&#39;s in each row and column.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. Traverse the matrix to populate these arrays.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. For each element mat[i][j], if mat[i][j] == 1, check if row[i] and col[j] both contain only 1&#39;s, if so increment the result count.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Return the final result count.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Matrix dimensions are guaranteed to be at least 1x1.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The solution should handle large matrices efficiently, with dimensions up to 100x100.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • When the matrix consists entirely of 0&#39;s, the output will be 0.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure the solution is efficient enough to handle the maximum input size.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Outer Loop - Row Iteration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Inner Loop - Column Iteration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update Row and Column Counts</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Second Loop - Checking Special Positions</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Second Inner Loop - Checking Columns</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Condition Check - Special Position</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Increment Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Result</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numSpecial</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> row(m, <span style="color:#666">0</span>), col(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mat[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) row[i]<span style="color:#666">++</span>, col[j]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(row[i] <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> col[j] <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> mat[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>            res<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numSpecial</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the function `numSpecial` that takes a matrix `mat` as input, where each cell can either be 0 or 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize variables `m` and `n` to represent the number of rows and columns in the matrix, respectively. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> row(m, <span style="color:#666">0</span>), col(n, <span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Create two vectors `row` and `col`, initialized to zero. These vectors will track the count of 1s in each row and each column. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize `res` to 0, which will store the result (the number of special positions in the matrix). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Outer Loop - Row Iteration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start the first loop to iterate over each row in the matrix. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Inner Loop - Column Iteration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start the second loop to iterate over each column in the current row. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Update Row and Column Counts</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mat[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) row[i]<span style="color:#666">++</span>, col[j]<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current cell is 1, increment the count for the corresponding row (`row[i]`) and column (`col[j]`), indicating that a 1 has been found. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Second Loop - Checking Special Positions</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start the third loop to iterate over each row again, this time to check for special positions. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Second Inner Loop - Checking Columns</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start the fourth loop to iterate over each column in the current row and check if the position is special. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Condition Check - Special Position</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(row[i] <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> col[j] <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> mat[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the current cell is 1, and if both its row and column contain exactly one 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Increment Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the condition is true, increment the result `res` by 1, as this cell is a special position. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the final result `res`, which represents the number of special positions in the matrix. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(m * n)</div>
+                        <div class=""> <b>Average Case:</b> O(m * n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(m * n) because we process each element in the matrix once and use auxiliary arrays to store the row and column counts.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(m &#43; n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m &#43; n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(m &#43; n) because we use two arrays to store the row and column counts.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
+<p><a href="https://leetcode.com/problems/partition-to-k-equal-sum-subsets/description/"><code>Link to LeetCode Lab</code></a></p></h4>            
         </div>
         <div class="card-footer bg-white">
             <div class="wrapfooter">
                 
                 
                 
-                <span class="post-date">Aug 29, 2024 - 7 min read </span>
+                <span class="post-date">Aug 29, 2024 - 6 min read </span>
                 <span class="post-read-more"><a href="http://localhost:1313/leetcode/solution-698-partition-to-k-equal-sum-subsets/" title="Read Story"><svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"><path d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z" fill-rule="evenodd"></path></svg></a></span>
                 <div class="clearfix"></div>
             </div>
@@ -185,14 +1256,356 @@
         <div class="card-body">
             <h2 class="card-title"><a class="text-dark" href="http://localhost:1313/leetcode/solution-1947-maximum-compatibility-score-sum/">Leetcode 1947: Maximum Compatibility Score Sum</a></h2>
             <h4 class="card-text"><hr>
-<p>You are given a survey with n questions where each question&rsquo;s answer is either 0 (no) or 1 (yes). The survey is completed by m students and m mentors. Each student&rsquo;s answers are represented by a 2D array of size m x n, and similarly, each mentor&rsquo;s answers are represented by another 2D array. The compatibility score of a student-mentor pair is calculated as the number of answers that are the same for both the student and the mentor. Your task is to find the optimal pairing of students to mentors that maximizes the sum of the compatibility scores.</p></h4>            
+
+
+
+
+
+
+
+
+
+
+<div class="">  </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="4"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="5"></button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> </div>
+                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> </div>
+                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Steps:</b>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Steps:</b>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"> Code </button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#666">%!</span>s(<span style="color:#666">&lt;</span>nil<span style="color:#666">&gt;</span>)
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> </div>
+                        <div class=""> <b>Average Case:</b> </div>
+                        <div class=""> <b>Worst Case:</b> </div> 
+                        <div class=""> <b>Description:</b> </div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> </div>
+                        <div class=""> <b>Worst Case:</b> </div> 
+                        <div class=""> <b>Description:</b> </div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target=""]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
+<p><a href="https://leetcode.com/problems/maximum-compatibility-score-sum/description/"><code>Link to LeetCode Lab</code></a></p></h4>            
         </div>
         <div class="card-footer bg-white">
             <div class="wrapfooter">
                 
                 
                 
-                <span class="post-date">Apr 26, 2024 - 6 min read </span>
+                <span class="post-date">Apr 26, 2024 - 1 min read </span>
                 <span class="post-read-more"><a href="http://localhost:1313/leetcode/solution-1947-maximum-compatibility-score-sum/" title="Read Story"><svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"><path d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z" fill-rule="evenodd"></path></svg></a></span>
                 <div class="clearfix"></div>
             </div>
@@ -212,20 +1625,356 @@
         <div class="card-body">
             <h2 class="card-title"><a class="text-dark" href="http://localhost:1313/leetcode/solution-1986-minimum-number-of-work-sessions-to-finish-the-tasks/">Leetcode 1986: Minimum Number of Work Sessions to Finish the Tasks</a></h2>
             <h4 class="card-text"><hr>
-<p>You are assigned several tasks, each with a specified time required to complete. A work session allows you to work continuously for up to sessionTime consecutive hours before taking a break. Your goal is to determine the minimum number of work sessions required to complete all tasks under the following conditions:</p>
-<ul>
-<li>If a task is started in a session, it must be completed within that same session.</li>
-<li>You may complete the tasks in any order.</li>
-<li>You can begin a new task immediately after finishing the previous one.</li>
-</ul>
-<p>Return the minimum number of work sessions needed to complete all tasks.</p></h4>            
+
+
+
+
+
+
+
+
+
+
+<div class="">  </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="4"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="5"></button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> </div>
+                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> </div>
+                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Steps:</b>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Steps:</b>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"> Code </button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#666">%!</span>s(<span style="color:#666">&lt;</span>nil<span style="color:#666">&gt;</span>)
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> </div>
+                        <div class=""> <b>Average Case:</b> </div>
+                        <div class=""> <b>Worst Case:</b> </div> 
+                        <div class=""> <b>Description:</b> </div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> </div>
+                        <div class=""> <b>Worst Case:</b> </div> 
+                        <div class=""> <b>Description:</b> </div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target=""]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
+<p><a href="https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks/description/"><code>Link to LeetCode Lab</code></a></p></h4>            
         </div>
         <div class="card-footer bg-white">
             <div class="wrapfooter">
                 
                 
                 
-                <span class="post-date">Apr 22, 2024 - 7 min read </span>
+                <span class="post-date">Apr 22, 2024 - 1 min read </span>
                 <span class="post-read-more"><a href="http://localhost:1313/leetcode/solution-1986-minimum-number-of-work-sessions-to-finish-the-tasks/" title="Read Story"><svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"><path d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z" fill-rule="evenodd"></path></svg></a></span>
                 <div class="clearfix"></div>
             </div>
@@ -245,14 +1994,356 @@
         <div class="card-body">
             <h2 class="card-title"><a class="text-dark" href="http://localhost:1313/leetcode/solution-2002-maximum-product-of-the-length-of-two-palindromic-subsequences/">Leetcode 2002: Maximum Product of the Length of Two Palindromic Subsequences</a></h2>
             <h4 class="card-text"><hr>
-<p>Given a string s, find two disjoint palindromic subsequences such that the product of their lengths is maximized. The two subsequences are disjoint if they do not both pick a character at the same index.</p></h4>            
+
+
+
+
+
+
+
+
+
+
+<div class="">  </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="4"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="5"></button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> </div>
+                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> </div>
+                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Steps:</b>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Steps:</b>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"> Code </button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#666">%!</span>s(<span style="color:#666">&lt;</span>nil<span style="color:#666">&gt;</span>)
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> </div>
+                        <div class=""> <b>Average Case:</b> </div>
+                        <div class=""> <b>Worst Case:</b> </div> 
+                        <div class=""> <b>Description:</b> </div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> </div>
+                        <div class=""> <b>Worst Case:</b> </div> 
+                        <div class=""> <b>Description:</b> </div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target=""]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
+<p><a href="https://leetcode.com/problems/maximum-product-of-the-length-of-two-palindromic-subsequences/description/"><code>Link to LeetCode Lab</code></a></p></h4>            
         </div>
         <div class="card-footer bg-white">
             <div class="wrapfooter">
                 
                 
                 
-                <span class="post-date">Apr 20, 2024 - 6 min read </span>
+                <span class="post-date">Apr 20, 2024 - 1 min read </span>
                 <span class="post-read-more"><a href="http://localhost:1313/leetcode/solution-2002-maximum-product-of-the-length-of-two-palindromic-subsequences/" title="Read Story"><svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"><path d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z" fill-rule="evenodd"></path></svg></a></span>
                 <div class="clearfix"></div>
             </div>
@@ -272,14 +2363,356 @@
         <div class="card-body">
             <h2 class="card-title"><a class="text-dark" href="http://localhost:1313/leetcode/solution-2305-fair-distribution-of-cookies/">Leetcode 2305: Fair Distribution of Cookies</a></h2>
             <h4 class="card-text"><hr>
-<p>You are given an integer array cookies, where each element represents the number of cookies in a particular bag. You are also given an integer k, which denotes the number of children to distribute these bags of cookies to. Each bag must go to exactly one child, and cookies cannot be split between children. The unfairness of a distribution is defined as the maximum number of cookies any single child receives. Your goal is to return the minimum unfairness across all possible distributions.</p></h4>            
+
+
+
+
+
+
+
+
+
+
+<div class="">  </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="4"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="5"></button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> </div>
+                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> </div>
+                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Steps:</b>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Steps:</b>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"> Code </button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#666">%!</span>s(<span style="color:#666">&lt;</span>nil<span style="color:#666">&gt;</span>)
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> </div>
+                        <div class=""> <b>Average Case:</b> </div>
+                        <div class=""> <b>Worst Case:</b> </div> 
+                        <div class=""> <b>Description:</b> </div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> </div>
+                        <div class=""> <b>Worst Case:</b> </div> 
+                        <div class=""> <b>Description:</b> </div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target=""]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
+<p><a href="https://leetcode.com/problems/fair-distribution-of-cookies/description/"><code>Link to LeetCode Lab</code></a></p></h4>            
         </div>
         <div class="card-footer bg-white">
             <div class="wrapfooter">
                 
                 
                 
-                <span class="post-date">Mar 21, 2024 - 6 min read </span>
+                <span class="post-date">Mar 21, 2024 - 1 min read </span>
                 <span class="post-read-more"><a href="http://localhost:1313/leetcode/solution-2305-fair-distribution-of-cookies/" title="Read Story"><svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"><path d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z" fill-rule="evenodd"></path></svg></a></span>
                 <div class="clearfix"></div>
             </div>
@@ -486,7 +2919,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-        
     </body>
 </html>

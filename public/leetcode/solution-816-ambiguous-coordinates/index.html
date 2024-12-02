@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -40,8 +42,97 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-816-ambiguous-coordinates\/"
+    },
+    "headline": "Leetcode 816: Ambiguous Coordinates",
+    "description": "In-depth solution and explanation for Leetcode 816: Ambiguous Coordinates in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/816.webp"
+    },
+    "datePublished": "2024-08-17T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"String\",\"Backtracking\",\"Enumeration\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "keywords": "[\"String\",\"Backtracking\",\"Enumeration\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-817-linked-list-components\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-814-binary-tree-pruning\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -182,7 +273,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 17, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    8 min read
                                 </span>					
                             </div>
                         </div>			
@@ -211,178 +302,652 @@
     
   </figure>
   </h2>
-<p>You are given a string s representing coordinates that have been encoded by removing commas, decimal points, and spaces. Your task is to restore the coordinates to their original form by considering all possible valid ways the digits could be split into two parts: a left part representing the x-coordinate and a right part representing the y-coordinate. Both parts may optionally contain a decimal point. The final coordinates must follow specific rules: no leading zeros are allowed, and the decimal point must be placed correctly. Return a list of all possible valid coordinates, formatted as &lsquo;(x, y)&rsquo;, where x and y represent the respective coordinates.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> You are given a string s that encodes two coordinates in the format &lsquo;(x, y)&rsquo;. The string consists of digits and is enclosed by parentheses. The commas, decimal points, and spaces have been removed.</li>
-<li><strong>Example:</strong> <code>Input: s = '(78910)'</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The length of s is between 4 and 12 characters.</li>
-<li>The first character of s is &lsquo;(&rsquo; and the last character is &lsquo;)&rsquo;.</li>
-<li>All other characters are digits.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> Return a list of strings, where each string represents a possible valid coordinate in the format &lsquo;(x, y)&rsquo;, with exactly one space after the comma between the x-coordinate and the y-coordinate.</li>
-<li><strong>Example:</strong> <code>Output: ['(7, 891.0)', '(7, 8910)', '(78, 91.0)', '(78, 910)', '(789, 10)']</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The output list should contain all possible valid coordinate representations.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> To generate all possible valid coordinates from the given encoded string by splitting the string into two parts and checking the validity of each part.</p>
-<ul>
-<li>Split the string s at every possible position to create two substrings, each representing a potential x and y coordinate.</li>
-<li>For each substring, check if it represents a valid integer or float coordinate (no leading zeros, correct placement of decimal points).</li>
-<li>Return all valid coordinates in the specified format.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>The input string will always start with &lsquo;(&rsquo; and end with &lsquo;)&rsquo;.</li>
-<li>The input will only contain digits after removing the commas and spaces.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li><strong>Input:</strong> <code>Input: s = '(12345)'</code>  <br>
-<strong>Explanation:</strong> The string &lsquo;(12345)&rsquo; can be split into several valid coordinates: &lsquo;(1, 23.45)&rsquo;, &lsquo;(1, 2345)&rsquo;, &lsquo;(12, 3.45)&rsquo;, &lsquo;(12, 345)&rsquo;, &lsquo;(123, 4.5)&rsquo;, and &lsquo;(123, 45)&rsquo;.</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>We approach the problem by iterating over all possible positions to split the string s into two parts: one for the x-coordinate and the other for the y-coordinate. For each split, we generate all valid representations of the x and y coordinates and combine them into the desired format.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>This is a string manipulation problem that requires careful handling of decimal points and leading zeros.</li>
-<li>We need to check each possible split and ensure that the resulting coordinates are valid based on the problem constraints.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>Input is not allowed to be empty, as the length of s is guaranteed to be between 4 and 12.</li>
-<li>Ensure the solution can handle strings of maximum length (12).</li>
-<li>Test cases where coordinates contain leading zeros (e.g., &lsquo;(00123)&rsquo;) or decimal points placed incorrectly (e.g., &lsquo;(001.23)&rsquo;) should be handled correctly.</li>
-<li>No leading zeros are allowed unless the coordinate is &lsquo;0&rsquo;.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ambiguousCoordinates(string S) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> S.size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">-</span> <span style="color:#666">2</span>; <span style="color:#666">++</span>i) {
-</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> A <span style="color:#666">=</span> f(S.substr(<span style="color:#666">1</span>, i)), B <span style="color:#666">=</span> f(S.substr(i <span style="color:#666">+</span> <span style="color:#666">1</span>, n <span style="color:#666">-</span> <span style="color:#666">2</span> <span style="color:#666">-</span> i));
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span> <span style="color:#a0a000">a</span> : A) <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span> <span style="color:#a0a000">b</span> : B) res.push_back(<span style="color:#b44">&#34;(&#34;</span> <span style="color:#666">+</span> a <span style="color:#666">+</span> <span style="color:#b44">&#34;, &#34;</span> <span style="color:#666">+</span> b <span style="color:#666">+</span> <span style="color:#b44">&#34;)&#34;</span>);
+
+
+
+
+
+
+
+
+
+
+<div class=""> A frog is traveling on a 3-lane road, starting at point 0 on lane 2. The frog wants to reach point n, but there may be obstacles at various points on the road. The frog can either move forward on the same lane or jump to another lane if the current lane is blocked. The goal is to find the minimum number of side jumps the frog needs to take to reach point n while avoiding obstacles. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> You are given an array obstacles where obstacles[i] (0 &lt;= i &lt;= n) represents the obstacle at point i in lane obstacles[i]. The value of obstacles[i] can be 0 (no obstacle), 1 (obstacle on lane 1), 2 (obstacle on lane 2), or 3 (obstacle on lane 3).</div>
+                        <div class=""> <b>Example:</b> For example, obstacles = [0, 1, 2, 3, 0] means that there are obstacles on lane 1 at point 1, lane 2 at point 2, and lane 3 at point 3.</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 5 * 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= obstacles[i] &lt;= 3</div>
+                            
+                                <div style="margin-left: 20px;"> • obstacles[0] == obstacles[n] == 0</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> Return the minimum number of side jumps the frog needs to take to reach point n, starting from point 0 on lane 2.</div>
+                        <div class=""> <b>Example:</b> For obstacles = [0, 1, 2, 3, 0], the frog needs 2 side jumps to avoid obstacles and reach point n, so the output should be 2.</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output should be a non-negative integer.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The frog needs to avoid obstacles and reach point n with the fewest side jumps.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1. Start at point 0, lane 2.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. At each point, check if there is an obstacle in the current lane.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. If there is an obstacle in the current lane, consider jumping to the other two lanes if they are clear of obstacles.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Continue this process until the frog reaches point n, keeping track of the minimum number of jumps.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The frog must avoid obstacles and make side jumps only when necessary.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • The frog starts at point 0, lane 2, and must reach point n.</div>
+                            
+                                <div style="margin-left: 20px;"> • At each point, there can be at most one obstacle in the three lanes.</div>
+                            
+                                <div style="margin-left: 20px;"> • The frog can jump to any lane as long as the new lane does not have an obstacle at the current point.</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The frog can always make a side jump if needed, as long as the destination lane is clear of obstacles.</div>
+                            
+                                <div style="margin-left: 20px;"> • The frog will only need to jump when its current lane is blocked.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: obstacles = [0, 1, 2, 3, 0]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The frog starts on lane 2 at point 0. It faces an obstacle on lane 1 at point 1, so it jumps to lane 3. It then faces an obstacle on lane 3 at point 2, so it jumps to lane 1. After jumping twice, the frog reaches point n, having made 2 side jumps.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: obstacles = [0, 1, 1, 3, 3, 0]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The frog starts on lane 2 at point 0. There are no obstacles on lane 2 at point 1, so it continues straight ahead. No side jumps are needed, and the frog reaches point n without any obstacles.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: obstacles = [0, 2, 1, 0, 3, 0]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The frog faces an obstacle on lane 2 at point 1, so it jumps to lane 3. It then faces an obstacle on lane 3 at point 3, so it jumps to lane 1. The frog makes 2 side jumps to reach point n.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> The frog&#39;s movement is optimized by using dynamic programming to minimize the number of side jumps. We track the frog&#39;s position and the state of the lanes at each point, recursively determining the minimum jumps required.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The frog can either move forward on the same lane or jump to another lane to avoid obstacles.</div>
+                            
+                                <div style="margin-left: 20px;"> • We need to calculate the minimum number of jumps for each position and lane combination.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • The problem can be solved with dynamic programming by storing results for each possible state (lane and position) and building upon the previous states.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1. Initialize a memoization table to store the minimum number of jumps for each lane and position.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. Recursively compute the minimum jumps from each lane and position by considering jumps to the other lanes.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. Return the result from the memoization table once all positions have been processed.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The input array has only one point (n=1), which is the simplest case.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Consider the case where n is at its upper bound (n = 500000). Efficient memoization and recursion are necessary to handle this case.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The frog does not need to jump if no obstacles are present, making the solution straightforward.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure that the memoization table handles the maximum input size efficiently.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Memoization Setup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Base Case 1</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Memoization Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Obstacle Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Recursive Call 1</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Left Track Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Right Track Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Left Track Side Jump</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Left Track Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Right Track Side Jump</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Right Track Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Memoization Storage</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Main Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Track Size</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Initial Track and Index</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Memoization Table Setup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return Result</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> cur, <span style="color:#0b0;font-weight:bold">int</span> idx, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>obs) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> obs.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[cur][idx] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[cur][idx];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(obs[idx] <span style="color:#666">==</span> cur) <span style="color:#a2f;font-weight:bold">return</span> INT_MAX <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> dp(cur, idx <span style="color:#666">+</span> <span style="color:#666">1</span>, obs);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> left  <span style="color:#666">=</span> (cur <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> right <span style="color:#666">=</span> (cur <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">+</span> <span style="color:#666">2</span>) <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(obs[idx] <span style="color:#666">!=</span> left) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> min(ans, dp(left, idx <span style="color:#666">+</span> <span style="color:#666">1</span>, obs) <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(obs[idx] <span style="color:#666">!=</span> right) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> min(ans, dp(right, idx <span style="color:#666">+</span> <span style="color:#666">1</span>, obs) <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[cur][idx] <span style="color:#666">=</span> ans;
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> f(string S) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> S.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> (n <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> S[<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&amp;&amp;</span> S[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>)) <span style="color:#a2f;font-weight:bold">return</span> {};
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> S[<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#a2f;font-weight:bold">return</span> {<span style="color:#b44">&#34;0.&#34;</span> <span style="color:#666">+</span> S.substr(<span style="color:#666">1</span>)};
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">||</span> S[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#a2f;font-weight:bold">return</span> {S};
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res <span style="color:#666">=</span> {S};
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; <span style="color:#666">++</span>i) res.push_back(S.substr(<span style="color:#666">0</span>, i) <span style="color:#666">+</span> <span style="color:#b44">&#39;.&#39;</span> <span style="color:#666">+</span> S.substr(i));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minSideJumps</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> obs) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> obs.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">2</span>, idx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    memo.resize(<span style="color:#666">4</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp(cur, idx, obs);
+</span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function generates all possible valid coordinate pairs from a string of digits, where the coordinates are formed by splitting the string into two non-empty parts, considering decimal placements.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ambiguousCoordinates(string S) {
-</span></span></code></pre></div><p>This line defines the function ambiguousCoordinates, which takes a string S as input and returns a vector of strings representing all valid coordinates formed from the input string.</p>
-</li>
-<li>
-<p><strong>Variable Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> S.size();
-</span></span></code></pre></div><p>This line calculates the size of the input string and stores it in the variable n.</p>
-</li>
-<li>
-<p><strong>Variable Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
-</span></span></code></pre></div><p>A vector res is declared to store the resulting coordinate pairs.</p>
-</li>
-<li>
-<p><strong>Function Call</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> A <span style="color:#666">=</span> f(S.substr(<span style="color:#666">1</span>, i)), B <span style="color:#666">=</span> f(S.substr(i <span style="color:#666">+</span> <span style="color:#666">1</span>, n <span style="color:#666">-</span> <span style="color:#666">2</span> <span style="color:#666">-</span> i));
-</span></span></code></pre></div><p>This line splits the string into two substrings and passes them to the helper function f, which generates all valid numbers from those substrings.</p>
-</li>
-<li>
-<p><strong>Nested Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span> <span style="color:#a0a000">a</span> : A) <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span> <span style="color:#a0a000">b</span> : B) res.push_back(<span style="color:#b44">&#34;(&#34;</span> <span style="color:#666">+</span> a <span style="color:#666">+</span> <span style="color:#b44">&#34;, &#34;</span> <span style="color:#666">+</span> b <span style="color:#666">+</span> <span style="color:#b44">&#34;)&#34;</span>);
-</span></span></code></pre></div><p>These nested loops iterate over the possible combinations of the two substrings A and B, adding the resulting pairs of coordinates to the result vector res.</p>
-</li>
-<li>
-<p><strong>Return</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><p>This returns the vector res, containing all valid coordinate pairs formed from the input string.</p>
-</li>
-<li>
-<p><strong>Function Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> f(string S) {
-</span></span></code></pre></div><p>This is a helper function f, which takes a string S and returns a vector of valid numbers that can be formed from it, considering decimal placements.</p>
-</li>
-<li>
-<p><strong>Variable Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> S.size();
-</span></span></code></pre></div><p>This line calculates the size of the string S and stores it in variable n.</p>
-</li>
-<li>
-<p><strong>Condition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> (n <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> S[<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&amp;&amp;</span> S[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>)) <span style="color:#a2f;font-weight:bold">return</span> {};
-</span></span></code></pre></div><p>This checks if the string is empty or contains invalid decimal numbers (like &lsquo;00&rsquo;). If true, it returns an empty vector.</p>
-</li>
-<li>
-<p><strong>Condition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> S[<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#a2f;font-weight:bold">return</span> {<span style="color:#b44">&#34;0.&#34;</span> <span style="color:#666">+</span> S.substr(<span style="color:#666">1</span>)};
-</span></span></code></pre></div><p>If the string starts with &lsquo;0&rsquo; and has more than one character, it returns a valid decimal number like &lsquo;0.x&rsquo; by placing a decimal point after &lsquo;0&rsquo;.</p>
-</li>
-<li>
-<p><strong>Condition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">||</span> S[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#a2f;font-weight:bold">return</span> {S};
-</span></span></code></pre></div><p>If the string is a single character or ends with &lsquo;0&rsquo;, it returns the string as it is (no decimal needed).</p>
-</li>
-<li>
-<p><strong>Variable Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res <span style="color:#666">=</span> {S};
-</span></span></code></pre></div><p>A vector res is initialized with the original string S.</p>
-</li>
-<li>
-<p><strong>Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; <span style="color:#666">++</span>i) res.push_back(S.substr(<span style="color:#666">0</span>, i) <span style="color:#666">+</span> <span style="color:#b44">&#39;.&#39;</span> <span style="color:#666">+</span> S.substr(i));
-</span></span></code></pre></div><p>This loop adds decimal points at different positions within the string and stores the results in the vector res.</p>
-</li>
-<li>
-<p><strong>Return</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><p>This returns the vector res containing all valid numbers formed by adding decimal points at various positions.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n^2), where n is the length of the string s. This is because we loop through all possible splits and check the validity of the resulting substrings.</li>
-<li><strong>Average Case:</strong> O(n^2)</li>
-<li><strong>Worst Case:</strong> O(n^2), as we check all splits and generate all valid coordinate combinations.</li>
-</ul>
-<p>The time complexity is quadratic due to the nested iteration for splitting and checking substrings.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n), in case the input string is very simple and only a few valid combinations exist.</li>
-<li><strong>Worst Case:</strong> O(n^2), as the result list can contain up to n^2 valid coordinate combinations.</li>
-</ul>
-<p>The space complexity is quadratic because we store all possible valid coordinate combinations.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Memoization Setup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A 2D vector `memo` is declared to store the results of subproblems. It helps in avoiding redundant calculations during recursion. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> cur, <span style="color:#0b0;font-weight:bold">int</span> idx, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>obs) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This defines the recursive helper function `dp` which calculates the minimum side jumps starting from the current track (`cur`) and index (`idx`) while avoiding obstacles. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Base Case 1</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> obs.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This base case checks if the end of the track is reached. If so, it returns 0, as no further jumps are needed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Memoization Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[cur][idx] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[cur][idx];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the result for the current subproblem has already been calculated, it is retrieved from `memo` to avoid redundant computations. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Obstacle Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(obs[idx] <span style="color:#666">==</span> cur) <span style="color:#a2f;font-weight:bold">return</span> INT_MAX <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If there is an obstacle on the current track (`cur`), it returns a large value (`INT_MAX - 1`), indicating an invalid path. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Recursive Call 1</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> dp(cur, idx <span style="color:#666">+</span> <span style="color:#666">1</span>, obs);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This recursive call computes the minimum side jumps if the current track is not changed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Left Track Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> left  <span style="color:#666">=</span> (cur <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This calculates the left track (`left`) that can be considered for the next move. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Right Track Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> right <span style="color:#666">=</span> (cur <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">+</span> <span style="color:#666">2</span>) <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This calculates the right track (`right`) that can be considered for the next move. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Left Track Side Jump</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(obs[idx] <span style="color:#666">!=</span> left) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the left track is not blocked by an obstacle. If not, it recursively calculates the minimum side jumps from the left track. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Left Track Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">=</span> min(ans, dp(left, idx <span style="color:#666">+</span> <span style="color:#666">1</span>, obs) <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The minimum side jumps value is updated if jumping to the left track results in a smaller number of jumps. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Right Track Side Jump</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(obs[idx] <span style="color:#666">!=</span> right) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the right track is not blocked by an obstacle. If not, it recursively calculates the minimum side jumps from the right track. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Right Track Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">=</span> min(ans, dp(right, idx <span style="color:#666">+</span> <span style="color:#666">1</span>, obs) <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The minimum side jumps value is updated if jumping to the right track results in a smaller number of jumps. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Memoization Storage</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[cur][idx] <span style="color:#666">=</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The result of the current subproblem is stored in the `memo` array to avoid redundant calculations. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Main Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minSideJumps</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> obs) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This defines the main function `minSideJumps`, which initializes the memoization table and calls the `dp` function to compute the minimum side jumps. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Track Size</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> obs.size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line calculates the size of the obstacle array (`obs`) to determine the number of tracks. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Initial Track and Index</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">2</span>, idx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initial values for `cur` (current track) and `idx` (current index) are set. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Memoization Table Setup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    memo.resize(<span style="color:#666">4</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The `memo` table is resized to store the results of subproblems for all tracks and indices. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dp</span>(cur, idx, obs);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calls the `dp` function to compute and return the minimum number of side jumps. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n) when there are no obstacles and no side jumps are required.</div>
+                        <div class=""> <b>Average Case:</b> O(n) since we compute the minimum jumps for each position and lane.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) with memoization to prevent recomputation of subproblems.</div> 
+                        <div class=""> <b>Description:</b> The dynamic programming solution processes each point only once, resulting in linear time complexity.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n) when no side jumps are needed.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) for the memoization table.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is linear due to the memoization table storing the minimum jumps for each lane and position.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/ambiguous-coordinates/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 <table>
@@ -394,6 +959,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -637,90 +1203,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-816-ambiguous-coordinates\/"
-    },
-    "headline": "Leetcode 816: Ambiguous Coordinates",
-    "description": "In-depth solution and explanation for Leetcode 816: Ambiguous Coordinates in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/816.webp"
-    },
-    "datePublished": "2024-08-17T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"String\",\"Backtracking\",\"Enumeration\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "keywords": "[\"String\",\"Backtracking\",\"Enumeration\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-817-linked-list-components\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-814-binary-tree-pruning\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

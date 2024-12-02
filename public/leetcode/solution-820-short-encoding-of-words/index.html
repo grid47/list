@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -41,8 +43,97 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-820-short-encoding-of-words\/"
+    },
+    "headline": "Leetcode 820: Short Encoding of Words",
+    "description": "In-depth solution and explanation for Leetcode 820: Short Encoding of Words in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/820.webp"
+    },
+    "datePublished": "2024-08-17T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Array\",\"Hash Table\",\"String\",\"Trie\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "keywords": "[\"Array\",\"Hash Table\",\"String\",\"Trie\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-822-card-flipping-game\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-817-linked-list-components\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -183,7 +274,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 17, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -212,156 +303,446 @@
     
   </figure>
   </h2>
-<p>Given an array of words, you are to return the length of the shortest reference string that can encode these words. The reference string consists of the words concatenated with a &lsquo;#&rsquo; character at the end, and indices are used to encode the words by identifying their position in the reference string. Each word is encoded by the substring in the reference string that starts at its position and ends at the next &lsquo;#&rsquo;.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input consists of an array of words, where each word is a string of lowercase letters. Each word in the array has a length between 1 and 7 characters.</li>
-<li><strong>Example:</strong> <code>Input: words = [&quot;apple&quot;, &quot;ple&quot;, &quot;le&quot;]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= words.length &lt;= 2000</li>
-<li>1 &lt;= words[i].length &lt;= 7</li>
-<li>words[i] consists of only lowercase letters</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> Return the length of the shortest reference string that can encode the given words.</li>
-<li><strong>Example:</strong> <code>Output: 9</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The output should be an integer representing the length of the shortest reference string.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> The goal is to find the shortest encoding of the words using a reference string. To do this, we can eliminate words that are suffixes of other words, and concatenate only the distinct prefixes of the words to form the reference string.</p>
-<ul>
-<li>Create a set of words to store unique words.</li>
-<li>For each word, check all possible suffixes and remove them from the set if they are also present.</li>
-<li>Finally, concatenate the remaining words, adding 1 for each &lsquo;#&rsquo; delimiter, and return the length of the concatenated string.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>All words are lowercase and have lengths between 1 and 7 characters.</li>
-<li>Words in the array are unique.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li>
-<p><strong>Input:</strong> <code>Input: words = [&quot;apple&quot;, &quot;ple&quot;, &quot;le&quot;]</code>  <br>
-<strong>Explanation:</strong> The word &lsquo;ple&rsquo; is a suffix of &lsquo;apple&rsquo;, and &rsquo;le&rsquo; is a suffix of &lsquo;ple&rsquo;. So, we can encode the words with &lsquo;apple#&rsquo;, which results in a total length of 9.</p>
-</li>
-<li>
-<p><strong>Input:</strong> <code>Input: words = [&quot;orange&quot;, &quot;or&quot;, &quot;ange&quot;]</code>  <br>
-<strong>Explanation:</strong> Here, &lsquo;or&rsquo; is a prefix of &lsquo;orange&rsquo;, and &lsquo;ange&rsquo; is a suffix of &lsquo;orange&rsquo;. The shortest encoding would be &lsquo;orange#&rsquo;, resulting in a total length of 7.</p>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>The key to solving this problem efficiently is to first remove suffixes that are redundant. If one word is a suffix of another, the shorter word does not need to be included in the final encoding.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>Suffixes that are part of longer words don&rsquo;t need to be included separately.</li>
-<li>The reference string must end with a &lsquo;#&rsquo; character, so we need to account for that when calculating the total length.</li>
-<li>We should identify all words that are not suffixes of other words, as these will contribute to the final reference string.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>If the input is an empty array, return 0 since there are no words to encode.</li>
-<li>For large arrays (up to 2000 words), the solution should handle them efficiently.</li>
-<li>Ensure that cases where all words are prefixes or suffixes of one another are handled correctly.</li>
-<li>The solution must handle arrays of up to 2000 words efficiently.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumLengthEncoding</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> s(words.begin(), words.end());
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">w</span>: words)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> w.size(); i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        s.erase(w.substr(i));
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;        
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">sk</span>: s)
-</span></span><span style="display:flex;"><span>    res <span style="color:#666">+=</span> (sk.size() <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+
+
+
+
+
+
+
+
+
+
+<div class=""> Given a string <code>sentence</code> consisting of lowercase English letters, determine whether the sentence contains every letter of the English alphabet at least once. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> The input consists of a string `sentence` containing only lowercase English letters.</div>
+                        <div class=""> <b>Example:</b> sentence = &#34;abcdefghijklmnopqrstuvwxyz&#34;</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= sentence.length &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • sentence consists of lowercase English letters.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> Return `true` if the sentence is a pangram, otherwise return `false`.</div>
+                        <div class=""> <b>Example:</b> true</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output will be a boolean value indicating whether the sentence is a pangram.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> Check if all the letters of the alphabet are present in the given sentence.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Initialize a set or bitmask to track the unique letters in the sentence.</div>
+                            
+                                <div style="margin-left: 20px;"> • Iterate through each character in the sentence and update the set or bitmask.</div>
+                            
+                                <div style="margin-left: 20px;"> • If all 26 letters are present, return `true`; otherwise, return `false`.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The string `sentence` must be between 1 and 1000 characters long, and it will only contain lowercase English letters.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= sentence.length &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • sentence consists only of lowercase English letters.</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The string `sentence` contains lowercase English letters and is not empty.</div>
+                            
+                                <div style="margin-left: 20px;"> • The sentence length is within the given constraint.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> sentence = &#34;abcdefghijklmnopqrstuvwxyz&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sentence contains every letter from &#39;a&#39; to &#39;z&#39;, so the output is `true`.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> sentence = &#34;hello&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sentence does not contain every letter of the alphabet, so the output is `false`.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> To solve this problem, we will check if the sentence contains every letter of the alphabet using a set or bitmask.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The problem can be efficiently solved using a set or bitmask to track the presence of each letter.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • We can utilize a bitmask of 26 bits to represent each letter of the alphabet. Each bit corresponds to a letter, and if the bit is set, it means that letter is present in the sentence.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Initialize a bitset of size 26 to track the letters found in the sentence.</div>
+                            
+                                <div style="margin-left: 20px;"> • Loop through each character in the sentence and mark the corresponding bit in the bitset.</div>
+                            
+                                <div style="margin-left: 20px;"> • After processing all characters, check if all 26 bits are set. If they are, return `true`; otherwise, return `false`.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The sentence will always have at least one character, based on the constraints.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • For large inputs, the solution should efficiently check for the presence of all alphabet letters.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If the sentence is too short to contain all 26 letters, the result will be `false`.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure the solution works efficiently within the provided input size constraints.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Bitset Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Through Characters</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Bitset Count Check</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkIfPangram</span>(string set) {
+</span></span><span style="display:flex;"><span>    bitset<span style="color:#666">&lt;</span><span style="color:#666">26</span><span style="color:#666">&gt;</span> bit;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: set) bit.set(x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> bit.count() <span style="color:#666">==</span> <span style="color:#666">26</span>;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function calculates the minimum length encoding for a set of words by removing the suffixes of each word that appear in other words.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumLengthEncoding</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words) {
-</span></span></code></pre></div><p>The function <code>minimumLengthEncoding</code> is defined, which takes a vector of strings <code>words</code> as input and returns an integer representing the minimum length encoding.</p>
-</li>
-<li>
-<p><strong>Set Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> s(words.begin(), words.end());
-</span></span></code></pre></div><p>An unordered set <code>s</code> is initialized with the elements from the <code>words</code> vector, ensuring all words are stored without duplicates.</p>
-</li>
-<li>
-<p><strong>Outer Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">w</span>: words)
-</span></span></code></pre></div><p>The outer loop iterates over each word <code>w</code> in the <code>words</code> vector.</p>
-</li>
-<li>
-<p><strong>Inner Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> w.size(); i<span style="color:#666">++</span>)
-</span></span></code></pre></div><p>The inner loop iterates over the characters in each word starting from index 1, essentially looking at suffixes of the word.</p>
-</li>
-<li>
-<p><strong>Erase Suffix</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s.erase(w.substr(i));
-</span></span></code></pre></div><p>The substring of <code>w</code> starting from index <code>i</code> is removed from the set <code>s</code>. This ensures that any word that is a suffix of another word is excluded from the encoding.</p>
-</li>
-<li>
-<p><strong>Result Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;        
-</span></span></code></pre></div><p>The variable <code>res</code> is initialized to 0, which will be used to store the total length of the encoded string.</p>
-</li>
-<li>
-<p><strong>Summing Lengths</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">sk</span>: s)
-</span></span></code></pre></div><p>The loop iterates over each string <code>sk</code> remaining in the set <code>s</code>.</p>
-</li>
-<li>
-<p><strong>Calculate Encoding Length</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    res <span style="color:#666">+=</span> (sk.size() <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span></code></pre></div><p>For each string <code>sk</code>, its length is added to <code>res</code>, along with an additional 1 to account for the &lsquo;#&rsquo; character that separates each word in the encoding.</p>
-</li>
-<li>
-<p><strong>Return Result</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><p>The function returns the total length of the encoded string, which is the sum of the lengths of all the strings in the set <code>s</code>.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n), where n is the number of words.</li>
-<li><strong>Average Case:</strong> O(n * m), where n is the number of words and m is the average length of the words.</li>
-<li><strong>Worst Case:</strong> O(n * m), where n is the number of words and m is the average length of the words.</li>
-</ul>
-<p>The time complexity is linear with respect to the number of words and the length of each word due to the need to check suffixes.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n), where n is the number of words, when no suffixes need to be stored.</li>
-<li><strong>Worst Case:</strong> O(n * m), where n is the number of words and m is the average length of the words, for storing the word set.</li>
-</ul>
-<p>The space complexity is primarily determined by the size of the word set.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkIfPangram</span>(string set) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the function `checkIfPangram`, which takes a string `set` as input and returns a boolean indicating whether the string contains all 26 letters of the alphabet. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Bitset Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bitset<span style="color:#666">&lt;</span><span style="color:#666">26</span><span style="color:#666">&gt;</span> bit;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes a bitset of size 26, where each bit represents one of the 26 letters of the alphabet. A set bit indicates the presence of that letter. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Loop Through Characters</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: set) bit.set(x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loops through each character `x` in the string `set` and sets the corresponding bit in the bitset. The expression `x - &#39;a&#39;` maps each letter to an index between 0 and 25. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Bitset Count Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> bit.count() <span style="color:#666">==</span> <span style="color:#666">26</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if all 26 bits in the bitset are set. If all bits are set (i.e., all letters are present), the count will be 26, and the function returns `true`; otherwise, it returns `false`. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the length of the sentence. We only need one pass through the sentence to check for the presence of all letters.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) since we are only using a fixed-size bitset or set for tracking the letters, regardless of the sentence length.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/short-encoding-of-words/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 <table>
@@ -373,6 +754,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -620,90 +1002,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-820-short-encoding-of-words\/"
-    },
-    "headline": "Leetcode 820: Short Encoding of Words",
-    "description": "In-depth solution and explanation for Leetcode 820: Short Encoding of Words in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/820.webp"
-    },
-    "datePublished": "2024-08-17T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Array\",\"Hash Table\",\"String\",\"Trie\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "keywords": "[\"Array\",\"Hash Table\",\"String\",\"Trie\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-822-card-flipping-game\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-817-linked-list-components\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

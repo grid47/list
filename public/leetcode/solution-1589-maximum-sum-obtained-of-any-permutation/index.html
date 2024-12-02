@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -41,8 +43,105 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1589-maximum-sum-obtained-of-any-permutation\/"
+    },
+    "headline": "Leetcode 1589: Maximum Sum Obtained of Any Permutation",
+    "description": "In-depth solution and explanation for Leetcode 1589: Maximum Sum Obtained of Any Permutation in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": ""
+    },
+    "datePublished": "2024-06-01T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Array\",\"Greedy\",\"Sorting\",\"Prefix Sum\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "video": {
+      "@type": "VideoObject",
+      "name": "Video explanation for Leetcode 1589: Maximum Sum Obtained of Any Permutation",
+      "embedUrl": "https://www.youtube.com/watch?v=TyZ_FFGIZgs",
+      "uploadDate": "2020-09-19",
+      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/TyZ_FFGIZgs\/maxresdefault.jpg"
+    },
+    
+    "keywords": "[\"Array\",\"Greedy\",\"Sorting\",\"Prefix Sum\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1590-make-sum-divisible-by-p\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1584-min-cost-to-connect-all-points\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -183,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Jun 1, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    1 min read
                                 </span>					
                             </div>
                         </div>			
@@ -200,198 +299,348 @@
                     
                     <div class="article-post">
                         <hr>
-<p>You are given an array of integers nums and a list of requests, where each request specifies a range in the array. The ith request asks for the sum of all elements from nums[starti] to nums[endi], inclusive. Your task is to determine the maximum total sum of all requests for any permutation of nums.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> You are given an array of integers nums, and a list of requests. Each request consists of two integers [starti, endi] representing a range in nums. The length of nums can be up to 10^5, and the number of requests can be as large as 10^5.</li>
-<li><strong>Example:</strong> <code>Input: nums = [1, 3, 2, 4], requests = [[0, 1], [1, 3]]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= nums.length &lt;= 10^5</li>
-<li>0 &lt;= nums[i] &lt;= 10^5</li>
-<li>1 &lt;= requests.length &lt;= 10^5</li>
-<li>0 &lt;= starti &lt;= endi &lt; n</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> Return the maximum possible sum of all request sums for any permutation of the nums array, modulo 10^9 + 7.</li>
-<li><strong>Example:</strong> <code>Output: 21</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The output should be an integer representing the maximum possible total sum modulo 10^9 + 7.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> The goal is to find the maximum total sum of the request sums for any permutation of nums by efficiently calculating the contributions of each element to the total sum based on the request ranges.</p>
-<ul>
-<li>
-<ol>
-<li>Create an array of length n, where each element corresponds to the number of times it is included in a request range.</li>
-</ol>
-</li>
-<li>
-<ol start="2">
-<li>Sort the nums array in increasing order and the request contributions in decreasing order.</li>
-</ol>
-</li>
-<li>
-<ol start="3">
-<li>Multiply each element of nums with its corresponding contribution and sum the results.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ol>
-</li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>The requests are well-formed, with starti &lt;= endi.</li>
-<li>All elements in nums are distinct and non-negative.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li><strong>Input:</strong> <code>Input: nums = [1, 3, 2, 4], requests = [[0, 1], [1, 3]]</code>  <br>
-<strong>Explanation:</strong> The permutation [4, 3, 2, 1] gives the maximum total sum for the requests. The first request sums nums[0] + nums[1] = 4 + 3 = 7 and the second request sums nums[1] + nums[2] + nums[3] = 3 + 2 + 1 = 6. The total sum is 7 + 6 = 13.</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>We can solve this problem by treating the requests as intervals that increase the frequency of certain elements in nums. The elements of nums that appear in many requests should be assigned larger values to maximize the total sum. By sorting both the nums array and the request contributions, we can efficiently compute the result.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>We need to calculate how often each element of nums is included in the request ranges.</li>
-<li>Sorting both nums and the request contributions in a way that matches higher frequencies with higher values will give the maximum sum.</li>
-<li>The problem boils down to sorting the frequency of requests and the values in nums to pair them optimally.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>Handle the case where nums has only one element or there are no requests.</li>
-<li>Ensure the solution can handle the largest possible input sizes efficiently.</li>
-<li>Handle cases where all values in nums are zero, or where the ranges in requests are minimal (e.g., starti == endi).</li>
-<li>Ensure the solution works within the provided time and space constraints.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxSumRangeQuery</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> req) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> cnt(n, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">r</span>: req) {
-</span></span><span style="display:flex;"><span>        cnt[r[<span style="color:#666">0</span>]]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(r[<span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&lt;</span> n)
-</span></span><span style="display:flex;"><span>            cnt[r[<span style="color:#666">1</span>] <span style="color:#666">+</span><span style="color:#666">1</span>]<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        cnt[i] <span style="color:#666">+=</span> cnt[i <span style="color:#666">-</span><span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>    sort(nums.begin(), nums.end());
-</span></span><span style="display:flex;"><span>    sort(cnt.begin(), cnt.end());
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span>  ((<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span>) nums[i] <span style="color:#666">*</span> cnt[i]);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">%</span> <span style="color:#666">1000000007</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><p>This function computes the maximum sum of values within the ranges specified in <code>req</code> after modifying <code>nums</code>. The final result is taken modulo 1000000007.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxSumRangeQuery</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> req) {
-</span></span></code></pre></div><p>This line defines the function <code>maxSumRangeQuery</code> that takes two arguments: a vector of integers <code>nums</code> and a 2D vector <code>req</code> representing the ranges for computation.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
-</span></span></code></pre></div><p>This initializes the variable <code>n</code> to store the size of the <code>nums</code> array.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div><p>Here, we initialize <code>res</code> to 0. This will hold the final result of the sum after performing the necessary calculations.</p>
-</li>
-<li>
-<p><strong>Array Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> cnt(n, <span style="color:#666">0</span>);
-</span></span></code></pre></div><p>We create a vector <code>cnt</code> initialized to zeros. This will keep track of the frequency of range updates for each index in <code>nums</code>.</p>
-</li>
-<li>
-<p><strong>Loop (Outer)</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">r</span>: req) {
-</span></span></code></pre></div><p>This loop iterates over each range in the <code>req</code> vector. Each range is represented by the indices <code>r[0]</code> and <code>r[1]</code>.</p>
-</li>
-<li>
-<p><strong>Range Update</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cnt[r[<span style="color:#666">0</span>]]<span style="color:#666">++</span>;
-</span></span></code></pre></div><p>This line increments the value at index <code>r[0]</code> in the <code>cnt</code> vector, indicating that the range starting at <code>r[0]</code> is updated.</p>
-</li>
-<li>
-<p><strong>Conditional Update</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(r[<span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&lt;</span> n)
-</span></span></code></pre></div><p>This checks if the end of the range <code>r[1]</code> is within bounds. If true, we need to decrement the value just after the range.</p>
-</li>
-<li>
-<p><strong>Range Update</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt[r[<span style="color:#666">1</span>] <span style="color:#666">+</span><span style="color:#666">1</span>]<span style="color:#666">--</span>;
-</span></span></code></pre></div><p>This line decrements the value just after the range <code>r[1] + 1</code>, signaling the end of the range effect.</p>
-</li>
-<li>
-<p><strong>Prefix Sum</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span></code></pre></div><p>This loop starts the prefix sum operation on the <code>cnt</code> array, which accumulates the range counts.</p>
-</li>
-<li>
-<p><strong>Prefix Sum Update</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cnt[i] <span style="color:#666">+=</span> cnt[i <span style="color:#666">-</span><span style="color:#666">1</span>];
-</span></span></code></pre></div><p>This line adds the previous value of <code>cnt[i-1]</code> to <code>cnt[i]</code>, effectively accumulating the range counts.</p>
-</li>
-<li>
-<p><strong>Sorting</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(nums.begin(), nums.end());
-</span></span></code></pre></div><p>This sorts the <code>nums</code> array in ascending order to align the highest values with the most frequent ranges.</p>
-</li>
-<li>
-<p><strong>Sorting</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(cnt.begin(), cnt.end());
-</span></span></code></pre></div><p>This sorts the <code>cnt</code> array to match the corresponding frequencies with the sorted <code>nums</code> array.</p>
-</li>
-<li>
-<p><strong>Final Computation Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span></code></pre></div><p>This loop computes the final result by multiplying each value in <code>nums</code> by the corresponding frequency in <code>cnt</code>.</p>
-</li>
-<li>
-<p><strong>Final Computation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span>  ((<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span>) nums[i] <span style="color:#666">*</span> cnt[i]);
-</span></span></code></pre></div><p>This line adds the product of the sorted values in <code>nums</code> and their corresponding frequencies in <code>cnt</code> to the result <code>res</code>.</p>
-</li>
-<li>
-<p><strong>Modulo Operation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">%</span> <span style="color:#666">1000000007</span>;
-</span></span></code></pre></div><p>After computing the total sum, we return the result modulo 1000000007 to avoid overflow and meet the problem&rsquo;s requirements.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n log n) - Sorting nums and cnt arrays takes O(n log n).</li>
-<li><strong>Average Case:</strong> O(n log n)</li>
-<li><strong>Worst Case:</strong> O(n log n)</li>
-</ul>
-<p>The most expensive operation is sorting the nums and cnt arrays.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n) - The space complexity is primarily determined by the storage of the cnt array and nums.</li>
-<li><strong>Worst Case:</strong> O(n) - Storing the cnt array and intermediate results requires O(n) space.</li>
-</ul>
-<p>The space complexity is linear, proportional to the size of nums and the request list.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+
+
+
+
+
+
+
+
+
+
+<div class="">  </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="4"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="5"></button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> </div>
+                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> </div>
+                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Steps:</b>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Steps:</b>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"> Code </button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#666">%!</span>s(<span style="color:#666">&lt;</span>nil<span style="color:#666">&gt;</span>)
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> </div>
+                        <div class=""> <b>Average Case:</b> </div>
+                        <div class=""> <b>Worst Case:</b> </div> 
+                        <div class=""> <b>Description:</b> </div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> </div>
+                        <div class=""> <b>Worst Case:</b> </div> 
+                        <div class=""> <b>Description:</b> </div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target=""]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/maximum-sum-obtained-of-any-permutation/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 
@@ -411,6 +660,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -658,98 +908,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1589-maximum-sum-obtained-of-any-permutation\/"
-    },
-    "headline": "Leetcode 1589: Maximum Sum Obtained of Any Permutation",
-    "description": "In-depth solution and explanation for Leetcode 1589: Maximum Sum Obtained of Any Permutation in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": ""
-    },
-    "datePublished": "2024-06-01T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Array\",\"Greedy\",\"Sorting\",\"Prefix Sum\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "video": {
-      "@type": "VideoObject",
-      "name": "Video explanation for Leetcode 1589: Maximum Sum Obtained of Any Permutation",
-      "embedUrl": "https://www.youtube.com/watch?v=TyZ_FFGIZgs",
-      "uploadDate": "2020-09-19",
-      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/TyZ_FFGIZgs\/maxresdefault.jpg"
-    },
-    
-    "keywords": "[\"Array\",\"Greedy\",\"Sorting\",\"Prefix Sum\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1590-make-sum-divisible-by-p\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1584-min-cost-to-connect-all-points\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

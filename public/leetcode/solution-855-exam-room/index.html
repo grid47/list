@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -40,8 +42,97 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-855-exam-room\/"
+    },
+    "headline": "Leetcode 855: Exam Room",
+    "description": "In-depth solution and explanation for Leetcode 855: Exam Room in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": ""
+    },
+    "datePublished": "2024-08-13T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Design\",\"Heap (Priority Queue)\",\"Ordered Set\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "keywords": "[\"Design\",\"Heap (Priority Queue)\",\"Ordered Set\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-856-score-of-parentheses\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-853-car-fleet\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -199,232 +290,544 @@
                     
                     <div class="article-post">
                         <hr>
-<p>You are tasked with simulating an exam room where students will choose seats based on a strategy that maximizes their distance from the closest person already seated. If multiple seats have the same distance, the student will choose the seat with the smallest index. Additionally, students can leave the room, freeing up their seats.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input consists of an integer n, which represents the number of seats in the exam room. The object should allow for two operations: seating a student and having a student leave a seat.</li>
-<li><strong>Example:</strong> <code>Input:  [&quot;ExamRoom&quot;, &quot;seat&quot;, &quot;seat&quot;, &quot;seat&quot;, &quot;seat&quot;, &quot;leave&quot;, &quot;seat&quot;]  [[10], [], [], [], [], [4], []]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= n &lt;= 10^9</li>
-<li>At most 10^4 calls will be made to the &lsquo;seat&rsquo; and &rsquo;leave&rsquo; operations.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> For each &lsquo;seat&rsquo; operation, return the seat index where the student will sit. For the &rsquo;leave&rsquo; operation, there is no return value.</li>
-<li><strong>Example:</strong> <code>Output:  [null, 0, 9, 4, 2, null, 5]</code></li>
-<li><strong>Constraints:</strong></li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> To implement the seating strategy such that students sit at the seat that maximizes the distance from the nearest student. If there are multiple options, choose the smallest seat index.</p>
-<ul>
-<li>Step 1: Implement a data structure to track the positions of students already seated.</li>
-<li>Step 2: For each &lsquo;seat&rsquo; operation, calculate the maximum distance to the nearest student for each empty seat and choose the seat that maximizes this distance.</li>
-<li>Step 3: For each &rsquo;leave&rsquo; operation, remove the seat from the list of occupied seats.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>There will always be at least one seat available when a student arrives.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li><strong>Input:</strong> <code>Input:  [&quot;ExamRoom&quot;, &quot;seat&quot;, &quot;seat&quot;, &quot;seat&quot;, &quot;seat&quot;, &quot;leave&quot;, &quot;seat&quot;]  [[10], [], [], [], [], [4], []]</code>  <br>
-<strong>Explanation:</strong> Initially, no student is seated. The first student sits at seat 0. The next student sits at the farthest available seat, seat 9. The next one sits at seat 4 (the middle of the remaining seats). The next student sits at seat 2. When the student at seat 4 leaves, the next student sits at seat 5 (the next best available seat).</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>To efficiently manage seating and leaving operations, we maintain a list of occupied seats and calculate the optimal seat choice for each &lsquo;seat&rsquo; operation.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>The problem requires balancing between finding the optimal seat and managing the students&rsquo; movements.</li>
-<li>A list of occupied seats is essential to calculate the seat with the greatest distance to the nearest student.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>N/A: The problem guarantees there is always at least one seat and one student.</li>
-<li>Efficient handling of operations is necessary when n is large, up to 10^9.</li>
-<li>If there is only one student and one seat, the student always sits at seat 0.</li>
-<li>There is a guarantee that no student will leave a seat that is unoccupied.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> L;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>ExamRoom(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    N <span style="color:#666">=</span> n;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">seat</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(L.size() <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>        L.push_back(<span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span> 
+
+
+
+
+
+
+
+
+
+
+<div class=""> You are participating in an online chess tournament where rounds start every 15 minutes, starting at 00:00. You are given two times: <code>loginTime</code> and <code>logoutTime</code>. Your task is to calculate the number of full rounds you have participated in during the period from <code>loginTime</code> to <code>logoutTime</code>. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> Two strings: `loginTime` and `logoutTime` representing the times when you log in and log out respectively.</div>
+                        <div class=""> <b>Example:</b> loginTime = &#34;08:25&#34;, logoutTime = &#34;09:05&#34;</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • loginTime and logoutTime are in the format hh:mm.</div>
+                            
+                                <div style="margin-left: 20px;"> • 00 &lt;= hh &lt;= 23</div>
+                            
+                                <div style="margin-left: 20px;"> • 00 &lt;= mm &lt;= 59</div>
+                            
+                                <div style="margin-left: 20px;"> • loginTime and logoutTime are not equal.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> Return the number of full chess rounds you have participated in during the given time window.</div>
+                        <div class=""> <b>Example:</b> 1</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The result is an integer representing the count of full rounds played.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> Calculate the number of full chess rounds you have played between `loginTime` and `logoutTime`.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Convert `loginTime` and `logoutTime` to minutes from 00:00.</div>
+                            
+                                <div style="margin-left: 20px;"> • If `logoutTime` is earlier than `loginTime`, split the time into two parts: from `loginTime` to midnight, and from midnight to `logoutTime`.</div>
+                            
+                                <div style="margin-left: 20px;"> • Count the full rounds (each lasting 15 minutes) in both parts of the time window.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The input times are valid and meet the specified constraints.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • loginTime and logoutTime are valid time strings in hh:mm format.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= loginTime.length, logoutTime.length &lt;= 5</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The input times are in the 24-hour format with no leading zeros in the time parts.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: loginTime = &#34;22:50&#34;, logoutTime = &#34;01:30&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> You played 1 full round from 22:50 to 23:00, and 5 full rounds from 00:00 to 01:30. Total = 6 full rounds.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> We need to calculate the number of full rounds by breaking down the time window into multiple 15-minute intervals. We handle the case where the login and logout times span across midnight.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The rounds start every 15 minutes, so checking for full rounds involves dividing the time window into intervals of 15 minutes.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • By converting the time to minutes and iterating through the intervals, we can efficiently count full rounds.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Convert `loginTime` and `logoutTime` to minutes from 00:00.</div>
+                            
+                                <div style="margin-left: 20px;"> • If `logoutTime` is earlier than `loginTime`, calculate the rounds separately for the periods before and after midnight.</div>
+                            
+                                <div style="margin-left: 20px;"> • For each period, check for full 15-minute rounds and count them.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Input times cannot be empty, as the constraints ensure they are always valid strings.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle the maximum number of rounds, even if `loginTime` and `logoutTime` span across the entire day.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Handle the scenario where `logoutTime` is earlier than `loginTime` by splitting the time window across midnight.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure that input values are within the range 00:00 to 23:59.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Login Time Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Logout Time Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Conditional Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 For Loop (Overlapping Time Calculation)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Interval Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Value (Condition True)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 For Loop (Overlapping Time Calculation)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Interval Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Value (Else Block)</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numberOfRounds</span>(string login, string logout) {
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> max(L[<span style="color:#666">0</span>], N <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">-</span> L[L.size() <span style="color:#666">-</span> <span style="color:#666">1</span>]);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> L.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) d <span style="color:#666">=</span> max(d, (L[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> L[i]) <span style="color:#666">/</span><span style="color:#666">2</span>);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(L[<span style="color:#666">0</span>] <span style="color:#666">==</span> d) {
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        L.insert(L.begin(), <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> L[<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> L.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((L[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> L[i])<span style="color:#666">/</span><span style="color:#666">2</span> <span style="color:#666">==</span> d) {
-</span></span><span style="display:flex;"><span>            L.insert(L.begin() <span style="color:#666">+</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>, (L[i] <span style="color:#666">+</span> L[i <span style="color:#666">+</span><span style="color:#666">1</span>])<span style="color:#666">/</span><span style="color:#666">2</span>);
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> L[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> in <span style="color:#666">=</span> (((login[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (login[<span style="color:#666">1</span>]<span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>)) <span style="color:#666">*</span> <span style="color:#666">60</span>) <span style="color:#666">+</span> ((login[<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (login[<span style="color:#666">4</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> out <span style="color:#666">=</span> (((logout[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (logout[<span style="color:#666">1</span>]<span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>)) <span style="color:#666">*</span> <span style="color:#666">60</span>) <span style="color:#666">+</span> ((logout[<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (logout[<span style="color:#666">4</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// cout &lt;&lt; in &lt;&lt; &#34; &#34; &lt;&lt; out;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(in <span style="color:#666">&gt;</span> out) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">24</span> <span style="color:#666">*</span> <span style="color:#666">60</span>; i <span style="color:#666">+=</span> <span style="color:#666">15</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">+</span> <span style="color:#666">15</span> <span style="color:#666">&lt;=</span> out <span style="color:#666">||</span> i <span style="color:#666">&gt;=</span> in) cnt<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>     }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">24</span> <span style="color:#666">*</span> <span style="color:#666">60</span>; i <span style="color:#666">+=</span> <span style="color:#666">15</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// cout &lt;&lt; &#34;\n&#34; &lt;&lt; i; 
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;=</span> in <span style="color:#666">&amp;&amp;</span> (i <span style="color:#666">+</span> <span style="color:#666">15</span>) <span style="color:#666">&lt;=</span> out) cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>        L.push_back(N <span style="color:#666">-</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> N <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">leave</span>(<span style="color:#0b0;font-weight:bold">int</span> p) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> L.size(); i<span style="color:#666">++</span>) <span style="color:#a2f;font-weight:bold">if</span>(L[i] <span style="color:#666">==</span> p) L.erase(L.begin() <span style="color:#666">+</span> i);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your ExamRoom object will be instantiated and called as such:
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * ExamRoom* obj = new ExamRoom(n);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_1 = obj-&gt;seat();
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;leave(p);
-</span></span></span></code></pre></div><p>This code defines a class <code>ExamRoom</code> with methods to manage seating arrangements based on the distance between people. It includes methods for seating (<code>seat()</code>) and a method for leaving (<code>leave(int p)</code>).</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Data Structures</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> L;
-</span></span></code></pre></div><p>Declares a vector <code>L</code> to store the positions of people in the room.</p>
-</li>
-<li>
-<p><strong>Access Modifiers</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span></code></pre></div><p>Indicates that the following methods are publicly accessible.</p>
-</li>
-<li>
-<p><strong>Constructor</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ExamRoom(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span></code></pre></div><p>Constructor of the <code>ExamRoom</code> class, initializing the room with a given size <code>n</code>.</p>
-</li>
-<li>
-<p><strong>Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    N <span style="color:#666">=</span> n;
-</span></span></code></pre></div><p>Initializes the variable <code>N</code> with the given size of the room <code>n</code>.</p>
-</li>
-<li>
-<p><strong>Method Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">seat</span>() {
-</span></span></code></pre></div><p>Defines the <code>seat()</code> method, which assigns a seat to a person based on available space.</p>
-</li>
-<li>
-<p><strong>Conditionals</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(L.size() <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span></code></pre></div><p>Checks if the room is empty. If it is, it assigns the first seat at position 0.</p>
-</li>
-<li>
-<p><strong>Action</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        L.push_back(<span style="color:#666">0</span>);
-</span></span></code></pre></div><p>Inserts the first person at position 0.</p>
-</li>
-<li>
-<p><strong>Return</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div><p>Returns the position of the newly seated person (0).</p>
-</li>
-<li>
-<p><strong>Distance Calculation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> max(L[<span style="color:#666">0</span>], N <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">-</span> L[L.size() <span style="color:#666">-</span> <span style="color:#666">1</span>]);
-</span></span></code></pre></div><p>Calculates the maximum distance between the first and last seats.</p>
-</li>
-<li>
-<p><strong>Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> L.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) d <span style="color:#666">=</span> max(d, (L[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> L[i]) <span style="color:#666">/</span> <span style="color:#666">2</span>);
-</span></span></code></pre></div><p>Calculates the maximum possible distance between two people in the room.</p>
-</li>
-<li>
-<p><strong>Conditional Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(L[<span style="color:#666">0</span>] <span style="color:#666">==</span> d) {
-</span></span></code></pre></div><p>Checks if the maximum distance is between the first seat and the available space.</p>
-</li>
-<li>
-<p><strong>Action</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        L.insert(L.begin(), <span style="color:#666">0</span>);
-</span></span></code></pre></div><p>Inserts a new person at the first seat.</p>
-</li>
-<li>
-<p><strong>Return</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> L[<span style="color:#666">0</span>];
-</span></span></code></pre></div><p>Returns the position of the newly seated person (0).</p>
-</li>
-<li>
-<p><strong>Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> L.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div><p>Starts a loop to find the best seat based on the maximum distance.</p>
-</li>
-<li>
-<p><strong>Conditional Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((L[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> L[i]) <span style="color:#666">/</span> <span style="color:#666">2</span> <span style="color:#666">==</span> d) {
-</span></span></code></pre></div><p>Checks if the gap between two adjacent seats is half of the maximum distance.</p>
-</li>
-<li>
-<p><strong>Action</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            L.insert(L.begin() <span style="color:#666">+</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>, (L[i] <span style="color:#666">+</span> L[i <span style="color:#666">+</span><span style="color:#666">1</span>]) <span style="color:#666">/</span> <span style="color:#666">2</span>);
-</span></span></code></pre></div><p>Seats the person at the optimal position between two others.</p>
-</li>
-<li>
-<p><strong>Return</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> L[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
-</span></span></code></pre></div><p>Returns the position where the person was seated.</p>
-</li>
-<li>
-<p><strong>Action</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        L.push_back(N <span style="color:#666">-</span> <span style="color:#666">1</span>);
-</span></span></code></pre></div><p>Inserts a new person at the last seat.</p>
-</li>
-<li>
-<p><strong>Return</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> N <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div><p>Returns the position of the newly seated person (last seat).</p>
-</li>
-<li>
-<p><strong>Method Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">leave</span>(<span style="color:#0b0;font-weight:bold">int</span> p) {
-</span></span></code></pre></div><p>Defines the <code>leave(int p)</code> method, which removes a person from the room at position <code>p</code>.</p>
-</li>
-<li>
-<p><strong>Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> L.size(); i<span style="color:#666">++</span>) <span style="color:#a2f;font-weight:bold">if</span>(L[i] <span style="color:#666">==</span> p) L.erase(L.begin() <span style="color:#666">+</span> i);
-</span></span></code></pre></div><p>Finds the person at position <code>p</code> and removes them from the list.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(1) for a single seat when no one is in the room.</li>
-<li><strong>Average Case:</strong> O(n) for finding the best seat when a student is seated.</li>
-<li><strong>Worst Case:</strong> O(n) per &lsquo;seat&rsquo; operation in the worst case, where the seating strategy requires checking multiple seats.</li>
-</ul>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(1) when no students are in the room.</li>
-<li><strong>Worst Case:</strong> O(n) for storing the list of occupied seats.</li>
-</ul>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numberOfRounds</span>(string login, string logout) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function definition starts here. It takes two string parameters `login` and `logout`, representing the login and logout times in HH:MM format. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Login Time Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> in <span style="color:#666">=</span> (((login[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (login[<span style="color:#666">1</span>]<span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>)) <span style="color:#666">*</span> <span style="color:#666">60</span>) <span style="color:#666">+</span> ((login[<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (login[<span style="color:#666">4</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line calculates the `in` time by converting the `login` string (HH:MM) to the number of minutes from midnight. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Logout Time Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> out <span style="color:#666">=</span> (((logout[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (logout[<span style="color:#666">1</span>]<span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>)) <span style="color:#666">*</span> <span style="color:#666">60</span>) <span style="color:#666">+</span> ((logout[<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (logout[<span style="color:#666">4</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line calculates the `out` time by converting the `logout` string (HH:MM) to the number of minutes from midnight. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line initializes a counter `cnt` to 0, which will track the number of overlapping 15-minute intervals. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Conditional Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(in <span style="color:#666">&gt;</span> out) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This condition checks if the `in` time is greater than the `out` time, which could happen if the login time is after midnight, indicating a new day. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : For Loop (Overlapping Time Calculation)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">24</span> <span style="color:#666">*</span> <span style="color:#666">60</span>; i <span style="color:#666">+=</span> <span style="color:#666">15</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This for loop iterates through all possible 15-minute intervals in a day (from 0 to 1440 minutes). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Interval Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">+</span> <span style="color:#666">15</span> <span style="color:#666">&lt;=</span> out <span style="color:#666">||</span> i <span style="color:#666">&gt;=</span> in) cnt<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This checks if the current 15-minute interval overlaps with the given time range, and increments the counter `cnt`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Return Value (Condition True)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the `in` time is greater than the `out` time, return the number of intervals counted so far. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : For Loop (Overlapping Time Calculation)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">24</span> <span style="color:#666">*</span> <span style="color:#666">60</span>; i <span style="color:#666">+=</span> <span style="color:#666">15</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This for loop iterates through all possible 15-minute intervals in a day (from 0 to 1440 minutes). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Interval Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;=</span> in <span style="color:#666">&amp;&amp;</span> (i <span style="color:#666">+</span> <span style="color:#666">15</span>) <span style="color:#666">&lt;=</span> out) cnt<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This checks if the current 15-minute interval is fully within the `in` and `out` times and increments the counter `cnt`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Return Value (Else Block)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the `in` time is less than or equal to the `out` time, return the number of intervals counted so far. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity depends on how many rounds are counted, which is proportional to the number of 15-minute intervals in a 24-hour period (96 intervals).</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant, as we only use a few variables to store the start and end times and the count of rounds.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/exam-room/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 <table>
@@ -436,6 +839,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -679,90 +1083,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-855-exam-room\/"
-    },
-    "headline": "Leetcode 855: Exam Room",
-    "description": "In-depth solution and explanation for Leetcode 855: Exam Room in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": ""
-    },
-    "datePublished": "2024-08-13T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Design\",\"Heap (Priority Queue)\",\"Ordered Set\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "keywords": "[\"Design\",\"Heap (Priority Queue)\",\"Ordered Set\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-856-score-of-parentheses\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-853-car-fleet\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

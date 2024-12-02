@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -40,8 +42,97 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1253-reconstruct-a-2-row-binary-matrix\/"
+    },
+    "headline": "Leetcode 1253: Reconstruct a 2-Row Binary Matrix",
+    "description": "In-depth solution and explanation for Leetcode 1253: Reconstruct a 2-Row Binary Matrix in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": ""
+    },
+    "datePublished": "2024-07-04T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Array\",\"Greedy\",\"Matrix\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "keywords": "[\"Array\",\"Greedy\",\"Matrix\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1254-number-of-closed-islands\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1249-minimum-remove-to-make-valid-parentheses\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -182,7 +273,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 4, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -199,137 +290,535 @@
                     
                     <div class="article-post">
                         <hr>
-<p>You are given a binary matrix with 2 rows and n columns, where each element is either 0 or 1. The sum of elements in the 0-th (upper) row is given by upper, the sum of elements in the 1-st (lower) row is given by lower, and the column-wise sum is given by colsum. Your task is to reconstruct the matrix based on these sums. If reconstruction is not possible, return an empty matrix.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input consists of three integers: upper, lower, and a list colsum representing the column-wise sums.</li>
-<li><strong>Example:</strong> <code>upper = 2, lower = 1, colsum = [1,1,1]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= colsum.length &lt;= 10^5</li>
-<li>0 &lt;= upper, lower &lt;= colsum.length</li>
-<li>0 &lt;= colsum[i] &lt;= 2</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> Return the reconstructed matrix if valid; otherwise, return an empty matrix.</li>
-<li><strong>Example:</strong> <code>[[1, 1, 0], [0, 0, 1]]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The reconstructed matrix must satisfy the row and column sums.</li>
-<li>If no valid solution exists, return an empty matrix.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> Reconstruct a valid binary matrix by ensuring that row and column sums match the given constraints.</p>
-<ul>
-<li>Iterate through the colsum array to reconstruct the matrix by assigning values to the two rows based on the constraints.</li>
-<li>Ensure that the values assigned to the rows satisfy the given upper and lower row sums as well as the colsum constraints.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>The input values are valid and the row sums upper and lower are feasible with respect to colsum.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li>
-<p><strong>Input:</strong> <code>upper = 2, lower = 1, colsum = [1, 1, 1]</code>  <br>
-<strong>Explanation:</strong> The matrix is valid as the sums of the rows and columns match the given values.</p>
-</li>
-<li>
-<p><strong>Input:</strong> <code>upper = 2, lower = 3, colsum = [2, 2, 1, 1]</code>  <br>
-<strong>Explanation:</strong> It is impossible to reconstruct a valid matrix, as the lower row sum exceeds the total sum of the columns.</p>
-</li>
-<li>
-<p><strong>Input:</strong> <code>upper = 5, lower = 5, colsum = [2, 1, 2, 0, 1, 0, 1, 2, 0, 1]</code>  <br>
-<strong>Explanation:</strong> The matrix is reconstructed correctly, with the row and column sums matching the given values.</p>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>To solve the problem, we iterate through the column sums and try to allocate values to the two rows, ensuring that the row and column sums match the given constraints.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>The binary matrix reconstruction requires careful allocation of values to the rows based on the column sums.</li>
-<li>The problem can be solved by iterating over the colsum array and using a greedy approach to assign 1s to the upper and lower rows, ensuring that the row sums are satisfied.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>If colsum is an empty array, return an empty matrix.</li>
-<li>The solution should handle large inputs efficiently, with a maximum length of 100,000 for colsum.</li>
-<li>If the column sums are all zeros, the matrix should be filled with zeros.</li>
-<li>Ensure the solution handles all edge cases, including invalid cases where no solution exists.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> reconstructMatrix(<span style="color:#0b0;font-weight:bold">int</span> u, <span style="color:#0b0;font-weight:bold">int</span> l, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> cs) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res(<span style="color:#666">2</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(cs.size()));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> cs.size(); u <span style="color:#666">-=</span> res[<span style="color:#666">0</span>][i], l <span style="color:#666">-=</span> res[<span style="color:#666">1</span>][i], i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        res[<span style="color:#666">0</span>][i] <span style="color:#666">=</span> cs[i] <span style="color:#666">==</span> <span style="color:#666">2</span> <span style="color:#666">||</span> (cs[i] <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> l <span style="color:#666">&lt;</span> u);
-</span></span><span style="display:flex;"><span>        res[<span style="color:#666">1</span>][i] <span style="color:#666">=</span> cs[i] <span style="color:#666">==</span> <span style="color:#666">2</span> <span style="color:#666">||</span> (cs[i] <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>res[<span style="color:#666">0</span>][i]);
+
+
+
+
+
+
+
+
+
+
+<div class=""> Given a binary matrix of size m x n, your task is to find the row that contains the highest number of 1&rsquo;s. If there are multiple rows with the same count of 1&rsquo;s, return the row with the smallest index. The output should contain the index of the row and the count of 1&rsquo;s in that row. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> The input consists of a binary matrix &#39;mat&#39; with m rows and n columns. Each element in the matrix is either 0 or 1.</div>
+                        <div class=""> <b>Example:</b> mat = [[0, 1, 1], [1, 0, 1], [1, 1, 1]]</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • mat[i][j] is either 0 or 1</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> Return an array containing two integers: the index of the row with the maximum count of 1&#39;s and the number of 1&#39;s in that row.</div>
+                        <div class=""> <b>Example:</b> Output: [2, 3]</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output array should contain the row index and the count of 1&#39;s in the selected row.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The goal is to find the row with the maximum number of 1&#39;s and return its index along with the count of 1&#39;s in that row.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Step 1: Initialize a variable to track the maximum count of 1&#39;s and the corresponding row index.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 2: Traverse each row of the matrix and count the number of 1&#39;s in the row.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 3: If the count of 1&#39;s in the current row exceeds the previous maximum, update the row index and the maximum count.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: After processing all rows, return the row index and the count of 1&#39;s in the row with the maximum count.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The solution must efficiently process matrices up to size 100 x 100, and handle cases where all elements are 0&#39;s or 1&#39;s.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Ensure the solution operates in O(m * n) time, where m is the number of rows and n is the number of columns.</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The matrix contains only 0&#39;s and 1&#39;s.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: mat = [[0, 1, 1], [1, 0, 1], [1, 1, 1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The first row has 2 ones, the second row has 2 ones, and the third row has 3 ones. The row with the maximum count of 1&#39;s is the third row (index 2), so the output is [2, 3].</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> We will iterate through each row of the binary matrix and count the number of 1&#39;s. As we process each row, we track the maximum count of 1&#39;s and its corresponding row index. The result is returned once all rows have been evaluated.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Since the problem is about counting 1&#39;s in each row, a straightforward approach of iterating through the matrix should suffice.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • We need to ensure that the solution is efficient enough to handle matrices of size 100 x 100.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Step 1: Initialize two variables to track the maximum count of 1&#39;s and the index of the corresponding row.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 2: Loop through each row in the matrix. For each row, count the number of 1&#39;s.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 3: If the count of 1&#39;s in the current row exceeds the previous maximum, update the maximum and the row index.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: After processing all rows, return the row index and the count of 1&#39;s in that row.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If the matrix has no rows or columns, handle it appropriately.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • For larger matrices, ensure that the solution works efficiently within the given constraints.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If all rows contain no 1&#39;s, return the first row with 0 ones.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The algorithm should run in linear time, O(m * n), where m is the number of rows and n is the number of columns.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Inner Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Comparison</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> rowAndMaximumOnes(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>, idx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mat[i][j]) cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">&gt;</span> mx) {
+</span></span><span style="display:flex;"><span>            idx <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> cnt;
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> u <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> l <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span> <span style="color:#a0a000">res</span> : vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{idx, mx};
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>The function <code>reconstructMatrix</code> attempts to reconstruct a binary matrix based on the given counts of ones in each row (<code>u</code> for upper row and <code>l</code> for lower row) and a vector <code>cs</code> indicating the constraints for each column. It returns the reconstructed matrix if it&rsquo;s possible, otherwise returns an empty matrix.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> reconstructMatrix(<span style="color:#0b0;font-weight:bold">int</span> u, <span style="color:#0b0;font-weight:bold">int</span> l, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> cs) {
-</span></span></code></pre></div><p>The function <code>reconstructMatrix</code> is defined, which takes two integers <code>u</code> (the number of ones in the upper row) and <code>l</code> (the number of ones in the lower row) as inputs, along with a vector <code>cs</code> containing constraints for each column.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res(<span style="color:#666">2</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(cs.size()));
-</span></span></code></pre></div><p>A 2D vector <code>res</code> of size 2xN (where N is the size of <code>cs</code>) is initialized to store the reconstructed binary matrix. The first row represents the upper row, and the second represents the lower row.</p>
-</li>
-<li>
-<p><strong>For Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> cs.size(); u <span style="color:#666">-=</span> res[<span style="color:#666">0</span>][i], l <span style="color:#666">-=</span> res[<span style="color:#666">1</span>][i], i<span style="color:#666">++</span>) {
-</span></span></code></pre></div><p>A <code>for</code> loop is used to iterate over each column in the matrix. During each iteration, <code>u</code> and <code>l</code> are reduced based on the number of ones placed in the upper and lower rows respectively.</p>
-</li>
-<li>
-<p><strong>Condition for Upper Row</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res[<span style="color:#666">0</span>][i] <span style="color:#666">=</span> cs[i] <span style="color:#666">==</span> <span style="color:#666">2</span> <span style="color:#666">||</span> (cs[i] <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> l <span style="color:#666">&lt;</span> u);
-</span></span></code></pre></div><p>For the current column, if the value in <code>cs[i]</code> is 2, the upper row at <code>i</code> is set to 1. If the value in <code>cs[i]</code> is 1, the upper row is set to 1 only if the remaining number of ones in the lower row (<code>l</code>) is less than the upper row (<code>u</code>).</p>
-</li>
-<li>
-<p><strong>Condition for Lower Row</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res[<span style="color:#666">1</span>][i] <span style="color:#666">=</span> cs[i] <span style="color:#666">==</span> <span style="color:#666">2</span> <span style="color:#666">||</span> (cs[i] <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>res[<span style="color:#666">0</span>][i]);
-</span></span></code></pre></div><p>For the current column, if <code>cs[i]</code> is 2, the lower row at <code>i</code> is set to 1. If <code>cs[i]</code> is 1, the lower row is set to 1 only if the upper row at the same column is 0.</p>
-</li>
-<li>
-<p><strong>Return Result</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> u <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> l <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span> <span style="color:#a0a000">res</span> : vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>();
-</span></span></code></pre></div><p>After processing all columns, the function checks if both <code>u</code> and <code>l</code> have been reduced to 0, meaning the number of ones for both rows is fully satisfied. If true, it returns the reconstructed matrix <code>res</code>; otherwise, it returns an empty 2D vector indicating that the reconstruction was not possible.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n)</li>
-<li><strong>Average Case:</strong> O(n)</li>
-<li><strong>Worst Case:</strong> O(n)</li>
-</ul>
-<p>The solution iterates through the colsum array once, resulting in a time complexity of O(n).</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n)</li>
-<li><strong>Worst Case:</strong> O(n)</li>
-</ul>
-<p>The space complexity is O(n) due to the storage of the result matrix.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> rowAndMaximumOnes(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function is declared with a vector of vectors `mat` as the input, representing a binary matrix, and it returns a vector of integers containing the index of the row with the maximum 1&#39;s and the count of 1&#39;s. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Here, the number of rows `m` and columns `n` of the matrix are obtained by using the `size()` function. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>, idx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Two variables are initialized: `mx` (to store the maximum count of 1&#39;s found) and `idx` (to store the index of the row with the maximum 1&#39;s). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Loop Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A loop is started to iterate through each row of the matrix. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A variable `cnt` is initialized to count the number of 1&#39;s in the current row. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Inner Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> An inner loop starts to iterate through each column of the current row. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Condition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mat[i][j]) cnt<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current element of the matrix is 1, increment the counter `cnt`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Comparison</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">&gt;</span> mx) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the count of 1&#39;s in the current row is greater than the previous maximum (`mx`), proceed to update the values. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Variable Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            idx <span style="color:#666">=</span> i;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update `idx` to the current row index `i` as it now has the highest count of 1&#39;s. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Variable Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mx <span style="color:#666">=</span> cnt;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update the maximum count of 1&#39;s found so far with the current row&#39;s count `cnt`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{idx, mx};
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return a vector containing the index of the row with the maximum 1&#39;s and the count of 1&#39;s. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(m * n)</div>
+                        <div class=""> <b>Average Case:</b> O(m * n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(m * n) because we are iterating through all elements in the matrix.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) because we are only using a few variables to track the result, and no additional data structures are required.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/reconstruct-a-2-row-binary-matrix/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 <table>
@@ -341,6 +830,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -584,90 +1074,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1253-reconstruct-a-2-row-binary-matrix\/"
-    },
-    "headline": "Leetcode 1253: Reconstruct a 2-Row Binary Matrix",
-    "description": "In-depth solution and explanation for Leetcode 1253: Reconstruct a 2-Row Binary Matrix in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": ""
-    },
-    "datePublished": "2024-07-04T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Array\",\"Greedy\",\"Matrix\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "keywords": "[\"Array\",\"Greedy\",\"Matrix\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1254-number-of-closed-islands\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1249-minimum-remove-to-make-valid-parentheses\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

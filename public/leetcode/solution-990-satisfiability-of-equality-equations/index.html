@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -41,8 +43,105 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-990-satisfiability-of-equality-equations\/"
+    },
+    "headline": "Leetcode 990: Satisfiability of Equality Equations",
+    "description": "In-depth solution and explanation for Leetcode 990: Satisfiability of Equality Equations in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": ""
+    },
+    "datePublished": "2024-07-31T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Array\",\"String\",\"Union Find\",\"Graph\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "video": {
+      "@type": "VideoObject",
+      "name": "Video explanation for Leetcode 990: Satisfiability of Equality Equations",
+      "embedUrl": "https://www.youtube.com/watch?v=d3MkgeCo8l4",
+      "uploadDate": "2024-04-06",
+      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/d3MkgeCo8l4\/maxresdefault.jpg"
+    },
+    
+    "keywords": "[\"Array\",\"String\",\"Union Find\",\"Graph\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-991-broken-calculator\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-988-smallest-string-starting-from-leaf\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -183,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 31, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    3 min read
                                 </span>					
                             </div>
                         </div>			
@@ -200,179 +299,436 @@
                     
                     <div class="article-post">
                         <hr>
-<p>You are given a list of equations where each equation represents a relationship between two variables in the form &lsquo;xi==yi&rsquo; or &lsquo;xi!=yi&rsquo;. Determine if it&rsquo;s possible to assign integer values to variables such that all equations are satisfied.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input consists of an array of strings, where each string is an equation of the form &lsquo;xi==yi&rsquo; or &lsquo;xi!=yi&rsquo;.</li>
-<li><strong>Example:</strong> <code>equations = [&quot;a==b&quot;, &quot;b!=a&quot;]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= equations.length &lt;= 500</li>
-<li>equations[i].length == 4</li>
-<li>equations[i][0] is a lowercase letter.</li>
-<li>equations[i][1] is either &lsquo;=&rsquo; or &lsquo;!&rsquo;</li>
-<li>equations[i][2] is &lsquo;=&rsquo;</li>
-<li>equations[i][3] is a lowercase letter.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> The output should be a boolean value: &rsquo;true&rsquo; if the equations can be satisfied by assigning values to the variables, &lsquo;false&rsquo; otherwise.</li>
-<li><strong>Example:</strong> <code>Output: true</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The output is true if all equations can be satisfied with consistent assignments of values to variables.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> The goal is to check if it&rsquo;s possible to assign integer values to variables such that all the equations are satisfied. This can be done by using a union-find data structure to group variables that are equal and check if any &lsquo;!=&rsquo; equations violate these groups.</p>
-<ul>
-<li>Initialize a union-find data structure to represent groups of variables that are equal.</li>
-<li>Process each equation: if it&rsquo;s an equality (&rsquo;==&rsquo;), union the two variables; if it&rsquo;s an inequality (&rsquo;!=&rsquo;), check if the two variables are in the same group, which would indicate a contradiction.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>The input list will contain only valid equations in the form of &lsquo;xi==yi&rsquo; or &lsquo;xi!=yi&rsquo;.</li>
-<li>The variables are represented by lowercase letters (&lsquo;a&rsquo; to &lsquo;z&rsquo;).
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li><strong>Input:</strong> <code>equations = [&quot;a==b&quot;, &quot;b!=a&quot;]</code>  <br>
-<strong>Explanation:</strong> In this example, we are given the equations &lsquo;a==b&rsquo; and &lsquo;b!=a&rsquo;. If we assume a = 1 and b = 1, the first equation is satisfied, but the second equation is violated because a cannot be equal to b and not equal to b at the same time.</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>To solve this problem, we can use a union-find (disjoint-set) data structure to manage the groups of variables that must be equal. We process all equality equations first and then check each inequality equation to ensure no contradictions.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>The problem requires us to check both equality and inequality relationships, which can be efficiently handled using the union-find data structure.</li>
-<li>The union-find approach will allow us to group variables and detect contradictions efficiently. If two variables that must be different are in the same group, it&rsquo;s impossible to satisfy the equations.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>Handle cases where the input array is empty.</li>
-<li>Ensure that the solution efficiently handles the maximum number of equations (500).</li>
-<li>Check for edge cases with only one equation, such as &lsquo;a==a&rsquo; or &lsquo;a!=a&rsquo;.</li>
-<li>The solution must handle up to 500 equations efficiently.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">equationsPossible</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> eqn) {
-</span></span><span style="display:flex;"><span>    UF<span style="color:#666">*</span> uf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> UF(<span style="color:#666">26</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> eqn.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> a <span style="color:#666">=</span> eqn[i][<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> b <span style="color:#666">=</span> eqn[i][<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(eqn[i][<span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;=&#39;</span>)
-</span></span><span style="display:flex;"><span>            uf<span style="color:#666">-&gt;</span>uni(a, b);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> eqn.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> a <span style="color:#666">=</span> eqn[i][<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> b <span style="color:#666">=</span> eqn[i][<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(eqn[i][<span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;!&#39;</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(uf<span style="color:#666">-&gt;</span>find(a) <span style="color:#666">==</span> uf<span style="color:#666">-&gt;</span>find(b))
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    }        
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+
+
+
+
+
+
+
+
+
+
+<div class=""> Given an integer <code>num</code>, your task is to determine if it can be expressed as the sum of three consecutive integers. If it can, return these integers as a sorted array. If not, return an empty array. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> The input consists of a single integer `num`.</div>
+                        <div class=""> <b>Example:</b> 27</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= num &lt;= 10^15</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> The output is either an array containing the three consecutive integers that sum to `num` or an empty array if no such triplet exists.</div>
+                        <div class=""> <b>Example:</b> [8, 9, 10]</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output must be a sorted array of three consecutive integers or an empty array.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The goal is to find if `num` can be written as the sum of three consecutive integers.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Check if `num` is divisible by 3.</div>
+                            
+                                <div style="margin-left: 20px;"> • If `num` is divisible by 3, calculate the three consecutive integers using `num / 3 - 1`, `num / 3`, and `num / 3 &#43; 1`.</div>
+                            
+                                <div style="margin-left: 20px;"> • If not, return an empty array.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The input `num` should be within the given bounds.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= num &lt;= 10^15</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The integer `num` is non-negative.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> 27</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The number 27 can be expressed as 8 &#43; 9 &#43; 10. These are three consecutive integers that sum to 27.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> The approach involves checking if the given number is divisible by 3, then finding the three consecutive integers that sum to the number.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The sum of three consecutive integers is always divisible by 3.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • Check if `num` is divisible by 3, then simply return the three integers. If not, return an empty array.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Check if `num` is divisible by 3.</div>
+                            
+                                <div style="margin-left: 20px;"> • If it is, return `num / 3 - 1`, `num / 3`, `num / 3 &#43; 1`.</div>
+                            
+                                <div style="margin-left: 20px;"> • If it is not, return an empty array.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The input `num` is always non-negative and within the specified range.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The solution should handle very large numbers, as `num` can be as large as 10^15.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Consider the case when `num` is 0, as the sum of three consecutive integers can&#39;t result in 0.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure that the solution works within the input constraints.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Return Result</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> sumOfThree(<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> num) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(num <span style="color:#666">%</span><span style="color:#666">3</span> <span style="color:#666">!=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> {num <span style="color:#666">/</span> <span style="color:#666">3</span> <span style="color:#666">-</span> <span style="color:#666">1</span>, num<span style="color:#666">/</span> <span style="color:#666">3</span>, num<span style="color:#666">/</span><span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>};
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function checks whether a set of equations is possible, given the constraints. It uses a union-find data structure to process equality constraints and verify that inequality constraints are satisfied.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">equationsPossible</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> eqn) {
-</span></span></code></pre></div><p>Defines the <code>equationsPossible</code> function that takes a vector of strings, <code>eqn</code>, where each string represents an equation (either equality or inequality) between two characters.</p>
-</li>
-<li>
-<p><strong>Union-Find Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    UF<span style="color:#666">*</span> uf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> UF(<span style="color:#666">26</span>);
-</span></span></code></pre></div><p>Initializes a union-find (disjoint-set) data structure <code>uf</code> with 26 elements, one for each letter of the alphabet. The union-find structure will help manage connected components for equality relations.</p>
-</li>
-<li>
-<p><strong>Equality Processing Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> eqn.size(); i<span style="color:#666">++</span>) {
-</span></span></code></pre></div><p>Starts a loop to process each equation in the input <code>eqn</code> vector.</p>
-</li>
-<li>
-<p><strong>Character Indexing</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> a <span style="color:#666">=</span> eqn[i][<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
-</span></span></code></pre></div><p>Converts the first character of the equation (left side) into an integer index between 0 and 25, representing the letter in the alphabet.</p>
-</li>
-<li>
-<p><strong>Character Indexing</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> b <span style="color:#666">=</span> eqn[i][<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
-</span></span></code></pre></div><p>Converts the second character of the equation (right side) into an integer index between 0 and 25.</p>
-</li>
-<li>
-<p><strong>Equality Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(eqn[i][<span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;=&#39;</span>)
-</span></span></code></pre></div><p>Checks if the current equation is an equality (<code>=</code>).</p>
-</li>
-<li>
-<p><strong>Union Operation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            uf<span style="color:#666">-&gt;</span>uni(a, b);
-</span></span></code></pre></div><p>If the equation is an equality, it performs a union operation on the two characters (<code>a</code> and <code>b</code>), indicating that they belong to the same group.</p>
-</li>
-<li>
-<p><strong>Inequality Processing Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> eqn.size(); i<span style="color:#666">++</span>) {
-</span></span></code></pre></div><p>Starts another loop to process the inequality equations.</p>
-</li>
-<li>
-<p><strong>Character Indexing</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> a <span style="color:#666">=</span> eqn[i][<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
-</span></span></code></pre></div><p>Converts the first character of the inequality equation into an integer index between 0 and 25.</p>
-</li>
-<li>
-<p><strong>Character Indexing</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> b <span style="color:#666">=</span> eqn[i][<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
-</span></span></code></pre></div><p>Converts the second character of the inequality equation into an integer index between 0 and 25.</p>
-</li>
-<li>
-<p><strong>Inequality Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(eqn[i][<span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;!&#39;</span>)
-</span></span></code></pre></div><p>Checks if the current equation is an inequality (<code>!=</code>).</p>
-</li>
-<li>
-<p><strong>Find Operation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(uf<span style="color:#666">-&gt;</span>find(a) <span style="color:#666">==</span> uf<span style="color:#666">-&gt;</span>find(b))
-</span></span></code></pre></div><p>If the equation is an inequality, it checks if the two characters are connected in the union-find structure. If they are connected (i.e., they belong to the same group), the inequality is violated.</p>
-</li>
-<li>
-<p><strong>Return False</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span></code></pre></div><p>If the inequality is violated (the characters are in the same group), the function returns <code>false</code> indicating that the equations are not possible.</p>
-</li>
-<li>
-<p><strong>Return True</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div><p>If all equations have been processed and no contradictions were found, the function returns <code>true</code>, indicating that the set of equations is possible.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n), where n is the number of equations, if all equations are satisfied with no contradictions.</li>
-<li><strong>Average Case:</strong> O(n), since each equation requires a constant time union/find operation.</li>
-<li><strong>Worst Case:</strong> O(n), as each union/find operation is nearly constant time with path compression and union by rank.</li>
-</ul>
-<p>The time complexity is O(n) due to the use of union-find, where n is the number of equations.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(26), regardless of input size, as the space required is constant.</li>
-<li><strong>Worst Case:</strong> O(26), as we need to store the union-find structure for 26 variables.</li>
-</ul>
-<p>The space complexity is O(26), which is constant, since we only need to store the union-find structure for the 26 variables.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> sumOfThree(<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> num) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the function `sumOfThree` that takes a single long long integer `num` and returns a vector of long long integers. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize an empty vector `ans` to store the result if `num` is divisible by 3. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(num <span style="color:#666">%</span><span style="color:#666">3</span> <span style="color:#666">!=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if `num` is divisible by 3. If not, return the empty vector `ans`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> {num <span style="color:#666">/</span> <span style="color:#666">3</span> <span style="color:#666">-</span> <span style="color:#666">1</span>, num<span style="color:#666">/</span> <span style="color:#666">3</span>, num<span style="color:#666">/</span><span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>};
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If `num` is divisible by 3, return a vector containing three integers: `num/3 - 1`, `num/3`, and `num/3 &#43; 1`. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Average Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is constant because the solution only requires a simple modulo check and arithmetic operations.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant because we are only storing a fixed number of integers.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/satisfiability-of-equality-equations/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 
@@ -392,6 +748,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -639,98 +996,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-990-satisfiability-of-equality-equations\/"
-    },
-    "headline": "Leetcode 990: Satisfiability of Equality Equations",
-    "description": "In-depth solution and explanation for Leetcode 990: Satisfiability of Equality Equations in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": ""
-    },
-    "datePublished": "2024-07-31T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Array\",\"String\",\"Union Find\",\"Graph\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "video": {
-      "@type": "VideoObject",
-      "name": "Video explanation for Leetcode 990: Satisfiability of Equality Equations",
-      "embedUrl": "https://www.youtube.com/watch?v=d3MkgeCo8l4",
-      "uploadDate": "2024-04-06",
-      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/d3MkgeCo8l4\/maxresdefault.jpg"
-    },
-    
-    "keywords": "[\"Array\",\"String\",\"Union Find\",\"Graph\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-991-broken-calculator\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-988-smallest-string-starting-from-leaf\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

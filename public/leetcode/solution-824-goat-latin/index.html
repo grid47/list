@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -38,8 +40,105 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-824-goat-latin\/"
+    },
+    "headline": "Leetcode 824: Goat Latin",
+    "description": "In-depth solution and explanation for Leetcode 824: Goat Latin in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": ""
+    },
+    "datePublished": "2024-08-16T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Easy",
+    "teaches": "[\"String\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "video": {
+      "@type": "VideoObject",
+      "name": "Video explanation for Leetcode 824: Goat Latin",
+      "embedUrl": "https://www.youtube.com/watch?v=pTLNHVWiQk0",
+      "uploadDate": "2020-03-17",
+      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi_webp\/pTLNHVWiQk0\/maxresdefault.webp"
+    },
+    
+    "keywords": "[\"String\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-825-friends-of-appropriate-ages\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-823-binary-trees-with-factors\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -197,164 +296,510 @@
                     
                     <div class="article-post">
                         <hr>
-<p>You are given a sentence with words separated by spaces. Each word consists of only lowercase and uppercase letters. Your task is to convert the sentence into a new language called &lsquo;Goat Latin&rsquo; by following the rules below:</p>
-<ol>
-<li>If a word begins with a vowel (&lsquo;a&rsquo;, &rsquo;e&rsquo;, &lsquo;i&rsquo;, &lsquo;o&rsquo;, or &lsquo;u&rsquo;), append &lsquo;ma&rsquo; to the end of the word.</li>
-<li>If a word begins with a consonant, remove the first letter, move it to the end, and add &lsquo;ma&rsquo;.</li>
-<li>Add one letter &lsquo;a&rsquo; to the end of each word depending on its position in the sentence (1st word gets &lsquo;a&rsquo;, 2nd gets &lsquo;aa&rsquo;, 3rd gets &lsquo;aaa&rsquo;, etc.).</li>
-</ol>
-<p>Return the final sentence in Goat Latin.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input consists of a string, sentence, which contains words separated by spaces.</li>
-<li><strong>Example:</strong> <code>Input: sentence = 'The quick brown fox'</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= sentence.length &lt;= 150</li>
-<li>The sentence consists of English letters and spaces.</li>
-<li>There are no leading or trailing spaces in the sentence.</li>
-<li>All words are separated by a single space.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> The output is a string representing the sentence after converting it to Goat Latin.</li>
-<li><strong>Example:</strong> <code>Output: 'heTmaa uickqmaaa rownbmaaaa oxfmaaaaa'</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The output must be a string.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> The goal is to convert the sentence into Goat Latin according to the specified rules. Each word must be processed based on whether it starts with a vowel or consonant, and the appropriate suffix must be added based on the word&rsquo;s position in the sentence.</p>
-<ul>
-<li>Step 1: Split the input sentence into words.</li>
-<li>Step 2: For each word, check if it starts with a vowel or consonant.</li>
-<li>Step 3: Modify the word accordingly (append &lsquo;ma&rsquo; or move the first letter to the end and append &lsquo;ma&rsquo;).</li>
-<li>Step 4: Add the correct number of &lsquo;a&rsquo;s to the end of the word based on its position in the sentence.</li>
-<li>Step 5: Join all words back together into a final sentence.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>All words in the sentence are valid words made up of lowercase and uppercase English letters.</li>
-<li>There are no punctuation marks or special characters in the sentence.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li><strong>Input:</strong> <code>Input: sentence = 'The quick brown fox'</code>  <br>
-<strong>Explanation:</strong> The sentence &lsquo;The quick brown fox&rsquo; would be converted to Goat Latin as &lsquo;heTmaa uickqmaaa rownbmaaaa oxfmaaaaa&rsquo;. The first word starts with a consonant, so &lsquo;T&rsquo; is moved to the end and &lsquo;ma&rsquo; is added. The second word starts with a consonant, so &lsquo;q&rsquo; is moved to the end, &lsquo;ma&rsquo; is added, and one &lsquo;a&rsquo; is appended. This continues for all words in the sentence.</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>We can solve this problem by iterating through each word in the sentence, applying the Goat Latin rules for vowels and consonants, and adding the appropriate number of &lsquo;a&rsquo;s based on the word&rsquo;s index. We then return the modified sentence.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>The problem is straightforward, with simple string manipulations.</li>
-<li>We need to handle each word based on its initial letter and word position in the sentence. String operations like checking the first letter and modifying words are key here.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>The input will always have at least one word, so empty input is not a concern.</li>
-<li>The sentence length could be up to 150 characters, which is manageable.</li>
-<li>Single-word sentences should be handled correctly.</li>
-<li>Ensure that all the words are correctly modified and that the number of &lsquo;a&rsquo;s corresponds to their position in the sentence.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">toGoatLatin</span>(string str) {
-</span></span><span style="display:flex;"><span>    stringstream iss(str), oss;
-</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> s <span style="color:#666">=</span> {<span style="color:#b44">&#39;a&#39;</span>, <span style="color:#b44">&#39;e&#39;</span>, <span style="color:#b44">&#39;i&#39;</span>, <span style="color:#b44">&#39;o&#39;</span>, <span style="color:#b44">&#39;u&#39;</span>, <span style="color:#b44">&#39;A&#39;</span>, <span style="color:#b44">&#39;E&#39;</span>, <span style="color:#b44">&#39;I&#39;</span>, <span style="color:#b44">&#39;O&#39;</span>, <span style="color:#b44">&#39;U&#39;</span>};
-</span></span><span style="display:flex;"><span>    string word;
-</span></span><span style="display:flex;"><span>    string a;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(iss <span style="color:#666">&gt;&gt;</span> word) {
-</span></span><span style="display:flex;"><span>        a.push_back(<span style="color:#b44">&#39;a&#39;</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s.count(word[<span style="color:#666">0</span>])) {
-</span></span><span style="display:flex;"><span>            oss <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#39; &#39;</span> <span style="color:#666">&lt;&lt;</span> word <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#34;ma&#34;</span> <span style="color:#666">&lt;&lt;</span> a;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            oss <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#39; &#39;</span> <span style="color:#666">&lt;&lt;</span> word.substr(<span style="color:#666">1</span>) <span style="color:#666">&lt;&lt;</span> word[<span style="color:#666">0</span>]  <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#34;ma&#34;</span> <span style="color:#666">&lt;&lt;</span> a;                
-</span></span><span style="display:flex;"><span>        }
+
+
+
+
+
+
+
+
+
+
+<div class=""> You are given an integer array nums and an integer k. In one operation, you can increment any element of the array by 1. Your task is to return the maximum possible frequency of any element after performing at most k operations. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> The input consists of an array nums containing integers and an integer k representing the maximum number of operations allowed.</div>
+                        <div class=""> <b>Example:</b> nums = [3, 5, 6], k = 5</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 10^5</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> The output is the maximum frequency of any element in the array after performing at most k operations.</div>
+                        <div class=""> <b>Example:</b> 3</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> To maximize the frequency of any element in the array by performing at most k operations.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Sort the array to easily calculate the number of increments needed to make elements equal.</div>
+                            
+                                <div style="margin-left: 20px;"> • Use a sliding window to calculate the number of operations required to make the elements in the window equal.</div>
+                            
+                                <div style="margin-left: 20px;"> • Maximize the frequency by checking the number of elements that can be converted to the same value using the available operations.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The input values nums and k are constrained to ensure that the problem can be solved efficiently.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 10^5</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The array contains at least one element.</div>
+                            
+                                <div style="margin-left: 20px;"> • k is the total number of allowed operations, and it is always greater than or equal to 1.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [3, 5, 6], k = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We first sort the array to get [3, 5, 6]. Then we can increment 3 by 2 and 5 by 3 to make them equal to 5, resulting in a frequency of 3 for 5.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> To maximize the frequency of an element, we will use a sliding window technique. By sorting the array and keeping track of the total operations needed to make the elements equal, we can find the maximum frequency.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Sorting the array will make it easier to check the operations required for each element.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • The sliding window approach will help efficiently compute the number of operations needed for different ranges of elements.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Sort the input array.</div>
+                            
+                                <div style="margin-left: 20px;"> • Initialize a window and track the number of operations needed to make all elements in the window equal.</div>
+                            
+                                <div style="margin-left: 20px;"> • Use the window to maximize the frequency of the elements by incrementing them up to k times.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • An empty input array is not valid based on the constraints.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure that the solution is efficient enough to handle large arrays up to size 10^5.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If k is very small compared to the differences between elements, the maximum frequency will be limited.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The array should always contain at least one element, and k should be positive.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Budget Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Sorting</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 For Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Update Budget</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Check Feasibility</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Adjust Window</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Result</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxFrequency</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A, <span style="color:#0b0;font-weight:bold">int</span> t) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> k <span style="color:#666">=</span> t;
+</span></span><span style="display:flex;"><span>    sort(A.begin(), A.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> A.size(); <span style="color:#666">++</span>j) {
+</span></span><span style="display:flex;"><span>        k <span style="color:#666">+=</span> A[j];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (k <span style="color:#666">&lt;</span> (<span style="color:#0b0;font-weight:bold">long</span>)A[j] <span style="color:#666">*</span> (j <span style="color:#666">-</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>))
+</span></span><span style="display:flex;"><span>            k <span style="color:#666">-=</span> A[i<span style="color:#666">++</span>];
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> oss.str().substr(<span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> j <span style="color:#666">-</span> i;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function converts a given string to Goat Latin by modifying the string according to specific rules. For each word, it checks if it starts with a vowel or consonant and appends appropriate suffixes.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">toGoatLatin</span>(string str) {
-</span></span></code></pre></div><p>This line declares the function <code>toGoatLatin</code> that takes a string as an argument and returns a string.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stringstream <span style="color:#00a000">iss</span>(str), oss;
-</span></span></code></pre></div><p>Initializes two stringstreams, <code>iss</code> for reading from the input string and <code>oss</code> for building the output string.</p>
-</li>
-<li>
-<p><strong>Set Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> s <span style="color:#666">=</span> {<span style="color:#b44">&#39;a&#39;</span>, <span style="color:#b44">&#39;e&#39;</span>, <span style="color:#b44">&#39;i&#39;</span>, <span style="color:#b44">&#39;o&#39;</span>, <span style="color:#b44">&#39;u&#39;</span>, <span style="color:#b44">&#39;A&#39;</span>, <span style="color:#b44">&#39;E&#39;</span>, <span style="color:#b44">&#39;I&#39;</span>, <span style="color:#b44">&#39;O&#39;</span>, <span style="color:#b44">&#39;U&#39;</span>};
-</span></span></code></pre></div><p>Defines a set of characters <code>s</code> containing vowels (both lowercase and uppercase) for checking the first letter of each word.</p>
-</li>
-<li>
-<p><strong>Variable Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string word;
-</span></span></code></pre></div><p>Declares a string variable <code>word</code> to temporarily store each word from the input string.</p>
-</li>
-<li>
-<p><strong>Variable Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string a;
-</span></span></code></pre></div><p>Declares a string variable <code>a</code> to hold the &lsquo;a&rsquo;s appended to the word in the process of converting it to Goat Latin.</p>
-</li>
-<li>
-<p><strong>Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(iss <span style="color:#666">&gt;&gt;</span> word) {
-</span></span></code></pre></div><p>Starts a loop that reads each word from the input string using the stringstream <code>iss</code>.</p>
-</li>
-<li>
-<p><strong>String Operation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        a.push_back(<span style="color:#b44">&#39;a&#39;</span>);
-</span></span></code></pre></div><p>Appends an &lsquo;a&rsquo; to the string <code>a</code> for each word processed, helping to create the Goat Latin suffix.</p>
-</li>
-<li>
-<p><strong>Condition Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s.count(word[<span style="color:#666">0</span>])) {
-</span></span></code></pre></div><p>Checks if the first letter of the word is a vowel by checking membership in the set <code>s</code>.</p>
-</li>
-<li>
-<p><strong>Else Clause</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div><p>If the word does not start with a vowel, process it as follows.</p>
-</li>
-<li>
-<p><strong>Return Statement</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> oss.str().substr(<span style="color:#666">1</span>);
-</span></span></code></pre></div><p>Returns the output string, removing the first space that was added before the first word.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n), where n is the number of words in the sentence.</li>
-<li><strong>Average Case:</strong> O(n), where n is the number of words in the sentence.</li>
-<li><strong>Worst Case:</strong> O(n), where n is the number of words in the sentence.</li>
-</ul>
-<p>The time complexity is linear because we process each word in the sentence once.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n), where n is the number of words in the sentence, for storing the modified words.</li>
-<li><strong>Worst Case:</strong> O(n), where n is the number of words in the sentence, for storing the modified words.</li>
-</ul>
-<p>The space complexity is linear as we need space to store the modified sentence.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxFrequency</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A, <span style="color:#0b0;font-weight:bold">int</span> t) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the function `maxFrequency` which takes a vector `A` representing the elements and an integer `t` representing the budget, and returns the maximum frequency of elements that can be purchased without exceeding the budget. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes the variables `i` and `j` for the sliding window. `i` is the start of the window, and `j` will iterate through the vector `A`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Budget Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> k <span style="color:#666">=</span> t;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes the budget `k` with the value of `t`. This will be updated as the algorithm processes the elements of `A`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Sorting</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(A.begin(), A.end());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Sorts the vector `A` in ascending order to allow the sliding window approach to work efficiently by trying to add the smallest elements first. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : For Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> A.size(); <span style="color:#666">++</span>j) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Starts a for loop where `j` iterates over the sorted elements in vector `A`. This loop will explore the possible subsets of elements that can be purchased with the available budget. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Update Budget</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        k <span style="color:#666">+=</span> A[j];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adds the current element `A[j]` to the budget `k`. This simulates spending money on the current item. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Check Feasibility</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (k <span style="color:#666">&lt;</span> (<span style="color:#0b0;font-weight:bold">long</span>)A[j] <span style="color:#666">*</span> (j <span style="color:#666">-</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>))
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the total budget `k` is less than the total cost of the current subset of elements, which is calculated as the current element `A[j]` multiplied by the number of elements in the window `(j - i &#43; 1)`. If this condition is true, it means the subset cannot be purchased with the budget. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Adjust Window</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            k <span style="color:#666">-=</span> A[i<span style="color:#666">++</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the budget is exceeded, adjusts the window by removing the first element `A[i]` from the budget and moving the start of the window `i` to the next element. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> j <span style="color:#666">-</span> i;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the difference between `j` and `i`, which represents the number of elements in the largest valid subset that can be purchased within the budget. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step, which is O(n log n), where n is the size of the array.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) for storing the sorted array in the worst case.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/goat-latin/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 
@@ -374,6 +819,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -609,98 +1055,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-824-goat-latin\/"
-    },
-    "headline": "Leetcode 824: Goat Latin",
-    "description": "In-depth solution and explanation for Leetcode 824: Goat Latin in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": ""
-    },
-    "datePublished": "2024-08-16T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Easy",
-    "teaches": "[\"String\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "video": {
-      "@type": "VideoObject",
-      "name": "Video explanation for Leetcode 824: Goat Latin",
-      "embedUrl": "https://www.youtube.com/watch?v=pTLNHVWiQk0",
-      "uploadDate": "2020-03-17",
-      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi_webp\/pTLNHVWiQk0\/maxresdefault.webp"
-    },
-    
-    "keywords": "[\"String\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-825-friends-of-appropriate-ages\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-823-binary-trees-with-factors\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -40,8 +42,105 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1706-where-will-the-ball-fall\/"
+    },
+    "headline": "Leetcode 1706: Where Will the Ball Fall",
+    "description": "In-depth solution and explanation for Leetcode 1706: Where Will the Ball Fall in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": ""
+    },
+    "datePublished": "2024-05-20T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Array\",\"Matrix\",\"Simulation\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "video": {
+      "@type": "VideoObject",
+      "name": "Video explanation for Leetcode 1706: Where Will the Ball Fall",
+      "embedUrl": "https://www.youtube.com/watch?v=QydaN-AVEAA",
+      "uploadDate": "2020-12-27",
+      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/QydaN-AVEAA\/maxresdefault.jpg"
+    },
+    
+    "keywords": "[\"Array\",\"Matrix\",\"Simulation\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1712-ways-to-split-array-into-three-subarrays\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1705-maximum-number-of-eaten-apples\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -182,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     May 20, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    1 min read
                                 </span>					
                             </div>
                         </div>			
@@ -199,199 +298,348 @@
                     
                     <div class="article-post">
                         <hr>
-<p>You have a 2-D grid representing a box, and a number of balls that will be dropped into the box. The box has diagonal boards in each cell, which can redirect the balls either left or right. Your task is to determine the path of each ball dropped from the top of the box. The ball can either fall out of the bottom, or get stuck if it hits a &lsquo;V&rsquo; shaped pattern between two boards or is redirected into a wall.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> You are given a 2-D grid of size &rsquo;m&rsquo; x &rsquo;n&rsquo; where each element in the grid can either be 1 or -1. A value of 1 indicates a board that redirects a ball to the right, and -1 indicates a board that redirects a ball to the left. Additionally, you are given an integer &rsquo;n&rsquo; representing the number of balls.</li>
-<li><strong>Example:</strong> <code>[[1,1,1,-1,-1],[1,1,1,-1,-1],[-1,-1,-1,1,1],[1,1,1,1,-1],[-1,-1,-1,-1,-1]]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= grid.length &lt;= 100</li>
-<li>1 &lt;= grid[i].length &lt;= 100</li>
-<li>grid[i][j] is either 1 or -1</li>
-<li>1 &lt;= n &lt;= 100</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> Return an array of size &rsquo;n&rsquo; where the &lsquo;i&rsquo;th element represents the column that the &lsquo;i&rsquo;th ball falls out of at the bottom of the box, or -1 if the ball gets stuck.</li>
-<li><strong>Example:</strong> <code>[1,-1,-1,-1,-1]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The output array should contain integers between 0 and n-1, or -1 if a ball gets stuck.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> Simulate the dropping of balls into the grid and track their paths based on the redirection rules.</p>
-<ul>
-<li>
-<ol>
-<li>For each ball, start at the top of a given column and simulate its movement through the grid.</li>
-</ol>
-</li>
-<li>
-<ol start="2">
-<li>At each row, check the direction of the board in the current cell and determine if the ball can be redirected.</li>
-</ol>
-</li>
-<li>
-<ol start="3">
-<li>If the ball hits a wall or gets stuck in a &lsquo;V&rsquo; shaped pattern, mark it as stuck and break out of the loop.</li>
-</ol>
-</li>
-<li>
-<ol start="4">
-<li>If the ball reaches the bottom without getting stuck, track the column where it exits.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ol>
-</li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>Each ball will be dropped from the top of a column and can either exit the grid or get stuck.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li>
-<p><strong>Input:</strong> <code>[[1, 1, 1, -1, -1], [1, 1, 1, -1, -1], [-1, -1, -1, 1, 1], [1, 1, 1, 1, -1], [-1, -1, -1, -1, -1]]</code>  <br>
-<strong>Explanation:</strong> Ball 0 is dropped at column 0 and falls out at column 1. Ball 1 is dropped at column 1 but gets stuck between columns 2 and 3. Balls 2-4 also get stuck due to the V-shaped pattern.</p>
-</li>
-<li>
-<p><strong>Input:</strong> <code>[[-1]]</code>  <br>
-<strong>Explanation:</strong> Ball 0 is dropped at column 0 but gets stuck against the left wall, resulting in -1.</p>
-</li>
-<li>
-<p><strong>Input:</strong> <code>[[1,1,1,1,1,1],[-1,-1,-1,-1,-1,-1],[1,1,1,1,1,1],[-1,-1,-1,-1,-1,-1]]</code>  <br>
-<strong>Explanation:</strong> Each ball from columns 0-4 exits the box through the respective columns at the bottom. Ball 5 gets stuck.</p>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>Simulate the process of dropping each ball from the top and track its path using the grid&rsquo;s redirection rules.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>We need to follow the path of each ball through the grid row by row.</li>
-<li>The grid&rsquo;s constraints (1, -1) provide clear redirection rules, making it possible to track each ball&rsquo;s path.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>The grid will always have at least one row and column, so empty grids are not an issue.</li>
-<li>Ensure that the solution scales for large grids with up to 100 rows and columns.</li>
-<li>Check for cases where balls hit the wall or get stuck due to a V-shaped pattern.</li>
-<li>The solution must efficiently handle multiple balls and large grid sizes.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findBall(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> i1 <span style="color:#666">=</span> i, i2;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> m; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            i2 <span style="color:#666">=</span> i1 <span style="color:#666">+</span> grid[j][i1];
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i2 <span style="color:#666">&lt;</span><span style="color:#666">0</span> <span style="color:#666">||</span> i2 <span style="color:#666">&gt;=</span> n <span style="color:#666">||</span> grid[j][i1] <span style="color:#666">!=</span> grid[j][i2]) {
-</span></span><span style="display:flex;"><span>                i1 <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            i1 <span style="color:#666">=</span> i2;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        res.push_back(i1);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function simulates the path of a ball falling through a grid of &lsquo;v&rsquo; and &lsquo;&gt;&rsquo; shaped tunnels. The ball starts at each column of the top row and follows the directions in each row&rsquo;s grid. It returns the column where the ball ends up in the bottom row.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findBall(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
-</span></span></code></pre></div><p>Defines the function <code>findBall</code> that simulates the ball&rsquo;s path through the grid.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
-</span></span></code></pre></div><p>Initializes a vector <code>res</code> to store the result of the ball&rsquo;s final position for each column.</p>
-</li>
-<li>
-<p><strong>Grid Size Calculation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
-</span></span></code></pre></div><p>Calculates the dimensions of the grid, with <code>m</code> being the number of rows and <code>n</code> the number of columns.</p>
-</li>
-<li>
-<p><strong>Outer Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div><p>Iterates over each column at the top of the grid where the ball can start.</p>
-</li>
-<li>
-<p><strong>Initialization for Ball Movement</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> i1 <span style="color:#666">=</span> i, i2;
-</span></span></code></pre></div><p>Sets the initial position of the ball (<code>i1</code> is the column index) and initializes <code>i2</code> to track the new column position.</p>
-</li>
-<li>
-<p><strong>Inner Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> m; j<span style="color:#666">++</span>) {
-</span></span></code></pre></div><p>Iterates through each row of the grid, simulating the ball&rsquo;s movement.</p>
-</li>
-<li>
-<p><strong>Calculate Next Column</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i2 <span style="color:#666">=</span> i1 <span style="color:#666">+</span> grid[j][i1];
-</span></span></code></pre></div><p>Calculates the next column index <code>i2</code> based on the direction in the current grid cell (<code>grid[j][i1]</code> is either 1 for &lsquo;&gt;&rsquo; or -1 for &lsquo;v&rsquo;).</p>
-</li>
-<li>
-<p><strong>Boundary and Direction Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i2 <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i2 <span style="color:#666">&gt;=</span> n <span style="color:#666">||</span> grid[j][i1] <span style="color:#666">!=</span> grid[j][i2]) {
-</span></span></code></pre></div><p>Checks if the ball has gone out of bounds or if it is stuck in a &lsquo;V&rsquo; shape (where both directions are the same).</p>
-</li>
-<li>
-<p><strong>Ball Stuck Condition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                i1 <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span></code></pre></div><p>Sets <code>i1</code> to -1 to indicate the ball is stuck (cannot move further).</p>
-</li>
-<li>
-<p><strong>Exit Inner Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span></code></pre></div><p>Exits the inner loop early if the ball is stuck.</p>
-</li>
-<li>
-<p><strong>Update Ball Position</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i1 <span style="color:#666">=</span> i2;
-</span></span></code></pre></div><p>Updates the ball&rsquo;s position to the new column <code>i2</code>.</p>
-</li>
-<li>
-<p><strong>Store Ball&rsquo;s Final Position</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.push_back(i1);
-</span></span></code></pre></div><p>Stores the final position of the ball after it has moved through all the rows (or is stuck) in the vector <code>res</code>.</p>
-</li>
-<li>
-<p><strong>Return Result</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><p>Returns the result vector <code>res</code>, which contains the final positions for the ball starting from each column.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(m * n), where m is the number of rows and n is the number of columns in the grid.</li>
-<li><strong>Average Case:</strong> O(m * n), since each ball may need to traverse through each row.</li>
-<li><strong>Worst Case:</strong> O(m * n), since in the worst case, every ball might traverse the entire grid.</li>
-</ul>
-<p>The time complexity is O(m * n) due to the nested iteration over rows and columns.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n), if all balls exit immediately.</li>
-<li><strong>Worst Case:</strong> O(n), since we store the result of each ball&rsquo;s path.</li>
-</ul>
-<p>The space complexity is O(n) because we only store the result for each ball.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+
+
+
+
+
+
+
+
+
+
+<div class="">  </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="4"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="5"></button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> </div>
+                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> </div>
+                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Steps:</b>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Steps:</b>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"> Code </button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#666">%!</span>s(<span style="color:#666">&lt;</span>nil<span style="color:#666">&gt;</span>)
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> </div>
+                        <div class=""> <b>Average Case:</b> </div>
+                        <div class=""> <b>Worst Case:</b> </div> 
+                        <div class=""> <b>Description:</b> </div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> </div>
+                        <div class=""> <b>Worst Case:</b> </div> 
+                        <div class=""> <b>Description:</b> </div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target=""]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/where-will-the-ball-fall/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 
@@ -411,6 +659,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -654,98 +903,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1706-where-will-the-ball-fall\/"
-    },
-    "headline": "Leetcode 1706: Where Will the Ball Fall",
-    "description": "In-depth solution and explanation for Leetcode 1706: Where Will the Ball Fall in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": ""
-    },
-    "datePublished": "2024-05-20T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Array\",\"Matrix\",\"Simulation\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "video": {
-      "@type": "VideoObject",
-      "name": "Video explanation for Leetcode 1706: Where Will the Ball Fall",
-      "embedUrl": "https://www.youtube.com/watch?v=QydaN-AVEAA",
-      "uploadDate": "2020-12-27",
-      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/QydaN-AVEAA\/maxresdefault.jpg"
-    },
-    
-    "keywords": "[\"Array\",\"Matrix\",\"Simulation\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1712-ways-to-split-array-into-three-subarrays\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1705-maximum-number-of-eaten-apples\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

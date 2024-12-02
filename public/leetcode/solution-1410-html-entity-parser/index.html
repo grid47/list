@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -39,8 +41,97 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1410-html-entity-parser\/"
+    },
+    "headline": "Leetcode 1410: HTML Entity Parser",
+    "description": "In-depth solution and explanation for Leetcode 1410: HTML Entity Parser in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": ""
+    },
+    "datePublished": "2024-06-19T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Hash Table\",\"String\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "keywords": "[\"Hash Table\",\"String\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1414-find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1409-queries-on-a-permutation-with-key\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -181,7 +272,7 @@
                                     <i class="far fa-star"></i>
                                     Jun 19, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -198,276 +289,469 @@
                     
                     <div class="article-post">
                         <hr>
-<p>You are tasked with decoding a string that contains HTML entities. The HTML entities represent special characters like quotation marks, ampersands, greater-than signs, etc. You need to replace the HTML entities with their respective characters.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input consists of a string with HTML entities.</li>
-<li><strong>Example:</strong> <code>text = &quot;The &amp;quot;HTML&amp;quot; language is popular.&quot;</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= text.length &lt;= 105</li>
-<li>The string can contain any ASCII character.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> Return the decoded string where all the HTML entities are replaced by their corresponding characters.</li>
-<li><strong>Example:</strong> <code>The output will be &quot;The HTML language is popular.&quot;</code></li>
-<li><strong>Constraints:</strong></li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> Replace HTML entities in the string with their corresponding characters.</p>
-<ul>
-<li>Initialize a map with HTML entity to character mappings.</li>
-<li>Iterate through the string, find any entity starting with &lsquo;&amp;&rsquo; and ending with &lsquo;;&rsquo;.</li>
-<li>Check if the found entity exists in the map and replace it.</li>
-<li>Return the final decoded string.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>The input string contains valid HTML entities.</li>
-<li>Entities are well-formed and properly enclosed in &lsquo;&amp;&rsquo; and &lsquo;;&rsquo;.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li><strong>Input:</strong> <code>Input: text = &quot;The &amp;quot;HTML&amp;quot; language is popular.&quot;</code>  <br>
-<strong>Explanation:</strong> The parser will replace the entity &quot; with &quot; to produce the decoded string: &ldquo;The HTML language is popular.&rdquo;</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>To solve this problem, we&rsquo;ll map the HTML entities to their corresponding characters and then iterate over the string to replace any encountered entities.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>HTML entities are enclosed by &lsquo;&amp;&rsquo; and &lsquo;;&rsquo;.</li>
-<li>Each entity corresponds to a special character.</li>
-<li>We can use a map to store the mappings and process the string character by character.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>Handle an empty string input.</li>
-<li>Ensure that the solution handles strings near the upper constraint of length 105.</li>
-<li>Consider cases where there are no entities in the input.</li>
-<li>Ensure all HTML entities are valid and properly closed with &lsquo;;&rsquo;.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">entityParser</span>(string text) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, string<span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    mp[<span style="color:#b44">&#34;&amp;quot;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;</span><span style="color:#b62;font-weight:bold">\&#34;</span><span style="color:#b44">&#34;</span>;
-</span></span><span style="display:flex;"><span>    mp[<span style="color:#b44">&#34;&amp;apos;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;</span><span style="color:#b62;font-weight:bold">\&#39;</span><span style="color:#b44">&#34;</span>;
-</span></span><span style="display:flex;"><span>    mp[<span style="color:#b44">&#34;&amp;amp;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;&amp;&#34;</span>;
-</span></span><span style="display:flex;"><span>    mp[<span style="color:#b44">&#34;&amp;gt;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;&gt;&#34;</span>;
-</span></span><span style="display:flex;"><span>    mp[<span style="color:#b44">&#34;&amp;lt;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;&lt;&#34;</span>;
-</span></span><span style="display:flex;"><span>    mp[<span style="color:#b44">&#34;&amp;frasl;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;/&#34;</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;        
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> text.size()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(text[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;&amp;&#39;</span>) {
-</span></span><span style="display:flex;"><span>            string tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> text.size() <span style="color:#666">&amp;&amp;</span> text[i] <span style="color:#666">!=</span> <span style="color:#b44">&#39;;&#39;</span>){
-</span></span><span style="display:flex;"><span>                tmp <span style="color:#666">+=</span> text[i<span style="color:#666">++</span>];
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> text.size() <span style="color:#666">&amp;&amp;</span> text[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;&amp;&#39;</span>) {
-</span></span><span style="display:flex;"><span>                    res <span style="color:#666">+=</span> tmp;
-</span></span><span style="display:flex;"><span>                    tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>            } 
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(text[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;;&#39;</span>) {
-</span></span><span style="display:flex;"><span>                i<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>                tmp <span style="color:#666">+=</span> <span style="color:#b44">&#39;;&#39;</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(mp.count(tmp)) {
-</span></span><span style="display:flex;"><span>                    res <span style="color:#666">+=</span> mp[tmp];
-</span></span><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>                    res <span style="color:#666">+=</span> tmp;
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>                res <span style="color:#666">+=</span> tmp;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> text[i<span style="color:#666">++</span>];
-</span></span><span style="display:flex;"><span>        }
+
+
+
+
+
+
+
+
+
+
+<div class=""> You are given an integer array &rsquo;nums&rsquo; of even length. Your task is to determine whether it is possible to divide the array into two subarrays, &rsquo;nums1&rsquo; and &rsquo;nums2&rsquo;, such that both subarrays have distinct elements and the same length. Each subarray must contain half of the total elements from the original array. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> You are given an array of integers nums.</div>
+                        <div class=""> <b>Example:</b> nums = [5, 6, 7, 7, 8, 8]</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • nums.length % 2 == 0</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 100</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> Return true if it&#39;s possible to split the array into two subarrays with distinct elements, otherwise return false.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> Determine if it&#39;s possible to split the given array into two subarrays with distinct elements.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Count the frequency of each number in the array.</div>
+                            
+                                <div style="margin-left: 20px;"> • If any number appears more than twice, return false.</div>
+                            
+                                <div style="margin-left: 20px;"> • If all numbers appear at most twice, return true.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> Ensure the given array satisfies the constraints mentioned below.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • nums.length is even.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each element is between 1 and 100.</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The array has an even number of elements.</div>
+                            
+                                <div style="margin-left: 20px;"> • The array elements are within the specified range.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [5, 6, 7, 7, 8, 8]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, we can split the array into nums1 = [5, 6, 7] and nums2 = [7, 8, 8]. Both subarrays have distinct elements, so the result is true.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> To solve this problem, we need to check if it&#39;s possible to split the array into two subarrays with distinct elements.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • We need to check the frequency of each number in the array.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • If a number appears more than twice, it would be impossible to split the array.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Iterate over the array and count the frequency of each number.</div>
+                            
+                                <div style="margin-left: 20px;"> • If any number appears more than twice, return false.</div>
+                            
+                                <div style="margin-left: 20px;"> • If all numbers appear at most twice, return true.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If nums is empty, we can return false.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If nums has 100 elements, we need to handle it efficiently.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Arrays where all numbers are the same will return false.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The array must have an even length.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Map Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isPossibleToSplit</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: nums) {
+</span></span><span style="display:flex;"><span>        mp[x]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[x] <span style="color:#666">&gt;</span> <span style="color:#666">2</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>The function <code>entityParser</code> processes an input string <code>text</code> and replaces certain HTML entities like <code>&amp;quot;</code>, <code>&amp;amp;</code>, and others with their respective character representations.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>String Manipulations</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">entityParser</span>(string text) {
-</span></span></code></pre></div><p>This line defines the function <code>entityParser</code>, which takes a string <code>text</code> as input and returns a modified version of it.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, string<span style="color:#666">&gt;</span> mp;
-</span></span></code></pre></div><p>A map <code>mp</code> is initialized to store key-value pairs for replacing HTML entities with their corresponding characters.</p>
-</li>
-<li>
-<p><strong>Map Operations</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#b44">&#34;&amp;quot;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;</span><span style="color:#b62;font-weight:bold">\&#34;</span><span style="color:#b44">&#34;</span>;
-</span></span></code></pre></div><p>Here, the <code>&amp;quot;</code> HTML entity is mapped to the double quote <code>&quot;</code> character.</p>
-</li>
-<li>
-<p><strong>Map Operations</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#b44">&#34;&amp;apos;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;</span><span style="color:#b62;font-weight:bold">\&#39;</span><span style="color:#b44">&#34;</span>;
-</span></span></code></pre></div><p>The <code>&amp;apos;</code> entity is mapped to the single quote '' character.</p>
-</li>
-<li>
-<p><strong>Map Operations</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#b44">&#34;&amp;amp;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;&amp;&#34;</span>;
-</span></span></code></pre></div><p>The <code>&amp;amp;</code> entity is mapped to the <code>&amp;</code> character.</p>
-</li>
-<li>
-<p><strong>Map Operations</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#b44">&#34;&amp;gt;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;&gt;&#34;</span>;
-</span></span></code></pre></div><p>The <code>&amp;gt;</code> entity is mapped to the greater-than <code>&gt;</code> character.</p>
-</li>
-<li>
-<p><strong>Map Operations</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#b44">&#34;&amp;lt;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;&lt;&#34;</span>;
-</span></span></code></pre></div><p>The <code>&amp;lt;</code> entity is mapped to the less-than <code>&lt;</code> character.</p>
-</li>
-<li>
-<p><strong>Map Operations</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#b44">&#34;&amp;frasl;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;/&#34;</span>;
-</span></span></code></pre></div><p>The <code>&amp;frasl;</code> entity is mapped to the forward slash <code>/</code> character.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;        
-</span></span></code></pre></div><p>The variable <code>res</code> is initialized as an empty string to accumulate the result.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div><p>The variable <code>i</code> is initialized to 0 and will be used as the index to iterate through the input string <code>text</code>.</p>
-</li>
-<li>
-<p><strong>Loop Constructs</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> text.size()) {
-</span></span></code></pre></div><p>A while loop is started to process each character in the input string <code>text</code>.</p>
-</li>
-<li>
-<p><strong>Conditional Logic</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(text[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;&amp;&#39;</span>) {
-</span></span></code></pre></div><p>Checks if the current character is the <code>&amp;</code> symbol, which indicates the start of an HTML entity.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            string tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span></code></pre></div><p>A temporary string <code>tmp</code> is initialized to store potential HTML entities.</p>
-</li>
-<li>
-<p><strong>Loop Constructs</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> text.size() <span style="color:#666">&amp;&amp;</span> text[i] <span style="color:#666">!=</span> <span style="color:#b44">&#39;;&#39;</span>){
-</span></span></code></pre></div><p>A nested while loop is used to collect characters until a semicolon <code>;</code> (end of the entity) is found.</p>
-</li>
-<li>
-<p><strong>String Manipulations</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                tmp <span style="color:#666">+=</span> text[i<span style="color:#666">++</span>];
-</span></span></code></pre></div><p>Appends the current character to <code>tmp</code> and increments <code>i</code>.</p>
-</li>
-<li>
-<p><strong>Conditional Logic</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> text.size() <span style="color:#666">&amp;&amp;</span> text[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;&amp;&#39;</span>) {
-</span></span></code></pre></div><p>Checks if another <code>&amp;</code> is encountered within the entity, in which case the current entity is complete.</p>
-</li>
-<li>
-<p><strong>String Manipulations</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    res <span style="color:#666">+=</span> tmp;
-</span></span></code></pre></div><p>Appends the current entity in <code>tmp</code> to the result string <code>res</code>.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span></code></pre></div><p>Resets the temporary string <code>tmp</code> to collect a new entity.</p>
-</li>
-<li>
-<p><strong>Conditional Logic</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(text[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;;&#39;</span>) {
-</span></span></code></pre></div><p>Checks if the current character is a semicolon, signaling the end of an HTML entity.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                i<span style="color:#666">++</span>;
-</span></span></code></pre></div><p>Increments <code>i</code> to move past the semicolon.</p>
-</li>
-<li>
-<p><strong>String Manipulations</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                tmp <span style="color:#666">+=</span> <span style="color:#b44">&#39;;&#39;</span>;
-</span></span></code></pre></div><p>Appends the semicolon to <code>tmp</code> to finalize the entity.</p>
-</li>
-<li>
-<p><strong>Map Operations</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(mp.count(tmp)) {
-</span></span></code></pre></div><p>Checks if the entity <code>tmp</code> exists in the <code>mp</code> map.</p>
-</li>
-<li>
-<p><strong>String Manipulations</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    res <span style="color:#666">+=</span> mp[tmp];
-</span></span></code></pre></div><p>If the entity is found in the map, its corresponding character is appended to the result string.</p>
-</li>
-<li>
-<p><strong>String Manipulations</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div><p>Handles the case where the entity is not in the map.</p>
-</li>
-<li>
-<p><strong>String Manipulations</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    res <span style="color:#666">+=</span> tmp;
-</span></span></code></pre></div><p>If the entity is not in the map, the raw entity is appended to the result string.</p>
-</li>
-<li>
-<p><strong>Control Flow</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div><p>If the character is not <code>&amp;</code>, append it to the result string.</p>
-</li>
-<li>
-<p><strong>String Manipulations</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                res <span style="color:#666">+=</span> tmp;
-</span></span></code></pre></div><p>Appends the accumulated characters in <code>tmp</code> to <code>res</code>.</p>
-</li>
-<li>
-<p><strong>Loop Constructs</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div><p>If the character is not <code>&amp;</code>, it is directly appended to the result.</p>
-</li>
-<li>
-<p><strong>String Manipulations</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">+=</span> text[i<span style="color:#666">++</span>];
-</span></span></code></pre></div><p>Appends the character to <code>res</code> and increments the index <code>i</code>.</p>
-</li>
-<li>
-<p><strong>Return Statement</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><p>Returns the processed string <code>res</code>.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n), where n is the length of the string.</li>
-<li><strong>Average Case:</strong> O(n), as we need to process each character in the string.</li>
-<li><strong>Worst Case:</strong> O(n), as we might encounter entities that require checking each character.</li>
-</ul>
-<p>The time complexity is linear in relation to the length of the string.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n), as we need to store the result string.</li>
-<li><strong>Worst Case:</strong> O(n), where n is the length of the string.</li>
-</ul>
-<p>The space complexity is linear due to the additional space used to store the decoded string.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isPossibleToSplit</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the function `isPossibleToSplit` which accepts a vector of integers `nums` and returns a boolean indicating whether the array can be split with the restriction that no number appears more than twice. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Declares a map `mp` to track the frequency of each element in the `nums` array. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: nums) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterates through each element `x` in the `nums` array. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Map Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[x]<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increments the count of the element `x` in the map `mp`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[x] <span style="color:#666">&gt;</span> <span style="color:#666">2</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if any element in the array appears more than twice by comparing its count in `mp`. If true, returns `false`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If no element appears more than twice, returns `true` indicating the array can be split as required. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) where n is the length of the array, as we are iterating over the array once.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage required for counting the frequency of elements.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/html-entity-parser/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 <table>
@@ -479,6 +763,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -718,90 +1003,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1410-html-entity-parser\/"
-    },
-    "headline": "Leetcode 1410: HTML Entity Parser",
-    "description": "In-depth solution and explanation for Leetcode 1410: HTML Entity Parser in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": ""
-    },
-    "datePublished": "2024-06-19T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Hash Table\",\"String\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "keywords": "[\"Hash Table\",\"String\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1414-find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1409-queries-on-a-permutation-with-key\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

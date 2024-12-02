@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -39,8 +41,105 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1109-corporate-flight-bookings\/"
+    },
+    "headline": "Leetcode 1109: Corporate Flight Bookings",
+    "description": "In-depth solution and explanation for Leetcode 1109: Corporate Flight Bookings in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": ""
+    },
+    "datePublished": "2024-07-19T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Array\",\"Prefix Sum\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "video": {
+      "@type": "VideoObject",
+      "name": "Video explanation for Leetcode 1109: Corporate Flight Bookings",
+      "embedUrl": "https://www.youtube.com/watch?v=geZPsJWEzfc",
+      "uploadDate": "2019-12-20",
+      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi_webp\/geZPsJWEzfc\/maxresdefault.webp"
+    },
+    
+    "keywords": "[\"Array\",\"Prefix Sum\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1110-delete-nodes-and-return-forest\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1105-filling-bookcase-shelves\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -181,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 19, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -198,144 +297,501 @@
                     
                     <div class="article-post">
                         <hr>
-<p>You are given a list of flight bookings, where each booking specifies the flight range (from first flight to last flight) and the number of seats reserved for each of the flights in that range. You need to compute the total number of seats reserved for each flight, from flight 1 to flight n.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> You are given a list of bookings, where each element <code>bookings[i]</code> is an array containing three integers: <code>[firsti, lasti, seatsi]</code>, representing the first flight, last flight, and the number of seats reserved for each flight in the given range. Additionally, you are given an integer <code>n</code> representing the total number of flights.</li>
-<li><strong>Example:</strong> <code>bookings = [[1, 2, 10], [2, 3, 20], [2, 5, 25]], n = 5</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= n &lt;= 2 * 10^4</li>
-<li>1 &lt;= bookings.length &lt;= 2 * 10^4</li>
-<li>bookings[i].length == 3</li>
-<li>1 &lt;= firsti &lt;= lasti &lt;= n</li>
-<li>1 &lt;= seatsi &lt;= 10^4</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> Return an array <code>answer</code> of length <code>n</code>, where each element <code>answer[i]</code> represents the total number of seats reserved for the i-th flight.</li>
-<li><strong>Example:</strong> <code>Output: [10, 55, 45, 25, 25]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>Each element in the answer array should be the sum of reserved seats for the respective flight.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> The goal is to calculate the total number of reserved seats for each flight while efficiently handling multiple bookings that affect overlapping flight ranges.</p>
-<ul>
-<li>Start with an array <code>ans</code> initialized to zero, which will store the total seats for each flight.</li>
-<li>For each booking, increment the number of seats reserved for the first flight in the range, and decrement the number of seats for the flight right after the last flight in the range.</li>
-<li>Use a cumulative sum to calculate the total seats reserved for each flight.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>Each flight range will contain valid indexes and the number of seats will always be within the allowed range.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li><strong>Input:</strong> <code>Input: bookings = [[1, 2, 10], [2, 3, 20], [2, 5, 25]], n = 5</code>  <br>
-<strong>Explanation:</strong> In this case, bookings affect the following flights: the first booking reserves 10 seats for flights 1 and 2. The second booking reserves 20 seats for flights 2 and 3. The third booking reserves 25 seats for flights 2 through 5. The total seats for each flight are: [10, 55, 45, 25, 25].</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>We will use a technique known as difference array to efficiently process overlapping bookings and compute the total seats reserved for each flight.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>We need to keep track of seat reservations for overlapping flight ranges, which can be handled by using the difference array approach.</li>
-<li>For each booking, we will increment the start of the range and decrement the flight after the last in the range. This way, we can compute the cumulative number of reserved seats with just one pass through the array.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>Bookings array cannot be empty as the problem guarantees at least one booking.</li>
-<li>The solution must handle the upper limits of input sizes efficiently (up to 20,000 flights and bookings).</li>
-<li>If all bookings affect the same flight range, the result should correctly accumulate the reserved seats for each flight.</li>
-<li>Ensure the solution works within the provided constraints of <code>n</code> and the size of the bookings array.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> corpFlightBookings(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> bookings, <span style="color:#0b0;font-weight:bold">int</span> m) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(m, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">v</span>: bookings) {
-</span></span><span style="display:flex;"><span>        ans[v[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+=</span> v[<span style="color:#666">2</span>];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(v[<span style="color:#666">1</span>] <span style="color:#666">&lt;</span> m) ans[v[<span style="color:#666">1</span>]] <span style="color:#666">-=</span> v[<span style="color:#666">2</span>];
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> m; j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        ans[j] <span style="color:#666">+=</span> ans[j<span style="color:#666">-</span><span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+
+
+
+
+
+
+
+
+
+
+<div class=""> You are given a string <code>s</code> consisting of lowercase English letters where each letter appears exactly twice. You are also given an array <code>distance</code> of length 26, where each element represents the number of characters between the two occurrences of the corresponding letter (0-indexed, &lsquo;a&rsquo; corresponds to index 0, &lsquo;b&rsquo; to index 1, etc.). Your task is to determine if the string <code>s</code> is a &lsquo;well-spaced&rsquo; string. A string is well-spaced if, for each letter in <code>s</code>, the number of characters between its two occurrences matches the corresponding value in the <code>distance</code> array. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> The input consists of a string `s` of length `n` and an array `distance` of size 26, representing the spacing rules for each letter in the alphabet.</div>
+                        <div class=""> <b>Example:</b> s = &#39;abcdbf&#39;, distance = [1, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 2 &lt;= s.length &lt;= 52</div>
+                            
+                                <div style="margin-left: 20px;"> • Each letter appears exactly twice in `s`.</div>
+                            
+                                <div style="margin-left: 20px;"> • The `distance` array has length 26.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> Return `true` if `s` is a well-spaced string, otherwise return `false`.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The goal is to verify if the string is well-spaced according to the spacing rules defined by the `distance` array.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1. Iterate through each character in the string `s`.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. For each character, check if the number of characters between its two occurrences matches the value in the `distance` array.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. If for any character, the spacing condition is violated, return `false`.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. If all characters satisfy their spacing conditions, return `true`.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The problem constraints ensure that the string `s` has a manageable length (2 to 52 characters) and that each character appears exactly twice, making the problem solvable efficiently.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • The length of `s` is guaranteed to be even, as each character appears exactly twice.</div>
+                            
+                                <div style="margin-left: 20px;"> • The array `distance` has a fixed length of 26, corresponding to the letters &#39;a&#39; to &#39;z&#39;.</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The input string `s` contains only lowercase English letters.</div>
+                            
+                                <div style="margin-left: 20px;"> • The array `distance` provides valid values for each letter, where values represent the number of letters between the two occurrences.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;abaccb&#39;, distance = [1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the spacing between occurrences of &#39;a&#39; is 1 (distance[0] = 1), between &#39;b&#39; is 3 (distance[1] = 3), and &#39;c&#39; has no spacing (distance[2] = 0). The string meets the well-spaced condition, so the output is true.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;aa&#39;, distance = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, &#39;a&#39; appears at indices 0 and 1, but the distance condition for &#39;a&#39; (distance[0] = 1) is not satisfied, as there are no letters between them. Therefore, the output is false.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> The approach involves checking the distance between occurrences of each character in the string `s` and ensuring that it satisfies the conditions specified in the `distance` array.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Each character in `s` appears exactly twice, so we only need to check the distance between the two occurrences of each character.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • We can efficiently track the positions of each character in the string and verify if the distance condition holds for each letter.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1. Create an array `pos` of size 26 to store the position of the first occurrence of each letter.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. Iterate through the string `s`. For each character, check if the distance between its two occurrences matches the corresponding value in `distance`.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. If any character violates the distance condition, return false. Otherwise, return true at the end.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Although `s` will always have a length of at least 2, it is important to consider cases where `s` contains only one unique character repeated twice.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The problem ensures that `s.length` will not exceed 52, so the solution must efficiently handle this input size.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • When `distance` contains zeros, it signifies that there are no characters between the occurrences of a letter.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • We can safely assume that the constraints guarantee a valid input string `s` and a well-formed `distance` array.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 FunctionDefinition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 VariableInitialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 LoopStart</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 CharacterToIndex</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 ConditionalCheck</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 ReturnFalse</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 UpdatePosition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 ReturnTrue</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkDistances</span>(string s, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> distance) {
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> pos[<span style="color:#666">26</span>] <span style="color:#666">=</span> {};
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); <span style="color:#666">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (pos[n] <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> distance[n] <span style="color:#666">!=</span> i <span style="color:#666">-</span> pos[n])
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    pos[n] <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function calculates the number of booked seats on each flight based on a list of bookings. It uses a prefix sum approach to efficiently calculate the number of seats for each flight.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> corpFlightBookings(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> bookings, <span style="color:#0b0;font-weight:bold">int</span> m) {
-</span></span></code></pre></div><p>The function <code>corpFlightBookings</code> accepts a 2D vector <code>bookings</code> representing the booking ranges (start and end flight) and an integer <code>m</code> representing the total number of flights. It returns a vector of integers where each element corresponds to the number of bookings for a flight.</p>
-</li>
-<li>
-<p><strong>Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(m, <span style="color:#666">0</span>);
-</span></span></code></pre></div><p>A vector <code>ans</code> of size <code>m</code> is initialized to zero, representing the number of bookings for each flight initially set to zero.</p>
-</li>
-<li>
-<p><strong>Loop Through Bookings</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">v</span>: bookings) {
-</span></span></code></pre></div><p>This loop iterates over each booking in the <code>bookings</code> vector. Each booking is represented by a vector <code>v</code> of three elements: start flight, end flight, and number of seats booked.</p>
-</li>
-<li>
-<p><strong>Booking Updates</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans[v[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+=</span> v[<span style="color:#666">2</span>];
-</span></span></code></pre></div><p>For each booking, the number of seats booked is added to the <code>ans</code> vector at the index corresponding to the start flight (adjusted by subtracting 1 for zero-based indexing).</p>
-</li>
-<li>
-<p><strong>Decrement After End Flight</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(v[<span style="color:#666">1</span>] <span style="color:#666">&lt;</span> m) ans[v[<span style="color:#666">1</span>]] <span style="color:#666">-=</span> v[<span style="color:#666">2</span>];
-</span></span></code></pre></div><p>If the end flight <code>v[1]</code> is less than <code>m</code> (i.e., within the range of flights), the number of seats booked is subtracted from the <code>ans</code> vector at the index corresponding to the end flight.</p>
-</li>
-<li>
-<p><strong>Prefix Sum Calculation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> m; j<span style="color:#666">++</span>)
-</span></span></code></pre></div><p>This loop calculates the prefix sum for each flight, adding the number of seats booked for each previous flight to compute the total number of seats for the current flight.</p>
-</li>
-<li>
-<p><strong>Prefix Sum Update</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans[j] <span style="color:#666">+=</span> ans[j<span style="color:#666">-</span><span style="color:#666">1</span>];
-</span></span></code></pre></div><p>The prefix sum is updated for each flight by adding the previous flight&rsquo;s seat count to the current flight&rsquo;s seat count.</p>
-</li>
-<li>
-<p><strong>Return Statement</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div><p>The function returns the <code>ans</code> vector, which contains the total number of seats booked for each flight after processing all bookings.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n + m)</li>
-<li><strong>Average Case:</strong> O(n + m)</li>
-<li><strong>Worst Case:</strong> O(n + m)</li>
-</ul>
-<p>The time complexity is O(n + m), where <code>n</code> is the number of flights and <code>m</code> is the number of bookings, as we process each booking and then compute the cumulative sum for the flights.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n)</li>
-<li><strong>Worst Case:</strong> O(n)</li>
-</ul>
-<p>The space complexity is O(n), where <code>n</code> is the number of flights, due to the array used to store seat reservations for each flight.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : FunctionDefinition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkDistances</span>(string s, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> distance) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line defines the function checkDistances, which takes a string &#39;s&#39; and a vector &#39;distance&#39; as parameters. The function returns a boolean value. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : VariableInitialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> pos[<span style="color:#666">26</span>] <span style="color:#666">=</span> {};
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> An array &#39;pos&#39; of size 26 is initialized to zero to keep track of the last seen position of each letter in the string. The array indexes correspond to the letters of the alphabet. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : LoopStart</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); <span style="color:#666">++</span>i) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A for loop is started that iterates through each character of the string &#39;s&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : CharacterToIndex</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Each character of the string &#39;s&#39; is converted into an index (0 for &#39;a&#39;, 1 for &#39;b&#39;, etc.) by subtracting &#39;a&#39; from the character. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : ConditionalCheck</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (pos[n] <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> distance[n] <span style="color:#666">!=</span> i <span style="color:#666">-</span> pos[n])
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This condition checks whether the character has appeared before and if the distance between this occurrence and the previous one matches the corresponding value in the &#39;distance&#39; vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : ReturnFalse</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the condition in the previous step is true, the function immediately returns false, indicating that the distances do not match. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : UpdatePosition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    pos[n] <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The position of the current character is updated in the &#39;pos&#39; array. The index is incremented by 1 to indicate that this character has been seen at the current index. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : ReturnTrue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If no mismatched distances were found during the loop, the function returns true, indicating that the distances between identical characters match the given values. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the string `s`. This is the case when all characters are well-spaced.</div>
+                        <div class=""> <b>Average Case:</b> O(n), where n is the length of the string `s`. We need to check each character&#39;s spacing.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the length of the string `s`. We check every character&#39;s distance condition.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear in terms of the length of `s`, as we perform a single pass through the string.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1), as space usage is independent of input size.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), as we are using a constant amount of space to track positions of characters.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant, as we only need a fixed-size array to store the first occurrence of each character.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/corporate-flight-bookings/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 
@@ -355,6 +811,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -594,98 +1051,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1109-corporate-flight-bookings\/"
-    },
-    "headline": "Leetcode 1109: Corporate Flight Bookings",
-    "description": "In-depth solution and explanation for Leetcode 1109: Corporate Flight Bookings in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": ""
-    },
-    "datePublished": "2024-07-19T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Array\",\"Prefix Sum\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "video": {
-      "@type": "VideoObject",
-      "name": "Video explanation for Leetcode 1109: Corporate Flight Bookings",
-      "embedUrl": "https://www.youtube.com/watch?v=geZPsJWEzfc",
-      "uploadDate": "2019-12-20",
-      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi_webp\/geZPsJWEzfc\/maxresdefault.webp"
-    },
-    
-    "keywords": "[\"Array\",\"Prefix Sum\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1110-delete-nodes-and-return-forest\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1105-filling-bookcase-shelves\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

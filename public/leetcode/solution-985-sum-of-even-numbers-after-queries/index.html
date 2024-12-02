@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -39,8 +41,97 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-985-sum-of-even-numbers-after-queries\/"
+    },
+    "headline": "Leetcode 985: Sum of Even Numbers After Queries",
+    "description": "In-depth solution and explanation for Leetcode 985: Sum of Even Numbers After Queries in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": ""
+    },
+    "datePublished": "2024-07-31T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Array\",\"Simulation\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "keywords": "[\"Array\",\"Simulation\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-988-smallest-string-starting-from-leaf\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-984-string-without-aaa-or-bbb\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -181,7 +272,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 31, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -198,154 +289,768 @@
                     
                     <div class="article-post">
                         <hr>
-<p>Given an integer array nums and an array of queries, each of which is in the form [value, index], you need to apply each query by adding value to nums[index] and return the sum of even numbers in the updated nums array after each query.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> You are given an array nums of integers and an array of queries, where each query consists of a value to be added to nums at a specific index.</li>
-<li><strong>Example:</strong> <code>nums = [5, 7, 9, 10], queries = [[2, 0], [-5, 1], [4, 0], [6, 3]]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= nums.length &lt;= 10^4</li>
-<li>-10^4 &lt;= nums[i] &lt;= 10^4</li>
-<li>1 &lt;= queries.length &lt;= 10^4</li>
-<li>-10^4 &lt;= value &lt;= 10^4</li>
-<li>0 &lt;= index &lt; nums.length</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> For each query, return the sum of even numbers in nums after the query has been applied.</li>
-<li><strong>Example:</strong> <code>Output: [12, 7, 12, 14]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The output should be an array of integers representing the sum of even numbers after each query.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> The goal is to modify the nums array with each query and compute the sum of even values in the updated array.</p>
-<ul>
-<li>Initialize a sum variable to hold the sum of even numbers in nums.</li>
-<li>Iterate over each query and modify the appropriate value in nums.</li>
-<li>After modifying nums, update the sum of even numbers based on the updated value.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>Each query modifies nums at a specific index, and the sum of even values is updated immediately after each modification.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li><strong>Input:</strong> <code>nums = [5, 7, 9, 10], queries = [[2, 0], [-5, 1], [4, 0], [6, 3]]</code>  <br>
-<strong>Explanation:</strong> In this example, we modify nums in place for each query and compute the sum of even values after each query.</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>We can keep track of the sum of even values in nums and update it after each query, adjusting for the even/odd status of the modified value.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>We need to efficiently update the sum of even values after each query without recalculating from scratch.</li>
-<li>By adjusting the sum based on whether the modified value is even or odd, we can avoid unnecessary recalculations.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>Handle cases where nums has only one element.</li>
-<li>Consider large arrays and large values for nums and queries.</li>
-<li>Handle cases where the modified number becomes even or odd due to the addition.</li>
-<li>Ensure the solution is efficient enough to handle the maximum constraints.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> sumEvenAfterQueries(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> qs) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res <span style="color:#666">=</span> {};
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> accumulate(begin(A), end(A), <span style="color:#666">0</span>, [](<span style="color:#0b0;font-weight:bold">int</span> s, <span style="color:#0b0;font-weight:bold">int</span> a) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> s <span style="color:#666">+</span> (a <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#a0a000">a</span> : <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    });
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">q</span>: qs) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(A[q[<span style="color:#666">1</span>]] <span style="color:#666">%</span><span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) sum<span style="color:#666">-=</span>A[q[<span style="color:#666">1</span>]];
-</span></span><span style="display:flex;"><span>        A[q[<span style="color:#666">1</span>]] <span style="color:#666">+=</span> q[<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(A[q[<span style="color:#666">1</span>]]<span style="color:#666">%</span><span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) sum<span style="color:#666">+=</span>A[q[<span style="color:#666">1</span>]];
-</span></span><span style="display:flex;"><span>        res.push_back(sum);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+
+
+
+
+
+
+
+
+
+
+<div class=""> You are tasked with implementing a Bitset class that supports operations such as setting bits, clearing bits, flipping all bits, and querying the state of the bits (whether all bits are set to 1, at least one bit is set to 1, etc.). </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> The input consists of a list of operations to be performed on a Bitset object, starting with its initialization with a given size.</div>
+                        <div class=""> <b>Example:</b> [&#34;Bitset&#34;, &#34;fix&#34;, &#34;fix&#34;, &#34;flip&#34;, &#34;all&#34;, &#34;unfix&#34;, &#34;flip&#34;, &#34;one&#34;, &#34;unfix&#34;, &#34;count&#34;, &#34;toString&#34;]</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= size &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= idx &lt; size</div>
+                            
+                                <div style="margin-left: 20px;"> • At most 10^5 calls will be made in total to fix, unfix, flip, all, one, count, and toString.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> The output should be a list of results corresponding to the operations performed, where each result matches the expected output for each method call.</div>
+                        <div class=""> <b>Example:</b> [null, null, null, null, false, null, null, true, null, 3, &#34;01011&#34;]</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • At least one call will be made to all, one, count, or toString.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> Implement the `Bitset` class to efficiently support the operations on bits.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Initialize the Bitset with all bits set to 0.</div>
+                            
+                                <div style="margin-left: 20px;"> • Support methods to fix, unfix, flip, and query the state of the bits.</div>
+                            
+                                <div style="margin-left: 20px;"> • Ensure that all methods run efficiently, with constant time complexity for individual operations.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The input constraints ensure that operations on the Bitset will not exceed the maximum size or number of operations.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= size &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= idx &lt; size</div>
+                            
+                                <div style="margin-left: 20px;"> • At most 10^5 operations will be performed.</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The size of the Bitset is always within the specified range.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: Input = [&#34;Bitset&#34;, &#34;fix&#34;, &#34;fix&#34;, &#34;flip&#34;, &#34;all&#34;, &#34;unfix&#34;, &#34;flip&#34;, &#34;one&#34;, &#34;unfix&#34;, &#34;count&#34;, &#34;toString&#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The Bitset is initialized with 5 bits. Several operations are performed such as fixing bits, flipping, and checking if all bits are set to 1, eventually returning the count and string representation of the Bitset.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> The approach is to store the state of the Bitset using two strings: one for the actual bitset and one for the flipped version. This allows efficient bit manipulation and state queries.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The problem requires efficient manipulation and querying of bits.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • Using two strings to represent the Bitset and its flipped version ensures efficient bit flipping and checking.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Initialize the Bitset with all bits set to 0.</div>
+                            
+                                <div style="margin-left: 20px;"> • Use two strings to track the current and flipped states of the Bitset.</div>
+                            
+                                <div style="margin-left: 20px;"> • Implement methods for fixing, unfixing, flipping, and querying the state of the Bitset.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • There are no empty inputs as the Bitset always has at least one bit.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The solution must efficiently handle the maximum constraint of 10^5 bits.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Handling cases where all bits are fixed or all are unfixes is important.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure that the solution works efficiently within the given constraints.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Access Specifier</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Constructor</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Method Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Modification</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Modification</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 End Method</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Method Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Modification</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Modification</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Method Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Modification</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Modification</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Method Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Method Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Method Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Method Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Return Statement</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> ones <span style="color:#666">=</span> <span style="color:#666">0</span>, size <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>Bitset(<span style="color:#0b0;font-weight:bold">int</span> size) {
+</span></span><span style="display:flex;"><span>    s <span style="color:#666">=</span> string(size, <span style="color:#b44">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>    flipp <span style="color:#666">=</span> string(size, <span style="color:#b44">&#39;1&#39;</span>);
+</span></span><span style="display:flex;"><span>    ones <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>size <span style="color:#666">=</span> size;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function <code>sumEvenAfterQueries</code> takes an array <code>A</code> and a list of queries <code>qs</code>. It modifies the array based on the queries and computes the sum of even elements after each update. The result is stored in <code>res</code> and returned.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> sumEvenAfterQueries(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> qs) {
-</span></span></code></pre></div><p>Defines the function <code>sumEvenAfterQueries</code>, which takes an array <code>A</code> and a list of queries <code>qs</code>, returning a vector of integers with the sum of even elements after each query.</p>
-</li>
-<li>
-<p><strong>Initialize Result Vector</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res <span style="color:#666">=</span> {};
-</span></span></code></pre></div><p>Initializes an empty vector <code>res</code> that will store the results after each query, representing the sum of even elements in the array.</p>
-</li>
-<li>
-<p><strong>Initialize Sum of Even Elements</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> accumulate(begin(A), end(A), <span style="color:#666">0</span>, [](<span style="color:#0b0;font-weight:bold">int</span> s, <span style="color:#0b0;font-weight:bold">int</span> a) {
-</span></span></code></pre></div><p>Calculates the initial sum of all even elements in the array <code>A</code> using the <code>accumulate</code> function and a lambda to check if an element is even.</p>
-</li>
-<li>
-<p><strong>Lambda for Even Sum</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> s <span style="color:#666">+</span> (a <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#a0a000">a</span> : <span style="color:#666">0</span>);
-</span></span></code></pre></div><p>This lambda function adds the element <code>a</code> to the sum <code>s</code> if <code>a</code> is even (<code>a % 2 == 0</code>), otherwise it adds 0.</p>
-</li>
-<li>
-<p><strong>Iterate Over Queries</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">q</span>: qs) {
-</span></span></code></pre></div><p>Begins a loop to iterate over the list of queries <code>qs</code>. Each query contains an update to the array <code>A</code>.</p>
-</li>
-<li>
-<p><strong>Remove Even Value from Sum</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(A[q[<span style="color:#666">1</span>]] <span style="color:#666">%</span><span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) sum<span style="color:#666">-=</span>A[q[<span style="color:#666">1</span>]];
-</span></span></code></pre></div><p>If the element at the index specified by <code>q[1]</code> is even, it is subtracted from the sum of even numbers before applying the query.</p>
-</li>
-<li>
-<p><strong>Apply Query</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        A[q[<span style="color:#666">1</span>]] <span style="color:#666">+=</span> q[<span style="color:#666">0</span>];
-</span></span></code></pre></div><p>Updates the element in the array <code>A</code> at the index <code>q[1]</code> by adding the value <code>q[0]</code> from the current query.</p>
-</li>
-<li>
-<p><strong>Add Even Value to Sum</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(A[q[<span style="color:#666">1</span>]]<span style="color:#666">%</span><span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) sum<span style="color:#666">+=</span>A[q[<span style="color:#666">1</span>]];
-</span></span></code></pre></div><p>After updating the element, if the element at index <code>q[1]</code> is even, it is added back to the sum of even numbers.</p>
-</li>
-<li>
-<p><strong>Store the Sum After Query</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.push_back(sum);
-</span></span></code></pre></div><p>After processing the query, the current sum of even numbers is added to the result vector <code>res</code>.</p>
-</li>
-<li>
-<p><strong>Return Result</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><p>Returns the result vector <code>res</code>, which contains the sum of even elements after each query.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(1) for each query if the update does not affect the even/odd status.</li>
-<li><strong>Average Case:</strong> O(1) for each query as we only adjust the sum.</li>
-<li><strong>Worst Case:</strong> O(n) if we recalculate the sum of even numbers after each query (though this is avoidable).</li>
-</ul>
-<p>Each query is processed in constant time if we manage the sum of even numbers efficiently.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n) for storing the nums array.</li>
-<li><strong>Worst Case:</strong> O(n) for storing the nums array.</li>
-</ul>
-<p>The space complexity is O(n) where n is the size of the nums array.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">fix</span>(<span style="color:#0b0;font-weight:bold">int</span> idx) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s[idx] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>) ones<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    s[idx] <span style="color:#666">=</span> <span style="color:#b44">&#39;1&#39;</span>;
+</span></span><span style="display:flex;"><span>    flipp[idx] <span style="color:#666">=</span> <span style="color:#b44">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">unfix</span>(<span style="color:#0b0;font-weight:bold">int</span> idx) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s[idx] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>) ones<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>    s[idx] <span style="color:#666">=</span> <span style="color:#b44">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span>    flipp[idx] <span style="color:#666">=</span> <span style="color:#b44">&#39;1&#39;</span>;        
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">flip</span>() {
+</span></span><span style="display:flex;"><span>    ones <span style="color:#666">=</span> size <span style="color:#666">-</span> ones;
+</span></span><span style="display:flex;"><span>    s.swap(flipp);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">all</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ones <span style="color:#666">==</span> size;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">one</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ones <span style="color:#666">&gt;</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">count</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ones;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>string <span style="color:#00a000">toString</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your Bitset object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Bitset* obj = new Bitset(size);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;fix(idx);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;unfix(idx);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;flip();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_4 = obj-&gt;all();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_5 = obj-&gt;one();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_6 = obj-&gt;count();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * string param_7 = obj-&gt;toString();
+</span></span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> ones <span style="color:#666">=</span> <span style="color:#666">0</span>, size <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line initializes two variables: `ones` to keep track of the number of bits set to 1, and `size` to store the size of the bitset. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Access Specifier</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This is the access specifier marking the beginning of the public section of the class, where methods that can be accessed outside the class are defined. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Constructor</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Bitset(<span style="color:#0b0;font-weight:bold">int</span> size) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This constructor initializes a `Bitset` object with the specified size, setting all bits to 0 initially. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    s <span style="color:#666">=</span> string(size, <span style="color:#b44">&#39;0&#39;</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line initializes the string `s` with the given size, filling it with &#39;0&#39; characters representing the unset bits. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    flipp <span style="color:#666">=</span> string(size, <span style="color:#b44">&#39;1&#39;</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line initializes the string `flipp` with the given size, filling it with &#39;1&#39; characters, which are used for flipping the bits. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ones <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line initializes the `ones` counter to 0, as no bits are set initially. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>size <span style="color:#666">=</span> size;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line sets the `size` of the bitset to the provided `size` argument. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Method Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">fix</span>(<span style="color:#0b0;font-weight:bold">int</span> idx) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This method is used to set the bit at the specified index `idx` to 1, and updates the count of ones. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s[idx] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>) ones<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This checks if the bit at the given index is currently 0. If it is, the counter for `ones` is incremented. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Modification</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    s[idx] <span style="color:#666">=</span> <span style="color:#b44">&#39;1&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This sets the bit at the specified index to 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Modification</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    flipp[idx] <span style="color:#666">=</span> <span style="color:#b44">&#39;0&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This sets the corresponding bit in the `flipp` string to &#39;0&#39; indicating it is no longer in the flip state. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : End Method</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The closing brace marks the end of the `fix` method. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Method Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">unfix</span>(<span style="color:#0b0;font-weight:bold">int</span> idx) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This method is used to set the bit at the specified index `idx` to 0, and updates the count of ones. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s[idx] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>) ones<span style="color:#666">--</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This checks if the bit at the given index is currently 1. If it is, the counter for `ones` is decremented. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Modification</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    s[idx] <span style="color:#666">=</span> <span style="color:#b44">&#39;0&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This sets the bit at the specified index to 0. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Modification</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    flipp[idx] <span style="color:#666">=</span> <span style="color:#b44">&#39;1&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This sets the corresponding bit in the `flipp` string to &#39;1&#39; indicating it is now in the flip state. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Method Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">flip</span>() {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This method flips the entire bitset, changing each bit to its opposite (0 to 1 and vice versa). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Modification</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ones <span style="color:#666">=</span> size <span style="color:#666">-</span> ones;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This updates the `ones` count after flipping by subtracting the current number of ones from the total size. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Modification</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    s.swap(flipp);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This swaps the contents of the `s` and `flipp` strings, effectively flipping the bits. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Method Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">all</span>() {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This method checks if all bits in the bitset are set to 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ones <span style="color:#666">==</span> size;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This returns true if the number of ones is equal to the total size, meaning all bits are set to 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Method Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">one</span>() {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This method checks if at least one bit in the bitset is set to 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ones <span style="color:#666">&gt;</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This returns true if the number of ones is greater than 0, meaning at least one bit is set. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Method Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">count</span>() {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This method returns the number of bits set to 1 in the bitset. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ones;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This returns the value of `ones`, which represents the number of bits set to 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>26 : Method Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">toString</span>() {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This method converts the current bitset to a string. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>27 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This returns the string representation of the current bitset. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Average Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> Each operation (fix, unfix, flip, all, one, count, toString) runs in constant time.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage of two strings representing the Bitset.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/sum-of-even-numbers-after-queries/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 <table>
@@ -357,6 +1062,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -596,90 +1302,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-985-sum-of-even-numbers-after-queries\/"
-    },
-    "headline": "Leetcode 985: Sum of Even Numbers After Queries",
-    "description": "In-depth solution and explanation for Leetcode 985: Sum of Even Numbers After Queries in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": ""
-    },
-    "datePublished": "2024-07-31T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Array\",\"Simulation\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "keywords": "[\"Array\",\"Simulation\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-988-smallest-string-starting-from-leaf\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-984-string-without-aaa-or-bbb\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

@@ -1,0 +1,379 @@
+{{ $idx := sub (int (.Get 0)) 1 }}
+{{ $page := index .Site.Data.net.net $idx }}
+{{ $defaultSection := $page.problem.steps.section_tag }}
+{{ $current := $page.problem.problem_statement.section_tag }}
+
+{{ $expectedPageNumber := .Get 1 }}
+{{ $actualPageNumber := $page.page.page_number | int }}
+
+
+
+<div class=""> {{ $page.problem.problem_statement.description | markdownify }} </div>
+
+<!--more-->
+
+<div class="problem-guide">
+
+    <!-- Tags Section -->
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="{{ $page.problem.problem_statement.section_tag }}" 
+             onclick="switchProblemGuideContent(this, '{{ $page.problem.problem_statement.section_tag }}')">
+             {{ $page.problem.problem_statement.section_tag }}             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="{{ $page.approach.approach.section_tag }}" 
+             onclick="switchProblemGuideContent(this, '{{ $page.approach.approach.section_tag }}')">
+             {{ $page.approach.approach.section_tag }}             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="{{ $page.steps.intro.section_tag }}" 
+             onclick="switchProblemGuideContent(this, '{{ $page.steps.intro.section_tag }}')">
+             {{ $page.steps.intro.section_tag }}             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="{{ $page.complexity.complexity.section_tag }}" 
+             onclick="switchProblemGuideContent(this, '{{ $page.complexity.complexity.section_tag }}')">
+             {{ $page.complexity.complexity.section_tag }}             
+        </div> 
+    </div>
+
+    <!-- Content Section -->
+    <div class="problem-guide-content">
+
+        <div id="{{ $page.problem.problem_statement.section_tag }}" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-{{ $page.problem.problem_statement.section_tag }}" data-slide="{{ 0 }}">{{ $page.problem.input_representation.section_tag }}</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-{{ $page.problem.problem_statement.section_tag }}" data-slide="{{ 1 }}">{{ $page.problem.output_specification.section_tag }}</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-{{ $page.problem.problem_statement.section_tag }}" data-slide="{{ 2 }}">{{ $page.problem.core_logic.section_tag }}</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-{{ $page.problem.problem_statement.section_tag }}" data-slide="{{ 3 }}">{{ $page.problem.constraints.section_tag }}</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-{{ $page.problem.problem_statement.section_tag }}" data-slide="{{ 4 }}">{{ $page.problem.problem_assumptions.section_tag }}</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-{{ $page.problem.problem_statement.section_tag }}" data-slide="{{ 5 }}">{{ (index $page.problem.understanding_examples 0).section_tag }}</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-{{ $page.problem.problem_statement.section_tag }}">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> {{ $page.problem.input_representation.description }}</div>
+                        <div class=""> <b>Example:</b> {{ $page.problem.input_representation.example }}</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            {{ range $page.problem.input_representation.constraints }}
+                                <div style="margin-left: 20px;"> • {{ . }}</div>
+                            {{ end }}
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> {{ $page.problem.output_specification.description }}</div>
+                        <div class=""> <b>Example:</b> {{ $page.problem.output_specification.example }}</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            {{ range $page.problem.output_specification.constraints }}
+                                <div style="margin-left: 20px;"> • {{ . }}</div>
+                            {{ end }}
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> {{ $page.problem.core_logic.goal }}</div>
+                        <div class=""> <b>Steps:</b>
+                            {{ range $page.problem.core_logic.steps }}
+                                <div style="margin-left: 20px;"> • {{ . }}</div>
+                            {{ end }}
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> {{ $page.problem.constraints.description }}</div>
+                        <div class=""> <b>Steps:</b>
+                            {{ range $page.problem.constraints.constraints }}
+                                <div style="margin-left: 20px;"> • {{ . }}</div>
+                            {{ end }}
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            {{ range $page.problem.problem_assumptions.assumptions }}
+                                <div style="margin-left: 20px;"> • {{ . }}</div>
+                            {{ end }}
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            {{ range $page.problem.understanding_examples }}
+                                <div style="margin-left: 20px;"> • <b>Input:</b> {{ .example }}</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> {{ .explanation }}</div>                                
+                                <br/>
+                            {{ end }}
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="{{ $page.approach.approach.section_tag }}" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-{{ $page.approach.approach.section_tag }}" data-slide="{{ 0 }}">{{ $page.approach.approach.section_tag }}</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-{{ $page.approach.approach.section_tag }}" data-slide="{{ 1 }}">{{ $page.approach.initial_thoughts.section_tag }}</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-{{ $page.approach.approach.section_tag }}" data-slide="{{ 2 }}">{{ $page.approach.solution_design.section_tag }}</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-{{ $page.approach.approach.section_tag }}" data-slide="{{ 3 }}">{{ $page.approach.edge_cases.section_tag }}</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-{{ $page.approach.approach.section_tag }}">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> {{ $page.approach.approach.description }}</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            {{ range $page.approach.initial_thoughts.observations }}
+                                <div style="margin-left: 20px;"> • {{ . }}</div>
+                            {{ end }}
+                            {{ range $page.approach.initial_thoughts.thought }}
+                                <div style="margin-left: 20px;"> • {{ . }}</div>
+                            {{ end }}
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            {{ range $page.approach.solution_design.steps }}
+                                <div style="margin-left: 20px;"> • {{ . }}</div>
+                            {{ end }}
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            {{ range $page.approach.edge_cases.empty_inputs }}
+                                <div style="margin-left: 20px;"> • {{ . }}</div>
+                            {{ end }}
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            {{ range $page.approach.edge_cases.large_inputs }}
+                                <div style="margin-left: 20px;"> • {{ . }}</div>
+                            {{ end }}
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            {{ range $page.approach.edge_cases.special_values }}
+                                <div style="margin-left: 20px;"> • {{ . }}</div>
+                            {{ end }}
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            {{ range $page.approach.edge_cases.constraints }}
+                                <div style="margin-left: 20px;"> • {{ . }}</div>
+                            {{ end }}
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="{{ $page.steps.intro.section_tag }}" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-{{ $page.steps.intro.section_tag }}" data-slide="{{ 0 }}"> Code </button>
+                    {{ range $index, $instruction := $page.steps.instructions }}
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-{{ $page.steps.intro.section_tag }}" data-slide="{{ add $index 1 }}"> {{ add $index 1 }} {{ $instruction.section_tag }}</button>
+                    {{ end }}
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-{{ $page.steps.intro.section_tag }}">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            {{ $codeBlock := printf "```cpp\n%s\n```" $page.steps.intro.complete_code }}
+                            {{ $codeBlock | markdownify }}
+                        </div>
+                    </div>
+
+                    {{ range $index, $instruction := $page.steps.instructions }}
+                        <div class="step-slide">
+                            <div class=""> <b>{{ add $index 1 }} : {{ $instruction.section_tag }}</b></div>
+                            <div class="">
+                                {{ $codeBlock := printf "```cpp\n%s\n```" $instruction.code }}
+                                {{ $codeBlock | markdownify }}                                
+                            </div>
+                            <div class=""> {{ $instruction.description }} </div>
+                        </div>
+                    {{ end }}
+                </div>
+            </div>
+        </div> 
+        
+        <div id="{{ $page.complexity.complexity.section_tag }}" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-{{ $page.complexity.complexity.section_tag }}" data-slide="{{ 0 }}">{{ $page.complexity.time_complexity.section_tag }}</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-{{ $page.complexity.complexity.section_tag }}" data-slide="{{ 1 }}">{{ $page.complexity.space_complexity.section_tag }}</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-{{ $page.complexity.complexity.section_tag }}">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> {{ $page.complexity.time_complexity.best_case }}</div>
+                        <div class=""> <b>Average Case:</b> {{ $page.complexity.time_complexity.average_case }}</div>
+                        <div class=""> <b>Worst Case:</b> {{ $page.complexity.time_complexity.worst_case }}</div> 
+                        <div class=""> <b>Description:</b> {{ $page.complexity.time_complexity.description }}</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> {{ $page.complexity.space_complexity.best_case }}</div>
+                        <div class=""> <b>Worst Case:</b> {{ $page.complexity.space_complexity.worst_case }}</div> 
+                        <div class=""> <b>Description:</b> {{ $page.complexity.space_complexity.description }}</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-{{ $current }}');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-{{ $current }}');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="{{ $current }}"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>

@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -39,8 +41,105 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-636-exclusive-time-of-functions\/"
+    },
+    "headline": "Leetcode 636: Exclusive Time of Functions",
+    "description": "In-depth solution and explanation for Leetcode 636: Exclusive Time of Functions in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/636.webp"
+    },
+    "datePublished": "2024-09-04T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Array\",\"Stack\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "video": {
+      "@type": "VideoObject",
+      "name": "Video explanation for Leetcode 636: Exclusive Time of Functions",
+      "embedUrl": "https://www.youtube.com/watch?v=Rjcwy-Q2uDo",
+      "uploadDate": "2020-04-01",
+      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi_webp\/Rjcwy-Q2uDo\/maxresdefault.webp"
+    },
+    
+    "keywords": "[\"Array\",\"Stack\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-638-shopping-offers\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-633-sum-of-square-numbers\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -181,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 4, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -210,223 +309,513 @@
     
   </figure>
   </h2>
-<p>You are given a list of logs representing the execution of n functions on a single-threaded CPU. Each log contains a function&rsquo;s ID, whether the function has started or ended, and the timestamp of the event. The goal is to calculate the exclusive time of each function, which is the total time the function spends executing, excluding the time spent on other nested function calls.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> You are given a list of logs formatted as strings with the structure {function_id}:{start|end}:{timestamp}. The logs indicate when a function starts or ends at a given timestamp.</li>
-<li><strong>Example:</strong> <code>n = 2, logs = [&quot;0:start:0&quot;, &quot;1:start:2&quot;, &quot;1:end:5&quot;, &quot;0:end:6&quot;]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= n &lt;= 100</li>
-<li>1 &lt;= logs.length &lt;= 500</li>
-<li>0 &lt;= function_id &lt; n</li>
-<li>0 &lt;= timestamp &lt;= 10^9</li>
-<li>No two start events will happen at the same timestamp.</li>
-<li>No two end events will happen at the same timestamp.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> Return the exclusive time for each function as an array, where the value at the ith index represents the exclusive time for function i.</li>
-<li><strong>Example:</strong> <code>[3, 4]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The output will be an array of n integers representing the exclusive times for each function.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> Calculate the exclusive time for each function based on the logs.</p>
-<ul>
-<li>Iterate through the logs and simulate the execution of the functions using a stack.</li>
-<li>Track the start and end times for each function call and compute the total time spent executing each function.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>Each function has a start and end log.</li>
-<li>The logs will be given in chronological order.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li><strong>Input:</strong> <code>n = 2, logs = [&quot;0:start:0&quot;, &quot;1:start:2&quot;, &quot;1:end:5&quot;, &quot;0:end:6&quot;]</code>  <br>
-<strong>Explanation:</strong> Function 0 starts at time 0 and runs for 2 units of time, function 1 starts at time 2 and runs for 4 units. Function 0 resumes at time 6 and runs for 1 unit, making the total exclusive time of function 0 equal to 3, and function 1 equal to 4.</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>We use a stack to simulate the function calls and calculate the exclusive time by tracking the start and end timestamps.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>Each function&rsquo;s exclusive time needs to account for recursive calls and nested execution times.</li>
-<li>By using a stack to keep track of function calls and their start times, we can easily calculate the total exclusive time for each function.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>The input will not be empty, as logs always contain at least one function call.</li>
-<li>The solution should be efficient enough to handle up to 500 logs.</li>
-<li>Consider cases with recursive function calls where a function calls itself multiple times.</li>
-<li>Ensure the solution is efficient for the given problem size.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> exclusiveTime(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> logs) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(n, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>Log<span style="color:#666">&gt;</span> stk;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">log</span> : logs) {
-</span></span><span style="display:flex;"><span>        stringstream <span style="color:#00a000">ss</span>(log);
-</span></span><span style="display:flex;"><span>        string num, adj, time;
-</span></span><span style="display:flex;"><span>        getline(ss, num,  <span style="color:#b44">&#39;:&#39;</span>);
-</span></span><span style="display:flex;"><span>        getline(ss, adj,  <span style="color:#b44">&#39;:&#39;</span>);
-</span></span><span style="display:flex;"><span>        getline(ss, time, <span style="color:#b44">&#39;:&#39;</span>);
-</span></span><span style="display:flex;"><span>        Log item <span style="color:#666">=</span> { stoi(num), adj, stoi(time) };
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(item.status <span style="color:#666">==</span> <span style="color:#b44">&#34;start&#34;</span>) {
-</span></span><span style="display:flex;"><span>            stk.push(item);
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            assert(stk.top().id <span style="color:#666">==</span> item.id);
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> item.time <span style="color:#666">-</span> stk.top().time <span style="color:#666">+</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>            ans[item.id] <span style="color:#666">+=</span> t;
-</span></span><span style="display:flex;"><span>            stk.pop();
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>stk.empty()){
-</span></span><span style="display:flex;"><span>                assert(stk.top().status <span style="color:#666">==</span> <span style="color:#b44">&#34;start&#34;</span>);
-</span></span><span style="display:flex;"><span>                ans[stk.top().id] <span style="color:#666">-=</span> t;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
+
+
+
+
+
+
+
+
+
+
+<div class=""> You are given two strings <code>s1</code> and <code>s2</code> of the same length. You need to check if some permutation of <code>s1</code> can &lsquo;break&rsquo; some permutation of <code>s2</code>, or vice-versa. A string <code>x</code> can break string <code>y</code> if for every character at position <code>i</code>, <code>x[i] &gt;= y[i]</code> when sorted alphabetically. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> The input consists of two strings `s1` and `s2`, both containing only lowercase English letters.</div>
+                        <div class=""> <b>Example:</b> s1 = &#39;cat&#39;, s2 = &#39;abc&#39;</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= s1.length == s2.length &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • All strings consist of lowercase English letters.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> The output is a boolean indicating whether one permutation of `s1` can break some permutation of `s2`, or vice-versa.</div>
+                        <div class=""> <b>Example:</b> true</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output is &#39;true&#39; if one permutation can break the other, otherwise &#39;false&#39;.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> To determine if one permutation of `s1` can break some permutation of `s2` or vice-versa.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Step 1: Sort both strings `s1` and `s2`.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 2: Compare the characters of the sorted strings. If at any position, a character from `s1` is less than the corresponding character from `s2`, return &#39;false&#39;.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 3: If no such position is found, return &#39;true&#39;.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The solution should efficiently handle strings of length up to 10^5.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Both strings are of equal length.</div>
+                            
+                                <div style="margin-left: 20px;"> • The strings consist only of lowercase English letters.</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • Both input strings are valid and consist of lowercase English letters.</div>
+                            
+                                <div style="margin-left: 20px;"> • The strings are of equal length.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s1 = &#39;cat&#39;, s2 = &#39;abc&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After sorting both strings, we have &#39;act&#39; and &#39;abc&#39;. Since each character in &#39;act&#39; is greater than or equal to the corresponding character in &#39;abc&#39;, &#39;s1&#39; can break &#39;s2&#39;.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s1 = &#39;dog&#39;, s2 = &#39;god&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After sorting both strings, we have &#39;dgo&#39; and &#39;dgo&#39;. Since the strings are identical, neither can break the other.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> We will compare the sorted versions of both strings to determine if one string can break the other. Sorting ensures that we are comparing the lexicographically ordered characters.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Sorting the strings ensures that we can directly compare their characters in lexicographical order.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • By comparing sorted strings character by character, we can determine if one can break the other.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Step 1: Sort both `s1` and `s2`.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 2: Compare each character of the sorted strings. If any character of `s1` is smaller than the corresponding character of `s2`, return false.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 3: If the comparison holds for all characters, return true.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • There are no empty inputs as the problem guarantees non-empty strings.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure the solution handles strings up to the length of 10^5 efficiently.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Consider cases where the strings are identical (e.g., &#39;abc&#39; and &#39;abc&#39;).</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The solution should be efficient enough to handle strings of length up to 10^5.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Sorting</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 String Comparison</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 String Comparison</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Conditional Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkIfCanBreak</span>(string s1, string s2) {
+</span></span><span style="display:flex;"><span>    sort(s1.begin(), s1.end());
+</span></span><span style="display:flex;"><span>    sort(s2.begin(), s2.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s1.size();
+</span></span><span style="display:flex;"><span>    string a <span style="color:#666">=</span> s1 <span style="color:#666">&lt;</span> s2 <span style="color:#666">?</span> <span style="color:#a0a000">s2</span>: s1;
+</span></span><span style="display:flex;"><span>    string b <span style="color:#666">=</span> s1 <span style="color:#666">&lt;</span> s2 <span style="color:#666">?</span> <span style="color:#a0a000">s1</span>: s2;   
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// cout &lt;&lt; a &lt;&lt; &#34;\n&#34;&lt;&lt; b;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a[i] <span style="color:#666">&lt;</span> b[i]) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function calculates the exclusive time for each task in a set of logs, where each log represents a task&rsquo;s start or end time. It uses a stack to manage nested tasks and computes the total time spent on each task.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> exclusiveTime(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> logs) {
-</span></span></code></pre></div><p>This line defines the function <code>exclusiveTime</code> that takes an integer <code>n</code> (number of tasks) and a vector of logs. It returns a vector of integers representing the exclusive time for each task.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(n, <span style="color:#666">0</span>);
-</span></span></code></pre></div><p>A vector <code>ans</code> is initialized with size <code>n</code> (number of tasks), and all elements are set to 0. This will store the exclusive time for each task.</p>
-</li>
-<li>
-<p><strong>Stack Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>Log<span style="color:#666">&gt;</span> stk;
-</span></span></code></pre></div><p>A stack <code>stk</code> is declared to hold <code>Log</code> objects, which will track the tasks as they are being processed. The stack is used to manage nested tasks.</p>
-</li>
-<li>
-<p><strong>Log Iteration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">log</span> : logs) {
-</span></span></code></pre></div><p>A <code>for</code> loop is used to iterate through each log in the <code>logs</code> vector, where each log is processed to extract task information.</p>
-</li>
-<li>
-<p><strong>Log Parsing</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        stringstream <span style="color:#00a000">ss</span>(log);
-</span></span></code></pre></div><p>A stringstream <code>ss</code> is created from the current log to easily extract individual components (task ID, status, and time).</p>
-</li>
-<li>
-<p><strong>Log Variables Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        string num, adj, time;
-</span></span></code></pre></div><p>Three string variables <code>num</code>, <code>adj</code>, and <code>time</code> are declared to hold the task ID, status (start or end), and time values extracted from the log.</p>
-</li>
-<li>
-<p><strong>Extract Task ID</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        getline(ss, num,  <span style="color:#b44">&#39;:&#39;</span>);
-</span></span></code></pre></div><p>The task ID (<code>num</code>) is extracted from the log by reading until the first colon <code>:</code>.</p>
-</li>
-<li>
-<p><strong>Extract Status</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        getline(ss, adj,  <span style="color:#b44">&#39;:&#39;</span>);
-</span></span></code></pre></div><p>The task status (<code>adj</code>), which indicates whether the task has started or ended, is extracted by reading the next section of the log.</p>
-</li>
-<li>
-<p><strong>Extract Time</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        getline(ss, time, <span style="color:#b44">&#39;:&#39;</span>);
-</span></span></code></pre></div><p>The task time (<code>time</code>) is extracted by reading the final section of the log.</p>
-</li>
-<li>
-<p><strong>Log Item Creation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        Log item <span style="color:#666">=</span> { stoi(num), adj, stoi(time) };
-</span></span></code></pre></div><p>A <code>Log</code> object is created with the parsed task ID (<code>num</code>), status (<code>adj</code>), and time (<code>time</code>). The <code>stoi</code> function is used to convert the <code>num</code> and <code>time</code> from strings to integers.</p>
-</li>
-<li>
-<p><strong>Start Task Handling</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(item.status <span style="color:#666">==</span> <span style="color:#b44">&#34;start&#34;</span>) {
-</span></span></code></pre></div><p>If the task status is &lsquo;start&rsquo;, the task is pushed onto the stack, indicating that it has started.</p>
-</li>
-<li>
-<p><strong>Push Task to Stack</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.push(item);
-</span></span></code></pre></div><p>The <code>item</code> (task) is pushed onto the stack to keep track of the active task.</p>
-</li>
-<li>
-<p><strong>End Task Handling</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div><p>If the task status is not &lsquo;start&rsquo; (i.e., it&rsquo;s &rsquo;end&rsquo;), the function proceeds to handle the task completion.</p>
-</li>
-<li>
-<p><strong>Assert Task ID Match</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            assert(stk.top().id <span style="color:#666">==</span> item.id);
-</span></span></code></pre></div><p>This assertion checks that the task ID of the current log matches the task ID of the task at the top of the stack, ensuring that tasks are being ended in the correct order.</p>
-</li>
-<li>
-<p><strong>Calculate Task Duration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> item.time <span style="color:#666">-</span> stk.top().time <span style="color:#666">+</span><span style="color:#666">1</span>;
-</span></span></code></pre></div><p>The exclusive time for the task is calculated as the difference between the current time and the time of the task at the top of the stack, plus 1.</p>
-</li>
-<li>
-<p><strong>Add Duration to Task</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans[item.id] <span style="color:#666">+=</span> t;
-</span></span></code></pre></div><p>The calculated exclusive time <code>t</code> is added to the corresponding task ID in the <code>ans</code> vector.</p>
-</li>
-<li>
-<p><strong>Pop Task from Stack</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.pop();
-</span></span></code></pre></div><p>The task is removed from the stack after processing its end time.</p>
-</li>
-<li>
-<p><strong>Handle Nested Task</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>stk.empty()){
-</span></span></code></pre></div><p>If there are still tasks in the stack (indicating a nested task), the function continues to handle the exclusive time for the parent task.</p>
-</li>
-<li>
-<p><strong>Assert Parent Task is Start</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                assert(stk.top().status <span style="color:#666">==</span> <span style="color:#b44">&#34;start&#34;</span>);
-</span></span></code></pre></div><p>This assertion checks that the task at the top of the stack is a &lsquo;start&rsquo; task, ensuring the parent task is still active.</p>
-</li>
-<li>
-<p><strong>Subtract Duration from Parent Task</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                ans[stk.top().id] <span style="color:#666">-=</span> t;
-</span></span></code></pre></div><p>The exclusive time of the parent task is reduced by <code>t</code> to ensure the nested task&rsquo;s time is not counted in the parent.</p>
-</li>
-<li>
-<p><strong>Return Result</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div><p>The function returns the <code>ans</code> vector, which contains the exclusive time for each task.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n)</li>
-<li><strong>Average Case:</strong> O(m)</li>
-<li><strong>Worst Case:</strong> O(m)</li>
-</ul>
-<p>The time complexity is linear in terms of the number of logs.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n)</li>
-<li><strong>Worst Case:</strong> O(n)</li>
-</ul>
-<p>The space complexity is O(n) due to the storage of the call stack.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkIfCanBreak</span>(string s1, string s2) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the function `checkIfCanBreak`, which takes two strings `s1` and `s2` as input and determines whether one can break the other. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Sorting</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(s1.begin(), s1.end());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Sorts the string `s1` in lexicographical order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Sorting</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(s2.begin(), s2.end());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Sorts the string `s2` in lexicographical order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s1.size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Stores the size of string `s1` in the variable `n`. Both strings are assumed to have the same length. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : String Comparison</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string a <span style="color:#666">=</span> s1 <span style="color:#666">&lt;</span> s2 <span style="color:#666">?</span> <span style="color:#a0a000">s2</span>: s1;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Assigns `a` to be the lexicographically larger of `s1` and `s2`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : String Comparison</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string b <span style="color:#666">=</span> s1 <span style="color:#666">&lt;</span> s2 <span style="color:#666">?</span> <span style="color:#a0a000">s1</span>: s2;   
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Assigns `b` to be the lexicographically smaller of `s1` and `s2`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Begins a loop that iterates over each character of the strings `a` and `b`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Conditional Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a[i] <span style="color:#666">&lt;</span> b[i]) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Compares the characters at the same position in `a` and `b`. If any character in `a` is less than the corresponding character in `b`, returns `false`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the loop completes without returning `false`, it means that every character in `a` is greater than or equal to the corresponding character in `b`, so it returns `true`. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n log n) for sorting the strings.</div>
+                        <div class=""> <b>Average Case:</b> O(n log n) for sorting and O(n) for the comparison.</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n) due to the sorting step.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n), as we need to store the sorted versions of the strings.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) for storing the sorted strings.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is linear, as we are storing the sorted versions of both strings.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/exclusive-time-of-functions/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 
@@ -446,6 +835,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -685,98 +1075,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-636-exclusive-time-of-functions\/"
-    },
-    "headline": "Leetcode 636: Exclusive Time of Functions",
-    "description": "In-depth solution and explanation for Leetcode 636: Exclusive Time of Functions in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/636.webp"
-    },
-    "datePublished": "2024-09-04T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Array\",\"Stack\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "video": {
-      "@type": "VideoObject",
-      "name": "Video explanation for Leetcode 636: Exclusive Time of Functions",
-      "embedUrl": "https://www.youtube.com/watch?v=Rjcwy-Q2uDo",
-      "uploadDate": "2020-04-01",
-      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi_webp\/Rjcwy-Q2uDo\/maxresdefault.webp"
-    },
-    
-    "keywords": "[\"Array\",\"Stack\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-638-shopping-offers\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-633-sum-of-square-numbers\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

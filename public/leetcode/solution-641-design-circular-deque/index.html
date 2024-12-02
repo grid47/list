@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -41,8 +43,97 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-641-design-circular-deque\/"
+    },
+    "headline": "Leetcode 641: Design Circular Deque",
+    "description": "In-depth solution and explanation for Leetcode 641: Design Circular Deque in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/641.webp"
+    },
+    "datePublished": "2024-09-03T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Array\",\"Linked List\",\"Design\",\"Queue\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "keywords": "[\"Array\",\"Linked List\",\"Design\",\"Queue\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-645-set-mismatch\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-640-solve-the-equation\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -212,349 +303,674 @@
     
   </figure>
   </h2>
-<p>Design a data structure that simulates a circular double-ended queue (deque) with a fixed maximum size. Implement the MyCircularDeque class with methods for inserting, deleting, and accessing elements at both ends of the deque.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input consists of multiple operations to be executed on the deque. Each operation is an array with the first element being the method name and the following elements representing the arguments.</li>
-<li><strong>Example:</strong> <code>[&quot;MyCircularDeque&quot;, &quot;insertLast&quot;, &quot;insertLast&quot;, &quot;insertFront&quot;, &quot;insertFront&quot;, &quot;getRear&quot;, &quot;isFull&quot;, &quot;deleteLast&quot;, &quot;insertFront&quot;, &quot;getFront&quot;]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= k &lt;= 1000</li>
-<li>0 &lt;= value &lt;= 1000</li>
-<li>At most 2000 calls will be made to the methods.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> For each method call, return the result of the operation. If the operation is successful, return a boolean value. For &lsquo;getFront&rsquo; and &lsquo;getRear&rsquo;, return the respective item, or -1 if the deque is empty.</li>
-<li><strong>Example:</strong> <code>[null, true, true, true, false, 2, true, true, true, 4]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>Each &lsquo;insert&rsquo; and &lsquo;delete&rsquo; operation is O(1).</li>
-<li>The deque will only store integer values.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> To simulate the operations of a circular double-ended queue and ensure the correct results are returned for each operation.</p>
-<ul>
-<li>Initialize the deque with a fixed size.</li>
-<li>Use two pointers (front and back) to track the positions of the front and rear elements.</li>
-<li>Ensure that operations like insertions, deletions, and retrievals are handled efficiently with modulo arithmetic to maintain the circular nature.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>The deque will always handle the insert and delete operations correctly based on its current state.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li><strong>Input:</strong> <code>[&quot;MyCircularDeque&quot;, &quot;insertLast&quot;, &quot;insertLast&quot;, &quot;insertFront&quot;, &quot;insertFront&quot;, &quot;getRear&quot;, &quot;isFull&quot;, &quot;deleteLast&quot;, &quot;insertFront&quot;, &quot;getFront&quot;]</code>  <br>
-<strong>Explanation:</strong> This example shows the correct sequence of operations on a circular deque, handling insertion, deletion, and retrieval of elements with a fixed size.</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>We can implement the circular deque using an array with two pointers (front and back), ensuring efficient insertions and deletions at both ends by updating the pointers using modulo arithmetic.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>A circular array can efficiently handle the required operations.</li>
-<li>The modulo operation helps to wrap around the array when inserting or deleting elements.</li>
-<li>We can use a fixed-size array and two pointers to simulate the circular behavior.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>Ensure that operations like &lsquo;getFront&rsquo; and &lsquo;getRear&rsquo; handle an empty deque correctly by returning -1.</li>
-<li>Ensure the solution works efficiently for the largest possible size of the deque and the maximum number of operations.</li>
-<li>Consider cases where the deque is full or empty before performing operations.</li>
-<li>The implementation should be able to handle up to 2000 operations efficiently.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> frd, bck;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> sz, cnt;
+
+
+
+
+
+
+
+
+
+
+<div class=""> You are given an undirected tree with <code>n</code> vertices numbered from <code>0</code> to <code>n-1</code>. Some vertices in this tree contain apples. Each edge in the tree requires <code>1 second</code> to traverse. Starting at vertex <code>0</code>, determine the minimum time required to collect all apples and return to vertex <code>0</code>. The tree structure is described by the array <code>edges</code>, where <code>edges[i] = [ai, bi]</code> indicates an edge between vertices <code>ai</code> and <code>bi</code>. Additionally, the array <code>hasApple</code> specifies whether a vertex contains an apple (<code>true</code>) or not (<code>false</code>). </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> The number of vertices `n`, the list of edges representing the tree, and the boolean array `hasApple`.</div>
+                        <div class=""> <b>Example:</b> Input: n = 5, edges = [[0,1],[0,2],[1,3],[1,4]], hasApple = [false,true,true,false,false]</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • edges.length == n - 1</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= ai, bi &lt; n</div>
+                            
+                                <div style="margin-left: 20px;"> • Each vertex is part of exactly one connected component.</div>
+                            
+                                <div style="margin-left: 20px;"> • hasApple.length == n</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> An integer representing the minimum time in seconds to collect all apples and return to vertex `0`.</div>
+                        <div class=""> <b>Example:</b> Output: 6</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output must be a non-negative integer.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> Find the minimum traversal time to collect all apples and return to the starting point.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Construct a graph from the edges.</div>
+                            
+                                <div style="margin-left: 20px;"> • Use a Depth-First Search (DFS) to traverse the tree starting from vertex `0`.</div>
+                            
+                                <div style="margin-left: 20px;"> • For each subtree, calculate the time required to collect apples.</div>
+                            
+                                <div style="margin-left: 20px;"> • Avoid unnecessary traversal if no apples are present in a subtree.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> Ensure efficient computation for large inputs.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Avoid revisiting nodes by using a `visited` array.</div>
+                            
+                                <div style="margin-left: 20px;"> • Ensure the solution handles up to `10^5` vertices within reasonable time.</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The tree is connected and acyclic.</div>
+                            
+                                <div style="margin-left: 20px;"> • The input tree has exactly `n-1` edges.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 6, edges = [[0,1],[0,2],[1,3],[2,4],[2,5]], hasApple = [false,false,true,false,true,true]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The optimal path involves visiting vertices 2, 4, and 5. The total time is `8` seconds.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 4, edges = [[0,1],[0,2],[1,3]], hasApple = [false,false,false,false]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> No apples exist, so the output is `0`.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> Use Depth-First Search (DFS) to traverse the tree and calculate the minimal traversal time.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Traversing unnecessary paths increases the time.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each edge should only be traversed if it leads to an apple.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • Using DFS ensures that we only traverse relevant subtrees containing apples.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Construct an adjacency list representation of the tree.</div>
+                            
+                                <div style="margin-left: 20px;"> • Perform a DFS starting from vertex `0`.</div>
+                            
+                                <div style="margin-left: 20px;"> • For each vertex, recursively check its children.</div>
+                            
+                                <div style="margin-left: 20px;"> • If any child contains an apple or leads to an apple, add `2` seconds for the traversal.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the total time.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Input: n = 1, edges = [], hasApple = [false] -&gt; Output: 0</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Input: n = 10^5 with a sparse distribution of apples -&gt; Should run within time constraints.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Input: All vertices have apples -&gt; Every edge will be traversed.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure no cycles exist in the graph structure.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Graph Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Visited Nodes</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Apple Nodes</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Access Control</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 minTime Method</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Apple Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Graph Construction</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Graph Population</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Graph Population</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 DFS Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 DFS Method</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Visited Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Mark as Visited</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Child Cost Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Child Node Exploration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Recursive DFS Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Apple Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Return Zero</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Return Total Cost</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> gph;
+</span></span><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> visited;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> hasApple;
 </span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>MyCircularDeque(<span style="color:#0b0;font-weight:bold">int</span> k) <span style="color:#666">:</span> sz(k), buf(k, <span style="color:#666">0</span>), bck(<span style="color:#666">0</span>), frd(k <span style="color:#666">-</span> <span style="color:#666">1</span>), cnt(<span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> minTime(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> edges, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&amp;</span> hasApple) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>hasApple <span style="color:#666">=</span> hasApple;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: edges) {
+</span></span><span style="display:flex;"><span>        gph[x[<span style="color:#666">0</span>]].push_back(x[<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>        gph[x[<span style="color:#666">1</span>]].push_back(x[<span style="color:#666">0</span>]);
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dfs</span>(<span style="color:#666">0</span>, <span style="color:#666">0</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">insertFront</span>(<span style="color:#0b0;font-weight:bold">int</span> value) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isFull()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(<span style="color:#0b0;font-weight:bold">int</span> mycost, <span style="color:#0b0;font-weight:bold">int</span> node) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(visited[node]) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    visited[node] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> childcost <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: gph[node]) {
+</span></span><span style="display:flex;"><span>        childcost <span style="color:#666">+=</span> dfs(<span style="color:#666">2</span>, x);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(childcost <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> hasApple[node] <span style="color:#666">==</span> <span style="color:#a2f">false</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    buf[frd] <span style="color:#666">=</span> value;
-</span></span><span style="display:flex;"><span>    frd <span style="color:#666">=</span> (frd <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">+</span> sz) <span style="color:#666">%</span> sz;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#666">++</span>cnt;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> childcost <span style="color:#666">+</span> mycost;
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">insertLast</span>(<span style="color:#0b0;font-weight:bold">int</span> value) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isFull()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    buf[bck] <span style="color:#666">=</span> value;        
-</span></span><span style="display:flex;"><span>    bck <span style="color:#666">=</span> (bck <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> sz;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#666">++</span>cnt;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;        
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">deleteFront</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isEmpty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    frd <span style="color:#666">=</span> (frd <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> sz;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#666">--</span>cnt;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;        
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">deleteLast</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isEmpty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    bck <span style="color:#666">=</span> (bck <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">+</span> sz) <span style="color:#666">%</span> sz;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#666">--</span>cnt;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;        
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getFront</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isEmpty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> buf[(frd <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> sz];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getRear</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isEmpty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> buf[(bck <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">+</span> sz) <span style="color:#666">%</span> sz];
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isEmpty</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt <span style="color:#666">==</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isFull</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span>  cnt <span style="color:#666">==</span> sz;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your MyCircularDeque object will be instantiated and called as such:
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * MyCircularDeque* obj = new MyCircularDeque(k);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_1 = obj-&gt;insertFront(value);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_2 = obj-&gt;insertLast(value);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_3 = obj-&gt;deleteFront();
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_4 = obj-&gt;deleteLast();
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_5 = obj-&gt;getFront();
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_6 = obj-&gt;getRear();
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_7 = obj-&gt;isEmpty();
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_8 = obj-&gt;isFull();
-</span></span></span></code></pre></div><p>This is the complete code for implementing a circular deque, with functions to insert elements at the front and back, delete elements from the front and back, and check if the deque is empty or full.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Variable Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> frd, bck;
-</span></span></code></pre></div><p>Declares the front and back indices for the circular deque.</p>
-</li>
-<li>
-<p><strong>Variable Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> sz, cnt;
-</span></span></code></pre></div><p>Declares the size of the deque and the count of elements in the deque.</p>
-</li>
-<li>
-<p><strong>Constructor</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span></code></pre></div><p>Begins the public section of the class where methods and the constructor are defined.</p>
-</li>
-<li>
-<p><strong>Constructor Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>MyCircularDeque(<span style="color:#0b0;font-weight:bold">int</span> k) <span style="color:#666">:</span> sz(k), buf(k, <span style="color:#666">0</span>), bck(<span style="color:#666">0</span>), frd(k <span style="color:#666">-</span> <span style="color:#666">1</span>), cnt(<span style="color:#666">0</span>) {
-</span></span></code></pre></div><p>Constructor that initializes the circular deque with a given size &lsquo;k&rsquo;, setting the front and back indices, and initializing the count of elements to zero.</p>
-</li>
-<li>
-<p><strong>Insert Front Method</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">insertFront</span>(<span style="color:#0b0;font-weight:bold">int</span> value) {
-</span></span></code></pre></div><p>Defines the &lsquo;insertFront&rsquo; method that inserts an element at the front of the deque.</p>
-</li>
-<li>
-<p><strong>Full Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isFull()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span></code></pre></div><p>Checks if the deque is full before inserting a new element.</p>
-</li>
-<li>
-<p><strong>Insert Element</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    buf[frd] <span style="color:#666">=</span> value;
-</span></span></code></pre></div><p>Inserts the value at the front of the deque.</p>
-</li>
-<li>
-<p><strong>Update Front Index</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    frd <span style="color:#666">=</span> (frd <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">+</span> sz) <span style="color:#666">%</span> sz;
-</span></span></code></pre></div><p>Updates the front index after inserting the element, wrapping it around if necessary.</p>
-</li>
-<li>
-<p><strong>Increment Count</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#666">++</span>cnt;
-</span></span></code></pre></div><p>Increments the count of elements in the deque.</p>
-</li>
-<li>
-<p><strong>Return True</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div><p>Returns true indicating the insertion was successful.</p>
-</li>
-<li>
-<p><strong>Insert Last Method</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">insertLast</span>(<span style="color:#0b0;font-weight:bold">int</span> value) {
-</span></span></code></pre></div><p>Defines the &lsquo;insertLast&rsquo; method that inserts an element at the back of the deque.</p>
-</li>
-<li>
-<p><strong>Full Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isFull()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span></code></pre></div><p>Checks if the deque is full before inserting a new element.</p>
-</li>
-<li>
-<p><strong>Insert Element</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    buf[bck] <span style="color:#666">=</span> value;
-</span></span></code></pre></div><p>Inserts the value at the back of the deque.</p>
-</li>
-<li>
-<p><strong>Update Back Index</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bck <span style="color:#666">=</span> (bck <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> sz;
-</span></span></code></pre></div><p>Updates the back index after inserting the element, wrapping it around if necessary.</p>
-</li>
-<li>
-<p><strong>Increment Count</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#666">++</span>cnt;
-</span></span></code></pre></div><p>Increments the count of elements in the deque.</p>
-</li>
-<li>
-<p><strong>Return True</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div><p>Returns true indicating the insertion was successful.</p>
-</li>
-<li>
-<p><strong>Delete Front Method</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">deleteFront</span>() {
-</span></span></code></pre></div><p>Defines the &lsquo;deleteFront&rsquo; method that removes an element from the front of the deque.</p>
-</li>
-<li>
-<p><strong>Empty Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isEmpty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span></code></pre></div><p>Checks if the deque is empty before attempting to delete an element.</p>
-</li>
-<li>
-<p><strong>Update Front Index</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    frd <span style="color:#666">=</span> (frd <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> sz;
-</span></span></code></pre></div><p>Updates the front index after deleting the element, wrapping it around if necessary.</p>
-</li>
-<li>
-<p><strong>Decrement Count</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#666">--</span>cnt;
-</span></span></code></pre></div><p>Decrements the count of elements in the deque.</p>
-</li>
-<li>
-<p><strong>Return True</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div><p>Returns true indicating the deletion was successful.</p>
-</li>
-<li>
-<p><strong>Delete Last Method</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">deleteLast</span>() {
-</span></span></code></pre></div><p>Defines the &lsquo;deleteLast&rsquo; method that removes an element from the back of the deque.</p>
-</li>
-<li>
-<p><strong>Empty Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isEmpty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span></code></pre></div><p>Checks if the deque is empty before attempting to delete an element.</p>
-</li>
-<li>
-<p><strong>Update Back Index</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bck <span style="color:#666">=</span> (bck <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">+</span> sz) <span style="color:#666">%</span> sz;
-</span></span></code></pre></div><p>Updates the back index after deleting the element, wrapping it around if necessary.</p>
-</li>
-<li>
-<p><strong>Decrement Count</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#666">--</span>cnt;
-</span></span></code></pre></div><p>Decrements the count of elements in the deque.</p>
-</li>
-<li>
-<p><strong>Return True</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div><p>Returns true indicating the deletion was successful.</p>
-</li>
-<li>
-<p><strong>Get Front Method</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getFront</span>() {
-</span></span></code></pre></div><p>Defines the &lsquo;getFront&rsquo; method that retrieves the element at the front of the deque.</p>
-</li>
-<li>
-<p><strong>Empty Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isEmpty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span></code></pre></div><p>Checks if the deque is empty before attempting to get an element.</p>
-</li>
-<li>
-<p><strong>Return Front Element</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> buf[(frd <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> sz];
-</span></span></code></pre></div><p>Returns the element at the front of the deque.</p>
-</li>
-<li>
-<p><strong>Get Rear Method</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getRear</span>() {
-</span></span></code></pre></div><p>Defines the &lsquo;getRear&rsquo; method that retrieves the element at the back of the deque.</p>
-</li>
-<li>
-<p><strong>Empty Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isEmpty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span></code></pre></div><p>Checks if the deque is empty before attempting to get an element.</p>
-</li>
-<li>
-<p><strong>Return Rear Element</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> buf[(bck <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">+</span> sz) <span style="color:#666">%</span> sz];
-</span></span></code></pre></div><p>Returns the element at the back of the deque.</p>
-</li>
-<li>
-<p><strong>Is Empty Method</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isEmpty</span>() {
-</span></span></code></pre></div><p>Defines the &lsquo;isEmpty&rsquo; method that checks if the deque is empty.</p>
-</li>
-<li>
-<p><strong>Return Empty Status</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt <span style="color:#666">==</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div><p>Returns true if the deque is empty.</p>
-</li>
-<li>
-<p><strong>Is Full Method</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isFull</span>() {
-</span></span></code></pre></div><p>Defines the &lsquo;isFull&rsquo; method that checks if the deque is full.</p>
-</li>
-<li>
-<p><strong>Return Full Status</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span>  cnt <span style="color:#666">==</span> sz;
-</span></span></code></pre></div><p>Returns true if the deque is full.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(1)</li>
-<li><strong>Average Case:</strong> O(1)</li>
-<li><strong>Worst Case:</strong> O(1)</li>
-</ul>
-<p>Each operation (insert, delete, get) is performed in constant time due to the circular nature of the deque.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(k)</li>
-<li><strong>Worst Case:</strong> O(k)</li>
-</ul>
-<p>The space complexity is O(k) where k is the maximum size of the deque, as we need to store up to k elements.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Class Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the `Solution` class that will contain the logic for the problem, including the graph representation and the depth-first search function. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Graph Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> gph;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Declares a map `gph` to store the graph as an adjacency list, where each node points to a list of connected nodes (edges). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Visited Nodes</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> visited;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Declares a map `visited` to keep track of the nodes that have been visited during the DFS traversal to avoid reprocessing the same node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Apple Nodes</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> hasApple;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Declares a vector `hasApple` to track whether a node contains an apple, where each element in the vector corresponds to a node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Access Control</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Marks the beginning of the public section of the class, where methods can be accessed by other parts of the program. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : minTime Method</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minTime</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> edges, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&amp;</span> hasApple) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the `minTime` method, which calculates the minimum time to collect all apples. It takes the number of nodes, a list of edges, and a list of boolean values representing nodes with apples. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Apple Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>hasApple <span style="color:#666">=</span> hasApple;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Assigns the `hasApple` parameter to the class&#39;s `hasApple` member variable, enabling access to the apple information for each node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Graph Construction</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: edges) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterates over each edge in the `edges` list to build the graph (adjacency list). Each edge connects two nodes, represented by `x[0]` and `x[1]`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Graph Population</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        gph[x[<span style="color:#666">0</span>]].push_back(x[<span style="color:#666">1</span>]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adds the second node `x[1]` to the adjacency list of the first node `x[0]`, establishing an undirected connection. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Graph Population</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        gph[x[<span style="color:#666">1</span>]].push_back(x[<span style="color:#666">0</span>]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adds the first node `x[0]` to the adjacency list of the second node `x[1]`, completing the undirected connection between the two nodes. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : DFS Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dfs</span>(<span style="color:#666">0</span>, <span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calls the `dfs` method starting from node 0 (the root) with an initial cost of 0 and returns the total time required to collect all apples. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : DFS Method</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(<span style="color:#0b0;font-weight:bold">int</span> mycost, <span style="color:#0b0;font-weight:bold">int</span> node) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the `dfs` method, which performs a depth-first search to calculate the total time for collecting apples from a given node. It takes the current cost (`mycost`) and the node to explore (`node`). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Visited Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(visited[node]) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current node has already been visited. If it has, returns 0 to avoid redundant calculations. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Mark as Visited</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    visited[node] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Marks the current node as visited to prevent revisiting it in future DFS calls. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Child Cost Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> childcost <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes a variable `childcost` to accumulate the cost of traversing the child nodes. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Child Node Exploration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: gph[node]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterates over all the child nodes of the current node (`node`) in the graph. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Recursive DFS Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        childcost <span style="color:#666">+=</span> dfs(<span style="color:#666">2</span>, x);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Makes a recursive call to `dfs` for each child node, with a cost of 2 (the fixed cost to move to a child node) and accumulates the returned `childcost`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Apple Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(childcost <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> hasApple[node] <span style="color:#666">==</span> <span style="color:#a2f">false</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current node has no child nodes contributing to the cost and does not contain an apple. If true, it returns 0 to indicate no further action is needed for this node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Return Zero</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns 0 when the current node has no apple and no child nodes contributing to the cost. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Return Total Cost</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> childcost <span style="color:#666">+</span> mycost;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the total accumulated cost of traversing from the current node, including the cost of its child nodes and the fixed cost (`mycost`) for visiting the node. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> Each vertex and edge is visited at most once during DFS.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The adjacency list and recursion stack require linear space.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/design-circular-deque/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 <table>
@@ -566,6 +982,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -813,90 +1230,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-641-design-circular-deque\/"
-    },
-    "headline": "Leetcode 641: Design Circular Deque",
-    "description": "In-depth solution and explanation for Leetcode 641: Design Circular Deque in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/641.webp"
-    },
-    "datePublished": "2024-09-03T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Array\",\"Linked List\",\"Design\",\"Queue\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "keywords": "[\"Array\",\"Linked List\",\"Design\",\"Queue\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-645-set-mismatch\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-640-solve-the-equation\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

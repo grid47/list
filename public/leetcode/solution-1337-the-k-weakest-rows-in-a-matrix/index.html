@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -42,8 +44,97 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1337-the-k-weakest-rows-in-a-matrix\/"
+    },
+    "headline": "Leetcode 1337: The K Weakest Rows in a Matrix",
+    "description": "In-depth solution and explanation for Leetcode 1337: The K Weakest Rows in a Matrix in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": ""
+    },
+    "datePublished": "2024-06-26T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Easy",
+    "teaches": "[\"Array\",\"Binary Search\",\"Sorting\",\"Heap (Priority Queue)\",\"Matrix\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "keywords": "[\"Array\",\"Binary Search\",\"Sorting\",\"Heap (Priority Queue)\",\"Matrix\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1338-reduce-array-size-to-the-half\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1334-find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -201,171 +292,608 @@
                     
                     <div class="article-post">
                         <hr>
-<p>You are given a binary matrix where 1&rsquo;s represent soldiers and 0&rsquo;s represent civilians. The soldiers are positioned before the civilians in each row. A row is weaker than another if it has fewer soldiers, or if it has the same number of soldiers but appears earlier. Your task is to return the indices of the k weakest rows in the matrix, ordered from weakest to strongest.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input consists of a binary matrix mat of size m x n, followed by an integer k representing the number of weakest rows to return.</li>
-<li><strong>Example:</strong> <code>mat = [[1, 1, 0, 0], [1, 1, 1, 0], [1, 0, 0, 0], [1, 1, 1, 1]], k = 2</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>2 &lt;= n, m &lt;= 100</li>
-<li>1 &lt;= k &lt;= m</li>
-<li>matrix[i][j] is either 0 or 1.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> The output should be a list of integers representing the indices of the k weakest rows, ordered from weakest to strongest.</li>
-<li><strong>Example:</strong> <code>For mat = [[1, 1, 0, 0], [1, 1, 1, 0], [1, 0, 0, 0], [1, 1, 1, 1]], k = 2, the output will be [2, 0].</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The number of rows to return is always valid (1 &lt;= k &lt;= m).</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> The goal is to identify the k weakest rows in the matrix and return them in the required order.</p>
-<ul>
-<li>
-<ol>
-<li>Count the number of soldiers (1&rsquo;s) in each row.</li>
-</ol>
-</li>
-<li>
-<ol start="2">
-<li>Pair each row&rsquo;s soldier count with its index.</li>
-</ol>
-</li>
-<li>
-<ol start="3">
-<li>Sort these pairs first by soldier count, and if two rows have the same count, by their index.</li>
-</ol>
-</li>
-<li>
-<ol start="4">
-<li>Extract the indices of the k weakest rows and return them.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ol>
-</li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>The matrix rows contain only 0&rsquo;s and 1&rsquo;s, with 1&rsquo;s representing soldiers and 0&rsquo;s representing civilians.</li>
-<li>The number of soldiers in a row is always less than or equal to the number of columns.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li>
-<p><strong>Input:</strong> <code>Example 1: mat = [[1, 1, 0, 0], [1, 1, 1, 0], [1, 0, 0, 0], [1, 1, 1, 1]], k = 2</code>  <br>
-<strong>Explanation:</strong> The weakest rows are rows 2 (1 soldier) and 0 (2 soldiers).</p>
-</li>
-<li>
-<p><strong>Input:</strong> <code>Example 2: mat = [[1, 0], [1, 1], [1, 0], [1, 0]], k = 3</code>  <br>
-<strong>Explanation:</strong> The weakest rows are rows 0, 2, and 3 (each with 1 soldier), ordered by their indices.</p>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>To solve this problem, we need to count the number of soldiers in each row and then sort the rows based on the count of soldiers. We can then return the indices of the k weakest rows.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>The matrix is binary, making it easy to count soldiers in each row.</li>
-<li>Sorting the rows based on the number of soldiers is a simple way to determine the weakest rows.</li>
-<li>Sorting is an efficient approach given that the matrix size is relatively small (maximum 100x100).
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>Empty matrices are not expected given the constraints.</li>
-<li>Handle matrices up to the size 100x100 efficiently.</li>
-<li>Rows with the same number of soldiers should be sorted by their index.</li>
-<li>Ensure that the sorted rows are correctly ordered first by soldier count, then by row index in case of ties.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> kWeakestRows(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n<span style="color:#666">=</span>mat[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>; i<span style="color:#666">&lt;</span>mat.size(); i<span style="color:#666">++</span>){
-</span></span><span style="display:flex;"><span>        mat[i].push_back(i);
+
+
+
+
+
+
+
+
+
+
+<div class=""> You are given a string moves consisting of characters &lsquo;L&rsquo;, &lsquo;R&rsquo;, and &lsquo;<em>&rsquo;. The string represents movements on a number line starting from position 0. You can choose to move left or right when the character is &lsquo;</em>&rsquo;, and the goal is to calculate the maximum distance from the origin you can reach after completing all the moves. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> The input consists of a string moves where each character is either &#39;L&#39;, &#39;R&#39;, or &#39;_&#39;.</div>
+                        <div class=""> <b>Example:</b> moves = &#39;L_RL__R&#39;</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= moves.length &lt;= 50</div>
+                            
+                                <div style="margin-left: 20px;"> • moves consists only of characters &#39;L&#39;, &#39;R&#39;, and &#39;_&#39;.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> Return the maximum distance from the origin that can be achieved after completing all the moves.</div>
+                        <div class=""> <b>Example:</b> 3</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output should be a single integer representing the maximum distance.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> To calculate the maximum distance from the origin after performing all moves, accounting for the choices made at each &#39;_&#39; character.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Initialize two counters to track the furthest left and right positions based on the current moves.</div>
+                            
+                                <div style="margin-left: 20px;"> • Iterate over the string moves and calculate the maximum possible distance considering the &#39;_&#39; characters can be either &#39;L&#39; or &#39;R&#39;.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the maximum of the absolute values of the two positions.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The input string moves has constraints as follows:</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= moves.length &lt;= 50</div>
+                            
+                                <div style="margin-left: 20px;"> • moves consists only of characters &#39;L&#39;, &#39;R&#39;, and &#39;_&#39;.</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The characters &#39;_&#39; in the moves string are flexible and can be treated as either &#39;L&#39; or &#39;R&#39;.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> moves = &#39;L_RL__R&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The furthest point we can reach is -3 after making the sequence of moves &#39;LLRLLLR&#39;.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> moves = &#39;_R__LL_&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The furthest point we can reach is -5 after making the sequence &#39;LRLLLLL&#39;.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> The problem can be approached by iterating through the string and calculating the furthest points we can reach for both left and right moves, considering the flexibility provided by &#39;_&#39; characters.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • For every &#39;_&#39; character, we can choose either left or right, so we need to maximize the distance considering both choices.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • We should compute the furthest left and right points and then take the maximum of their absolute values.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Initialize two variables, one for tracking the leftmost distance and another for tracking the rightmost distance.</div>
+                            
+                                <div style="margin-left: 20px;"> • Iterate over the string moves, updating both left and right distances as you encounter &#39;L&#39;, &#39;R&#39;, and &#39;_&#39;.</div>
+                            
+                                <div style="margin-left: 20px;"> • For each &#39;_&#39;, update both distances by considering it as &#39;L&#39; and &#39;R&#39; respectively.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the maximum of the absolute values of the two distances.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If the input string is empty, the distance should be 0.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The solution should handle the case where the string length is large (up to 50 characters).</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If the string contains only &#39;L&#39; or &#39;R&#39; characters, the solution will still compute the correct result.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure that the solution runs efficiently given the constraints on the length of the moves string.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Length Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Setup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Left Movement Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Left Movement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Else Right Movement Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Right Movement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Right Movement Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Right Movement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Else Left Movement Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Left Movement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Negative Value Correction</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Negative Value Correction</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Maximum</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">furthestDistanceFromOrigin</span>(string moves) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n<span style="color:#666">=</span>moves.length();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l<span style="color:#666">=</span><span style="color:#666">0</span>, r<span style="color:#666">=</span><span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>n;i<span style="color:#666">++</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(moves[i]<span style="color:#666">==</span><span style="color:#b44">&#39;L&#39;</span> <span style="color:#666">||</span> moves[i]<span style="color:#666">==</span><span style="color:#b44">&#39;_&#39;</span>){
+</span></span><span style="display:flex;"><span>            l<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        }<span style="color:#a2f;font-weight:bold">else</span>{
+</span></span><span style="display:flex;"><span>            l<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(moves[i]<span style="color:#666">==</span><span style="color:#b44">&#39;R&#39;</span> <span style="color:#666">||</span> moves[i]<span style="color:#666">==</span><span style="color:#b44">&#39;_&#39;</span>){
+</span></span><span style="display:flex;"><span>            r<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        }<span style="color:#a2f;font-weight:bold">else</span>{
+</span></span><span style="display:flex;"><span>            r<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    sort(mat.begin(), mat.end());
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(k);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>; i<span style="color:#666">&lt;</span>k; i<span style="color:#666">++</span>){
-</span></span><span style="display:flex;"><span>        ans[i]<span style="color:#666">=</span>mat[i][n];            
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(l<span style="color:#666">&lt;</span><span style="color:#666">0</span>) l <span style="color:#666">*=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(r<span style="color:#666">&lt;</span><span style="color:#666">0</span>) r <span style="color:#666">*=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> max(l,r);
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function finds the k weakest rows in a matrix. It adds the row index to the matrix, sorts it based on row strength (number of 1s), and then returns the indices of the k weakest rows.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> kWeakestRows(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span></code></pre></div><p>This is the function definition, where the function takes a matrix &lsquo;mat&rsquo; and an integer &lsquo;k&rsquo;, and returns the indices of the k weakest rows.</p>
-</li>
-<li>
-<p><strong>Matrix Column Size</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n<span style="color:#666">=</span>mat[<span style="color:#666">0</span>].size();
-</span></span></code></pre></div><p>Here we get the number of columns &rsquo;n&rsquo; in the matrix by accessing the size of the first row.</p>
-</li>
-<li>
-<p><strong>Row Loop Start</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>; i<span style="color:#666">&lt;</span>mat.size(); i<span style="color:#666">++</span>){
-</span></span></code></pre></div><p>We loop through each row of the matrix to append the row index to it.</p>
-</li>
-<li>
-<p><strong>Append Row Index</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mat[i].push_back(i);
-</span></span></code></pre></div><p>For each row, we append its index to the end, which helps in sorting rows by their strengths while keeping track of their original positions.</p>
-</li>
-<li>
-<p><strong>Sort Matrix</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(mat.begin(), mat.end());
-</span></span></code></pre></div><p>We sort the matrix rows in ascending order based on the number of 1s in each row (since the row index is appended, it will keep track of the original positions).</p>
-</li>
-<li>
-<p><strong>Answer Vector Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(k);
-</span></span></code></pre></div><p>We initialize a vector &lsquo;ans&rsquo; of size &lsquo;k&rsquo; to store the indices of the k weakest rows.</p>
-</li>
-<li>
-<p><strong>Answer Population Loop Start</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>; i<span style="color:#666">&lt;</span>k; i<span style="color:#666">++</span>){
-</span></span></code></pre></div><p>We loop through the first k rows in the sorted matrix to extract their original indices.</p>
-</li>
-<li>
-<p><strong>Populate Answer Vector</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans[i]<span style="color:#666">=</span>mat[i][n];            
-</span></span></code></pre></div><p>For each of the k weakest rows, we store the original index of the row (which is stored at the last position in the row after appending).</p>
-</li>
-<li>
-<p><strong>Return Answer</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div><p>Finally, we return the vector &lsquo;ans&rsquo;, which contains the indices of the k weakest rows.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(m log m), where m is the number of rows in the matrix.</li>
-<li><strong>Average Case:</strong> O(m log m)</li>
-<li><strong>Worst Case:</strong> O(m log m)</li>
-</ul>
-<p>Sorting the rows takes O(m log m), where m is the number of rows.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(m)</li>
-<li><strong>Worst Case:</strong> O(m)</li>
-</ul>
-<p>The space complexity is O(m) due to the storage of the soldier counts and row indices.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Variable Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">furthestDistanceFromOrigin</span>(string moves) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the function `furthestDistanceFromOrigin`, which takes a string `moves` as input to determine the furthest distance from the origin. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Length Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n<span style="color:#666">=</span>moves.length();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calculates the length of the `moves` string to determine how many steps to process. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l<span style="color:#666">=</span><span style="color:#666">0</span>, r<span style="color:#666">=</span><span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes two integer variables `l` and `r` to track the left and right movements respectively. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Loop Setup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>n;i<span style="color:#666">++</span>){
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Starts a loop that iterates through each character in the `moves` string. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Left Movement Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(moves[i]<span style="color:#666">==</span><span style="color:#b44">&#39;L&#39;</span> <span style="color:#666">||</span> moves[i]<span style="color:#666">==</span><span style="color:#b44">&#39;_&#39;</span>){
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current move is left (&#39;L&#39;) or an underscore (&#39;_&#39;) which signifies movement towards the left. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Left Movement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            l<span style="color:#666">--</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decreases the left movement counter `l` when a left move is detected. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Else Right Movement Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }<span style="color:#a2f;font-weight:bold">else</span>{
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Otherwise, check if the move is towards the right. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Right Movement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            l<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increases the left movement counter `l` if the move is not left. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Right Movement Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(moves[i]<span style="color:#666">==</span><span style="color:#b44">&#39;R&#39;</span> <span style="color:#666">||</span> moves[i]<span style="color:#666">==</span><span style="color:#b44">&#39;_&#39;</span>){
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current move is right (&#39;R&#39;) or an underscore (&#39;_&#39;) which signifies movement towards the right. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Right Movement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            r<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increases the right movement counter `r` when a right move is detected. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Else Left Movement Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }<span style="color:#a2f;font-weight:bold">else</span>{
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Otherwise, check if the move is towards the left. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Left Movement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            r<span style="color:#666">--</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decreases the right movement counter `r` if the move is not right. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Negative Value Correction</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(l<span style="color:#666">&lt;</span><span style="color:#666">0</span>) l <span style="color:#666">*=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Corrects the left movement counter `l` if it is negative by multiplying it by -1 to ensure positive values. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Negative Value Correction</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(r<span style="color:#666">&lt;</span><span style="color:#666">0</span>) r <span style="color:#666">*=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Corrects the right movement counter `r` if it is negative by multiplying it by -1 to ensure positive values. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>		
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Space for additional logic if needed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Return Maximum</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">max</span>(l,r);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the maximum of the left and right movement values, representing the furthest distance from the origin. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear in the length of the moves string since we only iterate once over the string.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant, as we only need a few variables to track the distances.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 <table>
@@ -377,6 +905,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -628,90 +1157,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1337-the-k-weakest-rows-in-a-matrix\/"
-    },
-    "headline": "Leetcode 1337: The K Weakest Rows in a Matrix",
-    "description": "In-depth solution and explanation for Leetcode 1337: The K Weakest Rows in a Matrix in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": ""
-    },
-    "datePublished": "2024-06-26T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Easy",
-    "teaches": "[\"Array\",\"Binary Search\",\"Sorting\",\"Heap (Priority Queue)\",\"Matrix\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "keywords": "[\"Array\",\"Binary Search\",\"Sorting\",\"Heap (Priority Queue)\",\"Matrix\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1338-reduce-array-size-to-the-half\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1334-find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

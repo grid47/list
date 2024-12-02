@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -41,8 +43,105 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-981-time-based-key-value-store\/"
+    },
+    "headline": "Leetcode 981: Time Based Key-Value Store",
+    "description": "In-depth solution and explanation for Leetcode 981: Time Based Key-Value Store in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": ""
+    },
+    "datePublished": "2024-07-31T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Hash Table\",\"String\",\"Binary Search\",\"Design\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "video": {
+      "@type": "VideoObject",
+      "name": "Video explanation for Leetcode 981: Time Based Key-Value Store",
+      "embedUrl": "https://www.youtube.com/watch?v=eVi4gDimCoo",
+      "uploadDate": "2021-01-18",
+      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi_webp\/eVi4gDimCoo\/maxresdefault.webp"
+    },
+    
+    "keywords": "[\"Hash Table\",\"String\",\"Binary Search\",\"Design\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-983-minimum-cost-for-tickets\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-979-distribute-coins-in-binary-tree\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -183,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 31, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -200,209 +299,457 @@
                     
                     <div class="article-post">
                         <hr>
-<p>Design a time-based key-value data structure that stores multiple values for the same key at different timestamps and supports retrieving the value at a specific timestamp.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input consists of a series of <code>set</code> and <code>get</code> operations on a <code>TimeMap</code> object.</li>
-<li><strong>Example:</strong> <code>[&quot;TimeMap&quot;, &quot;set&quot;, &quot;get&quot;, &quot;get&quot;, &quot;set&quot;, &quot;get&quot;, &quot;get&quot;] [[], [&quot;user1&quot;, &quot;apple&quot;, 1], [&quot;user1&quot;, 1], [&quot;user1&quot;, 3], [&quot;user1&quot;, &quot;banana&quot;, 4], [&quot;user1&quot;, 4], [&quot;user1&quot;, 5]]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= key.length, value.length &lt;= 100</li>
-<li>key and value consist of lowercase English letters and digits.</li>
-<li>1 &lt;= timestamp &lt;= 10^7</li>
-<li>All timestamps for <code>set</code> calls are strictly increasing.</li>
-<li>At most 2 * 10^5 calls will be made to <code>set</code> and <code>get</code>.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> For each <code>get</code> operation, return the value corresponding to the key at or before the given timestamp, or an empty string if no such value exists.</li>
-<li><strong>Example:</strong> <code>[null, null, &quot;apple&quot;, &quot;apple&quot;, null, &quot;banana&quot;, &quot;banana&quot;]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The output for each <code>get</code> operation should be a string.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> Implement a time-based key-value store with efficient retrieval for a given timestamp.</p>
-<ul>
-<li>Use a map to store key-value pairs along with timestamps.</li>
-<li>For each <code>set</code> operation, append the timestamp and value pair to the list of values for the given key.</li>
-<li>For each <code>get</code> operation, perform binary search to find the value with the largest timestamp less than or equal to the given timestamp.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>The data structure supports efficient insertion and retrieval operations.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li><strong>Input:</strong> <code>[&quot;TimeMap&quot;, &quot;set&quot;, &quot;get&quot;, &quot;get&quot;, &quot;set&quot;, &quot;get&quot;, &quot;get&quot;] [[], [&quot;user1&quot;, &quot;apple&quot;, 1], [&quot;user1&quot;, 1], [&quot;user1&quot;, 3], [&quot;user1&quot;, &quot;banana&quot;, 4], [&quot;user1&quot;, 4], [&quot;user1&quot;, 5]]</code>  <br>
-<strong>Explanation:</strong> The example demonstrates the behavior of the <code>TimeMap</code> class, where values are stored with timestamps and can be retrieved by the closest timestamp at or before a given time.</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>We will use a map to store key-value pairs along with their timestamps, and binary search to efficiently retrieve the value for the closest timestamp.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>The key-value pairs are stored with increasing timestamps.</li>
-<li>Binary search can be applied to find the latest value for a given timestamp.</li>
-<li>We need to balance the efficiency of <code>set</code> and <code>get</code> operations to handle large input sizes.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>Handling an empty map when no <code>set</code> operations have been called yet.</li>
-<li>Efficient handling of large numbers of <code>set</code> and <code>get</code> operations.</li>
-<li>If no value exists for a given key and timestamp, return an empty string.</li>
-<li>The <code>set</code> operations are guaranteed to have strictly increasing timestamps.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;&gt;&gt;</span> mp;
-</span></span><span style="display:flex;"><span>TimeMap() {
-</span></span><span style="display:flex;"><span>    
+
+
+
+
+
+
+
+
+
+
+<div class=""> You are given a four-digit integer &rsquo;num&rsquo;. Your task is to split this number into two new integers, &rsquo;new1&rsquo; and &rsquo;new2&rsquo;, by rearranging its digits. The digits in &rsquo;num&rsquo; must be used in their entirety, and leading zeros are allowed in &rsquo;new1&rsquo; and &rsquo;new2&rsquo;. Your goal is to return the minimum possible sum of &rsquo;new1&rsquo; and &rsquo;new2'. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> The input consists of a single integer &#39;num&#39;, which is a four-digit number.</div>
+                        <div class=""> <b>Example:</b> num = 4312</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1000 &lt;= num &lt;= 9999</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> The output should be the minimum possible sum of the two integers formed by rearranging the digits of &#39;num&#39;.</div>
+                        <div class=""> <b>Example:</b> 45</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The sum of the two integers formed should be the minimum possible sum.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> Rearrange the digits of &#39;num&#39; to form two integers, and calculate their sum to minimize the result.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Convert the integer &#39;num&#39; to a string to access its digits.</div>
+                            
+                                <div style="margin-left: 20px;"> • Sort the digits in ascending order.</div>
+                            
+                                <div style="margin-left: 20px;"> • Form two integers by taking alternate digits from the sorted list and summing them.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the sum of the two integers.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The input integer &#39;num&#39; is a four-digit integer.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1000 &lt;= num &lt;= 9999</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The integer &#39;num&#39; is a positive four-digit number.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: num = 4312</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By rearranging the digits of &#39;4312&#39;, we can get pairs like [13, 42], [14, 32], [12, 43]. The smallest sum is obtained by the pair [13, 32], and their sum is 45.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: num = 9503</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By rearranging the digits of &#39;9503&#39;, we can get pairs such as [03, 95], [05, 93], [9, 503]. The pair [03, 95] yields the smallest sum of 38.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> The approach is to sort the digits of &#39;num&#39; in ascending order, then form two integers by taking alternate digits. This ensures that the sum of the two integers is minimized.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Sorting the digits ensures that we use the smallest available digits first, minimizing the sum.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • After sorting, alternating the digits between the two integers minimizes the sum of the two numbers.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Convert &#39;num&#39; to a string to access the digits.</div>
+                            
+                                <div style="margin-left: 20px;"> • Sort the digits in ascending order.</div>
+                            
+                                <div style="margin-left: 20px;"> • Use the first two digits for one number and the last two digits for the other.</div>
+                            
+                                <div style="margin-left: 20px;"> • Sum the two numbers and return the result.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The input will always be a four-digit number, so no special handling for empty inputs is required.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • As the input is always four digits, there is no need to handle extremely large inputs.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The input will never have more than four digits, and the result will always be a valid sum.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure that the solution handles inputs within the range of 1000 to 9999 correctly.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 String Conversion</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Sorting</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Computation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Return</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumSum</span>(<span style="color:#0b0;font-weight:bold">int</span> num){
+</span></span><span style="display:flex;"><span>    string s <span style="color:#666">=</span> to_string(num);
+</span></span><span style="display:flex;"><span>    sort(s.begin(), s.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> (s[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">+</span> s[<span style="color:#666">1</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> s[<span style="color:#666">2</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">+</span> s[<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">set</span>(string key, string value, <span style="color:#0b0;font-weight:bold">int</span> timestamp) {
-</span></span><span style="display:flex;"><span>    mp[key].push_back(make_pair(timestamp, value));
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>string <span style="color:#00a000">get</span>(string key, <span style="color:#0b0;font-weight:bold">int</span> ts) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>mp.count(key)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// vector&lt;pair&lt;int, string&gt;&gt; v = &amp;mp[key];
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> mp[key].size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(ts <span style="color:#666">&gt;</span> mp[key][m].first) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(m <span style="color:#666">==</span> r <span style="color:#666">||</span> ts <span style="color:#666">&lt;</span> mp[key][m <span style="color:#666">+</span> <span style="color:#666">1</span>].first)
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> mp[key][m].second;
-</span></span><span style="display:flex;"><span>            l <span style="color:#666">=</span> m <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(ts <span style="color:#666">&lt;</span> mp[key][m].first)
-</span></span><span style="display:flex;"><span>            r <span style="color:#666">=</span> m <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> mp[key][m].second;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your TimeMap object will be instantiated and called as such:
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * TimeMap* obj = new TimeMap();
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;set(key,value,timestamp);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * string param_2 = obj-&gt;get(key,timestamp);
-</span></span></span></code></pre></div><p>This code defines a class <code>TimeMap</code> for storing key-value pairs with a timestamp. It has two main methods: <code>set</code> for storing the values, and <code>get</code> for retrieving the most recent value at a given timestamp using binary search.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Data Structure Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;&gt;&gt;</span> mp;
-</span></span></code></pre></div><p>Defines a map <code>mp</code> that maps each key (string) to a vector of pairs, where each pair contains a timestamp (int) and a value (string). This structure allows for efficient retrieval of the most recent value at a specific timestamp.</p>
-</li>
-<li>
-<p><strong>Constructor Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TimeMap() {
-</span></span></code></pre></div><p>Defines the constructor of the <code>TimeMap</code> class. The constructor does not perform any specific initialization in this case.</p>
-</li>
-<li>
-<p><strong>Set Method</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">set</span>(string key, string value, <span style="color:#0b0;font-weight:bold">int</span> timestamp) {
-</span></span></code></pre></div><p>Defines the <code>set</code> method, which stores the <code>value</code> associated with the <code>key</code> and the given <code>timestamp</code> in the map <code>mp</code>.</p>
-</li>
-<li>
-<p><strong>Push Value to Map</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[key].push_back(make_pair(timestamp, value));
-</span></span></code></pre></div><p>Adds a pair containing the <code>timestamp</code> and <code>value</code> to the vector associated with the <code>key</code> in the map <code>mp</code>. If the key does not exist, it will be created.</p>
-</li>
-<li>
-<p><strong>Get Method</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">get</span>(string key, <span style="color:#0b0;font-weight:bold">int</span> ts) {
-</span></span></code></pre></div><p>Defines the <code>get</code> method, which retrieves the most recent value associated with <code>key</code> at or before the given timestamp <code>ts</code>.</p>
-</li>
-<li>
-<p><strong>Key Not Found</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>mp.count(key)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span></code></pre></div><p>Checks if the <code>key</code> exists in the map <code>mp</code>. If the key is not found, the method returns an empty string.</p>
-</li>
-<li>
-<p><strong>Binary Search Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> mp[key].size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div><p>Initializes two pointers, <code>l</code> and <code>r</code>, to perform a binary search on the vector of pairs for the given <code>key</code>.</p>
-</li>
-<li>
-<p><strong>Binary Search Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
-</span></span></code></pre></div><p>Starts a while loop to perform the binary search on the vector of pairs associated with the <code>key</code>.</p>
-</li>
-<li>
-<p><strong>Calculate Middle Index</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div><p>Calculates the middle index <code>m</code> between <code>l</code> and <code>r</code> for binary search.</p>
-</li>
-<li>
-<p><strong>Check Timestamp Greater Than Middle</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(ts <span style="color:#666">&gt;</span> mp[key][m].first) {
-</span></span></code></pre></div><p>Checks if the <code>timestamp</code> <code>ts</code> is greater than the timestamp at the middle index <code>m</code>.</p>
-</li>
-<li>
-<p><strong>Check If Next Value Is Better</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(m <span style="color:#666">==</span> r <span style="color:#666">||</span> ts <span style="color:#666">&lt;</span> mp[key][m <span style="color:#666">+</span> <span style="color:#666">1</span>].first)
-</span></span></code></pre></div><p>Checks if the current value is the most recent value available for the given <code>timestamp</code>.</p>
-</li>
-<li>
-<p><strong>Return Value</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> mp[key][m].second;
-</span></span></code></pre></div><p>Returns the value associated with the timestamp at the middle index <code>m</code>.</p>
-</li>
-<li>
-<p><strong>Adjust Left Pointer</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            l <span style="color:#666">=</span> m <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div><p>Adjusts the left pointer <code>l</code> to continue the search in the right half of the vector.</p>
-</li>
-<li>
-<p><strong>Check Timestamp Less Than Middle</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(ts <span style="color:#666">&lt;</span> mp[key][m].first)
-</span></span></code></pre></div><p>Checks if the <code>timestamp</code> <code>ts</code> is less than the timestamp at the middle index <code>m</code>.</p>
-</li>
-<li>
-<p><strong>Adjust Right Pointer</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            r <span style="color:#666">=</span> m <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div><p>Adjusts the right pointer <code>r</code> to continue the search in the left half of the vector.</p>
-</li>
-<li>
-<p><strong>Return Value at Exact Match</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> mp[key][m].second;
-</span></span></code></pre></div><p>Returns the value at the middle index <code>m</code> if the <code>timestamp</code> exactly matches the timestamp at index <code>m</code>.</p>
-</li>
-<li>
-<p><strong>Return Empty String</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span></code></pre></div><p>Returns an empty string if no valid value is found for the given <code>timestamp</code>.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(log n) for <code>get</code> due to binary search, O(1) for <code>set</code>.</li>
-<li><strong>Average Case:</strong> O(log n) for <code>get</code> due to binary search, O(1) for <code>set</code>.</li>
-<li><strong>Worst Case:</strong> O(log n) for <code>get</code> due to binary search, O(1) for <code>set</code>.</li>
-</ul>
-<p>The <code>get</code> operation requires binary search over the list of timestamp-value pairs for a key, while <code>set</code> operates in constant time.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(1) if no <code>set</code> operations have been performed.</li>
-<li><strong>Worst Case:</strong> O(n) for the space required to store all the timestamp-value pairs for all keys.</li>
-</ul>
-<p>The space complexity is linear in the number of <code>set</code> operations performed, as each key will store a list of timestamp-value pairs.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumSum</span>(<span style="color:#0b0;font-weight:bold">int</span> num){
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define a function `minimumSum` that accepts a single integer `num` as an argument. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : String Conversion</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string s <span style="color:#666">=</span> to_string(num);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Convert the integer `num` to a string `s` for easy manipulation of individual digits. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Sorting</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(s.begin(), s.end());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Sort the string `s` in ascending order to arrange the digits in increasing order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Computation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> (s[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">+</span> s[<span style="color:#666">1</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> s[<span style="color:#666">2</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">+</span> s[<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Compute the minimum sum by forming two numbers from the sorted digits and summing them. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the computed result, which is the minimum sum of the two numbers. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Average Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is constant because the input size is always fixed at four digits.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant since we only need space to store the digits of the four-digit number.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/time-based-key-value-store/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 
@@ -422,6 +769,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -669,98 +1017,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-981-time-based-key-value-store\/"
-    },
-    "headline": "Leetcode 981: Time Based Key-Value Store",
-    "description": "In-depth solution and explanation for Leetcode 981: Time Based Key-Value Store in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": ""
-    },
-    "datePublished": "2024-07-31T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Hash Table\",\"String\",\"Binary Search\",\"Design\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "video": {
-      "@type": "VideoObject",
-      "name": "Video explanation for Leetcode 981: Time Based Key-Value Store",
-      "embedUrl": "https://www.youtube.com/watch?v=eVi4gDimCoo",
-      "uploadDate": "2021-01-18",
-      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi_webp\/eVi4gDimCoo\/maxresdefault.webp"
-    },
-    
-    "keywords": "[\"Hash Table\",\"String\",\"Binary Search\",\"Design\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-983-minimum-cost-for-tickets\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-979-distribute-coins-in-binary-tree\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

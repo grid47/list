@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -41,8 +43,105 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-752-open-the-lock\/"
+    },
+    "headline": "Leetcode 752: Open the Lock",
+    "description": "In-depth solution and explanation for Leetcode 752: Open the Lock in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/752.webp"
+    },
+    "datePublished": "2024-08-23T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Array\",\"Hash Table\",\"String\",\"Breadth-First Search\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "video": {
+      "@type": "VideoObject",
+      "name": "Video explanation for Leetcode 752: Open the Lock",
+      "embedUrl": "https://www.youtube.com/watch?v=Pzg3bCDY87w",
+      "uploadDate": "2022-01-19",
+      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/Pzg3bCDY87w\/maxresdefault.jpg"
+    },
+    
+    "keywords": "[\"Array\",\"Hash Table\",\"String\",\"Breadth-First Search\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-754-reach-a-number\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-746-min-cost-climbing-stairs\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -212,235 +311,535 @@
     
   </figure>
   </h2>
-<p>You are given a lock with 4 rotating wheels, each containing 10 slots labeled &lsquo;0&rsquo; to &lsquo;9&rsquo;. The wheels can rotate freely and wrap around. You must determine the minimum number of moves required to reach a target lock configuration, avoiding certain deadends.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input consists of a list of deadends and a target string, representing the lock&rsquo;s target configuration.</li>
-<li><strong>Example:</strong> <code>deadends = ['0201', '0101', '0102', '1212', '2002'], target = '0202'</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= deadends.length &lt;= 500</li>
-<li>deadends[i].length == 4</li>
-<li>target.length == 4</li>
-<li>target will not be in the list of deadends</li>
-<li>target and deadends[i] consist of digits only</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> Return the minimum number of turns required to reach the target configuration, or -1 if it is impossible.</li>
-<li><strong>Example:</strong> <code>For deadends = ['0201', '0101', '0102', '1212', '2002'] and target = '0202', the output is 6.</code></li>
-<li><strong>Constraints:</strong></li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> To find the shortest path from &lsquo;0000&rsquo; to the target configuration, avoiding deadends.</p>
-<ul>
-<li>Use a breadth-first search (BFS) starting from &lsquo;0000&rsquo;.</li>
-<li>At each step, generate all possible valid configurations by rotating one of the wheels.</li>
-<li>If the generated configuration is a deadend, skip it.</li>
-<li>If the configuration matches the target, return the number of moves taken to reach it.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>The input deadends and target strings consist only of digits between &lsquo;0&rsquo; and &lsquo;9&rsquo;.</li>
-<li>The target configuration is not present in the list of deadends.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li>
-<p><strong>Input:</strong> <code>deadends = ['0201', '0101', '0102', '1212', '2002'], target = '0202'</code>  <br>
-<strong>Explanation:</strong> Starting from &lsquo;0000&rsquo;, the sequence &lsquo;0000&rsquo; -&gt; &lsquo;1000&rsquo; -&gt; &lsquo;1100&rsquo; -&gt; &lsquo;1200&rsquo; -&gt; &lsquo;1201&rsquo; -&gt; &lsquo;1202&rsquo; -&gt; &lsquo;0202&rsquo; leads to the target, taking 6 moves.</p>
-</li>
-<li>
-<p><strong>Input:</strong> <code>deadends = ['8888'], target = '0009'</code>  <br>
-<strong>Explanation:</strong> Starting from &lsquo;0000&rsquo;, the sequence &lsquo;0000&rsquo; -&gt; &lsquo;0009&rsquo; requires just 1 move.</p>
-</li>
-<li>
-<p><strong>Input:</strong> <code>deadends = ['8887', '8889', '8878', '8898', '8788', '8988', '7888', '9888'], target = '8888'</code>  <br>
-<strong>Explanation:</strong> It is impossible to reach the target without hitting a deadend.</p>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>Use BFS to explore all possible configurations starting from &lsquo;0000&rsquo;, avoiding deadends, and tracking the number of moves to reach the target.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>BFS is an ideal approach for finding the shortest path in an unweighted graph of configurations.</li>
-<li>Each valid configuration can be viewed as a node, and each move as an edge connecting nodes. The BFS ensures the shortest path to the target.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>The constraints guarantee at least one deadend and one target configuration, so empty inputs are not possible.</li>
-<li>The BFS approach handles up to 500 deadends efficiently.</li>
-<li>The initial configuration &lsquo;0000&rsquo; cannot be a deadend.</li>
-<li>The algorithm should efficiently handle up to 500 deadends and a target of length 4.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">openLock</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> deadends, string target) {
-</span></span><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> dead(deadends.begin(), deadends.end());
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (dead.count(<span style="color:#b44">&#34;0000&#34;</span>)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> q({<span style="color:#b44">&#34;0000&#34;</span>});
+
+
+
+
+
+
+
+
+
+
+<div class=""> A restaurant with a single chef serves customers. Each customer arrives at a specific time and waits for the chef to prepare their order. The chef can only serve one customer at a time and prepares orders in the order they were received. The goal is to calculate the average waiting time of all customers. The waiting time of a customer is the time between their arrival and when they receive their order. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> You are given a 2D array where each entry represents a customer, with the first value indicating the arrival time and the second value indicating the time required to prepare the order.</div>
+                        <div class=""> <b>Example:</b> [[1, 2], [3, 4], [6, 1]]</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= customers.length &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= arrivali, timei &lt;= 10^4</div>
+                            
+                                <div style="margin-left: 20px;"> • arrivali &lt;= arrivali&#43;1</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> The output is a floating-point number representing the average waiting time for all customers.</div>
+                        <div class=""> <b>Example:</b> 3.33333</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The result must be accurate within 10^-5</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> To calculate the average waiting time of all customers.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1. Initialize the current time to the arrival time of the first customer.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. For each customer, check if the chef is idle or still working on a previous order.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. If the chef is idle, the chef starts preparing the order immediately; otherwise, the chef waits for the chef to finish the current order.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Add the waiting time (current time - arrival time) to the total waiting time.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. After processing all customers, return the total waiting time divided by the number of customers.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> Ensure that the solution adheres to the constraints to avoid performance issues, especially with large inputs.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • The solution should handle up to 100,000 customers efficiently.</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The customer arrival times are provided in non-decreasing order.</div>
+                            
+                                <div style="margin-left: 20px;"> • The chef serves customers in the order they arrive.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [[1, 2], [2, 5], [4, 3]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the first customer arrives at time 1 and waits 2 units of time, so their waiting time is 2. The second customer arrives at time 2 but waits until the chef is free at time 3, so their waiting time is 6. The third customer arrives at time 4 and waits until the chef is free at time 8, giving them a waiting time of 7. The average waiting time is (2 &#43; 6 &#43; 7) / 3 = 5.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> The solution iterates through the customer list while managing the time taken for each customer’s order. We track when each customer starts and finishes their order to calculate their waiting time.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The chef prepares orders one at a time and cannot start a new order until the previous one is finished.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • The problem requires managing the flow of customers and calculating each one&#39;s waiting time. The key observation is that the chef can only serve one customer at a time and must wait for previous orders to be completed.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1. Initialize current time to the first customer&#39;s arrival time.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. Iterate through the customer list, calculating the waiting time for each customer based on the current time.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. Update the current time after serving each customer.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Accumulate the waiting times and return the average after processing all customers.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If there are no customers, return 0.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure that the solution can handle inputs with 100,000 customers efficiently.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • When all customers have the same arrival time and order time, the waiting time will be calculated sequentially based on the previous customer&#39;s finish time.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The input constraints should be respected to avoid performance issues with large inputs.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initial Setup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Through Customers</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Customer Time Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update Current Time</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Current Time</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Accumulate Waiting Time</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Average Waiting Time</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">double</span> <span style="color:#00a000">averageWaitingTime</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> cust) {
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> turn <span style="color:#666">=</span> <span style="color:#666">0</span>;<span style="color:#666">!</span>q.empty(); turn<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> q.size(); i <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> curr <span style="color:#666">=</span> q.front(); q.pop();
-</span></span><span style="display:flex;"><span>            cout <span style="color:#666">&lt;&lt;</span> curr <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#39; &#39;</span> <span style="color:#666">&lt;&lt;</span> target <span style="color:#666">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (curr <span style="color:#666">==</span> target) <span style="color:#a2f;font-weight:bold">return</span> turn;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span> : neighbours(curr)) {
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(dead.count(it)) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>                dead.insert(it);
-</span></span><span style="display:flex;"><span>                q.push(it);
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> cust[<span style="color:#666">0</span>][<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> n <span style="color:#666">=</span> cust.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">&gt;</span> cust[i][<span style="color:#666">0</span>])
+</span></span><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> cust[i][<span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>
+</span></span><span style="display:flex;"><span>        cur <span style="color:#666">=</span> cust[i][<span style="color:#666">0</span>] <span style="color:#666">+</span> cust[i][<span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> cur <span style="color:#666">-</span> cust[i][<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sum <span style="color:#666">/</span> n;
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> neighbours(<span style="color:#a2f;font-weight:bold">const</span> string <span style="color:#666">&amp;</span>code) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> diff <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; diff <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; diff<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            string nei <span style="color:#666">=</span> code;
-</span></span><span style="display:flex;"><span>            nei[i] <span style="color:#666">=</span> (nei[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">+</span> diff <span style="color:#666">+</span> <span style="color:#666">10</span>) <span style="color:#666">%</span> <span style="color:#666">10</span> <span style="color:#666">+</span> <span style="color:#b44">&#39;0&#39;</span>;
-</span></span><span style="display:flex;"><span>            res.push_back(nei);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function solves the problem of opening a lock with a set of deadends, using a breadth-first search (BFS) approach to explore all possible states. It returns the minimum number of turns required to reach the target lock combination, or -1 if it&rsquo;s impossible.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">openLock</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> deadends, string target) {
-</span></span></code></pre></div><p>Defines the main function &lsquo;openLock&rsquo; which takes a list of deadends and the target string. It attempts to open the lock by exploring all valid moves.</p>
-</li>
-<li>
-<p><strong>Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> dead(deadends.begin(), deadends.end());
-</span></span></code></pre></div><p>Initializes the &lsquo;dead&rsquo; set with the deadends, preventing any movement into these states during the BFS traversal.</p>
-</li>
-<li>
-<p><strong>Edge Case</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (dead.count(<span style="color:#b44">&#34;0000&#34;</span>)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span></code></pre></div><p>Checks if the starting point (&lsquo;0000&rsquo;) is in the deadends. If it is, the lock cannot be opened, and the function returns -1.</p>
-</li>
-<li>
-<p><strong>Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> q({<span style="color:#b44">&#34;0000&#34;</span>});
-</span></span></code></pre></div><p>Initializes the queue with the starting point (&lsquo;0000&rsquo;), which is the initial state of the lock.</p>
-</li>
-<li>
-<p><strong>BFS Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> turn <span style="color:#666">=</span> <span style="color:#666">0</span>;<span style="color:#666">!</span>q.empty(); turn<span style="color:#666">++</span>) {
-</span></span></code></pre></div><p>A loop that continues as long as the queue is not empty, incrementing the &rsquo;turn&rsquo; at each level of BFS.</p>
-</li>
-<li>
-<p><strong>BFS Iteration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> q.size(); i <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
-</span></span></code></pre></div><p>Iterates over all elements in the queue at the current level (turn), processing each one by one.</p>
-</li>
-<li>
-<p><strong>Queue Operation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> curr <span style="color:#666">=</span> q.front(); q.pop();
-</span></span></code></pre></div><p>Pops the front element from the queue and assigns it to &lsquo;curr&rsquo;, representing the current lock state.</p>
-</li>
-<li>
-<p><strong>Goal Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (curr <span style="color:#666">==</span> target) <span style="color:#a2f;font-weight:bold">return</span> turn;
-</span></span></code></pre></div><p>Checks if the current state matches the target. If so, returns the number of turns taken to reach it.</p>
-</li>
-<li>
-<p><strong>Exploration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span> : neighbours(curr)) {
-</span></span></code></pre></div><p>Loops through all the possible neighbouring states of the current state by calling the &rsquo;neighbours&rsquo; function.</p>
-</li>
-<li>
-<p><strong>Deadend Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(dead.count(it)) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span></code></pre></div><p>Checks if a neighbouring state is a deadend. If it is, it is skipped.</p>
-</li>
-<li>
-<p><strong>State Exploration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                dead.insert(it);
-</span></span></code></pre></div><p>Marks the neighbouring state as visited by inserting it into the &lsquo;dead&rsquo; set.</p>
-</li>
-<li>
-<p><strong>State Exploration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                q.push(it);
-</span></span></code></pre></div><p>Pushes the valid neighbouring state into the queue to be processed in subsequent turns.</p>
-</li>
-<li>
-<p><strong>Failure</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span></code></pre></div><p>If the queue is empty and the target hasn&rsquo;t been reached, the function returns -1, indicating the lock cannot be opened.</p>
-</li>
-<li>
-<p><strong>Neighbouring Function</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> neighbours(<span style="color:#a2f;font-weight:bold">const</span> string <span style="color:#666">&amp;</span>code) {
-</span></span></code></pre></div><p>Defines the &rsquo;neighbours&rsquo; function that takes a lock code and returns all the possible states that are one turn away.</p>
-</li>
-<li>
-<p><strong>Neighbouring Function</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
-</span></span></code></pre></div><p>Initializes a vector to store the neighbouring states.</p>
-</li>
-<li>
-<p><strong>Loop Over Digits</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div><p>Iterates over each digit in the 4-digit lock code.</p>
-</li>
-<li>
-<p><strong>Loop Over Digits</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> diff <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; diff <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; diff<span style="color:#666">++</span>) {
-</span></span></code></pre></div><p>For each digit, it iterates over the possible changes (-1, 0, 1), representing turning the dial.</p>
-</li>
-<li>
-<p><strong>State Change</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            string nei <span style="color:#666">=</span> code;
-</span></span></code></pre></div><p>Creates a copy of the current lock code to modify.</p>
-</li>
-<li>
-<p><strong>State Change</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            nei[i] <span style="color:#666">=</span> (nei[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">+</span> diff <span style="color:#666">+</span> <span style="color:#666">10</span>) <span style="color:#666">%</span> <span style="color:#666">10</span> <span style="color:#666">+</span> <span style="color:#b44">&#39;0&#39;</span>;
-</span></span></code></pre></div><p>Modifies the i-th digit of the lock code by applying the change, ensuring the new digit is valid.</p>
-</li>
-<li>
-<p><strong>Neighbouring Function</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res.push_back(nei);
-</span></span></code></pre></div><p>Adds the newly generated neighbour state to the results vector.</p>
-</li>
-<li>
-<p><strong>Neighbouring Function</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><p>Returns the vector of all valid neighbouring states.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(1), when the target is &lsquo;0000&rsquo;.</li>
-<li><strong>Average Case:</strong> O(n), where n is the number of configurations explored (bounded by 10^4).</li>
-<li><strong>Worst Case:</strong> O(10^4), when the BFS explores all possible configurations.</li>
-</ul>
-<p>The time complexity is O(n) where n is the number of explored configurations, and there are at most 10^4 configurations.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(1), for trivial cases.</li>
-<li><strong>Worst Case:</strong> O(10^4), for the queue and visited configurations.</li>
-</ul>
-<p>The space complexity is O(n) where n is the number of configurations being tracked in BFS.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">double</span> <span style="color:#00a000">averageWaitingTime</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> cust) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the function `averageWaitingTime`, which calculates the average waiting time for customers based on their arrival times and service durations. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Initial Setup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> cust[<span style="color:#666">0</span>][<span style="color:#666">0</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes the `cur` variable to represent the current time, starting with the arrival time of the first customer. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> n <span style="color:#666">=</span> cust.size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Sets the variable `n` to the total number of customers in the `cust` array, which helps in calculating the average later. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes a variable `sum` to 0, which will hold the total waiting time for all customers. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Loop Through Customers</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Starts a loop to iterate through all customers in the `cust` array. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Customer Time Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">&gt;</span> cust[i][<span style="color:#666">0</span>])
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current time (`cur`) is greater than the arrival time of the current customer. If true, the customer can start being served immediately. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Update Current Time</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> cust[i][<span style="color:#666">1</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current customer can be served immediately, add their service duration to the current time (`cur`). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Update Current Time</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cur <span style="color:#666">=</span> cust[i][<span style="color:#666">0</span>] <span style="color:#666">+</span> cust[i][<span style="color:#666">1</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the customer arrives after the current time, set the `cur` to their arrival time plus their service duration. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Accumulate Waiting Time</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> cur <span style="color:#666">-</span> cust[i][<span style="color:#666">0</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adds the waiting time of the current customer to `sum`, which is the difference between the current time (`cur`) and their arrival time. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Return Average Waiting Time</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sum <span style="color:#666">/</span> n;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the average waiting time by dividing the total accumulated waiting time (`sum`) by the number of customers (`n`). </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n), where n is the number of customers. The best case occurs when the chef is always idle and the customers are served immediately.</div>
+                        <div class=""> <b>Average Case:</b> O(n), where n is the number of customers. The average case assumes that customers arrive in a reasonable distribution.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of customers. The worst case happens when each customer arrives after the previous one and needs to wait for their turn.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear because we iterate over the customers once.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1), since we only need a constant amount of space for variables like current time and total waiting time.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of customers, due to the input size.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is linear because we are storing a list of customers and only require a small amount of additional space for tracking the time and sums.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/open-the-lock/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 
@@ -460,6 +859,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -707,98 +1107,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-752-open-the-lock\/"
-    },
-    "headline": "Leetcode 752: Open the Lock",
-    "description": "In-depth solution and explanation for Leetcode 752: Open the Lock in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/752.webp"
-    },
-    "datePublished": "2024-08-23T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Array\",\"Hash Table\",\"String\",\"Breadth-First Search\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "video": {
-      "@type": "VideoObject",
-      "name": "Video explanation for Leetcode 752: Open the Lock",
-      "embedUrl": "https://www.youtube.com/watch?v=Pzg3bCDY87w",
-      "uploadDate": "2022-01-19",
-      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/Pzg3bCDY87w\/maxresdefault.jpg"
-    },
-    
-    "keywords": "[\"Array\",\"Hash Table\",\"String\",\"Breadth-First Search\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-754-reach-a-number\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-746-min-cost-climbing-stairs\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

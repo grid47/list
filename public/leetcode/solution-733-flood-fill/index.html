@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -41,8 +43,105 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-733-flood-fill\/"
+    },
+    "headline": "Leetcode 733: Flood Fill",
+    "description": "In-depth solution and explanation for Leetcode 733: Flood Fill in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/733.webp"
+    },
+    "datePublished": "2024-08-25T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Easy",
+    "teaches": "[\"Array\",\"Depth-First Search\",\"Breadth-First Search\",\"Matrix\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "video": {
+      "@type": "VideoObject",
+      "name": "Video explanation for Leetcode 733: Flood Fill",
+      "embedUrl": "https://www.youtube.com/watch?v=NomjaXe6kUE",
+      "uploadDate": "2020-05-11",
+      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/NomjaXe6kUE\/maxresdefault.jpg"
+    },
+    
+    "keywords": "[\"Array\",\"Depth-First Search\",\"Breadth-First Search\",\"Matrix\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-735-asteroid-collision\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-731-my-calendar-ii\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -183,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 25, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -212,170 +311,484 @@
     
   </figure>
   </h2>
-<p>You are given an m x n grid representing an image, where each element in the grid corresponds to a pixel value. Additionally, you&rsquo;re provided with three integers: sr (starting row), sc (starting column), and color. Your task is to perform a flood fill operation on the image starting at the pixel located at (sr, sc).</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> You are given a 2D grid representing an image, three integers sr, sc, and color.</li>
-<li><strong>Example:</strong> <code>image = [[1, 1, 1], [1, 1, 0], [1, 0, 1]], sr = 1, sc = 1, color = 2</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>m == image.length</li>
-<li>n == image[i].length</li>
-<li>1 &lt;= m, n &lt;= 50</li>
-<li>0 &lt;= image[i][j], color &lt; 216</li>
-<li>0 &lt;= sr &lt; m</li>
-<li>0 &lt;= sc &lt; n</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> Return the modified image after performing the flood fill.</li>
-<li><strong>Example:</strong> <code>After performing the flood fill on the input image, return the modified grid.</code></li>
-<li><strong>Constraints:</strong></li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> Change the color of the starting pixel and recursively change the color of adjacent pixels that share the original color.</p>
-<ul>
-<li>Check if the color to be applied is the same as the starting pixel&rsquo;s color.</li>
-<li>If different, perform a DFS (depth-first search) to apply the flood fill to all connected pixels that have the same original color.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>The grid will always contain at least one element.</li>
-<li>The target color will not be equal to the original color if the flood fill is to occur.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li><strong>Input:</strong> <code>Starting from (1, 1) and applying the color 2 results in a flood fill of the connected pixels.</code>  <br>
-<strong>Explanation:</strong> Starting from pixel (1, 1) with color 1, all connected pixels with color 1 will be changed to color 2. This process stops when there are no more pixels connected to the starting pixel with the same original color.</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>Use DFS to apply the flood fill on the grid recursively.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>DFS can be applied to propagate the color change to adjacent pixels.</li>
-<li>Use a helper function to handle the recursive flood fill.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>If the grid is empty, handle gracefully without performing any flood fill.</li>
-<li>Ensure the function handles larger grids efficiently within the given constraints.</li>
-<li>If the starting pixel already has the target color, no changes should be made to the grid.</li>
-<li>The maximum grid size is 50x50, which is small enough to handle with DFS efficiently.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> floodFill(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> image, <span style="color:#0b0;font-weight:bold">int</span> sr, <span style="color:#0b0;font-weight:bold">int</span> sc, <span style="color:#0b0;font-weight:bold">int</span> color) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(color <span style="color:#666">==</span> image[sr][sc]) <span style="color:#a2f;font-weight:bold">return</span> image;
-</span></span><span style="display:flex;"><span>    dfs(image, sr, sc, color, image[sr][sc]);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> image;
+
+
+
+
+
+
+
+
+
+
+<div class=""> You are given two integers <code>n</code> and <code>k</code>. Your task is to return the lexicographically smallest string of length <code>n</code> with a numeric value equal to <code>k</code>. The numeric value of a string is the sum of the numeric values of its characters, where &lsquo;a&rsquo; = 1, &lsquo;b&rsquo; = 2, &hellip;, and &lsquo;z&rsquo; = 26. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> You are given two integers, `n` and `k`. The string should be of length `n` and its numeric value should be equal to `k`.</div>
+                        <div class=""> <b>Example:</b> n = 4, k = 34</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • n &lt;= k &lt;= 26 * n</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> Return the lexicographically smallest string of length `n` with a numeric value equal to `k`.</div>
+                        <div class=""> <b>Example:</b> &#34;aazb&#34;</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The string should be of length `n` and have a numeric value equal to `k`.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> To construct the lexicographically smallest string that has the given numeric value `k` and length `n`.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Initialize a string of length `n` with all &#39;a&#39;s, since &#39;a&#39; has the smallest numeric value (1).</div>
+                            
+                                <div style="margin-left: 20px;"> • Subtract `n` from `k` to account for the initial &#39;a&#39;s.</div>
+                            
+                                <div style="margin-left: 20px;"> • From the end of the string, replace &#39;a&#39; with other characters (up to &#39;z&#39;) to achieve the desired numeric value, starting with the largest possible character (i.e., &#39;z&#39;).</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The constraints ensure that the solution can handle large input sizes efficiently.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • n &lt;= k &lt;= 26 * n</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The value of `k` will always be valid for the given `n` according to the constraints.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 4, k = 34</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string &#39;aazb&#39; has a numeric value of 1 &#43; 1 &#43; 26 &#43; 2 = 34, and is the lexicographically smallest string that satisfies these conditions.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 6, k = 60</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string &#39;aazzzz&#39; has a numeric value of 1 &#43; 1 &#43; 26 &#43; 26 &#43; 26 &#43; 26 = 60, and is the lexicographically smallest string that satisfies these conditions.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> The approach involves starting with a string of all &#39;a&#39;s and adjusting the characters from the end to reach the desired numeric value `k`.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The smallest string is composed of &#39;a&#39;s, and we need to replace some of them with higher value characters to achieve the total value `k`.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • We can use a greedy approach, modifying the string from the last position towards the first to minimize lexicographical order.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Initialize a string `ans` with `n` &#39;a&#39; characters.</div>
+                            
+                                <div style="margin-left: 20px;"> • Set `k` to `k - n` to account for the initial sum of &#39;a&#39;s.</div>
+                            
+                                <div style="margin-left: 20px;"> • Iterate from the end of the string to the beginning, at each position replacing &#39;a&#39; with the largest possible character such that the total sum of the string is equal to `k`.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If `n` is 1, then `k` must be between 1 and 26, inclusive.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • For large values of `n`, the algorithm should efficiently adjust the string to reach the value `k`.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • When `k` equals `n`, the string will consist only of &#39;a&#39;s.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The solution must handle values of `n` up to 10^5 efficiently.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Mathematical Adjustment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Looping</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 String Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Mathematical Adjustment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">getSmallestString</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    string ans(n, <span style="color:#b44">&#39;a&#39;</span>);
+</span></span><span style="display:flex;"><span>    k <span style="color:#666">-=</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(k <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        ans[<span style="color:#666">--</span>n] <span style="color:#666">+=</span> min(<span style="color:#666">25</span>, k);
+</span></span><span style="display:flex;"><span>        k <span style="color:#666">-=</span> min(<span style="color:#666">25</span>, k);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span> img, <span style="color:#0b0;font-weight:bold">int</span> r, <span style="color:#0b0;font-weight:bold">int</span> c, <span style="color:#0b0;font-weight:bold">int</span> color, <span style="color:#0b0;font-weight:bold">int</span> node) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> img.size(), n <span style="color:#666">=</span> img[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (r <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> c <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> r <span style="color:#666">==</span> m <span style="color:#666">||</span> c <span style="color:#666">==</span> n <span style="color:#666">||</span> img[r][c] <span style="color:#666">!=</span> node)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    img[r][c] <span style="color:#666">=</span> color;
-</span></span><span style="display:flex;"><span>    dfs(img, r <span style="color:#666">+</span> <span style="color:#666">1</span>, c, color, node);
-</span></span><span style="display:flex;"><span>    dfs(img, r, c <span style="color:#666">+</span> <span style="color:#666">1</span>, color, node);
-</span></span><span style="display:flex;"><span>    dfs(img, r <span style="color:#666">-</span> <span style="color:#666">1</span>, c, color, node);
-</span></span><span style="display:flex;"><span>    dfs(img, r, c <span style="color:#666">-</span> <span style="color:#666">1</span>, color, node);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This code defines a flood fill algorithm using depth-first search (DFS). It updates an image matrix by filling a region connected to a starting point with a new color. The algorithm checks if the color at the starting point is the same as the target color to avoid redundant operations. The helper function <code>dfs</code> recursively visits connected pixels and updates their color.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> floodFill(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> image, <span style="color:#0b0;font-weight:bold">int</span> sr, <span style="color:#0b0;font-weight:bold">int</span> sc, <span style="color:#0b0;font-weight:bold">int</span> color) {
-</span></span></code></pre></div><p>This function initiates the flood fill process. It takes an image (a matrix), a starting row (<code>sr</code>), a starting column (<code>sc</code>), and a new color as inputs.</p>
-</li>
-<li>
-<p><strong>Check Color</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(color <span style="color:#666">==</span> image[sr][sc]) <span style="color:#a2f;font-weight:bold">return</span> image;
-</span></span></code></pre></div><p>This step checks if the color at the starting point is already the target color. If so, it returns the image without making any changes.</p>
-</li>
-<li>
-<p><strong>Call DFS</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(image, sr, sc, color, image[sr][sc]);
-</span></span></code></pre></div><p>If the color is different, the DFS function is called to start the flood fill operation, passing the image, the starting coordinates, the new color, and the current color at the starting point.</p>
-</li>
-<li>
-<p><strong>Return Image</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> image;
-</span></span></code></pre></div><p>After completing the flood fill operation, the updated image is returned.</p>
-</li>
-<li>
-<p><strong>DFS Function Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span> img, <span style="color:#0b0;font-weight:bold">int</span> r, <span style="color:#0b0;font-weight:bold">int</span> c, <span style="color:#0b0;font-weight:bold">int</span> color, <span style="color:#0b0;font-weight:bold">int</span> node) {
-</span></span></code></pre></div><p>This function is a helper function that performs the depth-first search. It takes the image, the current row and column (<code>r</code>, <code>c</code>), the new color, and the original color (<code>node</code>) of the region to be filled.</p>
-</li>
-<li>
-<p><strong>Matrix Dimensions</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> img.size(), n <span style="color:#666">=</span> img[<span style="color:#666">0</span>].size();
-</span></span></code></pre></div><p>This line stores the number of rows (<code>m</code>) and columns (<code>n</code>) of the image matrix.</p>
-</li>
-<li>
-<p><strong>Bounds Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (r <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> c <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> r <span style="color:#666">==</span> m <span style="color:#666">||</span> c <span style="color:#666">==</span> n <span style="color:#666">||</span> img[r][c] <span style="color:#666">!=</span> node)
-</span></span></code></pre></div><p>This condition checks if the current pixel is out of bounds or does not match the original color. If so, the function returns without making any changes.</p>
-</li>
-<li>
-<p><strong>Exit DFS</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
-</span></span></code></pre></div><p>If the pixel is out of bounds or not part of the target region, the DFS recursion is terminated for this pixel.</p>
-</li>
-<li>
-<p><strong>Color Update</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    img[r][c] <span style="color:#666">=</span> color;
-</span></span></code></pre></div><p>The current pixel is updated with the new color.</p>
-</li>
-<li>
-<p><strong>DFS Recursion (Down)</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(img, r <span style="color:#666">+</span> <span style="color:#666">1</span>, c, color, node);
-</span></span></code></pre></div><p>The DFS function is called recursively on the neighboring pixel below the current one.</p>
-</li>
-<li>
-<p><strong>DFS Recursion (Right)</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(img, r, c <span style="color:#666">+</span> <span style="color:#666">1</span>, color, node);
-</span></span></code></pre></div><p>The DFS function is called recursively on the neighboring pixel to the right of the current one.</p>
-</li>
-<li>
-<p><strong>DFS Recursion (Up)</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(img, r <span style="color:#666">-</span> <span style="color:#666">1</span>, c, color, node);
-</span></span></code></pre></div><p>The DFS function is called recursively on the neighboring pixel above the current one.</p>
-</li>
-<li>
-<p><strong>DFS Recursion (Left)</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(img, r, c <span style="color:#666">-</span> <span style="color:#666">1</span>, color, node);
-</span></span></code></pre></div><p>The DFS function is called recursively on the neighboring pixel to the left of the current one.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(m * n), where m is the number of rows and n is the number of columns.</li>
-<li><strong>Average Case:</strong> O(m * n), as the flood fill may potentially visit every pixel in the worst case.</li>
-<li><strong>Worst Case:</strong> O(m * n), where m and n are the dimensions of the grid.</li>
-</ul>
-<p>The time complexity depends on the size of the grid and the number of pixels connected to the starting pixel.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(1), if no recursive calls are made (e.g., if no adjacent pixels share the same color).</li>
-<li><strong>Worst Case:</strong> O(m * n), due to the recursive call stack in DFS.</li>
-</ul>
-<p>The space complexity depends on the depth of the recursion tree, which can be proportional to the grid size.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">getSmallestString</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the function `getSmallestString` which takes integers `n` (length of the string) and `k` (target sum) as input. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string <span style="color:#00a000">ans</span>(n, <span style="color:#b44">&#39;a&#39;</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes the string `ans` with `n` characters, all set to &#39;a&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Mathematical Adjustment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    k <span style="color:#666">-=</span> n;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decreases `k` by `n` because each &#39;a&#39; contributes 1 to the total sum. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Looping</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(k <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Enters a loop to adjust the string until the remaining sum `k` is zero. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : String Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans[<span style="color:#666">--</span>n] <span style="color:#666">+=</span> min(<span style="color:#666">25</span>, k);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adjusts the last unprocessed character in `ans` by increasing its value by the smaller of 25 or `k`, ensuring it remains a valid alphabet character. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Mathematical Adjustment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        k <span style="color:#666">-=</span> min(<span style="color:#666">25</span>, k);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decreases `k` by the value added to the character, reducing the remaining sum to be distributed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the final adjusted string `ans`, which is the lexicographically smallest string meeting the criteria. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n), as we modify the string in linear time.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) since we store the string.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/flood-fill/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 
@@ -395,6 +808,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -642,98 +1056,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-733-flood-fill\/"
-    },
-    "headline": "Leetcode 733: Flood Fill",
-    "description": "In-depth solution and explanation for Leetcode 733: Flood Fill in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/733.webp"
-    },
-    "datePublished": "2024-08-25T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Easy",
-    "teaches": "[\"Array\",\"Depth-First Search\",\"Breadth-First Search\",\"Matrix\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "video": {
-      "@type": "VideoObject",
-      "name": "Video explanation for Leetcode 733: Flood Fill",
-      "embedUrl": "https://www.youtube.com/watch?v=NomjaXe6kUE",
-      "uploadDate": "2020-05-11",
-      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/NomjaXe6kUE\/maxresdefault.jpg"
-    },
-    
-    "keywords": "[\"Array\",\"Depth-First Search\",\"Breadth-First Search\",\"Matrix\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-735-asteroid-collision\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-731-my-calendar-ii\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

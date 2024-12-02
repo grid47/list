@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -42,8 +44,97 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1366-rank-teams-by-votes\/"
+    },
+    "headline": "Leetcode 1366: Rank Teams by Votes",
+    "description": "In-depth solution and explanation for Leetcode 1366: Rank Teams by Votes in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": ""
+    },
+    "datePublished": "2024-06-23T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Array\",\"Hash Table\",\"String\",\"Sorting\",\"Counting\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "keywords": "[\"Array\",\"Hash Table\",\"String\",\"Sorting\",\"Counting\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1367-linked-list-in-binary-tree\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1362-closest-divisors\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -184,7 +275,7 @@
                                     <i class="far fa-star"></i>
                                     Jun 23, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    8 min read
                                 </span>					
                             </div>
                         </div>			
@@ -201,172 +292,746 @@
                     
                     <div class="article-post">
                         <hr>
-<p>In a special ranking system, each voter assigns a rank to all participating teams in a competition. The rankings are based on the most first-place votes, then second-place votes, and so on. If there is still a tie, teams are ranked alphabetically.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input consists of an array of strings where each string represents the rankings given by a voter.</li>
-<li><strong>Example:</strong> <code>votes = [&quot;XYZ&quot;, &quot;YZX&quot;, &quot;ZXY&quot;, &quot;XYZ&quot;, &quot;YZX&quot;]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= votes.length &lt;= 1000</li>
-<li>1 &lt;= votes[i].length &lt;= 26</li>
-<li>votes[i].length == votes[j].length for all 0 &lt;= i, j &lt; votes.length</li>
-<li>Each character in a vote string is unique.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> The output is a string containing all the teams ranked from highest to lowest based on the voting system.</li>
-<li><strong>Example:</strong> <code>&quot;XYZ&quot;</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The output string will contain all teams in the order of their ranks.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> The goal is to rank teams based on their positions in the votes, resolving ties using subsequent positions, and sorting alphabetically if necessary.</p>
-<ul>
-<li>Count the number of first-place, second-place, third-place, etc., votes for each team.</li>
-<li>Sort teams primarily by the number of first-place votes, then second-place votes, and so on.</li>
-<li>If teams are still tied after considering all positions, sort them alphabetically.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>The input contains valid rankings where each character is a unique team in every vote string.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li>
-<p><strong>Input:</strong> <code>votes = [&quot;XYZ&quot;, &quot;YZX&quot;, &quot;ZXY&quot;, &quot;XYZ&quot;, &quot;YZX&quot;]</code>  <br>
-<strong>Explanation:</strong> In this case, team X received the most first-place votes, so it ranks first. Team Y and team Z tie for second place but team Y has the most second-place votes, so it ranks second.</p>
-</li>
-<li>
-<p><strong>Input:</strong> <code>votes = [&quot;ABCDE&quot;, &quot;DCBAE&quot;, &quot;EABCD&quot;]</code>  <br>
-<strong>Explanation:</strong> Team A received the most first-place votes across all voters, so it ranks first, followed by team B.</p>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>The approach involves counting the number of votes each team receives for each position and sorting them according to the ranking system.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>The problem requires ranking teams based on votes for each position in a list of rankings.</li>
-<li>Sorting the teams by first-place votes, then second-place votes, and so on, will allow us to handle ties effectively.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>If there is only one voter, their ranking is the final result.</li>
-<li>Ensure the solution handles large inputs efficiently, up to 1000 votes and 26 teams.</li>
-<li>If all teams are tied at each position, sort them alphabetically.</li>
-<li>Make sure to handle cases where there are multiple ties at various positions.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">rankTeams</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> votes) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> count(<span style="color:#666">26</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> (<span style="color:#666">27</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">c</span>: votes[<span style="color:#666">0</span>])
-</span></span><span style="display:flex;"><span>    count[c <span style="color:#666">-</span> <span style="color:#b44">&#39;A&#39;</span>][<span style="color:#666">26</span>] <span style="color:#666">=</span> c;
+
+
+
+
+
+
+
+
+
+
+<div class=""> You are given an array of strings <code>words</code> and an array <code>groups</code> of equal length <code>n</code>. The task is to find the longest subsequence from <code>words</code> such that the corresponding elements in <code>groups</code> are unequal for adjacent elements in the subsequence, and the Hamming distance between consecutive strings in the subsequence is exactly 1. A string&rsquo;s Hamming distance with another string is the number of positions at which their characters differ. The subsequence should be returned as an array of strings in the order of the subsequence indices. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> The input consists of two arrays: a string array `words` and an integer array `groups`, both of length `n`. Each element in `words` is a distinct lowercase string, and each element in `groups` is a positive integer. The strings in `words` may be of different lengths.</div>
+                        <div class=""> <b>Example:</b> words = [&#34;hello&#34;, &#34;hero&#34;, &#34;hollow&#34;, &#34;hi&#34;], groups = [1, 2, 1, 3]</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= n == words.length == groups.length &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= words[i].length &lt;= 10</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= groups[i] &lt;= n</div>
+                            
+                                <div style="margin-left: 20px;"> • words consists of distinct strings</div>
+                            
+                                <div style="margin-left: 20px;"> • words[i] consists of lowercase English letters</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> Return the longest subsequence of strings from `words` that satisfies the conditions. The subsequence should be ordered according to the selected indices in the subsequence.</div>
+                        <div class=""> <b>Example:</b> For words = [&#34;hello&#34;, &#34;hero&#34;, &#34;hollow&#34;, &#34;hi&#34;], groups = [1, 2, 1, 3], the output would be [&#34;hello&#34;, &#34;hollow&#34;] because they satisfy both conditions.</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The words in the subsequence should appear in the order of the indices selected.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> To find the longest subsequence of words such that the elements in `groups` at consecutive positions are different, and the Hamming distance between consecutive strings in the subsequence is 1.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Iterate through each string in `words` and compare it with previous strings based on the Hamming distance and the group values.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the current string has a Hamming distance of 1 from the previous string and the group values are different, add it to the subsequence.</div>
+                            
+                                <div style="margin-left: 20px;"> • Track the length of the longest subsequence and its corresponding words.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The input sizes are small enough to allow an O(n^2) solution, where n is the length of the input arrays.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= words[i].length &lt;= 10</div>
+                            
+                                <div style="margin-left: 20px;"> • groups[i] are distinct and between 1 and n</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The strings in `words` are distinct.</div>
+                            
+                                <div style="margin-left: 20px;"> • All strings in `words` can have different lengths.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For words = [&#34;cat&#34;, &#34;bat&#34;, &#34;rat&#34;, &#34;mat&#34;], groups = [1, 2, 2, 1], the valid subsequence is [&#34;cat&#34;, &#34;bat&#34;, &#34;rat&#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, words at indices 0, 1, and 2 have different groups, and the Hamming distance between consecutive strings is exactly 1.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> The approach involves iterating through each word and checking if it can be included in the subsequence based on the conditions. A dynamic programming approach is used to keep track of the longest valid subsequences.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The problem requires us to compare words with others in terms of Hamming distance and group values.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • This problem can be solved with dynamic programming by maintaining a list of subsequences and updating them when a new valid word is found.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Initialize a DP array to store subsequences.</div>
+                            
+                                <div style="margin-left: 20px;"> • For each word, check all previous words to see if they can form a valid subsequence.</div>
+                            
+                                <div style="margin-left: 20px;"> • Update the subsequence by adding the current word if it satisfies the conditions.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If the input arrays are empty, return an empty subsequence.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure that the solution works efficiently with up to 1000 words.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Words that are identical except for one character may be valid subsequences if they belong to different groups.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Handle large inputs efficiently.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Data Structure Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Outer Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Inner Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Distance Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Subsequence Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Subsequence Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Subsequence Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Length Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Result Construction</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Result Construction</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Result Construction</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Result Construction</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Result Construction</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Return Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Private Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Helper Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Loop Setup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Loop Setup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Distance Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Return Statement</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> getWordsInLongestSubsequence(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> groups) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(n);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) dp[i].push_back(i);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string<span style="color:#666">&amp;</span> <span style="color:#a0a000">vote</span>: votes)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span><span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> vote.size(); i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#666">--</span>count[vote[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;A&#39;</span>][i];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    sort(count.begin(), count.end());
-</span></span><span style="display:flex;"><span>    string res;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> votes[<span style="color:#666">0</span>].length(); i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> count[i][<span style="color:#666">26</span>];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> longest_length <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (groups[i] <span style="color:#666">==</span> groups[j]) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (words[i].size() <span style="color:#666">!=</span> words[j].size()) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (getHammingDistance(words[i], words[j]) <span style="color:#666">!=</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> ((dp[j].size() <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">&gt;</span> dp[i].size()) {
+</span></span><span style="display:flex;"><span>                dp[i] <span style="color:#666">=</span> dp[j];
+</span></span><span style="display:flex;"><span>                dp[i].push_back(i);
+</span></span><span style="display:flex;"><span>                longest_length <span style="color:#666">=</span> max(longest_length, <span style="color:#0b0;font-weight:bold">int</span>(dp[i].size()));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> result;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (dp[i].size() <span style="color:#666">==</span> longest_length) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">const</span> <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">x</span> : dp[i]) result.push_back(words[x]);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function ranks teams based on votes, where each vote is a string representing the ranking of teams. The function calculates the score of each team using a scoring system based on vote positions, sorts the teams based on their scores, and returns a string representing the ranked teams.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">rankTeams</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> votes) {
-</span></span></code></pre></div><p>This function takes a vector of strings &lsquo;votes&rsquo;, where each string represents a ranking of teams, and returns a string that represents the ranked order of the teams.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> count(<span style="color:#666">26</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> (<span style="color:#666">27</span>));
-</span></span></code></pre></div><p>A 2D vector &lsquo;count&rsquo; is initialized to store the ranking positions of 26 teams (A-Z), with each row representing a team and each column representing the position in the votes.</p>
-</li>
-<li>
-<p><strong>First Vote Processing</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">c</span>: votes[<span style="color:#666">0</span>])
-</span></span></code></pre></div><p>The first string in the &lsquo;votes&rsquo; vector is iterated, and for each character (team), its corresponding position in the &lsquo;count&rsquo; array is updated.</p>
-</li>
-<li>
-<p><strong>Store Team Character</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    count[c <span style="color:#666">-</span> <span style="color:#b44">&#39;A&#39;</span>][<span style="color:#666">26</span>] <span style="color:#666">=</span> c;
-</span></span></code></pre></div><p>Stores the character representing the team in the last column (index 26) of the &lsquo;count&rsquo; array. This keeps track of the team character in the count table.</p>
-</li>
-<li>
-<p><strong>Iterate Over Votes</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string<span style="color:#666">&amp;</span> <span style="color:#a0a000">vote</span>: votes)
-</span></span></code></pre></div><p>The function iterates over all the votes to process each vote string.</p>
-</li>
-<li>
-<p><strong>Iterate Over Each Vote</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> vote.size(); i<span style="color:#666">++</span>)
-</span></span></code></pre></div><p>For each vote string, this loop iterates over each position in the vote to update the corresponding team&rsquo;s score.</p>
-</li>
-<li>
-<p><strong>Update Team Score</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#666">--</span>count[vote[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;A&#39;</span>][i];
-</span></span></code></pre></div><p>For each team in the vote string, the corresponding team&rsquo;s score is decremented based on its position in the vote (lower positions have higher priority).</p>
-</li>
-<li>
-<p><strong>Sort Teams</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(count.begin(), count.end());
-</span></span></code></pre></div><p>The &lsquo;count&rsquo; array is sorted based on the scores of the teams, placing the teams with the highest score first.</p>
-</li>
-<li>
-<p><strong>Initialize Result String</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res;
-</span></span></code></pre></div><p>A string &lsquo;res&rsquo; is initialized to store the result of the ranked teams.</p>
-</li>
-<li>
-<p><strong>Construct Result String</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> votes[<span style="color:#666">0</span>].length(); i<span style="color:#666">++</span>)
-</span></span></code></pre></div><p>The function iterates over the length of the vote strings to construct the result string by adding teams in ranked order.</p>
-</li>
-<li>
-<p><strong>Add Ranked Team to Result</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> count[i][<span style="color:#666">26</span>];
-</span></span></code></pre></div><p>For each ranked team, its character (team) is appended to the result string &lsquo;res&rsquo;.</p>
-</li>
-<li>
-<p><strong>Return Result</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><p>The final ranked order of teams is returned as a string.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n log n)</li>
-<li><strong>Average Case:</strong> O(n log n)</li>
-<li><strong>Worst Case:</strong> O(n log n)</li>
-</ul>
-<p>The time complexity is dominated by the sorting step, where n is the number of teams.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n)</li>
-<li><strong>Worst Case:</strong> O(n)</li>
-</ul>
-<p>The space complexity is linear in the number of teams, as we need to store counts for each team.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">private</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> getHammingDistance(<span style="color:#a2f;font-weight:bold">const</span> string<span style="color:#666">&amp;</span> s, <span style="color:#a2f;font-weight:bold">const</span> string<span style="color:#666">&amp;</span> t) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dist <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> s.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (s[i] <span style="color:#666">!=</span> t[i]) dist<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dist;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> getWordsInLongestSubsequence(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> groups) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the function and initializes input parameters: n (number of words), words (the list of words), and groups (the groups of each word). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Data Structure Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(n);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes a 2D vector dp, where dp[i] will store the indices of the longest subsequence ending at word i. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Loop Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) dp[i].push_back(i);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Populates the dp vector with the indices of each word, starting each subsequence with just the word itself. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> longest_length <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes the longest_length variable to 1, as the shortest subsequence will have at least one word. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Outer Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Starts the outer loop to go through each word starting from the second word. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Inner Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Starts the inner loop to compare the current word with all previous words. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (groups[i] <span style="color:#666">==</span> groups[j]) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Skips comparing words in the same group as they should belong to different groups. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (words[i].size() <span style="color:#666">!=</span> words[j].size()) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Skips comparing words that are of different lengths since their Hamming distance cannot be 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Distance Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (getHammingDistance(words[i], words[j]) <span style="color:#666">!=</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Skips comparing words that do not have a Hamming distance of 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Subsequence Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> ((dp[j].size() <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">&gt;</span> dp[i].size()) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If adding the current word to the subsequence at dp[j] results in a longer subsequence, update dp[i]. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Subsequence Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                dp[i] <span style="color:#666">=</span> dp[j];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Copy the subsequence from dp[j] to dp[i], as dp[j] gives a longer subsequence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Subsequence Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                dp[i].push_back(i);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Add the current word&#39;s index to the subsequence at dp[i]. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Length Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                longest_length <span style="color:#666">=</span> max(longest_length, <span style="color:#0b0;font-weight:bold">int</span>(dp[i].size()));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update the longest subsequence length if the current subsequence at dp[i] is longer. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Result Construction</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> result;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes the result vector to store the words in the longest subsequence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Result Construction</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loops through the dp array to find the subsequence that has the longest length. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Result Construction</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (dp[i].size() <span style="color:#666">==</span> longest_length) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current subsequence is the longest, and if so, proceeds to construct the result. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Result Construction</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">const</span> <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">x</span> : dp[i]) result.push_back(words[x]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adds the words from the longest subsequence to the result vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Result Construction</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Breaks the loop after finding the longest subsequence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the longest subsequence of words. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Private Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">private</span><span style="color:#666">:</span>
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Marks the start of a private helper function. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Helper Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getHammingDistance</span>(<span style="color:#a2f;font-weight:bold">const</span> string<span style="color:#666">&amp;</span> s, <span style="color:#a2f;font-weight:bold">const</span> string<span style="color:#666">&amp;</span> t) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the helper function to calculate the Hamming distance between two strings. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dist <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes the dist variable to count the Hamming distance. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Loop Setup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> s.size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Gets the size of the strings to iterate over each character. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Loop Setup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Starts the loop to compare characters of the two strings. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Distance Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (s[i] <span style="color:#666">!=</span> t[i]) dist<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increments the distance for each mismatched character. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>26 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dist;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the calculated Hamming distance. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n^2)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> In the worst case, every word is compared to every other word.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> The space complexity depends on the size of the DP table which can grow up to O(n^2) in the worst case.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/rank-teams-by-votes/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 <table>
@@ -378,6 +1043,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -629,90 +1295,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1366-rank-teams-by-votes\/"
-    },
-    "headline": "Leetcode 1366: Rank Teams by Votes",
-    "description": "In-depth solution and explanation for Leetcode 1366: Rank Teams by Votes in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": ""
-    },
-    "datePublished": "2024-06-23T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Array\",\"Hash Table\",\"String\",\"Sorting\",\"Counting\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "keywords": "[\"Array\",\"Hash Table\",\"String\",\"Sorting\",\"Counting\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1367-linked-list-in-binary-tree\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1362-closest-divisors\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -41,8 +43,105 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-547-number-of-provinces\/"
+    },
+    "headline": "Leetcode 547: Number of Provinces",
+    "description": "In-depth solution and explanation for Leetcode 547: Number of Provinces in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/547.webp"
+    },
+    "datePublished": "2024-09-13T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Depth-First Search\",\"Breadth-First Search\",\"Union Find\",\"Graph\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "video": {
+      "@type": "VideoObject",
+      "name": "Video explanation for Leetcode 547: Number of Provinces",
+      "embedUrl": "https://www.youtube.com/watch?v=p5Ocm71wB0E",
+      "uploadDate": "2021-02-07",
+      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/p5Ocm71wB0E\/maxresdefault.jpg"
+    },
+    
+    "keywords": "[\"Depth-First Search\",\"Breadth-First Search\",\"Union Find\",\"Graph\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-553-optimal-division\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-543-diameter-of-binary-tree\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -183,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 13, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -212,136 +311,722 @@
     
   </figure>
   </h2>
-<p>You are given a matrix where each element indicates if two cities are directly connected. Your task is to determine the number of provinces formed by the cities. A province is a group of directly or indirectly connected cities.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input is an n x n matrix &lsquo;isConnected&rsquo; where &lsquo;isConnected[i][j]&rsquo; is 1 if city &lsquo;i&rsquo; is connected directly to city &lsquo;j&rsquo;, and 0 otherwise.</li>
-<li><strong>Example:</strong> <code>Input: isConnected = [[1, 1, 0], [1, 1, 0], [0, 0, 1]]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= n &lt;= 200</li>
-<li>n == isConnected.length</li>
-<li>n == isConnected[i].length</li>
-<li>isConnected[i][j] is 1 or 0.</li>
-<li>isConnected[i][i] == 1</li>
-<li>isConnected[i][j] == isConnected[j][i]</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> Return the total number of provinces in the network of cities.</li>
-<li><strong>Example:</strong> <code>Output: 2</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The output is an integer representing the total number of provinces.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> The goal is to compute the number of provinces by grouping cities that are connected directly or indirectly.</p>
-<ul>
-<li>Use a depth-first search (DFS) or union-find approach to group cities that are directly or indirectly connected.</li>
-<li>Track the groups of cities and count how many separate groups (provinces) there are.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>The input matrix is always valid and satisfies the given constraints.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li><strong>Input:</strong> <code>Input: isConnected = [[1, 1, 0], [1, 1, 0], [0, 0, 1]]</code>  <br>
-<strong>Explanation:</strong> In this example, there are two provinces: one consisting of city 1 and city 2, and the second consisting only of city 3.</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>We can solve this problem using either Depth-First Search (DFS) or Union-Find algorithms. Both approaches will allow us to group cities that are connected either directly or indirectly.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>We need to find groups of connected cities.</li>
-<li>This can be done by either performing DFS for each unvisited city or by using union-find to group connected cities.</li>
-<li>Using DFS, we can traverse the matrix and mark all connected cities as visited for each unvisited city, which will allow us to count the number of provinces.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>The input matrix will always contain at least one city, so there will never be an empty input.</li>
-<li>The algorithm should efficiently handle matrices up to 200 x 200 in size.</li>
-<li>If all cities are isolated (no connections), each city forms its own province.</li>
-<li>Ensure the algorithm handles the matrix dimensions efficiently for the upper limit of 200 cities.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findCircleNum</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> grid.size();
-</span></span><span style="display:flex;"><span>    UnionFind<span style="color:#666">*</span> uf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> UnionFind(n);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) uf<span style="color:#666">-&gt;</span>join(i, j);
+
+
+
+
+
+
+
+
+
+
+<div class=""> Five philosophers sit at a round table with bowls of spaghetti. Each philosopher alternates between thinking and eating. A philosopher can only eat when both their left and right forks are available. Design a system where no philosopher will starve and they can continue alternating between eating and thinking. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> The input consists of an integer n representing the number of times each philosopher will call the function wantsToEat. The philosophers are numbered from 0 to 4 in a clockwise direction, and they request the forks one by one.</div>
+                        <div class=""> <b>Example:</b> n = 1</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 60</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> The output consists of an array of operations in the form [a, b, c] where: a is the philosopher id, b indicates the fork (1 for left, 2 for right), and c indicates the operation (1 for pick, 2 for put, 3 for eat).</div>
+                        <div class=""> <b>Example:</b> [[4, 2, 1], [4, 1, 1], [0, 1, 1], [2, 2, 1], [2, 1, 1], [2, 0, 3], [2, 1, 2], [2, 2, 2], [4, 0, 3], [4, 1, 2], [0, 2, 1], [4, 2, 2], [3, 2, 1], [3, 1, 1], [0, 0, 3], [0, 1, 2], [0, 2, 2], [1, 2, 1], [1, 1, 1], [3, 0, 3], [3, 1, 2], [3, 2, 2], [1, 0, 3], [1, 1, 2], [1, 2, 2]]</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Each philosopher calls the function at least once.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> To ensure no philosopher ever starves while alternating between eating and thinking. The philosopher must acquire both forks before eating and release them afterward.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Each philosopher alternates between thinking and attempting to eat.</div>
+                            
+                                <div style="margin-left: 20px;"> • The philosopher first picks the left fork, then the right fork (or vice versa depending on the philosopher&#39;s id).</div>
+                            
+                                <div style="margin-left: 20px;"> • Once both forks are acquired, the philosopher starts eating.</div>
+                            
+                                <div style="margin-left: 20px;"> • After eating, the philosopher puts down both forks, making them available for others.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The constraints ensure that the philosophers do not conflict over fork usage and that they can indefinitely alternate between thinking and eating.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 60</div>
+                            
+                                <div style="margin-left: 20px;"> • 5 philosophers are involved, each with two forks.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each philosopher can pick and put down the forks in any order, but both forks must be acquired before eating.</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • Each philosopher alternates between thinking and eating.</div>
+                            
+                                <div style="margin-left: 20px;"> • A philosopher cannot eat without holding both forks.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, each philosopher calls the function once. The result is a series of operations where each philosopher picks up their forks, eats, and then puts down the forks in turn.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> To simulate the alternating process of eating and thinking while preventing starvation, we use mutex locks to ensure that philosophers only acquire forks when available and release them when done.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Philosophers should not block each other from eating by acquiring forks in an arbitrary order.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • We can implement a mutual exclusion mechanism using mutex locks to ensure forks are picked and released in a safe manner.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Create mutex locks for each fork.</div>
+                            
+                                <div style="margin-left: 20px;"> • Implement the wantsToEat function where each philosopher acquires locks on the forks, eats, and releases the forks in a manner that prevents deadlock.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • No empty inputs are allowed.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • For larger values of n, the number of philosopher actions will increase, but the system must remain efficient.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure that all philosophers can eat indefinitely and never starve.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Each philosopher must alternate between thinking and eating without blocking others.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Constructor</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Parameter</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Function Parameter</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Function Parameter</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Function Parameter</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Function Parameter</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Fork Index Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Fork Index Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Mutex Lock Setup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Mutex Lock Setup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Philosopher Eating Logic</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Locking Forks</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Locking Forks</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Fork Pickup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Fork Pickup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Philosopher Eating Logic</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Locking Forks</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Locking Forks</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Fork Pickup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Fork Pickup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Eat Action</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Put Fork Down</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Put Fork Down</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>mutex mtx[<span style="color:#666">5</span>];
+</span></span><span style="display:flex;"><span>DiningPhilosophers() {
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> uf<span style="color:#666">-&gt;</span>grp;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function finds the number of connected components (or friend circles) in a given 2D grid, where each cell represents a person, and a value of 1 indicates a friendship. The function uses Union-Find (Disjoint Set Union) to merge connected people and returns the number of disjoint sets (friend circles).</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findCircleNum</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
-</span></span></code></pre></div><p>Defines the function <code>findCircleNum</code>, which calculates the number of connected components (friend circles) in the given <code>grid</code>.</p>
-</li>
-<li>
-<p><strong>Matrix Size Calculation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> grid.size();
-</span></span></code></pre></div><p>Calculates the size of the grid (number of rows/columns) and stores it in variable <code>n</code>.</p>
-</li>
-<li>
-<p><strong>UnionFind Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    UnionFind<span style="color:#666">*</span> uf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> UnionFind(n);
-</span></span></code></pre></div><p>Creates a new instance of the <code>UnionFind</code> class, initializing it with the grid size <code>n</code>. This object will be used to manage the union and find operations for the friend circles.</p>
-</li>
-<li>
-<p><strong>Outer Loop (Row Traversal)</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span></code></pre></div><p>Starts the outer loop to traverse each row in the grid.</p>
-</li>
-<li>
-<p><strong>Inner Loop (Column Traversal)</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
-</span></span></code></pre></div><p>Starts the inner loop to traverse each column in the current row of the grid.</p>
-</li>
-<li>
-<p><strong>Union Operation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) uf<span style="color:#666">-&gt;</span>join(i, j);
-</span></span></code></pre></div><p>Checks if there is a friendship (grid[i][j] == 1). If true, performs a <code>union</code> operation to merge the sets of <code>i</code> and <code>j</code> using the <code>join</code> method of the <code>UnionFind</code> class.</p>
-</li>
-<li>
-<p><strong>Return Statement</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> uf<span style="color:#666">-&gt;</span>grp;
-</span></span></code></pre></div><p>Returns the number of distinct groups (friend circles) found in the grid, which is stored in the <code>grp</code> attribute of the <code>UnionFind</code> object.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n^2)</li>
-<li><strong>Average Case:</strong> O(n^2)</li>
-<li><strong>Worst Case:</strong> O(n^2)</li>
-</ul>
-<p>Since we need to process each entry in the matrix to determine connectivity, the time complexity is O(n^2).</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n)</li>
-<li><strong>Worst Case:</strong> O(n^2)</li>
-</ul>
-<p>The space complexity is O(n) for the visited array, and O(n^2) for storing the matrix.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">wantsToEat</span>(<span style="color:#0b0;font-weight:bold">int</span> philosopher,
+</span></span><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> pickLeftFork,
+</span></span><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> pickRightFork,
+</span></span><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> eat,
+</span></span><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> putLeftFork,
+</span></span><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> putRightFork) {
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> left <span style="color:#666">=</span> philosopher;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> right <span style="color:#666">=</span> (philosopher <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> <span style="color:#666">5</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    unique_lock<span style="color:#666">&lt;</span>mutex<span style="color:#666">&gt;</span> lck1(mtx[left], defer_lock);
+</span></span><span style="display:flex;"><span>    unique_lock<span style="color:#666">&lt;</span>mutex<span style="color:#666">&gt;</span> lck2(mtx[right], defer_lock);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(philosopher <span style="color:#666">%</span> <span style="color:#666">2</span>) {
+</span></span><span style="display:flex;"><span>        lck1.lock();
+</span></span><span style="display:flex;"><span>        lck2.lock();
+</span></span><span style="display:flex;"><span>        pickLeftFork();
+</span></span><span style="display:flex;"><span>        pickRightFork();
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        lck2.lock();
+</span></span><span style="display:flex;"><span>        lck1.lock();
+</span></span><span style="display:flex;"><span>        pickLeftFork();
+</span></span><span style="display:flex;"><span>        pickRightFork();            
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    eat();
+</span></span><span style="display:flex;"><span>    putLeftFork();
+</span></span><span style="display:flex;"><span>    putRightFork();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Variable Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>mutex mtx[<span style="color:#666">5</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A mutex array `mtx[5]` is declared to manage access to the forks (shared resources) for each philosopher. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Constructor</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>DiningPhilosophers() {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This is the constructor for the `DiningPhilosophers` class, where the mutex array is initialized. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> wantsToEat(<span style="color:#0b0;font-weight:bold">int</span> philosopher,
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This is the function definition for `wantsToEat`, which simulates a philosopher&#39;s request to eat. It accepts the philosopher&#39;s ID and functions for picking up and putting down forks, as well as eating. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Function Parameter</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> pickLeftFork,
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A function parameter `pickLeftFork` that simulates picking up the left fork. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Function Parameter</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> pickRightFork,
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A function parameter `pickRightFork` that simulates picking up the right fork. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Function Parameter</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> eat,
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A function parameter `eat` that simulates the action of eating. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Function Parameter</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> putLeftFork,
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A function parameter `putLeftFork` that simulates putting down the left fork. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Function Parameter</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> putRightFork) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A function parameter `putRightFork` that simulates putting down the right fork. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Fork Index Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> left <span style="color:#666">=</span> philosopher;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The `left` fork is assigned to the philosopher&#39;s position (index), corresponding to the philosopher&#39;s ID. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Fork Index Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> right <span style="color:#666">=</span> (philosopher <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> <span style="color:#666">5</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The `right` fork is the next fork, calculated using modulo 5 to handle the circular arrangement of philosophers. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Mutex Lock Setup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unique_lock<span style="color:#666">&lt;</span>mutex<span style="color:#666">&gt;</span> lck1(mtx[left], defer_lock);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A `unique_lock` is created for the left fork (`lck1`), with the `defer_lock` option to avoid locking immediately. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Mutex Lock Setup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unique_lock<span style="color:#666">&lt;</span>mutex<span style="color:#666">&gt;</span> lck2(mtx[right], defer_lock);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A `unique_lock` is created for the right fork (`lck2`), again with the `defer_lock` option. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Philosopher Eating Logic</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(philosopher <span style="color:#666">%</span> <span style="color:#666">2</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> An if condition is used to alternate the order in which philosophers acquire the forks to avoid deadlocks. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Locking Forks</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        lck1.lock();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The left fork is locked. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Locking Forks</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        lck2.lock();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The right fork is locked. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Fork Pickup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pickLeftFork();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function to pick up the left fork is called. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Fork Pickup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pickRightFork();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function to pick up the right fork is called. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Philosopher Eating Logic</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the philosopher&#39;s ID is even, the order of locking the forks is reversed to avoid deadlocks. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Locking Forks</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        lck2.lock();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The right fork is locked first. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Locking Forks</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        lck1.lock();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The left fork is locked second. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Fork Pickup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pickLeftFork();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function to pick up the left fork is called. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Fork Pickup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pickRightFork();            
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function to pick up the right fork is called. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Eat Action</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    eat();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The philosopher eats. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Put Fork Down</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    putLeftFork();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The philosopher puts down the left fork. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Put Fork Down</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    putRightFork();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The philosopher puts down the right fork. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n), where n is the number of times each philosopher calls the function.</div>
+                        <div class=""> <b>Average Case:</b> O(n), as each philosopher performs the same number of actions.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), since the system is designed to avoid starvation and deadlock.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear with respect to the number of iterations each philosopher makes.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1), since no additional space is required beyond the basic setup.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), as we only need a fixed number of mutexes and variables regardless of input size.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant as the number of philosophers is fixed and the operations are performed in constant space.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/number-of-provinces/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 
@@ -361,6 +1046,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -608,98 +1294,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-547-number-of-provinces\/"
-    },
-    "headline": "Leetcode 547: Number of Provinces",
-    "description": "In-depth solution and explanation for Leetcode 547: Number of Provinces in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/547.webp"
-    },
-    "datePublished": "2024-09-13T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Depth-First Search\",\"Breadth-First Search\",\"Union Find\",\"Graph\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "video": {
-      "@type": "VideoObject",
-      "name": "Video explanation for Leetcode 547: Number of Provinces",
-      "embedUrl": "https://www.youtube.com/watch?v=p5Ocm71wB0E",
-      "uploadDate": "2021-02-07",
-      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/p5Ocm71wB0E\/maxresdefault.jpg"
-    },
-    
-    "keywords": "[\"Depth-First Search\",\"Breadth-First Search\",\"Union Find\",\"Graph\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-553-optimal-division\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-543-diameter-of-binary-tree\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

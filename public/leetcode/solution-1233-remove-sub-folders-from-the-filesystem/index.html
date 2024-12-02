@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -41,8 +43,105 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1233-remove-sub-folders-from-the-filesystem\/"
+    },
+    "headline": "Leetcode 1233: Remove Sub-Folders from the Filesystem",
+    "description": "In-depth solution and explanation for Leetcode 1233: Remove Sub-Folders from the Filesystem in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": ""
+    },
+    "datePublished": "2024-07-06T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Array\",\"String\",\"Depth-First Search\",\"Trie\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "video": {
+      "@type": "VideoObject",
+      "name": "Video explanation for Leetcode 1233: Remove Sub-Folders from the Filesystem",
+      "embedUrl": "https://www.youtube.com/watch?v=sFv6T_wLS4k",
+      "uploadDate": "2021-03-03",
+      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi_webp\/sFv6T_wLS4k\/maxresdefault.webp"
+    },
+    
+    "keywords": "[\"Array\",\"String\",\"Depth-First Search\",\"Trie\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1234-replace-the-substring-for-balanced-string\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1232-check-if-it-is-a-straight-line\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -183,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 6, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -200,147 +299,652 @@
                     
                     <div class="article-post">
                         <hr>
-<p>You are given a list of folder paths, where each path represents a folder in the file system. The task is to remove all sub-folders from the list, keeping only the main folders.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input is a list of folder paths. Each path starts with a &lsquo;/&rsquo; and may contain one or more sub-folder paths.</li>
-<li><strong>Example:</strong> <code>folders = ['/home/user/docs', '/home/user', '/home/user/docs/photos', '/home/user/music']</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= folder.length &lt;= 4 * 10^4</li>
-<li>2 &lt;= folder[i].length &lt;= 100</li>
-<li>folder[i] contains only lowercase letters and &lsquo;/&rsquo;</li>
-<li>Each folder path is unique</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> The output should be a list of folder paths with all sub-folders removed.</li>
-<li><strong>Example:</strong> <code>[&quot;/home/user&quot;, &quot;/home/user/music&quot;]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The output should not contain any sub-folder paths.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> The goal is to remove any folder that is a sub-folder of another folder in the list.</p>
-<ul>
-<li>Sort the folder paths lexicographically.</li>
-<li>Use a trie structure to store and check for sub-folders.</li>
-<li>Add a folder to the result list only if it is not a sub-folder of any other folder.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>Each folder path starts with a &lsquo;/&rsquo; and contains valid characters.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li>
-<p><strong>Input:</strong> <code>folders = ['/home/user/docs', '/home/user', '/home/user/docs/photos', '/home/user/music']</code>  <br>
-<strong>Explanation:</strong> The folders &lsquo;/home/user/docs&rsquo; and &lsquo;/home/user/docs/photos&rsquo; are sub-folders of &lsquo;/home/user&rsquo;, so they are removed. The remaining folders are &lsquo;/home/user&rsquo; and &lsquo;/home/user/music&rsquo;.</p>
-</li>
-<li>
-<p><strong>Input:</strong> <code>folders = ['/a/b/c', '/a/b', '/a/c', '/a']</code>  <br>
-<strong>Explanation:</strong> The folders &lsquo;/a/b/c&rsquo;, &lsquo;/a/b&rsquo;, and &lsquo;/a/c&rsquo; are sub-folders of &lsquo;/a&rsquo;, so only &lsquo;/a&rsquo; remains.</p>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>To solve this problem, we first sort the folder paths lexicographically and then use a trie data structure to remove sub-folders.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>Sorting the folder paths lexicographically ensures that sub-folders will appear after their parent folders.</li>
-<li>Using a trie helps efficiently check if a folder is a sub-folder of another.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>Not applicable, as the input will always contain at least one folder.</li>
-<li>The solution should handle up to 40,000 folder paths efficiently.</li>
-<li>Ensure that folder paths are unique, and no folder path starts with an empty string or contains invalid characters.</li>
-<li>The folder paths are guaranteed to be well-formed and unique.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> removeSubfolders(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> folder) {
+
+
+
+
+
+
+
+
+
+
+<div class=""> You are given an array <code>ranks</code> representing the ranks of some mechanics, where <code>ranks[i]</code> is the rank of the <code>i</code>-th mechanic. A mechanic with rank <code>r</code> can repair <code>n</code> cars in <code>r * n^2</code> minutes. You are also given an integer <code>cars</code> representing the total number of cars waiting to be repaired. Return the minimum time required to repair all the cars when all mechanics can work simultaneously. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> The input consists of an integer array `ranks` and an integer `cars`.</div>
+                        <div class=""> <b>Example:</b> For `ranks = [5, 2, 3, 1], cars = 12`.</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= ranks.length &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= ranks[i] &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= cars &lt;= 10^6</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> Return the minimum time required to repair all the cars.</div>
+                        <div class=""> <b>Example:</b> For `ranks = [5, 2, 3, 1], cars = 12`, the output is `15`.</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output is an integer representing the minimum time.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The goal is to minimize the time taken to repair all the cars by distributing the work efficiently among the mechanics.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1. Use binary search to find the minimum time required to repair all cars.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. For each possible time, calculate how many cars can be repaired by each mechanic.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. Sum up the number of cars repaired by all mechanics and check if it is sufficient to repair all the cars.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Adjust the search range to find the minimum time that allows all cars to be repaired.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The input array `ranks` will have a length between 1 and 10^5. The values in `ranks` will range from 1 to 100. The number of cars will be between 1 and 10^6.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= ranks.length &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= ranks[i] &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= cars &lt;= 10^6</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The number of cars is always at least 1.</div>
+                            
+                                <div style="margin-left: 20px;"> • There will always be at least one mechanic.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For `ranks = [5, 2, 3, 1], cars = 12`</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By distributing the work among the mechanics, we find the minimum time required is 15 minutes.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> The solution uses binary search to find the minimum time required to repair all the cars by distributing the work efficiently among the mechanics.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The time complexity is dominated by the binary search and the car calculation for each mechanic, which can be optimized.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • The binary search will help narrow down the possible time range efficiently.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1. Sort the `ranks` array to ensure we start from the mechanic with the lowest rank.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. Apply binary search to find the minimum time required to repair all cars.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. For each midpoint in the binary search, calculate how many cars can be repaired by each mechanic within that time.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Adjust the search range based on whether all cars can be repaired in the current time.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • There will always be at least one mechanic and one car, so no empty inputs are possible.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle large inputs up to the constraint limits.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If there is only one mechanic or one car, the solution should still work correctly.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The solution must handle inputs with up to 100,000 mechanics and 1 million cars.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Sorting</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Maximum Rank</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Binary Search Setup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Binary Search Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Middle Point Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Check Feasibility</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Update Answer</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Adjust Search Range</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Adjust Search Range</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Return Minimum Time</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">can</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>ranks, <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> time, <span style="color:#0b0;font-weight:bold">int</span> cars) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(time <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> ranks.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        cnt <span style="color:#666">+=</span> (<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span>) sqrt(time<span style="color:#666">/</span>ranks[i]);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">&gt;=</span> cars) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt <span style="color:#666">&gt;=</span> cars;
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    sort(folder.begin(), folder.end());
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ans;
-</span></span><span style="display:flex;"><span>    TrieNode<span style="color:#666">*</span> root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TrieNode(<span style="color:#a2f">false</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> folder.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>add(folder[i]))
-</span></span><span style="display:flex;"><span>            ans.push_back(folder[i]);
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">repairCars</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> ranks, <span style="color:#0b0;font-weight:bold">int</span> cars) {
+</span></span><span style="display:flex;"><span>    sort(ranks.begin(), ranks.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> ranks[ranks.size() <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> LLONG_MAX <span style="color:#666">-</span> <span style="color:#666">100</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ans <span style="color:#666">=</span> r;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(can(ranks, mid, cars)) {
+</span></span><span style="display:flex;"><span>            ans<span style="color:#666">=</span> mid;
+</span></span><span style="display:flex;"><span>            r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function removes subfolders from a list of folder paths. It uses a Trie to efficiently check if a folder is a subfolder of another.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> removeSubfolders(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> folder) {
-</span></span></code></pre></div><p>This is the function definition for <code>removeSubfolders</code>. It takes a vector of folder paths and returns a vector with subfolders removed.</p>
-</li>
-<li>
-<p><strong>Sorting</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(folder.begin(), folder.end());
-</span></span></code></pre></div><p>The folder paths are sorted in lexicographical order to ensure that the parent folder always appears before its subfolder.</p>
-</li>
-<li>
-<p><strong>Result Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ans;
-</span></span></code></pre></div><p>An empty vector <code>ans</code> is initialized to store the folder paths that are not subfolders of others.</p>
-</li>
-<li>
-<p><strong>Trie Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    TrieNode<span style="color:#666">*</span> root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TrieNode(<span style="color:#a2f">false</span>);
-</span></span></code></pre></div><p>A new TrieNode <code>root</code> is created to serve as the root of the Trie. The <code>false</code> parameter indicates that this node does not represent the end of a valid folder path.</p>
-</li>
-<li>
-<p><strong>Iterating Over Folders</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> folder.size(); i<span style="color:#666">++</span>) {
-</span></span></code></pre></div><p>A loop is started to iterate over each folder in the sorted <code>folder</code> vector.</p>
-</li>
-<li>
-<p><strong>Checking for Subfolders</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>add(folder[i]))
-</span></span></code></pre></div><p>The function <code>add</code> is called on the root TrieNode to check if the current folder is a subfolder of any previously processed folder. If it is not a subfolder, the folder is added to the result.</p>
-</li>
-<li>
-<p><strong>Adding to Result</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans.push_back(folder[i]);
-</span></span></code></pre></div><p>If the folder is not a subfolder, it is added to the <code>ans</code> vector, which will be returned at the end.</p>
-</li>
-<li>
-<p><strong>Return Statement</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div><p>The function returns the <code>ans</code> vector, which contains the folder paths that are not subfolders of any other folder.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n log n)</li>
-<li><strong>Average Case:</strong> O(n log n)</li>
-<li><strong>Worst Case:</strong> O(n log n)</li>
-</ul>
-<p>The solution primarily depends on sorting the folder paths and checking each folder using the trie structure.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n)</li>
-<li><strong>Worst Case:</strong> O(n)</li>
-</ul>
-<p>The space complexity is proportional to the number of folder paths and the trie storage.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">can</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>ranks, <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> time, <span style="color:#0b0;font-weight:bold">int</span> cars) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This function checks if it is possible to repair a given number of cars within the specified time, based on the repair ranks provided. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes the counter &#39;cnt&#39; to track the total number of cars that can be repaired within the given time. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(time <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If time is zero, no cars can be repaired, so the function returns false. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> ranks.size(); i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterates through each rank to calculate the number of cars that can be repaired in the given time. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cnt <span style="color:#666">+=</span> (<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span>) sqrt(time<span style="color:#666">/</span>ranks[i]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For each rank, it calculates how many cars can be repaired in the given time and adds it to &#39;cnt&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">&gt;=</span> cars) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the counter reaches or exceeds the number of cars, it returns true, indicating that the repair is possible. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt <span style="color:#666">&gt;=</span> cars;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns true if the number of cars repaired is greater than or equal to the target; otherwise, it returns false. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">repairCars</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> ranks, <span style="color:#0b0;font-weight:bold">int</span> cars) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the &#39;repairCars&#39; function, which determines the minimum time required to repair the specified number of cars. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Sorting</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(ranks.begin(), ranks.end());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Sorts the repair ranks in ascending order to optimize the binary search process. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Maximum Rank</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> ranks[ranks.size() <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Determines the maximum repair rank from the sorted ranks. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> LLONG_MAX <span style="color:#666">-</span> <span style="color:#666">100</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes the binary search range, starting from 0 to a large value (LLONG_MAX - 100). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Binary Search Setup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ans <span style="color:#666">=</span> r;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Sets up a variable &#39;ans&#39; to store the minimum time required. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Binary Search Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Begins the binary search loop. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Middle Point Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calculates the middle point of the current binary search range. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Check Feasibility</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(can(ranks, mid, cars)) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calls the &#39;can&#39; function to check if it&#39;s possible to repair the cars in the current time &#39;mid&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Update Answer</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans <span style="color:#666">=</span> mid;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the &#39;can&#39; function returns true, updates &#39;ans&#39; to the current time. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Adjust Search Range</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If repair is possible within &#39;mid&#39; time, narrow the search range by adjusting &#39;r&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Adjust Search Range</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If repair is not possible within &#39;mid&#39; time, adjust the lower bound &#39;l&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Return Minimum Time</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the minimum time required to repair all cars. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n log T)</div>
+                        <div class=""> <b>Average Case:</b> O(n log T)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log T)</div> 
+                        <div class=""> <b>Description:</b> The binary search takes log(T) iterations, and for each iteration, we check the repair capacity of all mechanics, which takes O(n).</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) because we store the mechanics&#39; ranks and perform operations on them.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/remove-sub-folders-from-the-filesystem/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 
@@ -360,6 +964,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -607,98 +1212,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1233-remove-sub-folders-from-the-filesystem\/"
-    },
-    "headline": "Leetcode 1233: Remove Sub-Folders from the Filesystem",
-    "description": "In-depth solution and explanation for Leetcode 1233: Remove Sub-Folders from the Filesystem in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": ""
-    },
-    "datePublished": "2024-07-06T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Array\",\"String\",\"Depth-First Search\",\"Trie\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "video": {
-      "@type": "VideoObject",
-      "name": "Video explanation for Leetcode 1233: Remove Sub-Folders from the Filesystem",
-      "embedUrl": "https://www.youtube.com/watch?v=sFv6T_wLS4k",
-      "uploadDate": "2021-03-03",
-      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi_webp\/sFv6T_wLS4k\/maxresdefault.webp"
-    },
-    
-    "keywords": "[\"Array\",\"String\",\"Depth-First Search\",\"Trie\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1234-replace-the-substring-for-balanced-string\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1232-check-if-it-is-a-straight-line\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

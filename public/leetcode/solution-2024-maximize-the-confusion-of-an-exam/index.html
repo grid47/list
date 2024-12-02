@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -41,8 +43,105 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-2024-maximize-the-confusion-of-an-exam\/"
+    },
+    "headline": "Leetcode 2024: Maximize the Confusion of an Exam",
+    "description": "In-depth solution and explanation for Leetcode 2024: Maximize the Confusion of an Exam in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": ""
+    },
+    "datePublished": "2024-04-18T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"String\",\"Binary Search\",\"Sliding Window\",\"Prefix Sum\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "video": {
+      "@type": "VideoObject",
+      "name": "Video explanation for Leetcode 2024: Maximize the Confusion of an Exam",
+      "embedUrl": "https://www.youtube.com/watch?v=XYJv2pySK44",
+      "uploadDate": "2021-10-02",
+      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi_webp\/XYJv2pySK44\/maxresdefault.webp"
+    },
+    
+    "keywords": "[\"String\",\"Binary Search\",\"Sliding Window\",\"Prefix Sum\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-2027-minimum-moves-to-convert-string\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-2023-number-of-pairs-of-strings-with-concatenation-equal-to-target\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -183,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Apr 18, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    1 min read
                                 </span>					
                             </div>
                         </div>			
@@ -200,206 +299,348 @@
                     
                     <div class="article-post">
                         <hr>
-<p>You are given a string <code>answerKey</code> where each character represents a question&rsquo;s answer (either &lsquo;T&rsquo; for True or &lsquo;F&rsquo; for False), and an integer <code>k</code>. You are allowed to change at most <code>k</code> answers. Your task is to find the maximum number of consecutive &lsquo;T&rsquo;s or &lsquo;F&rsquo;s in the string after performing at most <code>k</code> changes.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input consists of a string <code>answerKey</code> where each character is either &lsquo;T&rsquo; or &lsquo;F&rsquo;, and an integer <code>k</code> representing the maximum number of changes allowed.</li>
-<li><strong>Example:</strong> <code>answerKey = &quot;FFTT&quot;, k = 2</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= answerKey.length &lt;= 50000</li>
-<li>1 &lt;= k &lt;= answerKey.length</li>
-<li>answerKey[i] is either &lsquo;T&rsquo; or &lsquo;F&rsquo;.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> Return the maximum number of consecutive &lsquo;T&rsquo;s or &lsquo;F&rsquo;s that can be achieved after performing at most <code>k</code> changes.</li>
-<li><strong>Example:</strong> <code>Output: 4</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The answer must be the maximum consecutive occurrence of either &lsquo;T&rsquo; or &lsquo;F&rsquo;.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> The goal is to find the longest subsequence of consecutive &lsquo;T&rsquo;s or &lsquo;F&rsquo;s that can be formed after changing at most <code>k</code> characters.</p>
-<ul>
-<li>
-<ol>
-<li>Use a sliding window approach where you iterate over the string while maintaining a window of consecutive characters that are either &lsquo;T&rsquo; or &lsquo;F&rsquo;.</li>
-</ol>
-</li>
-<li>
-<ol start="2">
-<li>Track the number of changes you make and adjust the window size such that the number of changes does not exceed <code>k</code>.</li>
-</ol>
-</li>
-<li>
-<ol start="3">
-<li>Update the result as you move through the string to ensure the maximum length of consecutive &lsquo;T&rsquo;s or &lsquo;F&rsquo;s is obtained.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ol>
-</li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>The string <code>answerKey</code> contains only the characters &lsquo;T&rsquo; and &lsquo;F&rsquo;.</li>
-<li>The number of changes is limited by the integer <code>k</code>.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li>
-<p><strong>Input:</strong> <code>answerKey = &quot;FFTT&quot;, k = 2</code>  <br>
-<strong>Explanation:</strong> We can replace both &lsquo;F&rsquo;s with &lsquo;T&rsquo;s, forming the string &lsquo;TTTT&rsquo;, which gives us 4 consecutive &lsquo;T&rsquo;s.</p>
-</li>
-<li>
-<p><strong>Input:</strong> <code>answerKey = &quot;TFTF&quot;, k = 1</code>  <br>
-<strong>Explanation:</strong> We can replace one &lsquo;F&rsquo; with &lsquo;T&rsquo;, forming either &lsquo;TTTF&rsquo; or &lsquo;TTFT&rsquo;, which gives us 3 consecutive &lsquo;T&rsquo;s.</p>
-</li>
-<li>
-<p><strong>Input:</strong> <code>answerKey = &quot;FTFTFT&quot;, k = 1</code>  <br>
-<strong>Explanation:</strong> We can replace one &lsquo;F&rsquo; with &lsquo;T&rsquo;, resulting in either &lsquo;TTFTFT&rsquo; or &lsquo;FTTTFT&rsquo;, both giving us 3 consecutive &lsquo;T&rsquo;s.</p>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>We can solve this problem efficiently using a sliding window approach to track the maximum number of consecutive &lsquo;T&rsquo;s or &lsquo;F&rsquo;s that can be formed with at most <code>k</code> changes.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>The problem can be reduced to finding the longest subsequence of &lsquo;T&rsquo;s or &lsquo;F&rsquo;s after changing at most <code>k</code> elements.</li>
-<li>By applying a sliding window, we can efficiently find the longest possible subsequence that meets the constraints.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>If the input string is empty, return 0.</li>
-<li>Ensure the solution efficiently handles the maximum input size (up to 50000 characters).</li>
-<li>If <code>k</code> is 0, no changes can be made, and the answer should be the longest sequence of consecutive &lsquo;T&rsquo;s or &lsquo;F&rsquo;s in the original string.</li>
-<li>Ensure that the solution does not exceed time limits for large inputs.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxConsecutiveAnswers</span>(string key, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fidx <span style="color:#666">=</span> <span style="color:#666">0</span>, tidx <span style="color:#666">=</span> <span style="color:#666">0</span>, fcnt <span style="color:#666">=</span> <span style="color:#666">0</span>, tcnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> key.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(key[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;F&#39;</span>) fcnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> tcnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(fcnt <span style="color:#666">&gt;</span> k) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(key[tidx] <span style="color:#666">==</span> <span style="color:#b44">&#39;F&#39;</span>) fcnt<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>            tidx<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, i <span style="color:#666">-</span> tidx <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(tcnt <span style="color:#666">&gt;</span> k) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(key[fidx] <span style="color:#666">==</span> <span style="color:#b44">&#39;T&#39;</span>) tcnt<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>            fidx<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, i <span style="color:#666">-</span> fidx <span style="color:#666">+</span> <span style="color:#666">1</span>);            
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function finds the maximum number of consecutive answers that can be obtained by changing at most &lsquo;k&rsquo; characters in the given string &lsquo;key&rsquo;. The string contains two types of characters: &lsquo;F&rsquo; and &lsquo;T&rsquo;. The goal is to find the longest subsequence where at most &lsquo;k&rsquo; characters can be changed from &lsquo;F&rsquo; to &lsquo;T&rsquo; or vice versa.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxConsecutiveAnswers</span>(string key, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span></code></pre></div><p>This defines the function &lsquo;maxConsecutiveAnswers&rsquo;, which takes a string &lsquo;key&rsquo; and an integer &lsquo;k&rsquo;. It returns the maximum length of a subsequence where at most &lsquo;k&rsquo; characters can be changed to either &lsquo;F&rsquo; or &lsquo;T&rsquo;.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div><p>This initializes an integer variable &lsquo;ans&rsquo; to store the maximum length of consecutive answers. The initial value is set to 1 since the minimum answer will be 1.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fidx <span style="color:#666">=</span> <span style="color:#666">0</span>, tidx <span style="color:#666">=</span> <span style="color:#666">0</span>, fcnt <span style="color:#666">=</span> <span style="color:#666">0</span>, tcnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div><p>These variables are initialized to keep track of the indices and counts for &lsquo;F&rsquo; and &lsquo;T&rsquo; characters. &lsquo;fidx&rsquo; and &rsquo;tidx&rsquo; are indices for the start of the window, while &lsquo;fcnt&rsquo; and &rsquo;tcnt&rsquo; are the counts of &lsquo;F&rsquo; and &lsquo;T&rsquo; characters within the window.</p>
-</li>
-<li>
-<p><strong>Loop Start</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> key.size(); i<span style="color:#666">++</span>) {
-</span></span></code></pre></div><p>This loop iterates through each character in the string &lsquo;key&rsquo; to explore different possible subsequences.</p>
-</li>
-<li>
-<p><strong>Condition Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(key[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;F&#39;</span>) fcnt<span style="color:#666">++</span>;
-</span></span></code></pre></div><p>This checks if the current character is &lsquo;F&rsquo;. If it is, the count of &lsquo;F&rsquo; characters within the current window (&lsquo;fcnt&rsquo;) is incremented.</p>
-</li>
-<li>
-<p><strong>Condition Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> tcnt<span style="color:#666">++</span>;
-</span></span></code></pre></div><p>If the current character is &lsquo;T&rsquo;, the count of &lsquo;T&rsquo; characters within the current window (&rsquo;tcnt&rsquo;) is incremented.</p>
-</li>
-<li>
-<p><strong>Window Adjustment</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(fcnt <span style="color:#666">&gt;</span> k) {
-</span></span></code></pre></div><p>This loop ensures that the number of &lsquo;F&rsquo; characters within the window does not exceed &lsquo;k&rsquo;. If the count of &lsquo;F&rsquo; exceeds &lsquo;k&rsquo;, the window is adjusted.</p>
-</li>
-<li>
-<p><strong>Window Adjustment</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(key[tidx] <span style="color:#666">==</span> <span style="color:#b44">&#39;F&#39;</span>) fcnt<span style="color:#666">--</span>;
-</span></span></code></pre></div><p>This checks if the character at the leftmost index (&rsquo;tidx&rsquo;) is &lsquo;F&rsquo;. If it is, the count of &lsquo;F&rsquo; characters (&lsquo;fcnt&rsquo;) is decreased.</p>
-</li>
-<li>
-<p><strong>Window Adjustment</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            tidx<span style="color:#666">++</span>;
-</span></span></code></pre></div><p>This moves the leftmost index of the window (&rsquo;tidx&rsquo;) to the right, effectively shrinking the window from the left.</p>
-</li>
-<li>
-<p><strong>Update Answer</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, i <span style="color:#666">-</span> tidx <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span></code></pre></div><p>This updates the value of &lsquo;ans&rsquo; by comparing the current answer with the length of the current window (i - tidx + 1). It ensures that &lsquo;ans&rsquo; always holds the maximum length of a valid subsequence.</p>
-</li>
-<li>
-<p><strong>Window Adjustment</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(tcnt <span style="color:#666">&gt;</span> k) {
-</span></span></code></pre></div><p>This loop ensures that the number of &lsquo;T&rsquo; characters within the window does not exceed &lsquo;k&rsquo;. If the count of &lsquo;T&rsquo; exceeds &lsquo;k&rsquo;, the window is adjusted.</p>
-</li>
-<li>
-<p><strong>Window Adjustment</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(key[fidx] <span style="color:#666">==</span> <span style="color:#b44">&#39;T&#39;</span>) tcnt<span style="color:#666">--</span>;
-</span></span></code></pre></div><p>This checks if the character at the leftmost index (&lsquo;fidx&rsquo;) is &lsquo;T&rsquo;. If it is, the count of &lsquo;T&rsquo; characters (&rsquo;tcnt&rsquo;) is decreased.</p>
-</li>
-<li>
-<p><strong>Window Adjustment</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            fidx<span style="color:#666">++</span>;
-</span></span></code></pre></div><p>This moves the leftmost index of the window (&lsquo;fidx&rsquo;) to the right, shrinking the window from the left.</p>
-</li>
-<li>
-<p><strong>Update Answer</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, i <span style="color:#666">-</span> fidx <span style="color:#666">+</span> <span style="color:#666">1</span>);            
-</span></span></code></pre></div><p>This updates &lsquo;ans&rsquo; again by comparing it with the length of the current window (i - fidx + 1).</p>
-</li>
-<li>
-<p><strong>Return Statement</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div><p>This returns the final result, which is the length of the longest valid subsequence where at most &lsquo;k&rsquo; characters can be changed.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n)</li>
-<li><strong>Average Case:</strong> O(n)</li>
-<li><strong>Worst Case:</strong> O(n)</li>
-</ul>
-<p>The sliding window approach iterates through the string once, resulting in a time complexity of O(n).</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(1)</li>
-<li><strong>Worst Case:</strong> O(1)</li>
-</ul>
-<p>The space complexity is O(1) as the solution only requires a few variables to track the window and counts.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+
+
+
+
+
+
+
+
+
+
+<div class="">  </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="" 
+             onclick="switchProblemGuideContent(this, '')">
+                          
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="4"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="5"></button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> </div>
+                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> </div>
+                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Steps:</b>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Steps:</b>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"> Code </button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#666">%!</span>s(<span style="color:#666">&lt;</span>nil<span style="color:#666">&gt;</span>)
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> </div>
+                        <div class=""> <b>Average Case:</b> </div>
+                        <div class=""> <b>Worst Case:</b> </div> 
+                        <div class=""> <b>Description:</b> </div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> </div>
+                        <div class=""> <b>Worst Case:</b> </div> 
+                        <div class=""> <b>Description:</b> </div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target=""]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/maximize-the-confusion-of-an-exam/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 
@@ -419,6 +660,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -666,98 +908,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-2024-maximize-the-confusion-of-an-exam\/"
-    },
-    "headline": "Leetcode 2024: Maximize the Confusion of an Exam",
-    "description": "In-depth solution and explanation for Leetcode 2024: Maximize the Confusion of an Exam in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": ""
-    },
-    "datePublished": "2024-04-18T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"String\",\"Binary Search\",\"Sliding Window\",\"Prefix Sum\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "video": {
-      "@type": "VideoObject",
-      "name": "Video explanation for Leetcode 2024: Maximize the Confusion of an Exam",
-      "embedUrl": "https://www.youtube.com/watch?v=XYJv2pySK44",
-      "uploadDate": "2021-10-02",
-      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi_webp\/XYJv2pySK44\/maxresdefault.webp"
-    },
-    
-    "keywords": "[\"String\",\"Binary Search\",\"Sliding Window\",\"Prefix Sum\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-2027-minimum-moves-to-convert-string\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-2023-number-of-pairs-of-strings-with-concatenation-equal-to-target\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -40,8 +42,105 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-946-validate-stack-sequences\/"
+    },
+    "headline": "Leetcode 946: Validate Stack Sequences",
+    "description": "In-depth solution and explanation for Leetcode 946: Validate Stack Sequences in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": ""
+    },
+    "datePublished": "2024-08-04T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Array\",\"Stack\",\"Simulation\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "video": {
+      "@type": "VideoObject",
+      "name": "Video explanation for Leetcode 946: Validate Stack Sequences",
+      "embedUrl": "https://www.youtube.com/watch?v=YF5ZWSWvMT0",
+      "uploadDate": "2023-04-13",
+      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/YF5ZWSWvMT0\/maxresdefault.jpg"
+    },
+    
+    "keywords": "[\"Array\",\"Stack\",\"Simulation\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-947-most-stones-removed-with-same-row-or-column\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-945-minimum-increment-to-make-array-unique\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -199,209 +298,570 @@
                     
                     <div class="article-post">
                         <hr>
-<p>You are given two integer arrays, <code>pushed</code> and <code>popped</code>, each containing distinct values. The arrays represent the order of elements being pushed onto and popped from an initially empty stack. Your task is to determine if it is possible to obtain the <code>popped</code> sequence from the <code>pushed</code> sequence through a series of valid stack push and pop operations.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input consists of two integer arrays: <code>pushed</code> and <code>popped</code>. Both arrays contain distinct values, and the length of both arrays is the same.</li>
-<li><strong>Example:</strong> <code>Input: pushed = [1, 2, 3, 4, 5], popped = [5, 4, 3, 2, 1]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= pushed.length &lt;= 1000</li>
-<li>0 &lt;= pushed[i] &lt;= 1000</li>
-<li>All elements in pushed and popped are unique.</li>
-<li>popped.length == pushed.length</li>
-<li>popped is a permutation of pushed.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> Return true if the sequence <code>popped</code> can be obtained by performing a sequence of push and pop operations on an initially empty stack, otherwise return false.</li>
-<li><strong>Example:</strong> <code>Output: true</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The input arrays are always valid, and the answer will fit in a boolean value.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> The goal is to verify if the <code>popped</code> array can be formed by performing valid stack operations on the <code>pushed</code> array.</p>
-<ul>
-<li>
-<ol>
-<li>Initialize an empty stack to simulate the stack operations.</li>
-</ol>
-</li>
-<li>
-<ol start="2">
-<li>Use two pointers, one for traversing <code>pushed</code> and another for traversing <code>popped</code>.</li>
-</ol>
-</li>
-<li>
-<ol start="3">
-<li>For each element in <code>pushed</code>, push it onto the stack.</li>
-</ol>
-</li>
-<li>
-<ol start="4">
-<li>While the stack is not empty and the top of the stack matches the current element in <code>popped</code>, pop the top element from the stack and move the pointer in <code>popped</code>.</li>
-</ol>
-</li>
-<li>
-<ol start="5">
-<li>Repeat the process until all elements from <code>pushed</code> are processed and the stack is empty.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ol>
-</li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>The arrays <code>pushed</code> and <code>popped</code> contain only unique values.</li>
-<li>The arrays are permutations of each other, meaning that <code>popped</code> can be re-arranged into <code>pushed</code>.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li>
-<p><strong>Input:</strong> <code>Input: pushed = [1, 2, 3, 4, 5], popped = [5, 4, 3, 2, 1]</code>  <br>
-<strong>Explanation:</strong> In this example, we can simulate the stack operations as follows: push(1), push(2), push(3), push(4), push(5), then pop elements in reverse order: pop() -&gt; 5, pop() -&gt; 4, pop() -&gt; 3, pop() -&gt; 2, pop() -&gt; 1. Since the stack operations produce the same order as <code>popped</code>, the output is true.</p>
-</li>
-<li>
-<p><strong>Input:</strong> <code>Input: pushed = [1, 2, 3, 4, 5], popped = [5, 3, 4, 1, 2]</code>  <br>
-<strong>Explanation:</strong> In this example, the element 1 cannot be popped before 2. It is not possible to obtain the sequence <code>popped</code> by performing valid stack operations on <code>pushed</code>, so the output is false.</p>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>The approach is to simulate stack operations by iterating over the <code>pushed</code> array and checking if the elements can be popped from the stack in the order specified by <code>popped</code>.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>The task involves simulating stack operations and ensuring that the order of pops matches the given sequence.</li>
-<li>The problem can be solved efficiently with a single pass through the arrays.</li>
-<li>Using a stack to simulate the push and pop operations is a straightforward approach.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>If both arrays are empty, the result is true because no operations are needed.</li>
-<li>For large inputs, ensure the solution handles up to 1000 elements efficiently.</li>
-<li>If the arrays are already in the correct order, no operations are needed, and the result is true.</li>
-<li>Make sure that the solution works within the problem constraints, particularly with array lengths up to 1000.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">validateStackSequences</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> pushed, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> popped) {
-</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    stk.push(pushed[<span style="color:#666">0</span>]);
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> pushed.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> n) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(j <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> popped[j]) {
-</span></span><span style="display:flex;"><span>            j<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>            stk.pop();
+
+
+
+
+
+
+
+
+
+
+<div class=""> Given an array of integers, you need to compute the k-radius average for each element in the array. The k-radius average for an element at index i is the average of the elements from index i - k to i + k (inclusive). If there are fewer than k elements before or after the index i, the result for that index will be -1. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> You are given an integer array nums and an integer k.</div>
+                        <div class=""> <b>Example:</b> nums = [7,4,3,9,1,8,5,2,6], k = 3</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • -10^9 &lt;= nums[i] &lt;= 10^9</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> Return an array of integers where each element is the k-radius average for the corresponding index in the input array.</div>
+                        <div class=""> <b>Example:</b> Output: [-1,-1,-1,5,4,4,-1,-1,-1]</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The length of the output array is the same as the input array.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> Calculate the k-radius average for each index in the array.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Initialize an array to store prefix sums of the input array.</div>
+                            
+                                <div style="margin-left: 20px;"> • For each index, check if there are enough elements to the left and right to calculate the k-radius average.</div>
+                            
+                                <div style="margin-left: 20px;"> • If there are enough elements, compute the sum of the subarray and calculate the integer division of the sum by the total number of elements.</div>
+                            
+                                <div style="margin-left: 20px;"> • If there are not enough elements, set the result for that index to -1.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The function must handle large input sizes efficiently.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • -10^9 &lt;= nums[i] &lt;= 10^9</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The array may contain both large positive and negative integers.</div>
+                            
+                                <div style="margin-left: 20px;"> • The function should be optimized for large inputs.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1,2,3,4,5], k = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The k-radius average for index 2 is calculated using elements from index 0 to index 4. The sum is 15, so the average is 15 // 5 = 3.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> We calculate the prefix sum of the array to efficiently compute the sum of elements in any subarray. We use this to determine the k-radius average for each index.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • We need to calculate the sum of elements in a subarray for each index.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • Using a prefix sum array will allow us to compute the sum of any subarray in constant time.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1. Compute the prefix sum array of nums.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. For each index, check if the k-radius average can be computed.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. If possible, calculate the sum of the subarray and divide by the total number of elements to get the average.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. If not, set the result to -1.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Handle the case where nums is empty.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure that the solution handles large arrays efficiently.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • When k is 0, the k-radius average for each index is just the element itself.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Handle large values of k and nums size efficiently.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Prefix Sum Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Prefix Sum Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Prefix Sum Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Window Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Boundary Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Window Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Averaging</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Statement</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> getAverages(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> psum(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> avg(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    psum[<span style="color:#666">0</span>] <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        psum[i] <span style="color:#666">=</span> psum[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> nums[i];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">-</span> k <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">+</span> k <span style="color:#666">&gt;=</span> n) {
+</span></span><span style="display:flex;"><span>            avg[i] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            avg[i] <span style="color:#666">=</span> (psum[i <span style="color:#666">+</span> k] <span style="color:#666">-</span> ((i <span style="color:#666">-</span> k) <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> psum[i <span style="color:#666">-</span> k <span style="color:#666">-</span> <span style="color:#666">1</span>])) <span style="color:#666">/</span> (<span style="color:#666">2</span> <span style="color:#666">*</span> k <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        stk.push(pushed[i<span style="color:#666">++</span>]);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(j <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> popped[j]) {
-</span></span><span style="display:flex;"><span>        j<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        stk.pop();
-</span></span><span style="display:flex;"><span>    }        
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> stk.empty();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> avg;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function checks if a sequence of stack operations can produce the sequence <code>popped</code> from the sequence <code>pushed</code>. It uses a stack to simulate pushing and popping, and ensures that the elements are popped in the correct order.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">validateStackSequences</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> pushed, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> popped) {
-</span></span></code></pre></div><p>This line declares the function <code>validateStackSequences</code>, which takes two vectors: <code>pushed</code> (the order in which elements are pushed onto the stack) and <code>popped</code> (the desired popping sequence). The function returns a boolean value indicating whether the sequence is valid.</p>
-</li>
-<li>
-<p><strong>Stack Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
-</span></span></code></pre></div><p>Declare a stack <code>stk</code> to simulate the push and pop operations.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div><p>Initialize two integer variables: <code>i</code> (used to iterate through the <code>pushed</code> vector) and <code>j</code> (used to iterate through the <code>popped</code> vector).</p>
-</li>
-<li>
-<p><strong>Initial Push</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stk.push(pushed[<span style="color:#666">0</span>]);
-</span></span></code></pre></div><p>Push the first element of the <code>pushed</code> vector onto the stack.</p>
-</li>
-<li>
-<p><strong>Size Calculation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> pushed.size();
-</span></span></code></pre></div><p>Calculate the size of the <code>pushed</code> vector and store it in <code>n</code>.</p>
-</li>
-<li>
-<p><strong>Main Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> n) {
-</span></span></code></pre></div><p>Start a loop that continues until <code>i</code> reaches the size of the <code>pushed</code> vector.</p>
-</li>
-<li>
-<p><strong>Inner Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(j <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> popped[j]) {
-</span></span></code></pre></div><p>This inner loop checks if the current stack&rsquo;s top matches the current element in <code>popped</code> and pops from the stack accordingly.</p>
-</li>
-<li>
-<p><strong>Increment <code>j</code></strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            j<span style="color:#666">++</span>;
-</span></span></code></pre></div><p>Increment <code>j</code> to check the next element in the <code>popped</code> vector after popping the current top element from the stack.</p>
-</li>
-<li>
-<p><strong>Pop Operation</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.pop();
-</span></span></code></pre></div><p>Pop the top element from the stack if it matches the current element in <code>popped</code>.</p>
-</li>
-<li>
-<p><strong>Push Next Element</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        stk.push(pushed[i<span style="color:#666">++</span>]);
-</span></span></code></pre></div><p>Push the next element from the <code>pushed</code> vector onto the stack and increment <code>i</code>.</p>
-</li>
-<li>
-<p><strong>Final Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(j <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> popped[j]) {
-</span></span></code></pre></div><p>After the main loop, check if there are still elements in the stack that match the remaining elements in the <code>popped</code> vector.</p>
-</li>
-<li>
-<p><strong>Increment <code>j</code> Again</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        j<span style="color:#666">++</span>;
-</span></span></code></pre></div><p>Increment <code>j</code> to check the next element in <code>popped</code> after popping the current top element from the stack.</p>
-</li>
-<li>
-<p><strong>Pop Operation Again</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        stk.pop();
-</span></span></code></pre></div><p>Pop the top element from the stack if it matches the current element in <code>popped</code>.</p>
-</li>
-<li>
-<p><strong>Return Result</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> stk.empty();
-</span></span></code></pre></div><p>Return true if the stack is empty (all elements have been popped correctly), otherwise return false.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n)</li>
-<li><strong>Average Case:</strong> O(n)</li>
-<li><strong>Worst Case:</strong> O(n)</li>
-</ul>
-<p>The time complexity is O(n) since we process each element in the arrays once.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(1)</li>
-<li><strong>Worst Case:</strong> O(n)</li>
-</ul>
-<p>The space complexity is O(n) in the worst case when the stack stores all elements, and O(1) in the best case when the stack is empty.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> getAverages(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This defines the `getAverages` function that takes a reference to a vector `nums` and an integer `k` as input parameters, and returns a vector of integers. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Variable Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This declares an integer `n` that stores the size of the `nums` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> psum(n, <span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This initializes a vector `psum` of size `n` to store the prefix sums of the `nums` array, initialized to 0. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> avg(n, <span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This initializes a vector `avg` of size `n` to store the averages of the moving window, initialized to 0. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Prefix Sum Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    psum[<span style="color:#666">0</span>] <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This sets the first element of the `psum` vector to be equal to the first element of the `nums` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Prefix Sum Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This starts a loop from the second element to the last element of the `nums` vector to calculate the prefix sum. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Prefix Sum Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        psum[i] <span style="color:#666">=</span> psum[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> nums[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This calculates the prefix sum for the `i`-th element by adding the `i`-th element of `nums` to the previous prefix sum. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Window Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This starts a loop to calculate the moving average for each element in the `nums` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Boundary Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">-</span> k <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">+</span> k <span style="color:#666">&gt;=</span> n) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This checks if the current index `i` is within the valid window range, i.e., the window `[i-k, i&#43;k]` must be within bounds. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            avg[i] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the window is out of bounds for the current index `i`, it assigns `-1` to the corresponding position in the `avg` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Window Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This handles the case where the current index `i` is within the valid window range. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Averaging</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            avg[i] <span style="color:#666">=</span> (psum[i <span style="color:#666">+</span> k] <span style="color:#666">-</span> ((i <span style="color:#666">-</span> k) <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> psum[i <span style="color:#666">-</span> k <span style="color:#666">-</span> <span style="color:#666">1</span>])) <span style="color:#666">/</span> (<span style="color:#666">2</span> <span style="color:#666">*</span> k <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This calculates the average for the window centered at `i`. It subtracts the appropriate prefix sums to get the sum of elements in the window and divides by the window size `2k &#43; 1`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> avg;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This returns the vector `avg`, which contains the moving averages (or `-1` for out-of-bounds windows). </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the array.</div>
+                        <div class=""> <b>Average Case:</b> O(n), since we only iterate over the array once for prefix sums and once for calculating the averages.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), the time complexity remains linear.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear because we iterate over the array twice: once to calculate the prefix sum, and once to compute the averages.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n), since both the prefix sum and result arrays are of size n.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) space for the prefix sum array and the result array.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is linear due to the storage of the prefix sum and the result array.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/validate-stack-sequences/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 
@@ -421,6 +881,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -664,98 +1125,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-946-validate-stack-sequences\/"
-    },
-    "headline": "Leetcode 946: Validate Stack Sequences",
-    "description": "In-depth solution and explanation for Leetcode 946: Validate Stack Sequences in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": ""
-    },
-    "datePublished": "2024-08-04T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Array\",\"Stack\",\"Simulation\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "video": {
-      "@type": "VideoObject",
-      "name": "Video explanation for Leetcode 946: Validate Stack Sequences",
-      "embedUrl": "https://www.youtube.com/watch?v=YF5ZWSWvMT0",
-      "uploadDate": "2023-04-13",
-      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/YF5ZWSWvMT0\/maxresdefault.jpg"
-    },
-    
-    "keywords": "[\"Array\",\"Stack\",\"Simulation\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-947-most-stones-removed-with-same-row-or-column\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-945-minimum-increment-to-make-array-unique\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

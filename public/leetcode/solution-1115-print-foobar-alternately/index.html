@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -38,8 +40,97 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1115-print-foobar-alternately\/"
+    },
+    "headline": "Leetcode 1115: Print FooBar Alternately",
+    "description": "In-depth solution and explanation for Leetcode 1115: Print FooBar Alternately in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": ""
+    },
+    "datePublished": "2024-07-18T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Concurrency\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "keywords": "[\"Concurrency\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1116-print-zero-even-odd\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1114-print-in-order\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -180,7 +271,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 18, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -197,204 +288,661 @@
                     
                     <div class="article-post">
                         <hr>
-<p>You are given a class <code>FooBar</code> with two methods: <code>foo()</code> and <code>bar()</code>. These methods are called concurrently by two threads. One thread calls <code>foo()</code> while the other calls <code>bar()</code>. You need to modify the program to ensure that the output alternates between &lsquo;foo&rsquo; and &lsquo;bar&rsquo;, and &lsquo;foobar&rsquo; is printed exactly <code>n</code> times. The threads should alternate their execution such that <code>foo()</code> is printed first, followed by <code>bar()</code>, and this pattern should continue for <code>n</code> times.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input consists of an integer <code>n</code> representing the number of times the pattern &lsquo;foobar&rsquo; should be printed.</li>
-<li><strong>Example:</strong> <code>Input: n = 3</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= n &lt;= 1000</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> The output should be the string &lsquo;foobar&rsquo; repeated <code>n</code> times, with each &lsquo;foo&rsquo; and &lsquo;bar&rsquo; printed by different threads in alternating order.</li>
-<li><strong>Example:</strong> <code>Output: 'foobarfoobarfoobar'</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The two threads should print &lsquo;foo&rsquo; and &lsquo;bar&rsquo; in alternating order, starting with &lsquo;foo&rsquo;.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> Ensure that the two threads alternate between printing &lsquo;foo&rsquo; and &lsquo;bar&rsquo;, starting with &lsquo;foo&rsquo;, for <code>n</code> times.</p>
-<ul>
-<li>Use two mutexes to control the execution order of the threads.</li>
-<li>Thread A prints &lsquo;foo&rsquo;, and thread B prints &lsquo;bar&rsquo;. Thread A should print first, then thread B, and the alternation continues for <code>n</code> times.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>Threads are scheduled asynchronously, so thread A and thread B may not execute in any specific order without synchronization.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li>
-<p><strong>Input:</strong> <code>Input: n = 1</code>  <br>
-<strong>Explanation:</strong> In this case, thread A calls <code>foo()</code> and thread B calls <code>bar()</code>. The expected output is &lsquo;foobar&rsquo; because thread A prints &lsquo;foo&rsquo; first, followed by thread B printing &lsquo;bar&rsquo;.</p>
-</li>
-<li>
-<p><strong>Input:</strong> <code>Input: n = 2</code>  <br>
-<strong>Explanation:</strong> Here, the expected output is &lsquo;foobarfoobar&rsquo; because the pattern &lsquo;foo&rsquo; followed by &lsquo;bar&rsquo; should repeat twice.</p>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>The approach uses two mutexes to synchronize the threads. The first mutex ensures that &lsquo;foo&rsquo; is printed first by thread A, and the second mutex controls the execution of thread B, ensuring &lsquo;bar&rsquo; is printed after &lsquo;foo&rsquo;.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>We need to manage the execution order of two threads to ensure they print in the correct sequence.</li>
-<li>Using two mutexes allows us to control which thread prints at any given time, ensuring they alternate in the desired order.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>Since n is guaranteed to be at least 1, there will always be at least one &lsquo;foobar&rsquo; printed.</li>
-<li>For large values of <code>n</code>, the solution should handle multiple thread executions efficiently.</li>
-<li>When <code>n</code> is 1, the output is simply &lsquo;foobar&rsquo;.</li>
-<li>The solution must handle both small and large values of <code>n</code> efficiently.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
-</span></span><span style="display:flex;"><span>mutex mtx1, mtx2;
+
+
+
+
+
+
+
+
+
+
+<div class=""> Alice and Bob are traveling to Rome for separate business meetings. You are given four strings representing their travel dates: arriveAlice, leaveAlice, arriveBob, and leaveBob. Each string follows the format &lsquo;MM-DD&rsquo;, which represents the month and day of their respective travel dates. Alice will be in Rome from &lsquo;arriveAlice&rsquo; to &rsquo;leaveAlice&rsquo;, while Bob will be in the city from &lsquo;arriveBob&rsquo; to &rsquo;leaveBob&rsquo;. Your task is to calculate how many days they will both be in Rome together. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> The input consists of four strings: arriveAlice, leaveAlice, arriveBob, and leaveBob. Each string represents a date in the format &#39;MM-DD&#39;.</div>
+                        <div class=""> <b>Example:</b> arriveAlice = &#39;07-10&#39;, leaveAlice = &#39;07-15&#39;, arriveBob = &#39;07-12&#39;, leaveBob = &#39;07-17&#39;</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= month &lt;= 12</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= day &lt;= 31</div>
+                            
+                                <div style="margin-left: 20px;"> • Alice&#39;s arrival date is earlier than or equal to their departure date.</div>
+                            
+                                <div style="margin-left: 20px;"> • Bob&#39;s arrival date is earlier than or equal to their departure date.</div>
+                            
+                                <div style="margin-left: 20px;"> • The dates are valid within a non-leap year.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> Return an integer representing the number of days Alice and Bob will both be in Rome together.</div>
+                        <div class=""> <b>Example:</b> Output: 4</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The goal is to find the overlap between the two time intervals (one for Alice and one for Bob). The number of days they both spend in Rome together is the length of the intersection of these two intervals.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1. Convert the string dates into a day of the year format.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. Find the overlapping range by calculating the maximum of the start dates and the minimum of the end dates.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. If there is an overlap, calculate the number of overlapping days by subtracting the start date of the overlap from the end date.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Return the total number of overlapping days.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The solution should efficiently handle all valid date ranges for a non-leap year.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Time complexity should be O(1), as the operations are based on fixed date conversions.</div>
+                            
+                                <div style="margin-left: 20px;"> • Space complexity should also be O(1), since we are only using a few variables.</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The dates provided are valid and fall within the same calendar year.</div>
+                            
+                                <div style="margin-left: 20px;"> • Alice and Bob may or may not have overlapping travel dates.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> arriveAlice = &#39;07-10&#39;, leaveAlice = &#39;07-15&#39;, arriveBob = &#39;07-12&#39;, leaveBob = &#39;07-17&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, Alice is in Rome from July 10 to July 15, and Bob is in Rome from July 12 to July 17. They will both be in Rome together from July 12 to July 15, which gives 4 days of overlap.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> arriveAlice = &#39;10-01&#39;, leaveAlice = &#39;10-31&#39;, arriveBob = &#39;11-01&#39;, leaveBob = &#39;12-31&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, Alice is in Rome in October, and Bob is in Rome from November onwards. There are no overlapping days, so the result is 0.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> arriveAlice = &#39;02-15&#39;, leaveAlice = &#39;02-18&#39;, arriveBob = &#39;02-16&#39;, leaveBob = &#39;02-20&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Alice is in Rome from February 15 to February 18, and Bob is in Rome from February 16 to February 20. They overlap from February 16 to February 18, so the result is 3 days.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> We will convert the dates into a single day number of the year (from 1 to 365) and then calculate the overlap between Alice&#39;s and Bob&#39;s travel dates.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The challenge is to handle the overlap calculation efficiently.</div>
+                            
+                                <div style="margin-left: 20px;"> • We need to account for all valid months and days of a non-leap year.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • A simple solution can be derived by converting the dates into day numbers and calculating the overlap directly.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1. Define a helper function to convert the &#39;MM-DD&#39; string format into the corresponding day of the year.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. For Alice&#39;s and Bob&#39;s dates, convert their arrival and departure dates into day numbers.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. Calculate the overlap by finding the maximum of the start dates and the minimum of the end dates.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. If the overlap exists (start &lt;= end), calculate the number of days by subtracting the start day from the end day.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • There are no empty inputs since all dates are valid.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Given the constraints, all inputs are manageable, and the solution runs in constant time due to the fixed nature of date operations.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If there is no overlap, return 0 days.</div>
+                            
+                                <div style="margin-left: 20px;"> • If Alice and Bob have identical travel dates, the total days together will be the length of the interval.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The solution is optimized for constant time complexity due to the simplicity of date conversion and comparison operations.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Comment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Decrement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Decrement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Access Modifier</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Function Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Comment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Condition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Increment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Return Statement</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic">// Convert date to respective number in year.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">td</span>(string s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> s[<span style="color:#666">1</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">+</span> <span style="color:#666">10</span><span style="color:#666">*</span>(s[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> s[<span style="color:#666">4</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">+</span> <span style="color:#666">10</span><span style="color:#666">*</span>(s[<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#666">--</span>m;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (m <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        d <span style="color:#666">+=</span> md[m];
+</span></span><span style="display:flex;"><span>        <span style="color:#666">--</span>m;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> d;
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>FooBar(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    mtx2.lock();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>n <span style="color:#666">=</span> n;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">foo</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printFoo) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        mtx1.lock();
-</span></span><span style="display:flex;"><span>    	<span style="color:#080;font-style:italic">// printFoo() outputs &#34;foo&#34;. Do not change or remove this line.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    	printFoo();
-</span></span><span style="display:flex;"><span>        mtx2.unlock();
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> countDaysTogether(string sa1, string sa2, string sb1, string sb2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> a1 <span style="color:#666">=</span> td(sa1), a2 <span style="color:#666">=</span> td(sa2), b1 <span style="color:#666">=</span> td(sb1), b2 <span style="color:#666">=</span> td(sb2);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#080;font-style:italic">// Check all 365 days in year
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">367</span>; <span style="color:#666">++</span>i) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (a1 <span style="color:#666">&lt;=</span> i <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">&lt;=</span> a2 <span style="color:#666">&amp;&amp;</span> b1 <span style="color:#666">&lt;=</span> i <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">&lt;=</span> b2) {
+</span></span><span style="display:flex;"><span>            <span style="color:#666">++</span>ans;
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">bar</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printBar) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        mtx2.lock();
-</span></span><span style="display:flex;"><span>    	<span style="color:#080;font-style:italic">// printBar() outputs &#34;bar&#34;. Do not change or remove this line.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    	printBar();
-</span></span><span style="display:flex;"><span>        mtx1.unlock();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This code defines a class <code>FooBar</code> where two tasks, <code>foo</code> and <code>bar</code>, alternate printing the strings &lsquo;foo&rsquo; and &lsquo;bar&rsquo; respectively. The synchronization between the tasks is achieved using two mutexes, <code>mtx1</code> and <code>mtx2</code>, to control the execution order.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Variable Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
-</span></span></code></pre></div><p>The variable <code>n</code> is declared to store the number of iterations for the tasks.</p>
-</li>
-<li>
-<p><strong>Mutex Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>mutex mtx1, mtx2;
-</span></span></code></pre></div><p>Two mutexes, <code>mtx1</code> and <code>mtx2</code>, are declared to synchronize the <code>foo</code> and <code>bar</code> functions and control the task execution order.</p>
-</li>
-<li>
-<p><strong>Access Modifier</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span></code></pre></div><p>Access modifier to define that the following functions can be accessed from outside the class.</p>
-</li>
-<li>
-<p><strong>Constructor</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>FooBar(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span></code></pre></div><p>The constructor <code>FooBar(int n)</code> is defined to initialize the variable <code>n</code> and lock <code>mtx2</code>.</p>
-</li>
-<li>
-<p><strong>Locking Mutex</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mtx2.lock();
-</span></span></code></pre></div><p>The mutex <code>mtx2</code> is locked in the constructor to prevent <code>bar</code> from starting before <code>foo</code>.</p>
-</li>
-<li>
-<p><strong>Assigning Value</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>n <span style="color:#666">=</span> n;
-</span></span></code></pre></div><p>The constructor assigns the value of <code>n</code> to the class&rsquo;s <code>n</code> variable.</p>
-</li>
-<li>
-<p><strong>Function Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">foo</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printFoo) {
-</span></span></code></pre></div><p>The <code>foo</code> method is defined, where it will print &lsquo;foo&rsquo; repeatedly for <code>n</code> times.</p>
-</li>
-<li>
-<p><strong>For Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div><p>A <code>for</code> loop is used to execute the task <code>n</code> times.</p>
-</li>
-<li>
-<p><strong>Locking Mutex</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mtx1.lock();
-</span></span></code></pre></div><p>The mutex <code>mtx1</code> is locked to ensure that <code>foo</code> can execute before <code>bar</code>.</p>
-</li>
-<li>
-<p><strong>Function Call</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    	printFoo();
-</span></span></code></pre></div><p>The function <code>printFoo()</code> is called to output &lsquo;foo&rsquo;.</p>
-</li>
-<li>
-<p><strong>Unlocking Mutex</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mtx2.unlock();
-</span></span></code></pre></div><p>The mutex <code>mtx2</code> is unlocked, allowing <code>bar</code> to execute.</p>
-</li>
-<li>
-<p><strong>Function Definition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">bar</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printBar) {
-</span></span></code></pre></div><p>The <code>bar</code> method is defined, where it will print &lsquo;bar&rsquo; repeatedly for <code>n</code> times.</p>
-</li>
-<li>
-<p><strong>For Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div><p>A <code>for</code> loop is used to execute the task <code>n</code> times.</p>
-</li>
-<li>
-<p><strong>Locking Mutex</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mtx2.lock();
-</span></span></code></pre></div><p>The mutex <code>mtx2</code> is locked to ensure that <code>bar</code> can execute after <code>foo</code>.</p>
-</li>
-<li>
-<p><strong>Print Bar</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    	<span style="color:#080;font-style:italic">// printBar() outputs &#34;bar&#34;. Do not change or remove this line.
-</span></span></span></code></pre></div><p>A comment indicating that <code>printBar()</code> will output &lsquo;bar&rsquo;. It should not be changed.</p>
-</li>
-<li>
-<p><strong>Function Call</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    	printBar();
-</span></span></code></pre></div><p>The function <code>printBar()</code> is called to output &lsquo;bar&rsquo;.</p>
-</li>
-<li>
-<p><strong>Unlocking Mutex</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mtx1.unlock();
-</span></span></code></pre></div><p>The mutex <code>mtx1</code> is unlocked, allowing <code>foo</code> to execute again.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n)</li>
-<li><strong>Average Case:</strong> O(n)</li>
-<li><strong>Worst Case:</strong> O(n)</li>
-</ul>
-<p>The time complexity is O(n) since each thread executes <code>n</code> times, and there are no nested iterations.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(1)</li>
-<li><strong>Worst Case:</strong> O(1)</li>
-</ul>
-<p>The space complexity is O(1) because only a fixed number of variables are used to control the thread synchronization.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Class Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This class is used to solve the problem of counting overlapping days between two date ranges. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Comment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>	<span style="color:#080;font-style:italic">// Convert date to respective number in year.
+</span></span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This comment describes the purpose of the following function, which converts a date string to a day number within the year. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">td</span>(string s) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function `td` takes a date string `s` and converts it to a day number within the year. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> s[<span style="color:#666">1</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">+</span> <span style="color:#666">10</span><span style="color:#666">*</span>(s[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Extracts the month from the date string and converts it into an integer representation. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> s[<span style="color:#666">4</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">+</span> <span style="color:#666">10</span><span style="color:#666">*</span>(s[<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Extracts the day from the date string and converts it into an integer representation. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Decrement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#666">--</span>m;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decreases the month value by 1, since month indices in the `md` array start from 0. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (m <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterates through the months to accumulate the total number of days up to the specified month. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        d <span style="color:#666">+=</span> md[m];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adds the number of days in the current month to the total day count `d`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Decrement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#666">--</span>m;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decreases the month index and moves to the previous month. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> d;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the total day count calculated for the given date. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Access Modifier</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Indicates the start of the public section of the class, where the main function is located. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countDaysTogether</span>(string sa1, string sa2, string sb1, string sb2) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This function calculates the number of overlapping days between two date ranges. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Function Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> a1 <span style="color:#666">=</span> td(sa1), a2 <span style="color:#666">=</span> td(sa2), b1 <span style="color:#666">=</span> td(sb1), b2 <span style="color:#666">=</span> td(sb2);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calls the `td` function to convert the given date strings into day numbers. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes the `ans` variable to count the number of overlapping days. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Comment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>		<span style="color:#080;font-style:italic">// Check all 365 days in year
+</span></span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This comment explains the upcoming loop, which checks each day of the year to see if it falls within both date ranges. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">367</span>; <span style="color:#666">++</span>i) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loops through all the days in the year (365 days, plus one extra for boundary checking). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Condition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (a1 <span style="color:#666">&lt;=</span> i <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">&lt;=</span> a2 <span style="color:#666">&amp;&amp;</span> b1 <span style="color:#666">&lt;=</span> i <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">&lt;=</span> b2) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current day `i` is within both date ranges. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Increment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#666">++</span>ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increments the `ans` variable if the current day `i` is within both date ranges. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the number of overlapping days between the two date ranges. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1), as the solution uses simple date calculations and comparisons.</div>
+                        <div class=""> <b>Average Case:</b> O(1), as date operations are constant time.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), since there are only four date strings to process.</div> 
+                        <div class=""> <b>Description:</b> The solution is optimal with constant time complexity.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1), since no extra space is needed beyond the input dates.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), as only a few variables are used to store date values.</div> 
+                        <div class=""> <b>Description:</b> The solution uses constant space.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/print-foobar-alternately/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 <table>
@@ -406,6 +954,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -641,90 +1190,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-1115-print-foobar-alternately\/"
-    },
-    "headline": "Leetcode 1115: Print FooBar Alternately",
-    "description": "In-depth solution and explanation for Leetcode 1115: Print FooBar Alternately in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": ""
-    },
-    "datePublished": "2024-07-18T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Concurrency\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "keywords": "[\"Concurrency\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-1116-print-zero-even-odd\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-1114-print-in-order\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -43,8 +45,105 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-721-accounts-merge\/"
+    },
+    "headline": "Leetcode 721: Accounts Merge",
+    "description": "In-depth solution and explanation for Leetcode 721: Accounts Merge in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/721.webp"
+    },
+    "datePublished": "2024-08-26T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Array\",\"Hash Table\",\"String\",\"Depth-First Search\",\"Breadth-First Search\",\"Union Find\",\"Sorting\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "video": {
+      "@type": "VideoObject",
+      "name": "Video explanation for Leetcode 721: Accounts Merge",
+      "embedUrl": "https://www.youtube.com/watch?v=otzKJY8YhRg",
+      "uploadDate": "2020-04-04",
+      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi_webp\/otzKJY8YhRg\/maxresdefault.webp"
+    },
+    
+    "keywords": "[\"Array\",\"Hash Table\",\"String\",\"Depth-First Search\",\"Breadth-First Search\",\"Union Find\",\"Sorting\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-722-remove-comments\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-720-longest-word-in-dictionary\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -185,7 +284,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 26, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -214,259 +313,468 @@
     
   </figure>
   </h2>
-<p>You are given a list of accounts, where each account consists of a name and a list of emails. Merge accounts that share common emails, and return the merged accounts in the format: name followed by sorted emails.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> Each account is represented by a list of strings. The first element is the name, and the rest are email addresses.</li>
-<li><strong>Example:</strong> <code>accounts = [[&quot;Alice&quot;,&quot;alice@mail.com&quot;,&quot;alice_newyork@mail.com&quot;], [&quot;Alice&quot;,&quot;alice@mail.com&quot;,&quot;alice123@mail.com&quot;], [&quot;Bob&quot;,&quot;bob@mail.com&quot;]]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>1 &lt;= accounts.length &lt;= 1000</li>
-<li>2 &lt;= accounts[i].length &lt;= 10</li>
-<li>1 &lt;= accounts[i][j].length &lt;= 30</li>
-<li>accounts[i][0] consists of English letters.</li>
-<li>accounts[i][j] (for j &gt; 0) is a valid email.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> Return the merged accounts, where each account starts with the name followed by a sorted list of email addresses.</li>
-<li><strong>Example:</strong> <code>[[&quot;Alice&quot;,&quot;alice123@mail.com&quot;,&quot;alice@mail.com&quot;,&quot;alice_newyork@mail.com&quot;]]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The accounts should be returned with emails in sorted order and merged by shared emails.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> The goal is to merge accounts based on common emails.</p>
-<ul>
-<li>Use a graph where each email is a node, and there is an edge between two emails if they belong to the same account.</li>
-<li>For each account, build the graph by connecting emails together.</li>
-<li>Perform DFS (depth-first search) to find all connected emails for each component, representing one account.</li>
-<li>Sort the emails in lexicographical order and return the merged result with the name and emails.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>Each account contains at least one email.</li>
-<li>The same person may have multiple accounts with the same or different names.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li>
-<p><strong>Input:</strong> <code>accounts = [[&quot;Alice&quot;,&quot;alice@mail.com&quot;,&quot;alice_newyork@mail.com&quot;], [&quot;Alice&quot;,&quot;alice@mail.com&quot;,&quot;alice123@mail.com&quot;], [&quot;Bob&quot;,&quot;bob@mail.com&quot;]]</code>  <br>
-<strong>Explanation:</strong> The first and second Alice accounts are merged since they share the email &lsquo;<a href="mailto:alice@mail.com">alice@mail.com</a>&rsquo;. The result should contain Alice’s emails sorted, and Bob’s account should remain unchanged.</p>
-</li>
-<li>
-<p><strong>Input:</strong> <code>accounts = [[&quot;John&quot;,&quot;john1@mail.com&quot;,&quot;john2@mail.com&quot;,&quot;john3@mail.com&quot;], [&quot;Mike&quot;,&quot;mike1@mail.com&quot;,&quot;mike2@mail.com&quot;], [&quot;John&quot;,&quot;john1@mail.com&quot;,&quot;john4@mail.com&quot;]]</code>  <br>
-<strong>Explanation:</strong> Both John accounts share &lsquo;<a href="mailto:john1@mail.com">john1@mail.com</a>&rsquo;, so they are merged, with all of John’s emails sorted.</p>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>The solution uses a graph-based approach to merge accounts that share common emails.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>Each email can be treated as a node, and accounts with common emails form connected components in the graph.</li>
-<li>By performing DFS on the graph, we can find all connected emails for each account and merge them.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>If the input list is empty, return an empty list.</li>
-<li>The solution must handle up to 1000 accounts efficiently.</li>
-<li>If no accounts share any emails, each account should be returned individually.</li>
-<li>The solution should work within time and space limits for the maximum input size.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> accountsMerge(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;&amp;</span> acc) {
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, string<span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> gph;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">ac</span>: acc) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> ac.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            mp[ac[i]] <span style="color:#666">=</span> ac[<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>            gph[ac[i]].insert(ac[<span style="color:#666">1</span>]);
-</span></span><span style="display:flex;"><span>            gph[ac[<span style="color:#666">1</span>]].insert(ac[i]);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
+
+
+
+
+
+
+
+
+
+
+<div class=""> Given n points on a 2D plane, where points[i] = [xi, yi], return the widest vertical area between two points such that no points are inside the area. A vertical area is defined as a fixed-width region that extends infinitely along the y-axis. The widest vertical area is the one with the maximum width. Note that points on the edge of the vertical area are not considered inside. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> The input consists of n points on a 2D plane, each represented as a pair of integers, [xi, yi], where xi and yi are the coordinates of the points.</div>
+                        <div class=""> <b>Example:</b> points = [[1, 4], [3, 1], [9, 0], [4, 6], [7, 2]]</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 2 &lt;= n &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= xi, yi &lt;= 10^9</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> The output is the width of the widest vertical area between two points such that no points lie within the area.</div>
+                        <div class=""> <b>Example:</b> Output: 5</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The width will be a non-negative integer.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The goal is to find the widest vertical area between two points where no points are inside the area.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Sort the points based on their x-coordinates.</div>
+                            
+                                <div style="margin-left: 20px;"> • Compute the horizontal distance between consecutive points in the sorted list.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the maximum distance between consecutive points as the result.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The number of points is at least 2 and can go up to 100,000. The x and y values of the points are non-negative integers and can be as large as 10^9.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 2 &lt;= n &lt;= 100,000</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= xi, yi &lt;= 10^9</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • There will always be at least two points in the array.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> points = [[12, 5], [8, 7], [15, 10], [9, 6]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The points are first sorted by their x-coordinate: [[8, 7], [9, 6], [12, 5], [15, 10]]. The distances between consecutive points are 1, 3, and 3, so the maximum width of the vertical area is 7.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> We will approach this problem by sorting the points based on their x-coordinates and then calculating the horizontal distances between consecutive points. The maximum distance will be the answer.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Sorting the points by their x-coordinate will allow us to easily compute the distances between adjacent points.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • Sorting the points first is the key step, as it ensures we are considering the widest possible vertical area between points.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Sort the points by their x-coordinate.</div>
+                            
+                                <div style="margin-left: 20px;"> • Iterate through the sorted list of points and calculate the distance between each pair of consecutive points.</div>
+                            
+                                <div style="margin-left: 20px;"> • Track the maximum distance and return it as the result.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The problem guarantees that there will always be at least two points, so there is no need to handle empty inputs.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • For large inputs, the solution should still be efficient with time complexity O(n log n) due to the sorting step.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The points may have large coordinates up to 10^9, but the solution will handle this without issue as long as the points are sorted first.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The solution needs to handle arrays with up to 100,000 points efficiently.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Method Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Constructs</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Mathematical Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxWidthOfVerticalArea</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> pts) {
+</span></span><span style="display:flex;"><span>    sort(pts.begin(), pts.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span><span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> pts.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, pts[i][<span style="color:#666">0</span>] <span style="color:#666">-</span> pts[i <span style="color:#666">-</span> <span style="color:#666">1</span>][<span style="color:#666">0</span>]);
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> seen;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> ans;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: mp) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(seen.count(it.first)) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> tmp;
-</span></span><span style="display:flex;"><span>        dfs(tmp, gph, seen, it.first);
-</span></span><span style="display:flex;"><span>        sort(tmp.begin(), tmp.end());
-</span></span><span style="display:flex;"><span>        tmp.insert(tmp.begin(), it.second);
-</span></span><span style="display:flex;"><span>        ans.push_back(tmp);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>tmp, map<span style="color:#666">&lt;</span>string, set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>gph, set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>seen, string node) {
-</span></span><span style="display:flex;"><span>    tmp.push_back(node);
-</span></span><span style="display:flex;"><span>    seen.insert(node);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: gph[node]) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(it)) {
-</span></span><span style="display:flex;"><span>            dfs(tmp, gph, seen, it);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function merges email accounts by identifying connected components in a graph where each email represents a node and edges exist between emails belonging to the same account.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Graph Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> accountsMerge(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;&amp;</span> acc) {
-</span></span></code></pre></div><p>The main function starts by initializing the structure to merge accounts.</p>
-</li>
-<li>
-<p><strong>Data Mapping</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, string<span style="color:#666">&gt;</span> mp;
-</span></span></code></pre></div><p>A mapping of emails to account names.</p>
-</li>
-<li>
-<p><strong>Graph Construction</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> gph;
-</span></span></code></pre></div><p>Graph representation where each email is a node connected to other emails.</p>
-</li>
-<li>
-<p><strong>Graph Traversal</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">ac</span>: acc) {
-</span></span></code></pre></div><p>Iterates over each account to construct the graph.</p>
-</li>
-<li>
-<p><strong>Graph Edge Insertion</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> ac.size(); i<span style="color:#666">++</span>) {
-</span></span></code></pre></div><p>Iterates over emails in the account to establish edges.</p>
-</li>
-<li>
-<p><strong>Mapping Emails</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mp[ac[i]] <span style="color:#666">=</span> ac[<span style="color:#666">0</span>];
-</span></span></code></pre></div><p>Maps each email to its corresponding account name.</p>
-</li>
-<li>
-<p><strong>Graph Edge Insertion</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            gph[ac[i]].insert(ac[<span style="color:#666">1</span>]);
-</span></span></code></pre></div><p>Adds an edge from the current email to the first email.</p>
-</li>
-<li>
-<p><strong>Graph Edge Insertion</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            gph[ac[<span style="color:#666">1</span>]].insert(ac[i]);
-</span></span></code></pre></div><p>Adds an edge from the first email to the current email.</p>
-</li>
-<li>
-<p><strong>Set Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> seen;
-</span></span></code></pre></div><p>A set to keep track of visited emails.</p>
-</li>
-<li>
-<p><strong>Result Storage</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> ans;
-</span></span></code></pre></div><p>Stores the merged accounts as a result.</p>
-</li>
-<li>
-<p><strong>Graph Traversal</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: mp) {
-</span></span></code></pre></div><p>Iterates through the email-to-name map to traverse the graph.</p>
-</li>
-<li>
-<p><strong>Visit Check</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(seen.count(it.first)) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span></code></pre></div><p>Skips already visited emails.</p>
-</li>
-<li>
-<p><strong>Temporary Storage</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> tmp;
-</span></span></code></pre></div><p>Temporary storage for connected component emails.</p>
-</li>
-<li>
-<p><strong>Depth First Search</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dfs(tmp, gph, seen, it.first);
-</span></span></code></pre></div><p>Performs DFS to collect all connected emails.</p>
-</li>
-<li>
-<p><strong>Sorting</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sort(tmp.begin(), tmp.end());
-</span></span></code></pre></div><p>Sorts emails alphabetically for output.</p>
-</li>
-<li>
-<p><strong>Insert Name</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        tmp.insert(tmp.begin(), it.second);
-</span></span></code></pre></div><p>Prepends the account name to the sorted emails.</p>
-</li>
-<li>
-<p><strong>Store Result</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back(tmp);
-</span></span></code></pre></div><p>Adds the merged account to the result.</p>
-</li>
-<li>
-<p><strong>Close Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
-</span></span></code></pre></div><p>Closes the loop for iterating through the email-to-name map.</p>
-</li>
-<li>
-<p><strong>Return Result</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div><p>Returns the final merged account list.</p>
-</li>
-<li>
-<p><strong>DFS Function</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>tmp, map<span style="color:#666">&lt;</span>string, set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>gph, set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>seen, string node) {
-</span></span></code></pre></div><p>Defines a helper function for DFS traversal.</p>
-</li>
-<li>
-<p><strong>DFS Visit</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    tmp.push_back(node);
-</span></span></code></pre></div><p>Marks the current node as visited and adds it to the result.</p>
-</li>
-<li>
-<p><strong>Mark Visited</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    seen.insert(node);
-</span></span></code></pre></div><p>Adds the node to the visited set.</p>
-</li>
-<li>
-<p><strong>Iterate Neighbors</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: gph[node]) {
-</span></span></code></pre></div><p>Iterates over all neighbors of the current node.</p>
-</li>
-<li>
-<p><strong>Check Unvisited</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(it)) {
-</span></span></code></pre></div><p>Checks if the neighbor has not been visited.</p>
-</li>
-<li>
-<p><strong>Recursive DFS</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            dfs(tmp, gph, seen, it);
-</span></span></code></pre></div><p>Recursively calls DFS for unvisited neighbors.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n log n), where n is the number of emails, because sorting the emails is the most time-consuming operation.</li>
-<li><strong>Average Case:</strong> O(n + e), where n is the number of emails and e is the number of edges in the graph (connections between emails).</li>
-<li><strong>Worst Case:</strong> O(n log n + e), where n is the number of emails and e is the number of edges.</li>
-</ul>
-<p>The time complexity is dominated by DFS and sorting the emails in each connected component.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n), in the case where no emails are shared between accounts.</li>
-<li><strong>Worst Case:</strong> O(n + e), where n is the number of emails and e is the number of edges.</li>
-</ul>
-<p>The space complexity is dominated by the graph representation and storage for the emails.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Method Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxWidthOfVerticalArea</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> pts) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the method &#39;maxWidthOfVerticalArea&#39; that takes a 2D vector of points &#39;pts&#39; as input. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Sorting</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(pts.begin(), pts.end());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Sort the points based on their x-coordinates to prepare for calculating the maximum vertical width. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span><span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize the variable &#39;res&#39; to store the maximum vertical width found during the iteration. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Loop Constructs</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> pts.size(); i<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start a loop that iterates over the points from the second element to the last. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Mathematical Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, pts[i][<span style="color:#666">0</span>] <span style="color:#666">-</span> pts[i <span style="color:#666">-</span> <span style="color:#666">1</span>][<span style="color:#666">0</span>]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For each pair of consecutive points, calculate the width (difference between the x-coordinates) and update &#39;res&#39; if a larger width is found. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the maximum width found during the loop. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n log n) due to the sorting step.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) for storing the sorted list of points.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/accounts-merge/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 
@@ -486,6 +794,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -745,98 +1054,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-721-accounts-merge\/"
-    },
-    "headline": "Leetcode 721: Accounts Merge",
-    "description": "In-depth solution and explanation for Leetcode 721: Accounts Merge in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/721.webp"
-    },
-    "datePublished": "2024-08-26T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Array\",\"Hash Table\",\"String\",\"Depth-First Search\",\"Breadth-First Search\",\"Union Find\",\"Sorting\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "video": {
-      "@type": "VideoObject",
-      "name": "Video explanation for Leetcode 721: Accounts Merge",
-      "embedUrl": "https://www.youtube.com/watch?v=otzKJY8YhRg",
-      "uploadDate": "2020-04-04",
-      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi_webp\/otzKJY8YhRg\/maxresdefault.webp"
-    },
-    
-    "keywords": "[\"Array\",\"Hash Table\",\"String\",\"Depth-First Search\",\"Breadth-First Search\",\"Union Find\",\"Sorting\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-722-remove-comments\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-720-longest-word-in-dictionary\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>

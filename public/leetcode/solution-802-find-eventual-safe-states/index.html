@@ -2,6 +2,8 @@
 <html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
 	<meta name="generator" content="Hugo 0.136.4">
 	
 	<link rel="icon" href="/images/logo.png">
@@ -41,8 +43,105 @@
 	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
 
 	
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/leetcode\/solution-802-find-eventual-safe-states\/"
+    },
+    "headline": "Leetcode 802: Find Eventual Safe States",
+    "description": "In-depth solution and explanation for Leetcode 802: Find Eventual Safe States in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/802.webp"
+    },
+    "datePublished": "2024-08-18T00:00:00\u002b00:00",
+    "dateModified": "2024-11-06T00:00:00\u002b00:00",
+    "author": {
+      "@type": "Person",
+      "name": "grid47"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/localhost:1313\//images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  
+          "url": "https://www.leetcode.com"  
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  
+            "url": "https://www.leetcode.com"  
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "Medium",
+    "teaches": "[\"Depth-First Search\",\"Breadth-First Search\",\"Graph\",\"Topological Sort\"]",
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "Leetcode",
+      "url": "http:\/\/localhost:1313\/series/leetcode"
+    },
+    
+    "video": {
+      "@type": "VideoObject",
+      "name": "Video explanation for Leetcode 802: Find Eventual Safe States",
+      "embedUrl": "https://www.youtube.com/watch?v=Re_v0j0CRsg",
+      "uploadDate": "2022-04-09",
+      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/Re_v0j0CRsg\/maxresdefault.jpg"
+    },
+    
+    "keywords": "[\"Depth-First Search\",\"Breadth-First Search\",\"Graph\",\"Topological Sort\"]",
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-807-max-increase-to-keep-city-skyline\/",
+      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-799-champagne-tower\/"
+    }
+  }
+  </script>  
+        
+
 	
-	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+	
+	<link rel="stylesheet" href="/css/leetcode.css" integrity="" crossorigin="anonymous" media="screen">
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
@@ -183,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 18, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -212,201 +311,522 @@
     
   </figure>
   </h2>
-<p>You are given a directed graph where each node represents a point, and edges represent possible transitions between nodes. A node is considered terminal if it has no outgoing edges. A node is deemed safe if every path starting from it leads either to a terminal node or another safe node. Your task is to identify all the safe nodes in the graph and return them in ascending order.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="input-representations-">Input Representations 📥</h3>
-<ul>
-<li><strong>Input:</strong> The input consists of a graph represented as a 2D array, where each node&rsquo;s adjacency list is provided, followed by the conditions of the graph&rsquo;s nodes.</li>
-<li><strong>Example:</strong> <code>Input: graph = [[1,2],[2,3],[5],[0],[5],[],[]]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>n == graph.length</li>
-<li>1 &lt;= n &lt;= 10^4</li>
-<li>0 &lt;= graph[i].length &lt;= n</li>
-<li>0 &lt;= graph[i][j] &lt;= n - 1</li>
-<li>graph[i] is sorted in a strictly increasing order</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="output-specifications-">Output Specifications 📤</h3>
-<ul>
-<li><strong>Output:</strong> Return an array of integers representing the safe nodes in the graph, sorted in ascending order.</li>
-<li><strong>Example:</strong> <code>Output: [2,4,5,6]</code></li>
-<li><strong>Constraints:</strong>
-<ul>
-<li>The returned array should be sorted in ascending order.</li>
-</ul>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="core-logic-">Core Logic 🔍</h3>
-<p><strong>Goal:</strong> To identify and return the safe nodes in the graph by using depth-first search (DFS) to track nodes that lead to terminal or safe nodes.</p>
-<ul>
-<li>Perform a depth-first search (DFS) to determine which nodes are safe.</li>
-<li>Track the visiting status of nodes (unvisited, visiting, or safe) to avoid cycles.</li>
-<li>Return all nodes that are identified as safe, ensuring they are in ascending order.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="problem-assumptions-">Problem Assumptions ✅</h3>
-<ul>
-<li>The graph may contain self-loops or cycles, but the traversal will ensure safe nodes are correctly identified.</li>
-<li>Each node is either part of a cycle or leads to a terminal node or a safe node.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="examples-">Examples 🧩</h2>
-<ul>
-<li>
-<p><strong>Input:</strong> <code>Input: graph = [[1,2],[2,3],[5],[0],[5],[],[]]</code>  <br>
-<strong>Explanation:</strong> In this graph, nodes 5 and 6 are terminal nodes because they have no outgoing edges. Nodes 2, 4, 5, and 6 are safe since all paths starting from these nodes lead either to a terminal node or another safe node.</p>
-</li>
-<li>
-<p><strong>Input:</strong> <code>Input: graph = [[1,2,3,4],[1,2],[3,4],[0,4],[]]</code>  <br>
-<strong>Explanation:</strong> In this case, node 4 is the only terminal node, and it is safe. The paths starting at node 4 always lead to itself, making it a safe node.</p>
-</li>
-</ul>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="approach-">Approach 🚀</h2>
-<p>To solve this problem, we can use a depth-first search (DFS) approach to explore each node and determine if it is safe based on its outgoing edges and the nodes it leads to.</p>
-<h3 id="initial-thoughts-">Initial Thoughts 💭</h3>
-<ul>
-<li>Safe nodes can be identified by ensuring all paths from them eventually lead to terminal nodes or other safe nodes.</li>
-<li>We will perform DFS from each node, tracking its status as either visiting, visited, or safe. Nodes that are part of cycles or lead to unsafe paths will not be marked as safe.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h3 id="edge-cases-">Edge Cases 🌐</h3>
-<ul>
-<li>If the graph has no nodes, there are no safe nodes to return.</li>
-<li>For large inputs, ensure the DFS algorithm is optimized to handle up to 10^4 nodes efficiently.</li>
-<li>If the graph contains self-loops, treat them carefully by marking the node as unsafe if it leads to itself in a cycle.</li>
-<li>Ensure that the solution is efficient given the graph constraints, particularly the number of nodes and edges.
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p></li>
-</ul>
-<h2 id="code-">Code 💻</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> eventualSafeNodes(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> graph) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> graph.size();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> vis(n, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(dfs(graph, i, vis)) res.push_back(i);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> graph, <span style="color:#0b0;font-weight:bold">int</span> cur, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>vis) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(vis[cur] <span style="color:#666">!=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> vis[cur] <span style="color:#666">==</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    vis[cur] <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">nxt</span>: graph[cur])
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>dfs(graph, nxt, vis)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    vis[cur] <span style="color:#666">=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This code finds all the eventual safe nodes in a directed graph represented as an adjacency list. A node is considered safe if there is no cycle that leads to it. The DFS approach is used to explore the graph, marking nodes as visited and checking for cycles.</p>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h3 id="step-by-step-breakdown-">Step-by-Step Breakdown 🛠️</h3>
-<ol>
-<li>
-<p><strong>Function</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> eventualSafeNodes(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> graph) {
-</span></span></code></pre></div><p>This is the function signature that defines the main function, <code>eventualSafeNodes</code>, which takes a graph (a vector of vectors of integers) as input and returns a vector of integers representing the safe nodes.</p>
-</li>
-<li>
-<p><strong>Variable Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
-</span></span></code></pre></div><p>A vector <code>res</code> is declared to store the eventual safe nodes that will be found during the DFS traversal.</p>
-</li>
-<li>
-<p><strong>Variable Declaration</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> graph.size();
-</span></span></code></pre></div><p>The variable <code>n</code> is initialized to store the size of the graph (i.e., the number of nodes).</p>
-</li>
-<li>
-<p><strong>Condition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><p>If the graph is empty (n == 0), an empty vector <code>res</code> is returned as there are no nodes to process.</p>
-</li>
-<li>
-<p><strong>Variable Initialization</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> vis(n, <span style="color:#666">0</span>);
-</span></span></code></pre></div><p>A <code>vis</code> vector is initialized with zeroes, where each element represents the visitation state of a node (0 = not visited, 1 = visiting, 2 = visited).</p>
-</li>
-<li>
-<p><strong>Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span></code></pre></div><p>A for loop is used to iterate over all the nodes in the graph, starting from node 0 to node n-1.</p>
-</li>
-<li>
-<p><strong>Conditional</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(dfs(graph, i, vis)) res.push_back(i);
-</span></span></code></pre></div><p>For each node, the DFS function is called to check if it&rsquo;s an eventual safe node. If the node is safe (DFS returns true), it is added to the result vector <code>res</code>.</p>
-</li>
-<li>
-<p><strong>Return Statement</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><p>The function returns the vector <code>res</code>, which contains all the safe nodes found during the DFS traversal.</p>
-</li>
-<li>
-<p><strong>Function</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> graph, <span style="color:#0b0;font-weight:bold">int</span> cur, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>vis) {
-</span></span></code></pre></div><p>This is the helper function <code>dfs</code> that performs depth-first search to explore the graph from a given node <code>cur</code>.</p>
-</li>
-<li>
-<p><strong>Condition</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(vis[cur] <span style="color:#666">!=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> vis[cur] <span style="color:#666">==</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div><p>If the node <code>cur</code> has already been visited (its state is not 0), the function returns whether the node is safe (state 2 means safe).</p>
-</li>
-<li>
-<p><strong>Mark Node as Visiting</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vis[cur] <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div><p>The node <code>cur</code> is marked as visiting (state 1) to indicate that it&rsquo;s being explored.</p>
-</li>
-<li>
-<p><strong>Loop</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">nxt</span>: graph[cur])
-</span></span></code></pre></div><p>The function iterates over all the neighboring nodes (<code>nxt</code>) of the current node <code>cur</code>.</p>
-</li>
-<li>
-<p><strong>Conditional</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>dfs(graph, nxt, vis)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span></code></pre></div><p>For each neighboring node <code>nxt</code>, the DFS function is called recursively. If any neighbor leads to a cycle (DFS returns false), the current node is not safe, and the function returns false.</p>
-</li>
-<li>
-<p><strong>Mark Node as Safe</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vis[cur] <span style="color:#666">=</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div><p>Once all the neighbors have been processed and no cycle is detected, the current node <code>cur</code> is marked as safe (state 2).</p>
-</li>
-<li>
-<p><strong>Return Statement</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div><p>The function returns true, indicating that the current node <code>cur</code> is safe.</p>
-</li>
-</ol>
-<p style="text-align: center; margin: 50px 0; font-weight: 600; letter-spacing: 0.8em;">...</p>
-<h2 id="complexity-analysis-">Complexity Analysis 📊</h2>
-<h3 id="time-complexity-">Time Complexity ⏳</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n + e), where n is the number of nodes and e is the number of edges in the graph.</li>
-<li><strong>Average Case:</strong> O(n + e), as DFS will visit each node and edge at most once.</li>
-<li><strong>Worst Case:</strong> O(n + e), since each node and edge must be processed during DFS traversal.</li>
-</ul>
-<p>The time complexity is linear in terms of the number of nodes and edges in the graph.</p>
-<h3 id="space-complexity-">Space Complexity 💾</h3>
-<ul>
-<li><strong>Best Case:</strong> O(n), since the space needed to store node status and recursion stack is proportional to the number of nodes.</li>
-<li><strong>Worst Case:</strong> O(n), as we need to store the status of each node during the DFS traversal.</li>
-</ul>
-<p>The space complexity is linear with respect to the number of nodes in the graph.</p>
-<p><strong>Happy Coding! 🎉</strong></p>
+
+
+
+
+
+
+
+
+
+
+<div class=""> Given an array of positive integers &rsquo;nums&rsquo;, return the maximum possible sum of an ascending subarray. A subarray is ascending if for each i, num[i] &lt; num[i+1]. </div>
+
+
+
+<div class="problem-guide">
+
+    
+    <div class="problem-guide-tags">
+
+        <div class="problem-guide-tag" 
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
+        </div>
+        <div class="problem-guide-tag" 
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
+        </div> 
+    </div>
+
+    
+    <div class="problem-guide-content">
+
+        <div id="Problem" 
+            class="problem-guide-topic-content" 
+            style="display: block;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Problem">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Input:</b> You are given an array &#39;nums&#39; of positive integers. Your task is to find the maximum sum of a strictly ascending subarray.</div>
+                        <div class=""> <b>Example:</b> nums = [5, 10, 15, 2, 8, 30]</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 100</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> Return the maximum sum of any strictly ascending subarray.</div>
+                        <div class=""> <b>Example:</b> For nums = [5, 10, 15, 2, 8, 30], the output will be 55.</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The goal is to find the sum of the maximum ascending subarray in &#39;nums&#39;.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1. Iterate through the array &#39;nums&#39;.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. Track the sum of the current ascending subarray. Reset the sum whenever the sequence stops being strictly ascending.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. Keep a variable to track the maximum sum found.</div>
+                            
+                        </div>
+                    </div>                      
+
+                    <div class="step-slide">
+                        <div class=""> <b>Goal:</b> The problem has constraints regarding the array size and values.</div>
+                        <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 100</div>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Assumptions:</b>
+                            
+                                <div style="margin-left: 20px;"> • The array will contain at least one number.</div>
+                            
+                        </div>
+                    </div>     
+                    
+                    <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [5, 10, 15, 2, 8, 30]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the ascending subarrays are [5, 10, 15] and [2, 8, 30]. The maximum sum is 5 &#43; 10 &#43; 15 &#43; 30 = 55.</div>                                
+                                <br/>
+                            
+                    </div>                         
+                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="Approach" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Approach">
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Approach:</b> We will iterate through the array and calculate the sum of all strictly ascending subarrays while updating the maximum sum whenever needed.</div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Observations:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • An ascending subarray is defined by consecutive elements where each element is greater than the previous one.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • We need to check each subarray&#39;s sum and compare it with the maximum sum so far.</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-slide">
+                        <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1. Initialize &#39;max_sum&#39; and &#39;current_sum&#39; to the first element of the array.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. Loop through the array starting from the second element.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. If the current element is greater than the previous one, add it to the &#39;current_sum&#39;. Otherwise, reset &#39;current_sum&#39; to the current element.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. After each addition, update &#39;max_sum&#39; with the maximum value between &#39;max_sum&#39; and &#39;current_sum&#39;.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. Return &#39;max_sum&#39;.</div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="step-slide">
+                        <div class=""> <b>Empty Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If the array is empty, return 0.</div>
+                            
+                        </div>
+                        <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure that the solution can handle arrays with up to 100 elements.</div>
+                            
+                        </div>
+                        <div class=""> <b>Special Values:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • For arrays with only one element, the maximum sum is the value of that element.</div>
+                            
+                        </div>       
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Make sure the solution runs efficiently within the given constraints.</div>
+                            
+                        </div>                                                                        
+                    </div>
+                                        
+                </div>
+            </div>
+        </div> 
+
+        <div id="Steps" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Edge Case Handling</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Start</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Reset Sum</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Sum Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Maximum Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
+                    
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Steps">
+
+                    <div class="step-slide">
+                        <div class=""> 
+                            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxAscendingSum</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> maxi <span style="color:#666">=</span> sum;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums.size() <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> nums[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;=</span> nums[i<span style="color:#666">-</span><span style="color:#666">1</span>]){
+</span></span><span style="display:flex;"><span>            sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>            maxi <span style="color:#666">=</span> max(sum,maxi);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> maxi;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div>
+                        </div>
+                    </div>
+
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxAscendingSum</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This is the function definition. The input is a vector of integers, `nums`, and the output is an integer representing the maximum sum of an ascending subarray. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize `sum` to the first element of the `nums` array. This variable tracks the sum of the current ascending subarray. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> maxi <span style="color:#666">=</span> sum;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize `maxi` to the value of `sum`. This will track the maximum sum encountered during the iteration. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Edge Case Handling</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums.size() <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> nums[<span style="color:#666">0</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Handle the edge case where the input list has only one element. In this case, the only possible sum is the element itself. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Loop Start</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>){
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start a loop from the second element to the last element of the `nums` array to evaluate each element in relation to its predecessor. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;=</span> nums[i<span style="color:#666">-</span><span style="color:#666">1</span>]){
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the current element is less than or equal to the previous element. If so, the ascending subarray has ended. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Reset Sum</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Reset `sum` to 0 since the current subarray is no longer strictly increasing. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Sum Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> nums[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Add the current element to `sum` as part of the current ascending subarray. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Maximum Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            maxi <span style="color:#666">=</span> max(sum,maxi);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update `maxi` with the larger of the current sum (`sum`) or the previous maximum (`maxi`). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> maxi;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the maximum sum of the strictly increasing subarray found during the iteration. </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div> 
+        
+        <div id="Complexity" 
+            class="problem-guide-topic-content" 
+            style="display: none;">
+
+            <div class="steps-container">
+                <div class="step-problem-guide-tags" id="stepButtons">
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
+                </div>
+
+                <div class="steps-slides" id="stepsSlides-Complexity">
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) where n is the length of the array, as we only iterate through the array once.</div>                                               
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) as we only need a few variables to track the current sum and the maximum sum.</div>    
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+
+    </div> 
+
+    <script>
+        function switchProblemGuideContent(element, id) {
+            document.querySelectorAll('.problem-guide-tag').forEach(tag => {
+                tag.classList.remove('problem-guide-tag-active');
+            });
+
+            element.classList.add('problem-guide-tag-active');
+
+            document.querySelectorAll('.problem-guide-topic-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(id);
+            activeContent.style.display = 'block';
+            buttons_x(id)
+        }
+
+        function buttons_x(id) {
+
+            const slides = document.getElementById('stepsSlides-'+ id );
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-' + id );
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+                console.log(buttons[index].id)
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+        }        
+
+        function buttons() {
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
+            let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+
+            function updateSlides(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                buttons.forEach(button => button.classList.remove('problem-guide-tag-active'));
+                buttons[index].classList.add('problem-guide-tag-active');
+            }
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides(currentIndex);
+                });
+            });
+
+            slides.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+
+            slides.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const moveX = e.touches[0].clientX - startX;
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50 && currentIndex < buttons.length - 1) {
+                    currentIndex++;
+                } else if (endX > startX + 50 && currentIndex > 0) {
+                    currentIndex--;
+                }
+                updateSlides(currentIndex);
+            });
+
+            updateSlides(currentIndex);
+
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
+            if (initialTag) {
+                initialTag.classList.add('problem-guide-tag-active');
+            }
+
+            const contentElements = document.querySelectorAll('.problem-guide-content');
+            let maxHeight = 0;
+            contentElements.forEach(element => {
+                const height = parseFloat(getComputedStyle(element).height);
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            document.querySelector('.problem-guide-content').style.height = maxHeight + 'px';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', buttons);
+    </script>
+</div>
+
 <p><a href="https://leetcode.com/problems/find-eventual-safe-states/description/"><code>Link to LeetCode Lab</code></a></p>
 <hr>
 
@@ -426,6 +846,7 @@
   <tbody>
   </tbody>
 </table>
+
                     </div>
                     
                     
@@ -673,98 +1094,5 @@
           gtag('config', 'G-1LN7R4LHR1');
         }
       </script>
-        
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/leetcode\/solution-802-find-eventual-safe-states\/"
-    },
-    "headline": "Leetcode 802: Find Eventual Safe States",
-    "description": "In-depth solution and explanation for Leetcode 802: Find Eventual Safe States in C\u002b\u002b. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.",
-    "image": {
-      "@type": "ImageObject",
-      "url": "https:\/\/raw.githubusercontent.com\/grid47\/list-images\/refs\/heads\/main\/list\/802.webp"
-    },
-    "datePublished": "2024-08-18T00:00:00\u002b00:00",
-    "dateModified": "2024-11-06T00:00:00\u002b00:00",
-    "author": {
-      "@type": "Person",
-      "name": "grid47"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "grid47",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http:\/\/localhost:1313\//images/logo.png"
-      }
-    },
-    "articleSection": "LeetCode Solutions",
-    "about": {
-      "@type": "SoftwareSourceCode",
-      "programmingLanguage": "C++",
-      "codeSampleType": "Code Solution",
-      "runtimePlatform": "LeetCode",
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "LeetCode",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",  
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": "0.00",  
-          "url": "https://www.leetcode.com"  
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.5",
-        "reviewCount": "2000",
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "LeetCode",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",  
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            "price": "0.00",  
-            "url": "https://www.leetcode.com"  
-          }          
-        }
-      }
-    },    
-    "educationalLevel": "Medium",
-    "teaches": "[\"Depth-First Search\",\"Breadth-First Search\",\"Graph\",\"Topological Sort\"]",
-    "hasPart": [],
-    "isPartOf": {
-      "@type": "Series",
-      "name": "Leetcode",
-      "url": "http:\/\/localhost:1313\/series/leetcode"
-    },
-    
-    "video": {
-      "@type": "VideoObject",
-      "name": "Video explanation for Leetcode 802: Find Eventual Safe States",
-      "embedUrl": "https://www.youtube.com/watch?v=Re_v0j0CRsg",
-      "uploadDate": "2022-04-09",
-      "thumbnailUrl": "https:\/\/i.ytimg.com\/vi\/Re_v0j0CRsg\/maxresdefault.jpg"
-    },
-    
-    "keywords": "[\"Depth-First Search\",\"Breadth-First Search\",\"Graph\",\"Topological Sort\"]",
-    "pagination": {
-      "@type": "DataFeed",
-      "nextItem": "http:\/\/localhost:1313\/leetcode\/solution-807-max-increase-to-keep-city-skyline\/",
-      "previousItem": "http:\/\/localhost:1313\/leetcode\/solution-799-champagne-tower\/"
-    }
-  }
-  </script>  
-        
     </body>
 </html>
