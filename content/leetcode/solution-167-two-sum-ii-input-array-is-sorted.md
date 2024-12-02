@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 167 >}}
+{{< leetcode 103 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
 

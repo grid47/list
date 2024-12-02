@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 946 >}}
+{{< leetcode 429 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/validate-stack-sequences/description/)
 

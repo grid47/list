@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1680 >}}
+{{< leetcode 742 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/concatenation-of-consecutive-binary-numbers/description/)
 

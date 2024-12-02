@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 853 >}}
+{{< leetcode 380 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/car-fleet/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2154 >}}
+{{< leetcode 979 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/keep-multiplying-found-values-by-two/description/)
 

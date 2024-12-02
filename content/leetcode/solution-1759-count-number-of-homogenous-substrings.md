@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1759 >}}
+{{< leetcode 783 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-number-of-homogenous-substrings/description/)
 

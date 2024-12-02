@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2217 >}}
+{{< leetcode 1012 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-palindrome-with-fixed-length/description/)
 

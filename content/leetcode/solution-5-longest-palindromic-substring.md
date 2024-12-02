@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 5 >}}
+{{< leetcode 4 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-palindromic-substring/description/)
 

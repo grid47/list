@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 357 >}}
+{{< leetcode 159 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-numbers-with-unique-digits/description/)
 

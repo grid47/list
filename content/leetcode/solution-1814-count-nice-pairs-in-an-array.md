@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1814 >}}
+{{< leetcode 810 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-nice-pairs-in-an-array/description/)
 

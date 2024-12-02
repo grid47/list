@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 310 >}}
+{{< leetcode 144 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-height-trees/description/)
 

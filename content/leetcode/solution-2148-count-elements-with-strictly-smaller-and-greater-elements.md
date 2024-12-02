@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2148 >}}
+{{< leetcode 976 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-elements-with-strictly-smaller-and-greater-elements/description/)
 

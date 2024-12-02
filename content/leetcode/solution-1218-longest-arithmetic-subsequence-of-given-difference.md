@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1218 >}}
+{{< leetcode 544 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-arithmetic-subsequence-of-given-difference/description/)
 

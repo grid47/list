@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 826 >}}
+{{< leetcode 364 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/most-profit-assigning-work/description/)
 

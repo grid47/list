@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2243 >}}
+{{< leetcode 1027 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/calculate-digit-sum-of-a-string/description/)
 

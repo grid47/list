@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1130 >}}
+{{< leetcode 518 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1277 >}}
+{{< leetcode 566 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-square-submatrices-with-all-ones/description/)
 

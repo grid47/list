@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2857 >}}
+{{< leetcode 1349 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-pairs-of-points-with-distance-k/description/)
 

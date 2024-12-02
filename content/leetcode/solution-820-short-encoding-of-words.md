@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 820 >}}
+{{< leetcode 359 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/short-encoding-of-words/description/)
 

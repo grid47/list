@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 34 >}}
+{{< leetcode 25 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/)
 

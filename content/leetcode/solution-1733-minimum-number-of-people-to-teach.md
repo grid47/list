@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1733 >}}
+{{< leetcode 768 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-people-to-teach/description/)
 

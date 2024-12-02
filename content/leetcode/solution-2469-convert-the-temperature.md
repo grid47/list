@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2469 >}}
+{{< leetcode 1153 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/convert-the-temperature/description/)
 

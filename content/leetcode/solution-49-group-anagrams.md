@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 49 >}}
+{{< leetcode 36 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/group-anagrams/description/)
 

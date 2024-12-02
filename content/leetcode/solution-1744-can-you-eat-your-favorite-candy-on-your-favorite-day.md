@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1744 >}}
+{{< leetcode 775 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/description/)
 

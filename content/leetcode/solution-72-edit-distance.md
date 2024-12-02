@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 72 >}}
+{{< leetcode 51 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/edit-distance/description/)
 

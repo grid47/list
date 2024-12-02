@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 739 >}}
+{{< leetcode 320 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/daily-temperatures/description/)
 

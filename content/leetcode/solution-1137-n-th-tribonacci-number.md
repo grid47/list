@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1137 >}}
+{{< leetcode 520 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/n-th-tribonacci-number/description/)
 

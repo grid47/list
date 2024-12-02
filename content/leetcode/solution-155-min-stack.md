@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 155 >}}
+{{< leetcode 101 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/min-stack/description/)
 

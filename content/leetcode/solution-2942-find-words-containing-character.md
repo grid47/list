@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2942 >}}
+{{< leetcode 1388 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-words-containing-character/description/)
 

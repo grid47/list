@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2948 >}}
+{{< leetcode 1393 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/make-lexicographically-smallest-array-by-swapping-elements/description/)
 

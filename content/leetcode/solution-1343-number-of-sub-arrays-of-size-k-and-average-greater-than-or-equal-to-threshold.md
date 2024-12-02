@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1343 >}}
+{{< leetcode 593 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/description/)
 

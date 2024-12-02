@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 869 >}}
+{{< leetcode 392 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reordered-power-of-2/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2108 >}}
+{{< leetcode 955 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-first-palindromic-string-in-the-array/description/)
 

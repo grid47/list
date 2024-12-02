@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 447 >}}
+{{< leetcode 206 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-boomerangs/description/)
 

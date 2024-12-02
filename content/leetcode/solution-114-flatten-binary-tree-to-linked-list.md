@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 114 >}}
+{{< leetcode 79 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/)
 

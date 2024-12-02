@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1482 >}}
+{{< leetcode 659 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/description/)
 

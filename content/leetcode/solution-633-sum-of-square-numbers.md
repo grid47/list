@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 633 >}}
+{{< leetcode 271 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-square-numbers/description/)
 

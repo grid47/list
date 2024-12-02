@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 740 >}}
+{{< leetcode 321 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/delete-and-earn/description/)
 

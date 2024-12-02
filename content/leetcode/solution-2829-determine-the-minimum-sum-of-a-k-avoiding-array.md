@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2829 >}}
+{{< leetcode 1334 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/determine-the-minimum-sum-of-a-k-avoiding-array/description/)
 

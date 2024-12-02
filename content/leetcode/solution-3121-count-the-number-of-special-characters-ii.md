@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3121 >}}
+{{< leetcode 1417 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-number-of-special-characters-ii/description/)
 

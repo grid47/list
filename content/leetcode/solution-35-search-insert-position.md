@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 35 >}}
+{{< leetcode 26 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/search-insert-position/description/)
 

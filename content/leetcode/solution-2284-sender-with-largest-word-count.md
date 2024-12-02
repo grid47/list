@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2284 >}}
+{{< leetcode 1050 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sender-with-largest-word-count/description/)
 

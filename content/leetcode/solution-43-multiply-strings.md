@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 43 >}}
+{{< leetcode 31 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/multiply-strings/description/)
 

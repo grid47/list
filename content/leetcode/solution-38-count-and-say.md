@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 38 >}}
+{{< leetcode 28 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-and-say/description/)
 

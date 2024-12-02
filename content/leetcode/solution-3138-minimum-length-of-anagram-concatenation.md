@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3138 >}}
+{{< leetcode 1424 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-length-of-anagram-concatenation/description/)
 

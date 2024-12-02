@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 554 >}}
+{{< leetcode 250 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/brick-wall/description/)
 

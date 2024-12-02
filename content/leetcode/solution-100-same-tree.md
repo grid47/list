@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 100 >}}
+{{< leetcode 69 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/same-tree/description/)
 

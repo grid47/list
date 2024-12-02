@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2443 >}}
+{{< leetcode 1138 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-number-and-its-reverse/description/)
 

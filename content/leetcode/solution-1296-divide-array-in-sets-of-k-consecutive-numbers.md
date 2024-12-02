@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1296 >}}
+{{< leetcode 573 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/divide-array-in-sets-of-k-consecutive-numbers/description/)
 

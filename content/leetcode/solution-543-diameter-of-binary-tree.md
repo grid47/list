@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 543 >}}
+{{< leetcode 247 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/diameter-of-binary-tree/description/)
 

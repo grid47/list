@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 658 >}}
+{{< leetcode 284 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-k-closest-elements/description/)
 

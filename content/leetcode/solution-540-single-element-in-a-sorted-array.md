@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 540 >}}
+{{< leetcode 245 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/single-element-in-a-sorted-array/description/)
 

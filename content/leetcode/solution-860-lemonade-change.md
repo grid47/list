@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 860 >}}
+{{< leetcode 385 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/lemonade-change/description/)
 

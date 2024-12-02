@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1302 >}}
+{{< leetcode 576 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/deepest-leaves-sum/description/)
 

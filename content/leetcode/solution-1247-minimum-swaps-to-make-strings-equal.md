@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1247 >}}
+{{< leetcode 555 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-swaps-to-make-strings-equal/description/)
 

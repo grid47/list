@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 322 >}}
+{{< leetcode 148 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/coin-change/description/)
 

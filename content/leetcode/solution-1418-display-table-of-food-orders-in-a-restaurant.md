@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1418 >}}
+{{< leetcode 629 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/display-table-of-food-orders-in-a-restaurant/description/)
 

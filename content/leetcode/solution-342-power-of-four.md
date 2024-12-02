@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 342 >}}
+{{< leetcode 153 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/power-of-four/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1805 >}}
+{{< leetcode 805 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-different-integers-in-a-string/description/)
 

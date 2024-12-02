@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2605 >}}
+{{< leetcode 1241 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/form-smallest-number-from-two-digit-arrays/description/)
 

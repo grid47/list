@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 799 >}}
+{{< leetcode 349 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/champagne-tower/description/)
 

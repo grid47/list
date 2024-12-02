@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 919 >}}
+{{< leetcode 418 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/complete-binary-tree-inserter/description/)
 

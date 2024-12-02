@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2582 >}}
+{{< leetcode 1225 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/pass-the-pillow/description/)
 

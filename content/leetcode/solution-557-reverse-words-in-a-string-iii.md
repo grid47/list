@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 557 >}}
+{{< leetcode 252 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reverse-words-in-a-string-iii/description/)
 

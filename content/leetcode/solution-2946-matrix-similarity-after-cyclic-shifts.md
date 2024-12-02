@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2946 >}}
+{{< leetcode 1391 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/matrix-similarity-after-cyclic-shifts/description/)
 

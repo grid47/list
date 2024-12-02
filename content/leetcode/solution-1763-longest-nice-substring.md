@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1763 >}}
+{{< leetcode 785 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-nice-substring/description/)
 

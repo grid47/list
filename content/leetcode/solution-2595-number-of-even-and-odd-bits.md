@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2595 >}}
+{{< leetcode 1234 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-even-and-odd-bits/description/)
 

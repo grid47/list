@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1845 >}}
+{{< leetcode 827 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/seat-reservation-manager/description/)
 

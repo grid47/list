@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1559 >}}
+{{< leetcode 690 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/detect-cycles-in-2d-grid/description/)
 

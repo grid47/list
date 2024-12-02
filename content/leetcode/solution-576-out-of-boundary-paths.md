@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 576 >}}
+{{< leetcode 257 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/out-of-boundary-paths/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1720 >}}
+{{< leetcode 761 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/decode-xored-array/description/)
 

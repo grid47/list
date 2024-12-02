@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1226 >}}
+{{< leetcode 547 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-dining-philosophers/description/)
 

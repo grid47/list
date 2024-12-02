@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1775 >}}
+{{< leetcode 792 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/equal-sum-arrays-with-minimum-number-of-operations/description/)
 

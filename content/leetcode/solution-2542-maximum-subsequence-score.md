@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2542 >}}
+{{< leetcode 1197 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-subsequence-score/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 513 >}}
+{{< leetcode 227 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-bottom-left-tree-value/description/)
 

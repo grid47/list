@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1288 >}}
+{{< leetcode 571 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-covered-intervals/description/)
 

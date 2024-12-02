@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 235 >}}
+{{< leetcode 131 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/)
 

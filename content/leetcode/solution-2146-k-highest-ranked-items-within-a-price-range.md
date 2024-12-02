@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2146 >}}
+{{< leetcode 975 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/k-highest-ranked-items-within-a-price-range/description/)
 

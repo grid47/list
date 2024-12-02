@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2133 >}}
+{{< leetcode 967 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-every-row-and-column-contains-all-numbers/description/)
 

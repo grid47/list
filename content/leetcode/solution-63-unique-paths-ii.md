@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 63 >}}
+{{< leetcode 45 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/unique-paths-ii/description/)
 

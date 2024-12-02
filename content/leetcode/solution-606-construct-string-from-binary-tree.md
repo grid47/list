@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 606 >}}
+{{< leetcode 263 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/construct-string-from-binary-tree/description/)
 

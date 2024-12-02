@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 752 >}}
+{{< leetcode 325 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/open-the-lock/description/)
 

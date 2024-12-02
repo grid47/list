@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1589 >}}
+{{< leetcode 701 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-sum-obtained-of-any-permutation/description/)
 

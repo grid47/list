@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 467 >}}
+{{< leetcode 215 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/unique-substrings-in-wraparound-string/description/)
 

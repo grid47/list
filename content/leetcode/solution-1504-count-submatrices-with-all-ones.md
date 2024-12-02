@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1504 >}}
+{{< leetcode 670 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-submatrices-with-all-ones/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 971 >}}
+{{< leetcode 446 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/flip-binary-tree-to-match-preorder-traversal/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1287 >}}
+{{< leetcode 570 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/element-appearing-more-than-25-in-sorted-array/description/)
 

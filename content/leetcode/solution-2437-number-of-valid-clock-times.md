@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2437 >}}
+{{< leetcode 1133 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-valid-clock-times/description/)
 

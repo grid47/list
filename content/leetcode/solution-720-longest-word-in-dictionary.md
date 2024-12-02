@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 720 >}}
+{{< leetcode 310 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-word-in-dictionary/description/)
 

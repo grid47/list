@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1105 >}}
+{{< leetcode 507 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/filling-bookcase-shelves/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 206 >}}
+{{< leetcode 115 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reverse-linked-list/description/)
 

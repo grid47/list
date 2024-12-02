@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2410 >}}
+{{< leetcode 1116 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-matching-of-players-with-trainers/description/)
 

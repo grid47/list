@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 528 >}}
+{{< leetcode 237 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/random-pick-with-weight/description/)
 

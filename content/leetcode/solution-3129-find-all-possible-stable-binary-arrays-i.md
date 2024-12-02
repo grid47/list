@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3129 >}}
+{{< leetcode 1421 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-all-possible-stable-binary-arrays-i/description/)
 

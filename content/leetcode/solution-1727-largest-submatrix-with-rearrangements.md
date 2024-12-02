@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1727 >}}
+{{< leetcode 766 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-submatrix-with-rearrangements/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2563 >}}
+{{< leetcode 1211 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-number-of-fair-pairs/description/)
 

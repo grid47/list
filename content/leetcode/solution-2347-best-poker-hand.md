@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2347 >}}
+{{< leetcode 1078 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/best-poker-hand/description/)
 

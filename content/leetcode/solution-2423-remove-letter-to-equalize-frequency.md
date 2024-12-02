@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2423 >}}
+{{< leetcode 1124 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-letter-to-equalize-frequency/description/)
 

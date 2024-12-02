@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2928 >}}
+{{< leetcode 1382 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/distribute-candies-among-children-i/description/)
 

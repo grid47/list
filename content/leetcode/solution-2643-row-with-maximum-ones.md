@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2643 >}}
+{{< leetcode 1253 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/row-with-maximum-ones/description/)
 

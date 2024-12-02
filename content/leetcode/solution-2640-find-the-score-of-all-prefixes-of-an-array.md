@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2640 >}}
+{{< leetcode 1251 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-score-of-all-prefixes-of-an-array/description/)
 

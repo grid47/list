@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1109 >}}
+{{< leetcode 508 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/corporate-flight-bookings/description/)
 

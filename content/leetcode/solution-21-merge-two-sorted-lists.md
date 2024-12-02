@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 21 >}}
+{{< leetcode 18 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/merge-two-sorted-lists/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2054 >}}
+{{< leetcode 931 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/two-best-non-overlapping-events/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 955 >}}
+{{< leetcode 436 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/delete-columns-to-make-sorted-ii/description/)
 

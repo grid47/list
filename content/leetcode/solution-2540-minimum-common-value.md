@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2540 >}}
+{{< leetcode 1195 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-common-value/description/)
 

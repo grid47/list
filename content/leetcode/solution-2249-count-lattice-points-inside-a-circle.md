@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2249 >}}
+{{< leetcode 1029 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-lattice-points-inside-a-circle/description/)
 

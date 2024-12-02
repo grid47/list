@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2918 >}}
+{{< leetcode 1378 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-equal-sum-of-two-arrays-after-replacing-zeros/description/)
 

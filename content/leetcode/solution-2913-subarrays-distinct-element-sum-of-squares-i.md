@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2913 >}}
+{{< leetcode 1374 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/subarrays-distinct-element-sum-of-squares-i/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2037 >}}
+{{< leetcode 922 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-moves-to-seat-everyone/description/)
 

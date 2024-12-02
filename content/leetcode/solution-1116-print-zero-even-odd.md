@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1116 >}}
+{{< leetcode 513 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/print-zero-even-odd/description/)
 

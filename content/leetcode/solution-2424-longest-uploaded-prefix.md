@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2424 >}}
+{{< leetcode 1125 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-uploaded-prefix/description/)
 

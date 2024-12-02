@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2766 >}}
+{{< leetcode 1304 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/relocate-marbles/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 794 >}}
+{{< leetcode 346 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/valid-tic-tac-toe-state/description/)
 

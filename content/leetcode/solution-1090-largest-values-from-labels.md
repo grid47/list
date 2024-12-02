@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1090 >}}
+{{< leetcode 503 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-values-from-labels/description/)
 

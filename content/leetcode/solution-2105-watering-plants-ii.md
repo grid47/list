@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2105 >}}
+{{< leetcode 954 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/watering-plants-ii/description/)
 

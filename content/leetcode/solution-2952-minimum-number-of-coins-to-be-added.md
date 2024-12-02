@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2952 >}}
+{{< leetcode 1395 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-coins-to-be-added/description/)
 

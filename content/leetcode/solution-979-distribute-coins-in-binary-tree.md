@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 979 >}}
+{{< leetcode 451 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/distribute-coins-in-binary-tree/description/)
 

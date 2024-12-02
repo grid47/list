@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1016 >}}
+{{< leetcode 472 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-string-with-substrings-representing-1-to-n/description/)
 

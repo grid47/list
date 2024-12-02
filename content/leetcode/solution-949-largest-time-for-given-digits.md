@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 949 >}}
+{{< leetcode 432 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-time-for-given-digits/description/)
 

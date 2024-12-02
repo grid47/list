@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2456 >}}
+{{< leetcode 1145 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/most-popular-video-creator/description/)
 

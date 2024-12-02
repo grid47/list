@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1266 >}}
+{{< leetcode 562 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-time-visiting-all-points/description/)
 

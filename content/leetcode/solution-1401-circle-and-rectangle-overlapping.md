@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1401 >}}
+{{< leetcode 622 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/circle-and-rectangle-overlapping/description/)
 

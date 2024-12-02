@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1488 >}}
+{{< leetcode 661 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/avoid-flood-in-the-city/description/)
 

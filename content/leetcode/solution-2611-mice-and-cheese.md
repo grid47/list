@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2611 >}}
+{{< leetcode 1246 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/mice-and-cheese/description/)
 

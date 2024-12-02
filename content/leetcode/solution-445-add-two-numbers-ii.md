@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 445 >}}
+{{< leetcode 205 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/add-two-numbers-ii/description/)
 

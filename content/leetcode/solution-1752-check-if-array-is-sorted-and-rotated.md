@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1752 >}}
+{{< leetcode 779 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/description/)
 

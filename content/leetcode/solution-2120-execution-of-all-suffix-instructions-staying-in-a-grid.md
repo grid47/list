@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2120 >}}
+{{< leetcode 959 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/execution-of-all-suffix-instructions-staying-in-a-grid/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 456 >}}
+{{< leetcode 212 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/132-pattern/description/)
 

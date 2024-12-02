@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 994 >}}
+{{< leetcode 459 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rotting-oranges/description/)
 

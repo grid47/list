@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 838 >}}
+{{< leetcode 370 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/push-dominoes/description/)
 

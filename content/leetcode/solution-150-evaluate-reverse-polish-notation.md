@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 150 >}}
+{{< leetcode 98 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/evaluate-reverse-polish-notation/description/)
 

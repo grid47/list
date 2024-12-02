@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1732 >}}
+{{< leetcode 767 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-highest-altitude/description/)
 

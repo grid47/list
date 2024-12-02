@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2568 >}}
+{{< leetcode 1215 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-impossible-or/description/)
 

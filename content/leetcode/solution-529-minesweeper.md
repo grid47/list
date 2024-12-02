@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 529 >}}
+{{< leetcode 238 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minesweeper/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 279 >}}
+{{< leetcode 139 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/perfect-squares/description/)
 

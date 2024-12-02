@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2475 >}}
+{{< leetcode 1156 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-unequal-triplets-in-array/description/)
 

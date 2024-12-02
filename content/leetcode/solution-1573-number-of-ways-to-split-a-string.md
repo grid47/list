@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1573 >}}
+{{< leetcode 695 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-ways-to-split-a-string/description/)
 

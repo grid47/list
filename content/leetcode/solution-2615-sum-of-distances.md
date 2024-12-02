@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2615 >}}
+{{< leetcode 1248 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-distances/description/)
 

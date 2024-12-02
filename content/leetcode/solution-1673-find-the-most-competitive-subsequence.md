@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1673 >}}
+{{< leetcode 739 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-most-competitive-subsequence/description/)
 

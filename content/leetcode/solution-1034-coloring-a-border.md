@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1034 >}}
+{{< leetcode 483 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/coloring-a-border/description/)
 

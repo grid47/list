@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2521 >}}
+{{< leetcode 1183 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/distinct-prime-factors-of-product-of-array/description/)
 

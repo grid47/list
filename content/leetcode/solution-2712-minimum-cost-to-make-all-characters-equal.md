@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2712 >}}
+{{< leetcode 1282 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-cost-to-make-all-characters-equal/description/)
 

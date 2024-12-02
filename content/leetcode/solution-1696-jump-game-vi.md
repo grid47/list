@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1696 >}}
+{{< leetcode 750 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/jump-game-vi/description/)
 

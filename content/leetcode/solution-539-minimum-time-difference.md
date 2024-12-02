@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 539 >}}
+{{< leetcode 244 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-time-difference/description/)
 

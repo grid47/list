@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2038 >}}
+{{< leetcode 923 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-colored-pieces-if-both-neighbors-are-the-same-color/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2685 >}}
+{{< leetcode 1274 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-number-of-complete-components/description/)
 

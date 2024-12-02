@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 398 >}}
+{{< leetcode 184 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/random-pick-index/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1599 >}}
+{{< leetcode 706 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-profit-of-operating-a-centennial-wheel/description/)
 

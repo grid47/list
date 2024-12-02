@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1850 >}}
+{{< leetcode 831 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-adjacent-swaps-to-reach-the-kth-smallest-number/description/)
 

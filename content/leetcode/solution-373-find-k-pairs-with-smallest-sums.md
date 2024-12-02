@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 373 >}}
+{{< leetcode 164 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/description/)
 

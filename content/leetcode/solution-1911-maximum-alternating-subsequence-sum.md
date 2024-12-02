@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1911 >}}
+{{< leetcode 859 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-alternating-subsequence-sum/description/)
 

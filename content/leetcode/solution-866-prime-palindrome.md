@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 866 >}}
+{{< leetcode 389 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/prime-palindrome/description/)
 

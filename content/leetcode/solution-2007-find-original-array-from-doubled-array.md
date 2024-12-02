@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2007 >}}
+{{< leetcode 906 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-original-array-from-doubled-array/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1786 >}}
+{{< leetcode 795 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/description/)
 

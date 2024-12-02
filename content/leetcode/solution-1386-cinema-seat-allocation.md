@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1386 >}}
+{{< leetcode 614 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/cinema-seat-allocation/description/)
 

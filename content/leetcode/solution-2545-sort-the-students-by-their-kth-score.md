@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2545 >}}
+{{< leetcode 1199 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sort-the-students-by-their-kth-score/description/)
 

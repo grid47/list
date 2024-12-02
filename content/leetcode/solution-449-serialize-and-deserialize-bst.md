@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 449 >}}
+{{< leetcode 207 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/serialize-and-deserialize-bst/description/)
 

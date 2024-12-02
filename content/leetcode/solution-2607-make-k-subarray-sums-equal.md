@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2607 >}}
+{{< leetcode 1243 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/make-k-subarray-sums-equal/description/)
 

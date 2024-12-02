@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2516 >}}
+{{< leetcode 1180 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/take-k-of-each-character-from-left-and-right/description/)
 

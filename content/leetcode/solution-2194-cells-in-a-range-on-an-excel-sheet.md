@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2194 >}}
+{{< leetcode 1001 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/cells-in-a-range-on-an-excel-sheet/description/)
 

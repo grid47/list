@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2810 >}}
+{{< leetcode 1324 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/faulty-keyboard/description/)
 

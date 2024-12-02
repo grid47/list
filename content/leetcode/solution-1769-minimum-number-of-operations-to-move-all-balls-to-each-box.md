@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1769 >}}
+{{< leetcode 789 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-operations-to-move-all-balls-to-each-box/description/)
 

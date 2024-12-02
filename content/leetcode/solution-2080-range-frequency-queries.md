@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2080 >}}
+{{< leetcode 943 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/range-frequency-queries/description/)
 

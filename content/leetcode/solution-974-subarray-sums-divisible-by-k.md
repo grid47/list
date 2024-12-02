@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 974 >}}
+{{< leetcode 448 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/subarray-sums-divisible-by-k/description/)
 

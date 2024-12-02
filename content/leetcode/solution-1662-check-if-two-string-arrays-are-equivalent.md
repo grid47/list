@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1662 >}}
+{{< leetcode 732 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/description/)
 

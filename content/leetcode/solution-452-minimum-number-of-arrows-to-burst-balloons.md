@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 452 >}}
+{{< leetcode 209 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2293 >}}
+{{< leetcode 1053 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/min-max-game/description/)
 

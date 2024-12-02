@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1648 >}}
+{{< leetcode 726 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sell-diminishing-valued-colored-balls/description/)
 

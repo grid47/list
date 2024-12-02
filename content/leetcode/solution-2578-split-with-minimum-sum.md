@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2578 >}}
+{{< leetcode 1222 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/split-with-minimum-sum/description/)
 

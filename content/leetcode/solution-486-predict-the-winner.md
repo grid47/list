@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 486 >}}
+{{< leetcode 220 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/predict-the-winner/description/)
 

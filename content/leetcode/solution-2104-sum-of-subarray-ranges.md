@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2104 >}}
+{{< leetcode 953 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-subarray-ranges/description/)
 

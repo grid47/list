@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2255 >}}
+{{< leetcode 1031 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-prefixes-of-a-given-string/description/)
 

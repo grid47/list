@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2368 >}}
+{{< leetcode 1091 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reachable-nodes-with-restrictions/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2210 >}}
+{{< leetcode 1007 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-hills-and-valleys-in-an-array/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 641 >}}
+{{< leetcode 275 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-circular-deque/description/)
 

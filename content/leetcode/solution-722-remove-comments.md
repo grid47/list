@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 722 >}}
+{{< leetcode 312 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-comments/description/)
 

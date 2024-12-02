@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1630 >}}
+{{< leetcode 719 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/arithmetic-subarrays/description/)
 

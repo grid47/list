@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 718 >}}
+{{< leetcode 309 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-length-of-repeated-subarray/description/)
 

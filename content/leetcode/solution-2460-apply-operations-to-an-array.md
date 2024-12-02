@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2460 >}}
+{{< leetcode 1147 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/apply-operations-to-an-array/description/)
 

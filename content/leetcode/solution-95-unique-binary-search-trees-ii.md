@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 95 >}}
+{{< leetcode 65 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/unique-binary-search-trees-ii/description/)
 

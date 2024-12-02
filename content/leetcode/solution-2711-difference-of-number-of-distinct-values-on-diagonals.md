@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2711 >}}
+{{< leetcode 1281 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/difference-of-number-of-distinct-values-on-diagonals/description/)
 

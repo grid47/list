@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1942 >}}
+{{< leetcode 873 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-number-of-the-smallest-unoccupied-chair/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 268 >}}
+{{< leetcode 137 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/missing-number/description/)
 

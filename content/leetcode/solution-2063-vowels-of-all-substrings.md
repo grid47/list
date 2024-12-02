@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2063 >}}
+{{< leetcode 935 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/vowels-of-all-substrings/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1381 >}}
+{{< leetcode 612 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-a-stack-with-increment-operation/description/)
 

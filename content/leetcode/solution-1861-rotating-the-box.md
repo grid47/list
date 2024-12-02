@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1861 >}}
+{{< leetcode 836 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rotating-the-box/description/)
 

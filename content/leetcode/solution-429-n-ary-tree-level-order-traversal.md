@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 429 >}}
+{{< leetcode 198 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/n-ary-tree-level-order-traversal/description/)
 

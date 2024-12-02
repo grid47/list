@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2391 >}}
+{{< leetcode 1105 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-amount-of-time-to-collect-garbage/description/)
 

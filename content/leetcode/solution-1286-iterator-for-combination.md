@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1286 >}}
+{{< leetcode 569 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/iterator-for-combination/description/)
 

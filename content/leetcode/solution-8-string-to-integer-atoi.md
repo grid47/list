@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 8 >}}
+{{< leetcode 7 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/string-to-integer-atoi/description/)
 

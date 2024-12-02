@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2279 >}}
+{{< leetcode 1047 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-bags-with-full-capacity-of-rocks/description/)
 

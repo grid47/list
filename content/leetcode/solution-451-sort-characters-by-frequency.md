@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 451 >}}
+{{< leetcode 208 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sort-characters-by-frequency/description/)
 

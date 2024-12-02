@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1600 >}}
+{{< leetcode 707 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/throne-inheritance/description/)
 

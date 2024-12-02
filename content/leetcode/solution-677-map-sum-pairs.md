@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 677 >}}
+{{< leetcode 293 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/map-sum-pairs/description/)
 

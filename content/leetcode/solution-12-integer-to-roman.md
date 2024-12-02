@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 12 >}}
+{{< leetcode 10 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/integer-to-roman/description/)
 

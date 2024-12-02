@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1702 >}}
+{{< leetcode 753 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-binary-string-after-change/description/)
 

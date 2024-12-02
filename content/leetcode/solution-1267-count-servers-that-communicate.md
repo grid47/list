@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1267 >}}
+{{< leetcode 563 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-servers-that-communicate/description/)
 

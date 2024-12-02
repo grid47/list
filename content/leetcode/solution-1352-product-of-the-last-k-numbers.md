@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1352 >}}
+{{< leetcode 598 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/product-of-the-last-k-numbers/description/)
 

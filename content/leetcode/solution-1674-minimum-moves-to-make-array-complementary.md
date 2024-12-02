@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1674 >}}
+{{< leetcode 740 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-moves-to-make-array-complementary/description/)
 

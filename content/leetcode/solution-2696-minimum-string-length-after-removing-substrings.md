@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2696 >}}
+{{< leetcode 1275 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-string-length-after-removing-substrings/description/)
 

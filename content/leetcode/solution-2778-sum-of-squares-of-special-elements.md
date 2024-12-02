@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2778 >}}
+{{< leetcode 1311 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-squares-of-special-elements/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 767 >}}
+{{< leetcode 331 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reorganize-string/description/)
 

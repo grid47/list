@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 898 >}}
+{{< leetcode 407 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/bitwise-ors-of-subarrays/description/)
 

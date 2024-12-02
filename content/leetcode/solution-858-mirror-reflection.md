@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 858 >}}
+{{< leetcode 383 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/mirror-reflection/description/)
 

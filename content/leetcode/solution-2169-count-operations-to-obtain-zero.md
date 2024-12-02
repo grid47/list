@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2169 >}}
+{{< leetcode 986 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-operations-to-obtain-zero/description/)
 

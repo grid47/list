@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2121 >}}
+{{< leetcode 960 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/intervals-between-identical-elements/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 842 >}}
+{{< leetcode 373 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/split-array-into-fibonacci-sequence/description/)
 

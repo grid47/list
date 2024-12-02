@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2260 >}}
+{{< leetcode 1035 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-consecutive-cards-to-pick-up/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1351 >}}
+{{< leetcode 597 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-negative-numbers-in-a-sorted-matrix/description/)
 

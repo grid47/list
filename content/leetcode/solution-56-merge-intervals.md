@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 56 >}}
+{{< leetcode 41 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/merge-intervals/description/)
 

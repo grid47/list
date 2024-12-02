@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2269 >}}
+{{< leetcode 1040 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-k-beauty-of-a-number/description/)
 

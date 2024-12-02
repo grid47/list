@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2023 >}}
+{{< leetcode 915 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-pairs-of-strings-with-concatenation-equal-to-target/description/)
 

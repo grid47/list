@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2002 >}}
+{{< leetcode 904 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-product-of-the-length-of-two-palindromic-subsequences/description/)
 

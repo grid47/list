@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1914 >}}
+{{< leetcode 861 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/cyclically-rotating-a-grid/description/)
 

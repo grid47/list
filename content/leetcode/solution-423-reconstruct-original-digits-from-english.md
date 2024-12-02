@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 423 >}}
+{{< leetcode 195 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reconstruct-original-digits-from-english/description/)
 

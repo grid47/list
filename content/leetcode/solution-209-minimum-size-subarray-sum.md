@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 209 >}}
+{{< leetcode 118 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-size-subarray-sum/description/)
 

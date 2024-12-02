@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 146 >}}
+{{< leetcode 97 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/lru-cache/description/)
 

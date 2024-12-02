@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2446 >}}
+{{< leetcode 1139 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/determine-if-two-events-have-conflict/description/)
 

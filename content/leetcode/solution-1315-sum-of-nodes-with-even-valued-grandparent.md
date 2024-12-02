@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1315 >}}
+{{< leetcode 582 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-nodes-with-even-valued-grandparent/description/)
 

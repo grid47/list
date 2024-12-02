@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1039 >}}
+{{< leetcode 486 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-score-triangulation-of-polygon/description/)
 

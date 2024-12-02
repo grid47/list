@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 316 >}}
+{{< leetcode 145 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-duplicate-letters/description/)
 

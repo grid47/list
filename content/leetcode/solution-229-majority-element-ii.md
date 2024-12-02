@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 229 >}}
+{{< leetcode 127 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/majority-element-ii/description/)
 

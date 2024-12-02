@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2869 >}}
+{{< leetcode 1356 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-operations-to-collect-elements/description/)
 

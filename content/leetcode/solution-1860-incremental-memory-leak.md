@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1860 >}}
+{{< leetcode 835 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/incremental-memory-leak/description/)
 

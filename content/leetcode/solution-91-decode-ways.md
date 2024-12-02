@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 91 >}}
+{{< leetcode 62 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/decode-ways/description/)
 

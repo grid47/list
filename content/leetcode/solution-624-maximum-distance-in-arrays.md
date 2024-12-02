@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 624 >}}
+{{< leetcode 270 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-distance-in-arrays/description/)
 

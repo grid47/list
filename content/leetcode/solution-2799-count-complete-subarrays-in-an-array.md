@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2799 >}}
+{{< leetcode 1319 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-complete-subarrays-in-an-array/description/)
 

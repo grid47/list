@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 523 >}}
+{{< leetcode 234 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/continuous-subarray-sum/description/)
 

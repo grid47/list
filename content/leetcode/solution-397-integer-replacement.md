@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 397 >}}
+{{< leetcode 183 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/integer-replacement/description/)
 

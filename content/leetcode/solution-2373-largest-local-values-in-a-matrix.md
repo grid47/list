@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2373 >}}
+{{< leetcode 1094 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-local-values-in-a-matrix/description/)
 

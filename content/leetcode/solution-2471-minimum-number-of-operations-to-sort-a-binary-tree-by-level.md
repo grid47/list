@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2471 >}}
+{{< leetcode 1155 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/description/)
 

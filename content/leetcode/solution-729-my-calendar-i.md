@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 729 >}}
+{{< leetcode 315 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/my-calendar-i/description/)
 

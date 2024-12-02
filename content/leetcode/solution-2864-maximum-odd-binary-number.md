@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2864 >}}
+{{< leetcode 1353 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-odd-binary-number/description/)
 

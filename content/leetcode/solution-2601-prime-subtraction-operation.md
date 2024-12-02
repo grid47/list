@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2601 >}}
+{{< leetcode 1239 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/prime-subtraction-operation/description/)
 

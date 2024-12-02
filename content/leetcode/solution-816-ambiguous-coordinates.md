@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 816 >}}
+{{< leetcode 357 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/ambiguous-coordinates/description/)
 

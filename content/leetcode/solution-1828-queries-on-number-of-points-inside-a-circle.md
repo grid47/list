@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1828 >}}
+{{< leetcode 818 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/queries-on-number-of-points-inside-a-circle/description/)
 

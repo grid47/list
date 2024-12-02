@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 560 >}}
+{{< leetcode 253 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/subarray-sum-equals-k/description/)
 

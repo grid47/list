@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1471 >}}
+{{< leetcode 653 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-k-strongest-values-in-an-array/description/)
 

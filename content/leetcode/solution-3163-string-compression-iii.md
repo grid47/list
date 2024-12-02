@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3163 >}}
+{{< leetcode 1427 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/string-compression-iii/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1519 >}}
+{{< leetcode 676 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-nodes-in-the-sub-tree-with-the-same-label/description/)
 

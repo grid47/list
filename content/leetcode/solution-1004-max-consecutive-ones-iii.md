@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1004 >}}
+{{< leetcode 464 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/max-consecutive-ones-iii/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2404 >}}
+{{< leetcode 1112 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/most-frequent-even-element/description/)
 

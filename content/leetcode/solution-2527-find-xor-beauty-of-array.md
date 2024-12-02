@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2527 >}}
+{{< leetcode 1188 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-xor-beauty-of-array/description/)
 

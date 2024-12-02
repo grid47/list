@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2957 >}}
+{{< leetcode 1397 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-adjacent-almost-equal-characters/description/)
 

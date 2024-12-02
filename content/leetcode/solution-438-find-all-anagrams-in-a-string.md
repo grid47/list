@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 438 >}}
+{{< leetcode 203 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-all-anagrams-in-a-string/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2100 >}}
+{{< leetcode 951 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-good-days-to-rob-the-bank/description/)
 

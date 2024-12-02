@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2357 >}}
+{{< leetcode 1084 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/make-array-zero-by-subtracting-equal-amounts/description/)
 

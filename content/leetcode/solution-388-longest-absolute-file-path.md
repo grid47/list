@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 388 >}}
+{{< leetcode 176 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-absolute-file-path/description/)
 

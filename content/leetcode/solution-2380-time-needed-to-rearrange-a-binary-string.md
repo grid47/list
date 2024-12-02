@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2380 >}}
+{{< leetcode 1098 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/time-needed-to-rearrange-a-binary-string/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 904 >}}
+{{< leetcode 410 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/fruit-into-baskets/description/)
 

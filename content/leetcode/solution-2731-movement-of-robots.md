@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2731 >}}
+{{< leetcode 1288 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/movement-of-robots/description/)
 

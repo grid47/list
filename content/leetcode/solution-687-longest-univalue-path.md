@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 687 >}}
+{{< leetcode 297 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-univalue-path/description/)
 

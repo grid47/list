@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2833 >}}
+{{< leetcode 1337 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/furthest-point-from-origin/description/)
 

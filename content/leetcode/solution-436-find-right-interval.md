@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 436 >}}
+{{< leetcode 201 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-right-interval/description/)
 

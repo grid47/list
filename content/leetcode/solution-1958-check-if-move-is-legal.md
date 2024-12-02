@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1958 >}}
+{{< leetcode 879 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-move-is-legal/description/)
 

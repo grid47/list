@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2673 >}}
+{{< leetcode 1267 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/make-costs-of-paths-equal-in-a-binary-tree/description/)
 

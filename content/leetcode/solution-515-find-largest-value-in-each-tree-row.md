@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 515 >}}
+{{< leetcode 228 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-largest-value-in-each-tree-row/description/)
 

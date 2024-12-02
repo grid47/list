@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1984 >}}
+{{< leetcode 893 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-difference-between-highest-and-lowest-of-k-scores/description/)
 

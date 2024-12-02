@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2221 >}}
+{{< leetcode 1014 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-triangular-sum-of-an-array/description/)
 

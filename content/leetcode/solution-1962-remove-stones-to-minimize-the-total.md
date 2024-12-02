@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1962 >}}
+{{< leetcode 882 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-stones-to-minimize-the-total/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2808 >}}
+{{< leetcode 1323 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-seconds-to-equalize-a-circular-array/description/)
 

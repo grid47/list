@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1239 >}}
+{{< leetcode 554 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/description/)
 

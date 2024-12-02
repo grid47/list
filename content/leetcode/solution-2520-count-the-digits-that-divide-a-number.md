@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2520 >}}
+{{< leetcode 1182 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-digits-that-divide-a-number/description/)
 

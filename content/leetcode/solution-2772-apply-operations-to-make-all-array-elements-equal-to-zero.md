@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2772 >}}
+{{< leetcode 1310 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/apply-operations-to-make-all-array-elements-equal-to-zero/description/)
 

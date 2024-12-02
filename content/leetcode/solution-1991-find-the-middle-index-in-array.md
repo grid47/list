@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1991 >}}
+{{< leetcode 896 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-middle-index-in-array/description/)
 

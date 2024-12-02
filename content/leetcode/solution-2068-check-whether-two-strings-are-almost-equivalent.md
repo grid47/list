@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2068 >}}
+{{< leetcode 937 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-whether-two-strings-are-almost-equivalent/description/)
 

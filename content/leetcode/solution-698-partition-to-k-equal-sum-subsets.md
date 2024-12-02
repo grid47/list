@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 698 >}}
+{{< leetcode 301 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/partition-to-k-equal-sum-subsets/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2161 >}}
+{{< leetcode 982 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/partition-array-according-to-given-pivot/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 520 >}}
+{{< leetcode 232 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/detect-capital/description/)
 

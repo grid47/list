@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1818 >}}
+{{< leetcode 813 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-absolute-sum-difference/description/)
 

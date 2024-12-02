@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2812 >}}
+{{< leetcode 1326 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-safest-path-in-a-grid/description/)
 

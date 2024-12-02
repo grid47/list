@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2465 >}}
+{{< leetcode 1150 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-distinct-averages/description/)
 

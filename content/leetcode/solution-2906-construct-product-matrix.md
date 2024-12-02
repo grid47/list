@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2906 >}}
+{{< leetcode 1370 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/construct-product-matrix/description/)
 

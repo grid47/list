@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 258 >}}
+{{< leetcode 136 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/add-digits/description/)
 

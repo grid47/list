@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1837 >}}
+{{< leetcode 823 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-digits-in-base-k/description/)
 

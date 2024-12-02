@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1029 >}}
+{{< leetcode 480 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/two-city-scheduling/description/)
 

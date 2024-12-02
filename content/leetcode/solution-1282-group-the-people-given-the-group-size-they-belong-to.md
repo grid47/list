@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1282 >}}
+{{< leetcode 567 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/group-the-people-given-the-group-size-they-belong-to/description/)
 

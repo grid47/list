@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1207 >}}
+{{< leetcode 541 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/unique-number-of-occurrences/description/)
 

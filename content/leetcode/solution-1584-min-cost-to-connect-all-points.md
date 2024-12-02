@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1584 >}}
+{{< leetcode 700 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/min-cost-to-connect-all-points/description/)
 

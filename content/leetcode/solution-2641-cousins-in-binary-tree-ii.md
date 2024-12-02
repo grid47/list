@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2641 >}}
+{{< leetcode 1252 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/cousins-in-binary-tree-ii/description/)
 

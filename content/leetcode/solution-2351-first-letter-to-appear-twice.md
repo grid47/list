@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2351 >}}
+{{< leetcode 1081 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/first-letter-to-appear-twice/description/)
 

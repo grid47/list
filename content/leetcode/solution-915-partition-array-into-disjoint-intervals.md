@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 915 >}}
+{{< leetcode 415 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/partition-array-into-disjoint-intervals/description/)
 

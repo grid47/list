@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2644 >}}
+{{< leetcode 1254 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-maximum-divisibility-score/description/)
 

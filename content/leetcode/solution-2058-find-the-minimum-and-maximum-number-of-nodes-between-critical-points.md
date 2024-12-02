@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2058 >}}
+{{< leetcode 933 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-minimum-and-maximum-number-of-nodes-between-critical-points/description/)
 

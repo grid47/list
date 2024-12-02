@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1006 >}}
+{{< leetcode 465 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/clumsy-factorial/description/)
 

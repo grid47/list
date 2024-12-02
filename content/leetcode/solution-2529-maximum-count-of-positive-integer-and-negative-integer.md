@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2529 >}}
+{{< leetcode 1189 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-count-of-positive-integer-and-negative-integer/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1652 >}}
+{{< leetcode 727 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/defuse-the-bomb/description/)
 

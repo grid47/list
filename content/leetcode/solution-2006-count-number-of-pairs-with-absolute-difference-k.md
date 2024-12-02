@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2006 >}}
+{{< leetcode 905 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-number-of-pairs-with-absolute-difference-k/description/)
 

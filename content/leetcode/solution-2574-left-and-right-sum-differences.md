@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2574 >}}
+{{< leetcode 1219 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/left-and-right-sum-differences/description/)
 

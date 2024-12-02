@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1419 >}}
+{{< leetcode 630 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-frogs-croaking/description/)
 

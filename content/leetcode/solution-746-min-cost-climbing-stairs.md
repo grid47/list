@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 746 >}}
+{{< leetcode 324 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/min-cost-climbing-stairs/description/)
 

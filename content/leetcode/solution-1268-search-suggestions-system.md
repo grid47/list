@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1268 >}}
+{{< leetcode 564 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/search-suggestions-system/description/)
 

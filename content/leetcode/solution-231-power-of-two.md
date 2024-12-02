@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 231 >}}
+{{< leetcode 129 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/power-of-two/description/)
 

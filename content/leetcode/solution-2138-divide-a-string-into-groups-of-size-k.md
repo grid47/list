@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2138 >}}
+{{< leetcode 970 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/divide-a-string-into-groups-of-size-k/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2300 >}}
+{{< leetcode 1056 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/successful-pairs-of-spells-and-potions/description/)
 

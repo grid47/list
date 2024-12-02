@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 287 >}}
+{{< leetcode 141 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-duplicate-number/description/)
 

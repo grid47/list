@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1497 >}}
+{{< leetcode 666 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-array-pairs-are-divisible-by-k/description/)
 

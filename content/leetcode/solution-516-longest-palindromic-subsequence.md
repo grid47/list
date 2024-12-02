@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 516 >}}
+{{< leetcode 229 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-palindromic-subsequence/description/)
 

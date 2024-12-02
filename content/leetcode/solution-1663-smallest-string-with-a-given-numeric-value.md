@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1663 >}}
+{{< leetcode 733 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-string-with-a-given-numeric-value/description/)
 

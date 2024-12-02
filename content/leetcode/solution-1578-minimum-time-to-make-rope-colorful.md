@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1578 >}}
+{{< leetcode 697 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-time-to-make-rope-colorful/description/)
 

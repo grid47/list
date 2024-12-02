@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1031 >}}
+{{< leetcode 481 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-sum-of-two-non-overlapping-subarrays/description/)
 

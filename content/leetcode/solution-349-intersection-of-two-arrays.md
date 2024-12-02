@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 349 >}}
+{{< leetcode 157 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/intersection-of-two-arrays/description/)
 

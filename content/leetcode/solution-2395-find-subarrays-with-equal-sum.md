@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2395 >}}
+{{< leetcode 1106 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-subarrays-with-equal-sum/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 278 >}}
+{{< leetcode 138 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/first-bad-version/description/)
 

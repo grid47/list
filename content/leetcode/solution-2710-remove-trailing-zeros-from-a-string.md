@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2710 >}}
+{{< leetcode 1280 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-trailing-zeros-from-a-string/description/)
 

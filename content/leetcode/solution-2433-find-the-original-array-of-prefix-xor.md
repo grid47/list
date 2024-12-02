@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2433 >}}
+{{< leetcode 1131 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-original-array-of-prefix-xor/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2748 >}}
+{{< leetcode 1298 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-beautiful-pairs/description/)
 

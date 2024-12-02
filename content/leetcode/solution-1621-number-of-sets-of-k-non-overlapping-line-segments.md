@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1621 >}}
+{{< leetcode 715 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-sets-of-k-non-overlapping-line-segments/description/)
 

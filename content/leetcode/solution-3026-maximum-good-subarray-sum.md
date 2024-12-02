@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3026 >}}
+{{< leetcode 1406 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-good-subarray-sum/description/)
 

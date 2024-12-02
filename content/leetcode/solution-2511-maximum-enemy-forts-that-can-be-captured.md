@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2511 >}}
+{{< leetcode 1176 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-enemy-forts-that-can-be-captured/description/)
 

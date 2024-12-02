@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 911 >}}
+{{< leetcode 414 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/online-election/description/)
 

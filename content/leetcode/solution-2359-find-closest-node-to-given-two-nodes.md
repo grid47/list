@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2359 >}}
+{{< leetcode 1086 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-closest-node-to-given-two-nodes/description/)
 

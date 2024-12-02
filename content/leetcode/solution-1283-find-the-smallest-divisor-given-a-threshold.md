@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1283 >}}
+{{< leetcode 568 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/description/)
 

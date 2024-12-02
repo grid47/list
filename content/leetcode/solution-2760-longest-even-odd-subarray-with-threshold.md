@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2760 >}}
+{{< leetcode 1300 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-even-odd-subarray-with-threshold/description/)
 

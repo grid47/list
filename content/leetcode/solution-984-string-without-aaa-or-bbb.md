@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 984 >}}
+{{< leetcode 454 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/string-without-aaa-or-bbb/description/)
 

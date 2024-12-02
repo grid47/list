@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2288 >}}
+{{< leetcode 1052 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/apply-discount-to-prices/description/)
 

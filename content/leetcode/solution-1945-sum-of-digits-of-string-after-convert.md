@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1945 >}}
+{{< leetcode 875 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-digits-of-string-after-convert/description/)
 

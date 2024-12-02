@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1996 >}}
+{{< leetcode 900 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-number-of-weak-characters-in-the-game/description/)
 

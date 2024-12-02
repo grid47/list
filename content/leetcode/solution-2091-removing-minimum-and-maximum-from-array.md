@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2091 >}}
+{{< leetcode 947 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/removing-minimum-and-maximum-from-array/description/)
 

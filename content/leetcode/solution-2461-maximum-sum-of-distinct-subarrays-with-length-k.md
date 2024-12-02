@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2461 >}}
+{{< leetcode 1148 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/description/)
 

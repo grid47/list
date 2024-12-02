@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2513 >}}
+{{< leetcode 1178 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimize-the-maximum-of-two-arrays/description/)
 

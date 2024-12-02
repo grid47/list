@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1493 >}}
+{{< leetcode 664 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/description/)
 

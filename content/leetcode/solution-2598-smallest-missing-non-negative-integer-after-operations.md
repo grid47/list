@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2598 >}}
+{{< leetcode 1237 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-missing-non-negative-integer-after-operations/description/)
 

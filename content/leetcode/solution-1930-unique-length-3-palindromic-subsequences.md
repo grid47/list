@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1930 >}}
+{{< leetcode 868 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/unique-length-3-palindromic-subsequences/description/)
 

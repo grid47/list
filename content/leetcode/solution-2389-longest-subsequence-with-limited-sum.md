@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2389 >}}
+{{< leetcode 1103 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-subsequence-with-limited-sum/description/)
 

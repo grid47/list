@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1604 >}}
+{{< leetcode 709 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/alert-using-same-key-card-three-or-more-times-in-a-one-hour-period/description/)
 

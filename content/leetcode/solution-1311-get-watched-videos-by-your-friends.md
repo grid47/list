@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1311 >}}
+{{< leetcode 580 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/get-watched-videos-by-your-friends/description/)
 

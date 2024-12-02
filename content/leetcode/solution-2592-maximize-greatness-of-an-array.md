@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2592 >}}
+{{< leetcode 1231 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximize-greatness-of-an-array/description/)
 

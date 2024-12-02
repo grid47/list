@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1975 >}}
+{{< leetcode 888 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-matrix-sum/description/)
 

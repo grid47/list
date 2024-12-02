@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2348 >}}
+{{< leetcode 1079 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-zero-filled-subarrays/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2672 >}}
+{{< leetcode 1266 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-adjacent-elements-with-the-same-color/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1718 >}}
+{{< leetcode 760 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/construct-the-lexicographically-largest-valid-sequence/description/)
 

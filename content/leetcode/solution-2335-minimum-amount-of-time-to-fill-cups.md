@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2335 >}}
+{{< leetcode 1072 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-amount-of-time-to-fill-cups/description/)
 

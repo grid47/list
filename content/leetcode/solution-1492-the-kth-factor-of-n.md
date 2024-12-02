@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1492 >}}
+{{< leetcode 663 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-kth-factor-of-n/description/)
 

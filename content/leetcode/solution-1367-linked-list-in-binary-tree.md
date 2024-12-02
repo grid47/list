@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1367 >}}
+{{< leetcode 606 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/linked-list-in-binary-tree/description/)
 

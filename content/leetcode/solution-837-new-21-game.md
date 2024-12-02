@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 837 >}}
+{{< leetcode 369 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/new-21-game/description/)
 

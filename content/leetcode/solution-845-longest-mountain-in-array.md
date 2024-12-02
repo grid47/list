@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 845 >}}
+{{< leetcode 375 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-mountain-in-array/description/)
 

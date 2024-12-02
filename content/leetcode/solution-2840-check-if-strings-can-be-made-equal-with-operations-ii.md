@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2840 >}}
+{{< leetcode 1339 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-strings-can-be-made-equal-with-operations-ii/description/)
 

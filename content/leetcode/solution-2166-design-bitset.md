@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2166 >}}
+{{< leetcode 985 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-bitset/description/)
 

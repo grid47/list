@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 50 >}}
+{{< leetcode 37 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/powx-n/description/)
 

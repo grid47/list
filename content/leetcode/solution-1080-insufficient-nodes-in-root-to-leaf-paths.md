@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1080 >}}
+{{< leetcode 501 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/insufficient-nodes-in-root-to-leaf-paths/description/)
 

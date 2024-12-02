@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 950 >}}
+{{< leetcode 433 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reveal-cards-in-increasing-order/description/)
 

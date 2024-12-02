@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1472 >}}
+{{< leetcode 654 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-browser-history/description/)
 

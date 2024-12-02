@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1261 >}}
+{{< leetcode 560 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-elements-in-a-contaminated-binary-tree/description/)
 

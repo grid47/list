@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2525 >}}
+{{< leetcode 1186 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/categorize-box-according-to-criteria/description/)
 

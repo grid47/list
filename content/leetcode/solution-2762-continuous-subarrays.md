@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2762 >}}
+{{< leetcode 1302 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/continuous-subarrays/description/)
 

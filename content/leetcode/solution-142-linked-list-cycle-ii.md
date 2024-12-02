@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 142 >}}
+{{< leetcode 94 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/linked-list-cycle-ii/description/)
 

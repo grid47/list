@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2735 >}}
+{{< leetcode 1291 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/collecting-chocolates/description/)
 

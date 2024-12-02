@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2591 >}}
+{{< leetcode 1230 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/distribute-money-to-maximum-children/description/)
 

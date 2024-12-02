@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1695 >}}
+{{< leetcode 749 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-erasure-value/description/)
 

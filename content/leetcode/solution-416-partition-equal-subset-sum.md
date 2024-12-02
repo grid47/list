@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 416 >}}
+{{< leetcode 191 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/partition-equal-subset-sum/description/)
 

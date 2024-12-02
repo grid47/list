@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2477 >}}
+{{< leetcode 1158 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-fuel-cost-to-report-to-the-capital/description/)
 

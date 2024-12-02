@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 811 >}}
+{{< leetcode 354 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/subdomain-visit-count/description/)
 

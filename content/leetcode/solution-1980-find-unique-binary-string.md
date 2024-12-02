@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1980 >}}
+{{< leetcode 891 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-unique-binary-string/description/)
 

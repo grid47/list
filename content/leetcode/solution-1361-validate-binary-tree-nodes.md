@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1361 >}}
+{{< leetcode 603 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/validate-binary-tree-nodes/description/)
 

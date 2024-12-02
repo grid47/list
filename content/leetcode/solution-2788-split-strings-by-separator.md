@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2788 >}}
+{{< leetcode 1316 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/split-strings-by-separator/description/)
 

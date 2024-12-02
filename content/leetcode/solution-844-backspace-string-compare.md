@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 844 >}}
+{{< leetcode 374 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/backspace-string-compare/description/)
 

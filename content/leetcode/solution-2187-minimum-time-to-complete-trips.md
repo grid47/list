@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2187 >}}
+{{< leetcode 997 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-time-to-complete-trips/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 371 >}}
+{{< leetcode 162 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-two-integers/description/)
 

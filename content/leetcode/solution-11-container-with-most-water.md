@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 11 >}}
+{{< leetcode 9 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/container-with-most-water/description/)
 

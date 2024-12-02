@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2049 >}}
+{{< leetcode 929 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-nodes-with-the-highest-score/description/)
 

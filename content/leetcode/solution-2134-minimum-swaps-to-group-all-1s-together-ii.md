@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2134 >}}
+{{< leetcode 968 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-swaps-to-group-all-1s-together-ii/description/)
 

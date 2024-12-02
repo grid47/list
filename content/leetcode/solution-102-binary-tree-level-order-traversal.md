@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 102 >}}
+{{< leetcode 70 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-tree-level-order-traversal/description/)
 

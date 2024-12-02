@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1253 >}}
+{{< leetcode 558 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reconstruct-a-2-row-binary-matrix/description/)
 

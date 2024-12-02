@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 807 >}}
+{{< leetcode 351 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/max-increase-to-keep-city-skyline/description/)
 

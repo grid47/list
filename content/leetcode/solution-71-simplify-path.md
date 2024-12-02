@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 71 >}}
+{{< leetcode 50 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/simplify-path/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 841 >}}
+{{< leetcode 372 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/keys-and-rooms/description/)
 

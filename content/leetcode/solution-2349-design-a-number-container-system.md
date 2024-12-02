@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2349 >}}
+{{< leetcode 1080 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-a-number-container-system/description/)
 

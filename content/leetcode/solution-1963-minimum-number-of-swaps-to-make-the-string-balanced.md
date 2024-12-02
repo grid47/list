@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1963 >}}
+{{< leetcode 883 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-string-balanced/description/)
 

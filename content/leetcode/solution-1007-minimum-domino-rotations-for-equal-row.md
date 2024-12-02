@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1007 >}}
+{{< leetcode 466 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-domino-rotations-for-equal-row/description/)
 

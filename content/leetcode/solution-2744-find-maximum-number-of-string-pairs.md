@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2744 >}}
+{{< leetcode 1295 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-maximum-number-of-string-pairs/description/)
 

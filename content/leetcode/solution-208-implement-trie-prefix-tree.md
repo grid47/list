@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 208 >}}
+{{< leetcode 117 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/implement-trie-prefix-tree/description/)
 

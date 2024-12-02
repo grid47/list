@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2564 >}}
+{{< leetcode 1212 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/substring-xor-queries/description/)
 

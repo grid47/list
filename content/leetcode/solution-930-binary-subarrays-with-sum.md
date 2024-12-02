@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 930 >}}
+{{< leetcode 422 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-subarrays-with-sum/description/)
 

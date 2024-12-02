@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 622 >}}
+{{< leetcode 268 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-circular-queue/description/)
 

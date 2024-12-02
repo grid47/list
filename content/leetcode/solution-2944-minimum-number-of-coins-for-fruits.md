@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2944 >}}
+{{< leetcode 1390 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-coins-for-fruits/description/)
 

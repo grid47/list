@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1362 >}}
+{{< leetcode 604 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/closest-divisors/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1477 >}}
+{{< leetcode 656 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-two-non-overlapping-sub-arrays-each-with-target-sum/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 133 >}}
+{{< leetcode 87 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/clone-graph/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2593 >}}
+{{< leetcode 1232 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-score-of-an-array-after-marking-all-elements/description/)
 

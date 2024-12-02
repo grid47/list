@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1678 >}}
+{{< leetcode 741 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/goal-parser-interpretation/description/)
 

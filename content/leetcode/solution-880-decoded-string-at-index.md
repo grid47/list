@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 880 >}}
+{{< leetcode 399 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/decoded-string-at-index/description/)
 

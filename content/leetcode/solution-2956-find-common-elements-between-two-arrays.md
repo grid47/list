@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2956 >}}
+{{< leetcode 1396 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-common-elements-between-two-arrays/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2490 >}}
+{{< leetcode 1165 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/circular-sentence/description/)
 

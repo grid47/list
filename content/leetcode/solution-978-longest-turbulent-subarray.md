@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 978 >}}
+{{< leetcode 450 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-turbulent-subarray/description/)
 

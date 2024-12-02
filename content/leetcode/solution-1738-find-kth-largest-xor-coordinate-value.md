@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1738 >}}
+{{< leetcode 772 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-kth-largest-xor-coordinate-value/description/)
 

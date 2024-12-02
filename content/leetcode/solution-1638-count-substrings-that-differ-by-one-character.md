@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1638 >}}
+{{< leetcode 722 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-substrings-that-differ-by-one-character/description/)
 

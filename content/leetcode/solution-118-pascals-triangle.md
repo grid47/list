@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 118 >}}
+{{< leetcode 81 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/pascals-triangle/description/)
 

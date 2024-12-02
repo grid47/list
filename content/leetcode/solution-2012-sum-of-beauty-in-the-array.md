@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2012 >}}
+{{< leetcode 909 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-beauty-in-the-array/description/)
 

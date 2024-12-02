@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1104 >}}
+{{< leetcode 506 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/path-in-zigzag-labelled-binary-tree/description/)
 

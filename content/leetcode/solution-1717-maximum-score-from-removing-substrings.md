@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1717 >}}
+{{< leetcode 759 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-score-from-removing-substrings/description/)
 

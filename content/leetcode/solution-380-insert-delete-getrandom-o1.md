@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 380 >}}
+{{< leetcode 169 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/insert-delete-getrandom-o1/description/)
 

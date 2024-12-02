@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2682 >}}
+{{< leetcode 1271 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-losers-of-the-circular-game/description/)
 

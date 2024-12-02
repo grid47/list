@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 977 >}}
+{{< leetcode 449 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/squares-of-a-sorted-array/description/)
 

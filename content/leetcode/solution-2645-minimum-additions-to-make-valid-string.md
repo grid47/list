@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2645 >}}
+{{< leetcode 1255 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-additions-to-make-valid-string/description/)
 

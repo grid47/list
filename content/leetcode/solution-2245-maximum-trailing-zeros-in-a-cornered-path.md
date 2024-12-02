@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2245 >}}
+{{< leetcode 1028 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-trailing-zeros-in-a-cornered-path/description/)
 

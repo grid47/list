@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2086 >}}
+{{< leetcode 944 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-food-buckets-to-feed-the-hamsters/description/)
 

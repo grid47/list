@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3178 >}}
+{{< leetcode 1430 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-child-who-has-the-ball-after-k-seconds/description/)
 

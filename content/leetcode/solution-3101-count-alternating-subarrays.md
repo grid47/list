@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3101 >}}
+{{< leetcode 1414 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-alternating-subarrays/description/)
 

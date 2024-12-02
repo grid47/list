@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1452 >}}
+{{< leetcode 645 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/people-whose-list-of-favorite-companies-is-not-a-subset-of-another-list/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1839 >}}
+{{< leetcode 825 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-substring-of-all-vowels-in-order/description/)
 

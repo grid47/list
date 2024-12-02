@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 831 >}}
+{{< leetcode 365 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/masking-personal-information/description/)
 

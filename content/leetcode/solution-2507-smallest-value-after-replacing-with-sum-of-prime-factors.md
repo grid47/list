@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2507 >}}
+{{< leetcode 1175 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-value-after-replacing-with-sum-of-prime-factors/description/)
 

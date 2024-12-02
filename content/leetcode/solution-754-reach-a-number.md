@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 754 >}}
+{{< leetcode 326 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reach-a-number/description/)
 

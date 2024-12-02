@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2566 >}}
+{{< leetcode 1213 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-difference-by-remapping-a-digit/description/)
 

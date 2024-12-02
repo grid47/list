@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2498 >}}
+{{< leetcode 1170 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/frog-jump-ii/description/)
 

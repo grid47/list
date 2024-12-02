@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1146 >}}
+{{< leetcode 527 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/snapshot-array/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1124 >}}
+{{< leetcode 516 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-well-performing-interval/description/)
 

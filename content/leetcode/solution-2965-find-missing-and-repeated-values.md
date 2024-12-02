@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2965 >}}
+{{< leetcode 1402 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-missing-and-repeated-values/description/)
 

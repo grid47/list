@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1921 >}}
+{{< leetcode 864 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/eliminate-maximum-number-of-monsters/description/)
 

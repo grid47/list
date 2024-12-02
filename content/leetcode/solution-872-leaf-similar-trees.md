@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 872 >}}
+{{< leetcode 394 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/leaf-similar-trees/description/)
 

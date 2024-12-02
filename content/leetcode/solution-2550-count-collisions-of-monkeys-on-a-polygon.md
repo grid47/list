@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2550 >}}
+{{< leetcode 1202 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-collisions-of-monkeys-on-a-polygon/description/)
 

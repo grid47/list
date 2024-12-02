@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 553 >}}
+{{< leetcode 249 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/optimal-division/description/)
 

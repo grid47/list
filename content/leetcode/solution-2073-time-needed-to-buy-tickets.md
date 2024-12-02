@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2073 >}}
+{{< leetcode 940 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/time-needed-to-buy-tickets/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 225 >}}
+{{< leetcode 124 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/implement-stack-using-queues/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1019 >}}
+{{< leetcode 474 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/next-greater-node-in-linked-list/description/)
 

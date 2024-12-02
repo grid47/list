@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2397 >}}
+{{< leetcode 1108 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-rows-covered-by-columns/description/)
 

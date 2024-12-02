@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1712 >}}
+{{< leetcode 757 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/ways-to-split-array-into-three-subarrays/description/)
 

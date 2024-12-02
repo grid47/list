@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1541 >}}
+{{< leetcode 684 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-insertions-to-balance-a-parentheses-string/description/)
 

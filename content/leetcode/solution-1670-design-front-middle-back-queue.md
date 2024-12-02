@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1670 >}}
+{{< leetcode 737 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-front-middle-back-queue/description/)
 

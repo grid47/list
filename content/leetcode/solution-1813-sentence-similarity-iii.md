@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1813 >}}
+{{< leetcode 809 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sentence-similarity-iii/description/)
 

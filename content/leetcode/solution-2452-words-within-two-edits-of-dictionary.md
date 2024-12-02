@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2452 >}}
+{{< leetcode 1142 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/words-within-two-edits-of-dictionary/description/)
 

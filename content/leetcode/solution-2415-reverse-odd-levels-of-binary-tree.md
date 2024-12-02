@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2415 >}}
+{{< leetcode 1120 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reverse-odd-levels-of-binary-tree/description/)
 

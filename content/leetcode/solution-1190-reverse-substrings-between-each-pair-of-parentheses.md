@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1190 >}}
+{{< leetcode 537 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reverse-substrings-between-each-pair-of-parentheses/description/)
 

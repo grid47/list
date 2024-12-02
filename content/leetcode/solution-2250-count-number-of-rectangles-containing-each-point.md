@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2250 >}}
+{{< leetcode 1030 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-number-of-rectangles-containing-each-point/description/)
 

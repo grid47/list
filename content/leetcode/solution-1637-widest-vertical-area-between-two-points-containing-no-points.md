@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1637 >}}
+{{< leetcode 721 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/widest-vertical-area-between-two-points-containing-no-points/description/)
 

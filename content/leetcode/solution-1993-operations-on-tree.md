@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1993 >}}
+{{< leetcode 898 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/operations-on-tree/description/)
 

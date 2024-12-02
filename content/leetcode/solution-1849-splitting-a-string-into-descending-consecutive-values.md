@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1849 >}}
+{{< leetcode 830 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/splitting-a-string-into-descending-consecutive-values/description/)
 

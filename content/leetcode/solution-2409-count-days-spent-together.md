@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2409 >}}
+{{< leetcode 1115 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-days-spent-together/description/)
 

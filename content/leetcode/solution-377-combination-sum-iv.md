@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 377 >}}
+{{< leetcode 167 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/combination-sum-iv/description/)
 

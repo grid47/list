@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1700 >}}
+{{< leetcode 751 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-students-unable-to-eat-lunch/description/)
 

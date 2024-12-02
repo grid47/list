@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 572 >}}
+{{< leetcode 256 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/subtree-of-another-tree/description/)
 

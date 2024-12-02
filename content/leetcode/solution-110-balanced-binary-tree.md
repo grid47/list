@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 110 >}}
+{{< leetcode 76 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/balanced-binary-tree/description/)
 

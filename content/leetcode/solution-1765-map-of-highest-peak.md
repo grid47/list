@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1765 >}}
+{{< leetcode 787 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/map-of-highest-peak/description/)
 

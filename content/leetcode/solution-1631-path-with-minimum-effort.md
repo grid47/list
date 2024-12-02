@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1631 >}}
+{{< leetcode 720 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/path-with-minimum-effort/description/)
 

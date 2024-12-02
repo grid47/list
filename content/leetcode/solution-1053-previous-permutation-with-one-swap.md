@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1053 >}}
+{{< leetcode 495 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/previous-permutation-with-one-swap/description/)
 

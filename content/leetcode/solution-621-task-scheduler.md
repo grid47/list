@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 621 >}}
+{{< leetcode 267 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/task-scheduler/description/)
 

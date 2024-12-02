@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1615 >}}
+{{< leetcode 712 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximal-network-rank/description/)
 

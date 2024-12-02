@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2554 >}}
+{{< leetcode 1204 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-integers-to-choose-from-a-range-i/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1961 >}}
+{{< leetcode 881 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-string-is-a-prefix-of-array/description/)
 

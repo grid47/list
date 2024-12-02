@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2660 >}}
+{{< leetcode 1263 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/determine-the-winner-of-a-bowling-game/description/)
 

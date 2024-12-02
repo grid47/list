@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1947 >}}
+{{< leetcode 876 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-compatibility-score-sum/description/)
 

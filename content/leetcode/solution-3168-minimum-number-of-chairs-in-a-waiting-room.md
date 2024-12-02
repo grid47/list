@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3168 >}}
+{{< leetcode 1428 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-chairs-in-a-waiting-room/description/)
 

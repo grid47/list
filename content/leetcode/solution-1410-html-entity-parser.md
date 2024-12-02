@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1410 >}}
+{{< leetcode 626 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/html-entity-parser/description/)
 

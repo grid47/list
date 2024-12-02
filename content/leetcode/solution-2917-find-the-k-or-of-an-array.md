@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2917 >}}
+{{< leetcode 1377 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-k-or-of-an-array/description/)
 

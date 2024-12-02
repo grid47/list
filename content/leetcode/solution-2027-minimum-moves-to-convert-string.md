@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2027 >}}
+{{< leetcode 917 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-moves-to-convert-string/description/)
 

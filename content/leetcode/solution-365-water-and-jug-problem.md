@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 365 >}}
+{{< leetcode 160 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/water-and-jug-problem/description/)
 

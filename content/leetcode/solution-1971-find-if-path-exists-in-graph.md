@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1971 >}}
+{{< leetcode 886 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-if-path-exists-in-graph/description/)
 

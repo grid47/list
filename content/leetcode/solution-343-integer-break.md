@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 343 >}}
+{{< leetcode 154 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/integer-break/description/)
 

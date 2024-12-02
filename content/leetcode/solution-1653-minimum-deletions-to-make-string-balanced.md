@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1653 >}}
+{{< leetcode 728 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-deletions-to-make-string-balanced/description/)
 

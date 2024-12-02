@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1784 >}}
+{{< leetcode 793 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-binary-string-has-at-most-one-segment-of-ones/description/)
 

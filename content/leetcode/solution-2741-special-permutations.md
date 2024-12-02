@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2741 >}}
+{{< leetcode 1294 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/special-permutations/description/)
 

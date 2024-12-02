@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1161 >}}
+{{< leetcode 531 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree/description/)
 

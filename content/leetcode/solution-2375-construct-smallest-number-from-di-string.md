@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2375 >}}
+{{< leetcode 1096 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/construct-smallest-number-from-di-string/description/)
 

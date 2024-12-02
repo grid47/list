@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1358 >}}
+{{< leetcode 602 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/description/)
 

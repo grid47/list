@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1552 >}}
+{{< leetcode 688 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/magnetic-force-between-two-balls/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1686 >}}
+{{< leetcode 745 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/stone-game-vi/description/)
 

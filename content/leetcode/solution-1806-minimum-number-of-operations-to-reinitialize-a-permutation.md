@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1806 >}}
+{{< leetcode 806 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-operations-to-reinitialize-a-permutation/description/)
 

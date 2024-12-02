@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2352 >}}
+{{< leetcode 1082 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/equal-row-and-column-pairs/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2124 >}}
+{{< leetcode 961 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-all-as-appears-before-all-bs/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2418 >}}
+{{< leetcode 1121 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sort-the-people/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2008 >}}
+{{< leetcode 907 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-earnings-from-taxi/description/)
 

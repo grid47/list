@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2856 >}}
+{{< leetcode 1348 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-array-length-after-pair-removals/description/)
 

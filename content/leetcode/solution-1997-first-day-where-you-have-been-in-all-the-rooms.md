@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1997 >}}
+{{< leetcode 901 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/first-day-where-you-have-been-in-all-the-rooms/description/)
 

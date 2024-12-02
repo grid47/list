@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 116 >}}
+{{< leetcode 80 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/)
 

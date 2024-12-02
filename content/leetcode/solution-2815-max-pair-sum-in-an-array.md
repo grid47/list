@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2815 >}}
+{{< leetcode 1327 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/max-pair-sum-in-an-array/description/)
 

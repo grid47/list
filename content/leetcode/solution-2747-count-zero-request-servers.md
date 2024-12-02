@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2747 >}}
+{{< leetcode 1297 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-zero-request-servers/description/)
 

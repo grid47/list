@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 73 >}}
+{{< leetcode 52 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/set-matrix-zeroes/description/)
 

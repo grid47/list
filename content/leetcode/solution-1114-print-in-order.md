@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1114 >}}
+{{< leetcode 511 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/print-in-order/description/)
 

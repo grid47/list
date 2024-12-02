@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 537 >}}
+{{< leetcode 242 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/complex-number-multiplication/description/)
 

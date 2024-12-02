@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2765 >}}
+{{< leetcode 1303 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-alternating-subarray/description/)
 

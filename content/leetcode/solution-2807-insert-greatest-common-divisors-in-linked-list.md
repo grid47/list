@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2807 >}}
+{{< leetcode 1322 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/insert-greatest-common-divisors-in-linked-list/description/)
 

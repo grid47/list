@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 814 >}}
+{{< leetcode 356 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-tree-pruning/description/)
 

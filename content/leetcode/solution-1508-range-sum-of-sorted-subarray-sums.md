@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1508 >}}
+{{< leetcode 671 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/range-sum-of-sorted-subarray-sums/description/)
 

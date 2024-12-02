@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1886 >}}
+{{< leetcode 847 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/determine-whether-matrix-can-be-obtained-by-rotation/description/)
 

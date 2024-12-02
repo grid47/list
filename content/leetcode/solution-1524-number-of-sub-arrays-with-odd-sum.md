@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1524 >}}
+{{< leetcode 677 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/description/)
 

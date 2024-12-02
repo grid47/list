@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 881 >}}
+{{< leetcode 400 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/boats-to-save-people/description/)
 

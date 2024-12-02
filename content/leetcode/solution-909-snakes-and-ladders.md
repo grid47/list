@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 909 >}}
+{{< leetcode 412 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/snakes-and-ladders/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 947 >}}
+{{< leetcode 430 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/)
 

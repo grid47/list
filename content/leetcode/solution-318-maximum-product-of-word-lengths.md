@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 318 >}}
+{{< leetcode 146 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-product-of-word-lengths/description/)
 

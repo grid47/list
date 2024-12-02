@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1802 >}}
+{{< leetcode 804 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-value-at-a-given-index-in-a-bounded-array/description/)
 

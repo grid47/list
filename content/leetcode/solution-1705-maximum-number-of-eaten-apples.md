@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1705 >}}
+{{< leetcode 755 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-eaten-apples/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2718 >}}
+{{< leetcode 1285 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-matrix-after-queries/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 789 >}}
+{{< leetcode 342 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/escape-the-ghosts/description/)
 

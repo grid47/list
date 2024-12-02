@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2274 >}}
+{{< leetcode 1044 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-consecutive-floors-without-special-floors/description/)
 

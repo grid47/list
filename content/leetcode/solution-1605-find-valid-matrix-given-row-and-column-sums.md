@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1605 >}}
+{{< leetcode 710 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-valid-matrix-given-row-and-column-sums/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 565 >}}
+{{< leetcode 254 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/array-nesting/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2786 >}}
+{{< leetcode 1315 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/visit-array-positions-to-maximize-score/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 400 >}}
+{{< leetcode 186 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/nth-digit/description/)
 

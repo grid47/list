@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 36 >}}
+{{< leetcode 27 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/valid-sudoku/description/)
 

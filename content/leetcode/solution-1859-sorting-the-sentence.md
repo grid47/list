@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1859 >}}
+{{< leetcode 834 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sorting-the-sentence/description/)
 

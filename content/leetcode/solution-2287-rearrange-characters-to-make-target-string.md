@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2287 >}}
+{{< leetcode 1051 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rearrange-characters-to-make-target-string/description/)
 

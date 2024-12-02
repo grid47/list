@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1404 >}}
+{{< leetcode 623 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-steps-to-reduce-a-number-in-binary-representation-to-one/description/)
 

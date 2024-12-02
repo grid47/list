@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 583 >}}
+{{< leetcode 259 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/delete-operation-for-two-strings/description/)
 

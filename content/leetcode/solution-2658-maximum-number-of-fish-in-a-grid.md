@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2658 >}}
+{{< leetcode 1262 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-fish-in-a-grid/description/)
 

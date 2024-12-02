@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1017 >}}
+{{< leetcode 473 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/convert-to-base-2/description/)
 

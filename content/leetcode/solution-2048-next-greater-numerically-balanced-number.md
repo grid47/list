@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2048 >}}
+{{< leetcode 928 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/next-greater-numerically-balanced-number/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 695 >}}
+{{< leetcode 300 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/max-area-of-island/description/)
 

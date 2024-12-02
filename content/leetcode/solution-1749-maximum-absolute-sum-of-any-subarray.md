@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1749 >}}
+{{< leetcode 777 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/description/)
 

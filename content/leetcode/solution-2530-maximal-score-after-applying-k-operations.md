@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2530 >}}
+{{< leetcode 1190 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximal-score-after-applying-k-operations/description/)
 

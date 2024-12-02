@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2501 >}}
+{{< leetcode 1172 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-square-streak-in-an-array/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2087 >}}
+{{< leetcode 945 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-cost-homecoming-of-a-robot-in-a-grid/description/)
 

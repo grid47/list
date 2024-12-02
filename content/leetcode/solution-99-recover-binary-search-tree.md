@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 99 >}}
+{{< leetcode 68 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/recover-binary-search-tree/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1415 >}}
+{{< leetcode 628 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/description/)
 

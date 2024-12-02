@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2904 >}}
+{{< leetcode 1368 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shortest-and-lexicographically-smallest-beautiful-string/description/)
 

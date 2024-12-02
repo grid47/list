@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 22 >}}
+{{< leetcode 19 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/generate-parentheses/description/)
 

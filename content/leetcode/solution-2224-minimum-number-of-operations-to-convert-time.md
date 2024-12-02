@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2224 >}}
+{{< leetcode 1016 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-operations-to-convert-time/description/)
 

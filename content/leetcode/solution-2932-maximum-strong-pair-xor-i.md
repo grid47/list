@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2932 >}}
+{{< leetcode 1383 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-strong-pair-xor-i/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1441 >}}
+{{< leetcode 639 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/build-an-array-with-stack-operations/description/)
 

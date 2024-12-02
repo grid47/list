@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 609 >}}
+{{< leetcode 264 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-duplicate-file-in-system/description/)
 

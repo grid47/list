@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1992 >}}
+{{< leetcode 897 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-all-groups-of-farmland/description/)
 

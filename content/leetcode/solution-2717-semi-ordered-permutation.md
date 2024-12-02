@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2717 >}}
+{{< leetcode 1284 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/semi-ordered-permutation/description/)
 

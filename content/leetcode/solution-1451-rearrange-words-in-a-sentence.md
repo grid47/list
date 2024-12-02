@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1451 >}}
+{{< leetcode 644 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rearrange-words-in-a-sentence/description/)
 

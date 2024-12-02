@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2806 >}}
+{{< leetcode 1321 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/account-balance-after-rounded-purchase/description/)
 

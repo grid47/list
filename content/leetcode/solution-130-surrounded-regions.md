@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 130 >}}
+{{< leetcode 85 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/surrounded-regions/description/)
 

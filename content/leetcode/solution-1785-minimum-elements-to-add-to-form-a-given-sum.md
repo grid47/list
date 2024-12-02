@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1785 >}}
+{{< leetcode 794 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-elements-to-add-to-form-a-given-sum/description/)
 

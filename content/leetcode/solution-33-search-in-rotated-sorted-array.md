@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 33 >}}
+{{< leetcode 24 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/search-in-rotated-sorted-array/description/)
 

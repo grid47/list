@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2130 >}}
+{{< leetcode 965 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/description/)
 

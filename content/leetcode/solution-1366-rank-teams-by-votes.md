@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1366 >}}
+{{< leetcode 605 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rank-teams-by-votes/description/)
 

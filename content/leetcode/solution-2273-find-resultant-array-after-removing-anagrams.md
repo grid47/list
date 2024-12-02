@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2273 >}}
+{{< leetcode 1043 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-resultant-array-after-removing-anagrams/description/)
 

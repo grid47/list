@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2780 >}}
+{{< leetcode 1312 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-index-of-a-valid-split/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1436 >}}
+{{< leetcode 637 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/destination-city/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2225 >}}
+{{< leetcode 1017 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-players-with-zero-or-one-losses/description/)
 

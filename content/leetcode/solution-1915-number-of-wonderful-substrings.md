@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1915 >}}
+{{< leetcode 862 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-wonderful-substrings/description/)
 

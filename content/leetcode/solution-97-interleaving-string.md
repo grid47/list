@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 97 >}}
+{{< leetcode 66 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/interleaving-string/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1043 >}}
+{{< leetcode 489 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/partition-array-for-maximum-sum/description/)
 

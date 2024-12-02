@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2125 >}}
+{{< leetcode 962 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-laser-beams-in-a-bank/description/)
 

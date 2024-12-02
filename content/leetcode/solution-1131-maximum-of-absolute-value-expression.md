@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1131 >}}
+{{< leetcode 519 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-of-absolute-value-expression/description/)
 

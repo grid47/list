@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 954 >}}
+{{< leetcode 435 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/array-of-doubled-pairs/description/)
 

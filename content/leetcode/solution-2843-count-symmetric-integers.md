@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2843 >}}
+{{< leetcode 1341 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-symmetric-integers/description/)
 

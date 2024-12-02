@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1969 >}}
+{{< leetcode 885 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-non-zero-product-of-the-array-elements/description/)
 

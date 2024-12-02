@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2231 >}}
+{{< leetcode 1019 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-number-after-digit-swaps-by-parity/description/)
 

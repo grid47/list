@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 532 >}}
+{{< leetcode 240 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/k-diff-pairs-in-an-array/description/)
 

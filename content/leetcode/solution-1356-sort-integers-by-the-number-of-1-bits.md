@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1356 >}}
+{{< leetcode 600 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1530 >}}
+{{< leetcode 680 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-good-leaf-nodes-pairs/description/)
 

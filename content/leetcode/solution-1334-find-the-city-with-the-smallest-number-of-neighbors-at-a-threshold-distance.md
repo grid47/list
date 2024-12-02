@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1334 >}}
+{{< leetcode 589 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/description/)
 

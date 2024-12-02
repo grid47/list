@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1838 >}}
+{{< leetcode 824 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/frequency-of-the-most-frequent-element/description/)
 

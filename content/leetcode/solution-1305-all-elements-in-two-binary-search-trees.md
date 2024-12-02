@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1305 >}}
+{{< leetcode 577 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/all-elements-in-two-binary-search-trees/description/)
 

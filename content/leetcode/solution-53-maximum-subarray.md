@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 53 >}}
+{{< leetcode 38 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-subarray/description/)
 

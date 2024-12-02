@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2740 >}}
+{{< leetcode 1293 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-value-of-the-partition/description/)
 

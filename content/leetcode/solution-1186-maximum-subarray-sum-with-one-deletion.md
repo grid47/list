@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1186 >}}
+{{< leetcode 536 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-subarray-sum-with-one-deletion/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 385 >}}
+{{< leetcode 173 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/mini-parser/description/)
 

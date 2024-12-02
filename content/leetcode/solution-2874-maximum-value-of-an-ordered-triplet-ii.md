@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2874 >}}
+{{< leetcode 1360 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-value-of-an-ordered-triplet-ii/description/)
 

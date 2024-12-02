@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1959 >}}
+{{< leetcode 880 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-total-space-wasted-with-k-resizing-operations/description/)
 

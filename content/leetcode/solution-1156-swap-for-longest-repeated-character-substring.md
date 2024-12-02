@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1156 >}}
+{{< leetcode 529 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/swap-for-longest-repeated-character-substring/description/)
 

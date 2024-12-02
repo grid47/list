@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2826 >}}
+{{< leetcode 1332 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sorting-three-groups/description/)
 

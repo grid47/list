@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1093 >}}
+{{< leetcode 505 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/statistics-from-a-large-sample/description/)
 

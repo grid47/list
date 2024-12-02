@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1051 >}}
+{{< leetcode 493 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/height-checker/description/)
 

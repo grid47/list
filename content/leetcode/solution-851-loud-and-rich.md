@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 851 >}}
+{{< leetcode 378 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/loud-and-rich/description/)
 

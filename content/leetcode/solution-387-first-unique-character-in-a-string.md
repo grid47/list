@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 387 >}}
+{{< leetcode 175 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/first-unique-character-in-a-string/description/)
 

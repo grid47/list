@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1658 >}}
+{{< leetcode 731 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/description/)
 

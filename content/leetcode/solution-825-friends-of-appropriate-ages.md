@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 825 >}}
+{{< leetcode 363 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/friends-of-appropriate-ages/description/)
 

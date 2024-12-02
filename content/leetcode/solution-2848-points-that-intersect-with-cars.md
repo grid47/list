@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2848 >}}
+{{< leetcode 1344 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/points-that-intersect-with-cars/description/)
 

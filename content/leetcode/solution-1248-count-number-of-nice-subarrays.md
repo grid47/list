@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1248 >}}
+{{< leetcode 556 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-number-of-nice-subarrays/description/)
 

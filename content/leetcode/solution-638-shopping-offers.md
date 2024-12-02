@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 638 >}}
+{{< leetcode 273 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shopping-offers/description/)
 

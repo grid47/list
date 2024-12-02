@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2572 >}}
+{{< leetcode 1218 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-number-of-square-free-subsets/description/)
 

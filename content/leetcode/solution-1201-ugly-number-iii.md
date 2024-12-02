@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1201 >}}
+{{< leetcode 539 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/ugly-number-iii/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2680 >}}
+{{< leetcode 1270 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-or/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2730 >}}
+{{< leetcode 1287 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-longest-semi-repetitive-substring/description/)
 

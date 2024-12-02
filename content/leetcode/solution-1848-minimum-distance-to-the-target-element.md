@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1848 >}}
+{{< leetcode 829 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-distance-to-the-target-element/description/)
 

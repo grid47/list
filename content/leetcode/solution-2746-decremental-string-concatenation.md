@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2746 >}}
+{{< leetcode 1296 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/decremental-string-concatenation/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 309 >}}
+{{< leetcode 143 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/description/)
 

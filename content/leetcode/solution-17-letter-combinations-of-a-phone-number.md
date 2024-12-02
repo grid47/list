@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 17 >}}
+{{< leetcode 14 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/)
 

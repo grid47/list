@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1935 >}}
+{{< leetcode 869 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-words-you-can-type/description/)
 

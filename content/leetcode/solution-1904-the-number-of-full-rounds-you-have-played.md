@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1904 >}}
+{{< leetcode 855 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-number-of-full-rounds-you-have-played/description/)
 

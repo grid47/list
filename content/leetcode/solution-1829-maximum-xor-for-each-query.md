@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1829 >}}
+{{< leetcode 819 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-xor-for-each-query/description/)
 

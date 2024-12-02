@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 338 >}}
+{{< leetcode 151 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/counting-bits/description/)
 

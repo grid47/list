@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1487 >}}
+{{< leetcode 660 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/making-file-names-unique/description/)
 

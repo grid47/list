@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2140 >}}
+{{< leetcode 972 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/solving-questions-with-brainpower/description/)
 

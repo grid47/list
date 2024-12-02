@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1657 >}}
+{{< leetcode 730 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/determine-if-two-strings-are-close/description/)
 

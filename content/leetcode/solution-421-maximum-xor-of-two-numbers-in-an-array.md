@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 421 >}}
+{{< leetcode 194 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/description/)
 

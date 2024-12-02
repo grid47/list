@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 966 >}}
+{{< leetcode 442 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/vowel-spellchecker/description/)
 

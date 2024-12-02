@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2428 >}}
+{{< leetcode 1128 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-sum-of-an-hourglass/description/)
 

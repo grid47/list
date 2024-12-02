@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2576 >}}
+{{< leetcode 1221 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-maximum-number-of-marked-indices/description/)
 

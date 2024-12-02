@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 372 >}}
+{{< leetcode 163 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/super-pow/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2937 >}}
+{{< leetcode 1386 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/make-three-strings-equal/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1232 >}}
+{{< leetcode 549 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-it-is-a-straight-line/description/)
 

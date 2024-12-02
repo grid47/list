@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2399 >}}
+{{< leetcode 1109 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-distances-between-same-letters/description/)
 

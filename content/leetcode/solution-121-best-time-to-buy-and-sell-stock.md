@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 121 >}}
+{{< leetcode 82 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/)
 

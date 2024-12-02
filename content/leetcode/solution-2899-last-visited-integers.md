@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2899 >}}
+{{< leetcode 1364 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/last-visited-integers/description/)
 

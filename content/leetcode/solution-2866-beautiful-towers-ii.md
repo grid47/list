@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2866 >}}
+{{< leetcode 1355 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/beautiful-towers-ii/description/)
 

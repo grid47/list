@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2176 >}}
+{{< leetcode 989 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-equal-and-divisible-pairs-in-an-array/description/)
 

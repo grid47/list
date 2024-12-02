@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 684 >}}
+{{< leetcode 295 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/redundant-connection/description/)
 

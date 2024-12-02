@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1395 >}}
+{{< leetcode 619 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-number-of-teams/description/)
 

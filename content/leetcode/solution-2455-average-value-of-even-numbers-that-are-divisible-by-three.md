@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2455 >}}
+{{< leetcode 1144 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/average-value-of-even-numbers-that-are-divisible-by-three/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2233 >}}
+{{< leetcode 1021 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-product-after-k-increments/description/)
 

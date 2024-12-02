@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2144 >}}
+{{< leetcode 973 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-cost-of-buying-candies-with-discount/description/)
 

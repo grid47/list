@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1624 >}}
+{{< leetcode 716 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-substring-between-two-equal-characters/description/)
 

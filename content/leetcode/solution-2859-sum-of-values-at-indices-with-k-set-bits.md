@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2859 >}}
+{{< leetcode 1350 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-values-at-indices-with-k-set-bits/description/)
 

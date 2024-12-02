@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3179 >}}
+{{< leetcode 1431 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-n-th-value-after-k-seconds/description/)
 

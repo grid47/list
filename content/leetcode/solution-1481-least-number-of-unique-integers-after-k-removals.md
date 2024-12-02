@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1481 >}}
+{{< leetcode 658 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/least-number-of-unique-integers-after-k-removals/description/)
 

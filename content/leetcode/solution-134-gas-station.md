@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 134 >}}
+{{< leetcode 88 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/gas-station/description/)
 

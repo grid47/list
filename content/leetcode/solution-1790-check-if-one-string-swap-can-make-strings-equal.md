@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1790 >}}
+{{< leetcode 796 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-one-string-swap-can-make-strings-equal/description/)
 

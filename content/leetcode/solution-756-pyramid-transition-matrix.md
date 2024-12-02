@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 756 >}}
+{{< leetcode 327 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/pyramid-transition-matrix/description/)
 

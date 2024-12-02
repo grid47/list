@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1329 >}}
+{{< leetcode 587 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sort-the-matrix-diagonally/description/)
 

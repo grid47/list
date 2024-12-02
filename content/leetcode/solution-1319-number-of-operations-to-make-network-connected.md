@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1319 >}}
+{{< leetcode 584 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-operations-to-make-network-connected/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 406 >}}
+{{< leetcode 188 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/queue-reconstruction-by-height/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2232 >}}
+{{< leetcode 1020 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimize-result-by-adding-parentheses-to-expression/description/)
 

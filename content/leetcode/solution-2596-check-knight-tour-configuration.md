@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2596 >}}
+{{< leetcode 1235 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-knight-tour-configuration/description/)
 

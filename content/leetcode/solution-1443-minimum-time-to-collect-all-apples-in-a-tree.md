@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1443 >}}
+{{< leetcode 641 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-time-to-collect-all-apples-in-a-tree/description/)
 

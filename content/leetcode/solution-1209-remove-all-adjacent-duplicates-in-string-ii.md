@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1209 >}}
+{{< leetcode 543 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/description/)
 

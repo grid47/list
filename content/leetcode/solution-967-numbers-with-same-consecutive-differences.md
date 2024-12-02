@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 967 >}}
+{{< leetcode 443 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/numbers-with-same-consecutive-differences/description/)
 

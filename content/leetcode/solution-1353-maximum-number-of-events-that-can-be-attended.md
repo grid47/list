@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1353 >}}
+{{< leetcode 599 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2901 >}}
+{{< leetcode 1366 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-unequal-adjacent-groups-subsequence-ii/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1551 >}}
+{{< leetcode 687 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-operations-to-make-array-equal/description/)
 

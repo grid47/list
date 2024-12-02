@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2220 >}}
+{{< leetcode 1013 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-bit-flips-to-convert-number/description/)
 

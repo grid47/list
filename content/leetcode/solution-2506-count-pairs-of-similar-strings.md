@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2506 >}}
+{{< leetcode 1174 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-pairs-of-similar-strings/description/)
 

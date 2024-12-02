@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1072 >}}
+{{< leetcode 498 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/flip-columns-for-maximum-number-of-equal-rows/description/)
 

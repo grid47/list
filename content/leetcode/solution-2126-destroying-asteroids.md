@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2126 >}}
+{{< leetcode 963 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/destroying-asteroids/description/)
 

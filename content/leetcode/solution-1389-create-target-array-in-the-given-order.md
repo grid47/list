@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1389 >}}
+{{< leetcode 616 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/create-target-array-in-the-given-order/description/)
 

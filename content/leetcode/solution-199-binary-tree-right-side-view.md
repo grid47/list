@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 199 >}}
+{{< leetcode 110 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-tree-right-side-view/description/)
 

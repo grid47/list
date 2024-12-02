@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1139 >}}
+{{< leetcode 522 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-1-bordered-square/description/)
 

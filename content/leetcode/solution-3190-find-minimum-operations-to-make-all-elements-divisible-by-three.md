@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3190 >}}
+{{< leetcode 1432 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three/description/)
 

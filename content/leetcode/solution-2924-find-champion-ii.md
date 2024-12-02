@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2924 >}}
+{{< leetcode 1381 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-champion-ii/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1442 >}}
+{{< leetcode 640 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/description/)
 

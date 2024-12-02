@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 623 >}}
+{{< leetcode 269 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/add-one-row-to-tree/description/)
 

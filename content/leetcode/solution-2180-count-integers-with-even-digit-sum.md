@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2180 >}}
+{{< leetcode 992 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-integers-with-even-digit-sum/description/)
 

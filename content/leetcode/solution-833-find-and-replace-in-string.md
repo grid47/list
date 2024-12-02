@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 833 >}}
+{{< leetcode 366 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-and-replace-in-string/description/)
 

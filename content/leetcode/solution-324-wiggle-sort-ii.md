@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 324 >}}
+{{< leetcode 149 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/wiggle-sort-ii/description/)
 

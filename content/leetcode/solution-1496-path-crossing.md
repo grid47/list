@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1496 >}}
+{{< leetcode 665 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/path-crossing/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2090 >}}
+{{< leetcode 946 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/k-radius-subarray-averages/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2549 >}}
+{{< leetcode 1201 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-distinct-numbers-on-board/description/)
 

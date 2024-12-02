@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3043 >}}
+{{< leetcode 1408 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-length-of-the-longest-common-prefix/description/)
 

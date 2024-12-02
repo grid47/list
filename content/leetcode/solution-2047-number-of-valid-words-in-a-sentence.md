@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2047 >}}
+{{< leetcode 927 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-valid-words-in-a-sentence/description/)
 

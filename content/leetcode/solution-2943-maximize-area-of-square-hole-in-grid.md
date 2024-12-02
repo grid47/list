@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2943 >}}
+{{< leetcode 1389 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximize-area-of-square-hole-in-grid/description/)
 

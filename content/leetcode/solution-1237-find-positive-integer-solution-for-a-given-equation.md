@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1237 >}}
+{{< leetcode 552 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-positive-integer-solution-for-a-given-equation/description/)
 

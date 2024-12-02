@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 45 >}}
+{{< leetcode 32 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/jump-game-ii/description/)
 

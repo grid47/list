@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 64 >}}
+{{< leetcode 46 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-path-sum/description/)
 

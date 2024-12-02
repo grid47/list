@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1054 >}}
+{{< leetcode 496 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/distant-barcodes/description/)
 

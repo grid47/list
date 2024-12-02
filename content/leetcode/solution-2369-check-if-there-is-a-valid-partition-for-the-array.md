@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2369 >}}
+{{< leetcode 1092 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-there-is-a-valid-partition-for-the-array/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 497 >}}
+{{< leetcode 222 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/random-point-in-non-overlapping-rectangles/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1023 >}}
+{{< leetcode 476 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/camelcase-matching/description/)
 

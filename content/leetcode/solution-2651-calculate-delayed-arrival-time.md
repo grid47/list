@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2651 >}}
+{{< leetcode 1256 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/calculate-delayed-arrival-time/description/)
 

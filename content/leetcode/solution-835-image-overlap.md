@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 835 >}}
+{{< leetcode 367 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/image-overlap/description/)
 

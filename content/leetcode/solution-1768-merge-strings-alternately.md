@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1768 >}}
+{{< leetcode 788 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/merge-strings-alternately/description/)
 

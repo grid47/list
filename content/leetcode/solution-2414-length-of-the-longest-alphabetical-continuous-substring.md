@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2414 >}}
+{{< leetcode 1119 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/length-of-the-longest-alphabetical-continuous-substring/description/)
 

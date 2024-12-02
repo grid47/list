@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 797 >}}
+{{< leetcode 348 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/all-paths-from-source-to-target/description/)
 

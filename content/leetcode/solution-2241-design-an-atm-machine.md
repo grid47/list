@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2241 >}}
+{{< leetcode 1026 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-an-atm-machine/description/)
 

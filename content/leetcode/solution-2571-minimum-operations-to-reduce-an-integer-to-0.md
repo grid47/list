@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2571 >}}
+{{< leetcode 1217 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-operations-to-reduce-an-integer-to-0/description/)
 

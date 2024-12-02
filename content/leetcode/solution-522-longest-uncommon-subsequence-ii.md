@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 522 >}}
+{{< leetcode 233 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-uncommon-subsequence-ii/description/)
 

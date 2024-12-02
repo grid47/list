@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2536 >}}
+{{< leetcode 1193 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/increment-submatrices-by-one/description/)
 

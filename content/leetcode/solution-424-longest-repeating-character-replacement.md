@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 424 >}}
+{{< leetcode 196 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-repeating-character-replacement/description/)
 

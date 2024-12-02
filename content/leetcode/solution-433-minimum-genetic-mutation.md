@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 433 >}}
+{{< leetcode 199 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-genetic-mutation/description/)
 

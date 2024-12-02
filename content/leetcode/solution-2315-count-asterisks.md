@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2315 >}}
+{{< leetcode 1061 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-asterisks/description/)
 

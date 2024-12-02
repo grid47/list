@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2441 >}}
+{{< leetcode 1136 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-positive-integer-that-exists-with-its-negative/description/)
 

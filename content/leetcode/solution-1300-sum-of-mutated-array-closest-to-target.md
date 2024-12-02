@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1300 >}}
+{{< leetcode 575 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-mutated-array-closest-to-target/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1333 >}}
+{{< leetcode 588 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/filter-restaurants-by-vegan-friendly-price-and-distance/description/)
 

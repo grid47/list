@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 886 >}}
+{{< leetcode 402 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/possible-bipartition/description/)
 

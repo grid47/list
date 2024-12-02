@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2212 >}}
+{{< leetcode 1009 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-points-in-an-archery-competition/description/)
 

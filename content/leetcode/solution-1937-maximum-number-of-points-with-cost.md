@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1937 >}}
+{{< leetcode 871 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-points-with-cost/description/)
 

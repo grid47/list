@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2784 >}}
+{{< leetcode 1313 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-array-is-good/description/)
 

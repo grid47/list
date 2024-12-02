@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 725 >}}
+{{< leetcode 314 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/split-linked-list-in-parts/description/)
 

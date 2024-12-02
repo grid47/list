@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 822 >}}
+{{< leetcode 360 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/card-flipping-game/description/)
 

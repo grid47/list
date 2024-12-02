@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1372 >}}
+{{< leetcode 608 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-zigzag-path-in-a-binary-tree/description/)
 

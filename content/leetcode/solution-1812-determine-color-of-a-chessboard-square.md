@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1812 >}}
+{{< leetcode 808 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/determine-color-of-a-chessboard-square/description/)
 

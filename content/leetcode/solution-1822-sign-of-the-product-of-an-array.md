@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1822 >}}
+{{< leetcode 814 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sign-of-the-product-of-an-array/description/)
 

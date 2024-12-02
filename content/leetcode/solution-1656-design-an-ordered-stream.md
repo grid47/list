@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1656 >}}
+{{< leetcode 729 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-an-ordered-stream/description/)
 

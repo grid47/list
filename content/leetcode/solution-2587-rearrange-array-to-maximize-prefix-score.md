@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2587 >}}
+{{< leetcode 1228 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rearrange-array-to-maximize-prefix-score/description/)
 

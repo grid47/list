@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 498 >}}
+{{< leetcode 223 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/diagonal-traverse/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1502 >}}
+{{< leetcode 668 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/can-make-arithmetic-progression-from-sequence/description/)
 

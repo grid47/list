@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2609 >}}
+{{< leetcode 1244 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-longest-balanced-substring-of-a-binary-string/description/)
 

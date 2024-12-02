@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 376 >}}
+{{< leetcode 166 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/wiggle-subsequence/description/)
 

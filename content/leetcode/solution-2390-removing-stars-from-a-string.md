@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2390 >}}
+{{< leetcode 1104 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/removing-stars-from-a-string/description/)
 

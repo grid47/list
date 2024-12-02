@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 870 >}}
+{{< leetcode 393 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/advantage-shuffle/description/)
 

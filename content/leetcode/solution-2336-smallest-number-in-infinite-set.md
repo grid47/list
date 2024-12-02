@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2336 >}}
+{{< leetcode 1073 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-number-in-infinite-set/description/)
 

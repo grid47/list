@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 910 >}}
+{{< leetcode 413 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-range-ii/description/)
 

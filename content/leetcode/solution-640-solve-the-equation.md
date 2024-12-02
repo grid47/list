@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 640 >}}
+{{< leetcode 274 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/solve-the-equation/description/)
 

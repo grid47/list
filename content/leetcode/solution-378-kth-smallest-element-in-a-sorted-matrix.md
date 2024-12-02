@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 378 >}}
+{{< leetcode 168 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/)
 

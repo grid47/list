@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 319 >}}
+{{< leetcode 147 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/bulb-switcher/description/)
 

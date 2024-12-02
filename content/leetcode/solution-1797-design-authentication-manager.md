@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1797 >}}
+{{< leetcode 800 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-authentication-manager/description/)
 

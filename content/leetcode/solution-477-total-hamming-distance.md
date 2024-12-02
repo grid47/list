@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 477 >}}
+{{< leetcode 218 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/total-hamming-distance/description/)
 

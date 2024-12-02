@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1015 >}}
+{{< leetcode 471 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-integer-divisible-by-k/description/)
 

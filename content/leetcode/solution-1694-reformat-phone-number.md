@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1694 >}}
+{{< leetcode 748 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reformat-phone-number/description/)
 

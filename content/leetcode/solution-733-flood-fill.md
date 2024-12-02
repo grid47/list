@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 733 >}}
+{{< leetcode 317 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/flood-fill/description/)
 

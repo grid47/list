@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1979 >}}
+{{< leetcode 890 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-greatest-common-divisor-of-array/description/)
 

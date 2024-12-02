@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2116 >}}
+{{< leetcode 958 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-a-parentheses-string-can-be-valid/description/)
 

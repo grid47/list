@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1348 >}}
+{{< leetcode 596 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/tweet-counts-per-frequency/description/)
 

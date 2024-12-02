@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1863 >}}
+{{< leetcode 837 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-all-subset-xor-totals/description/)
 

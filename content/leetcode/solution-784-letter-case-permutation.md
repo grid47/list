@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 784 >}}
+{{< leetcode 337 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/letter-case-permutation/description/)
 

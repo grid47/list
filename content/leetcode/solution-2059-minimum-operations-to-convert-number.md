@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2059 >}}
+{{< leetcode 934 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-operations-to-convert-number/description/)
 

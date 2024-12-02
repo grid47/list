@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1424 >}}
+{{< leetcode 633 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/diagonal-traverse-ii/description/)
 

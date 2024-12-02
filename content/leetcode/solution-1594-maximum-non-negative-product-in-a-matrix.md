@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1594 >}}
+{{< leetcode 704 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-non-negative-product-in-a-matrix/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 787 >}}
+{{< leetcode 340 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/cheapest-flights-within-k-stops/description/)
 

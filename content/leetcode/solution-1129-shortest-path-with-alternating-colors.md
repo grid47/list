@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1129 >}}
+{{< leetcode 517 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shortest-path-with-alternating-colors/description/)
 

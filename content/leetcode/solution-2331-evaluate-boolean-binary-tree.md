@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2331 >}}
+{{< leetcode 1069 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/evaluate-boolean-binary-tree/description/)
 

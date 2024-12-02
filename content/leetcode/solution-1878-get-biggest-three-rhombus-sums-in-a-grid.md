@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1878 >}}
+{{< leetcode 844 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/get-biggest-three-rhombus-sums-in-a-grid/description/)
 

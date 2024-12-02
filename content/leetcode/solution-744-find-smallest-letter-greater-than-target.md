@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 744 >}}
+{{< leetcode 323 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-smallest-letter-greater-than-target/description/)
 

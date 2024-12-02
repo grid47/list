@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 654 >}}
+{{< leetcode 282 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-binary-tree/description/)
 

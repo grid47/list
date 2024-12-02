@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3110 >}}
+{{< leetcode 1415 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/score-of-a-string/description/)
 

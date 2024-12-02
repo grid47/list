@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2914 >}}
+{{< leetcode 1375 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-changes-to-make-binary-string-beautiful/description/)
 

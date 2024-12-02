@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2482 >}}
+{{< leetcode 1160 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/difference-between-ones-and-zeros-in-row-and-column/description/)
 

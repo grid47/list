@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 383 >}}
+{{< leetcode 171 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/ransom-note/description/)
 

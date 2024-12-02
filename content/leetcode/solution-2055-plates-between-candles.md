@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2055 >}}
+{{< leetcode 932 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/plates-between-candles/description/)
 

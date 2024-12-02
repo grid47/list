@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1926 >}}
+{{< leetcode 866 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/description/)
 

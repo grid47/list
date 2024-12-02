@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 459 >}}
+{{< leetcode 214 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/repeated-substring-pattern/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 617 >}}
+{{< leetcode 266 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/merge-two-binary-trees/description/)
 

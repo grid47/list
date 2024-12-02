@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2364 >}}
+{{< leetcode 1088 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-number-of-bad-pairs/description/)
 

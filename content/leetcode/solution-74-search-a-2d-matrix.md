@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 74 >}}
+{{< leetcode 53 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/search-a-2d-matrix/description/)
 

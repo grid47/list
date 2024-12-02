@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1816 >}}
+{{< leetcode 811 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/truncate-sentence/description/)
 

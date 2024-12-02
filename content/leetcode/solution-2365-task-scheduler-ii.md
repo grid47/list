@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2365 >}}
+{{< leetcode 1089 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/task-scheduler-ii/description/)
 

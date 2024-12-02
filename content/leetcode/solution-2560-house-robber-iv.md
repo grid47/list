@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2560 >}}
+{{< leetcode 1209 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/house-robber-iv/description/)
 

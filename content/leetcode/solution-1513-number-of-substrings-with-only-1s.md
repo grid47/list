@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1513 >}}
+{{< leetcode 674 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-substrings-with-only-1s/description/)
 

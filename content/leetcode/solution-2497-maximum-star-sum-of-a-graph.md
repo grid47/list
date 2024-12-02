@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2497 >}}
+{{< leetcode 1169 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-star-sum-of-a-graph/description/)
 

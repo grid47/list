@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 86 >}}
+{{< leetcode 59 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/partition-list/description/)
 

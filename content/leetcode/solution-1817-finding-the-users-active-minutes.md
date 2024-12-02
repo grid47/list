@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1817 >}}
+{{< leetcode 812 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/finding-the-users-active-minutes/description/)
 

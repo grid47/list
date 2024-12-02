@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2427 >}}
+{{< leetcode 1127 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-common-factors/description/)
 

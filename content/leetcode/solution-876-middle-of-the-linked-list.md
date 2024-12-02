@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 876 >}}
+{{< leetcode 397 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/middle-of-the-linked-list/description/)
 

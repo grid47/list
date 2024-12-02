@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2367 >}}
+{{< leetcode 1090 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-arithmetic-triplets/description/)
 

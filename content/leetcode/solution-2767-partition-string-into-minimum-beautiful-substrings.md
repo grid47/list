@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2767 >}}
+{{< leetcode 1305 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/partition-string-into-minimum-beautiful-substrings/description/)
 

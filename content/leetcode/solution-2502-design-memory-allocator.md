@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2502 >}}
+{{< leetcode 1173 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-memory-allocator/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2406 >}}
+{{< leetcode 1114 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/divide-intervals-into-minimum-number-of-groups/description/)
 

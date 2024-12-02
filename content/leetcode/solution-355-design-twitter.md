@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 355 >}}
+{{< leetcode 158 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-twitter/description/)
 

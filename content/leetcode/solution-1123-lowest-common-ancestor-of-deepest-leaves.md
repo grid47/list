@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1123 >}}
+{{< leetcode 515 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/description/)
 

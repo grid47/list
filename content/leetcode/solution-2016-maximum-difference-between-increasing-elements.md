@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2016 >}}
+{{< leetcode 911 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-difference-between-increasing-elements/description/)
 

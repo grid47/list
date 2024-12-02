@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 143 >}}
+{{< leetcode 95 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reorder-list/description/)
 

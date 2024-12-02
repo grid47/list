@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 840 >}}
+{{< leetcode 371 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/magic-squares-in-grid/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2283 >}}
+{{< leetcode 1049 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-number-has-equal-digit-count-and-digit-value/description/)
 

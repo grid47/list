@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1855 >}}
+{{< leetcode 833 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-distance-between-a-pair-of-values/description/)
 

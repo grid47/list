@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 162 >}}
+{{< leetcode 102 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-peak-element/description/)
 

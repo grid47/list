@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 997 >}}
+{{< leetcode 460 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-town-judge/description/)
 

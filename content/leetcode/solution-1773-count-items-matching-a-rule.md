@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1773 >}}
+{{< leetcode 790 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-items-matching-a-rule/description/)
 

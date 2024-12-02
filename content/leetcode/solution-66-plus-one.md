@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 66 >}}
+{{< leetcode 47 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/plus-one/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1514 >}}
+{{< leetcode 675 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/path-with-maximum-probability/description/)
 

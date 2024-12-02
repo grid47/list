@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1748 >}}
+{{< leetcode 776 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-unique-elements/description/)
 

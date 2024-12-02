@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1685 >}}
+{{< leetcode 744 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-absolute-differences-in-a-sorted-array/description/)
 

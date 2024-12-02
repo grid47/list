@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1002 >}}
+{{< leetcode 462 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-common-characters/description/)
 

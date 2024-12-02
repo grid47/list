@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2266 >}}
+{{< leetcode 1039 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-number-of-texts/description/)
 

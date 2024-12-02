@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2661 >}}
+{{< leetcode 1264 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/first-completely-painted-row-or-column/description/)
 

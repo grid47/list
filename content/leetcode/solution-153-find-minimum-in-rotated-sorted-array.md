@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 153 >}}
+{{< leetcode 100 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/)
 

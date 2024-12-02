@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1509 >}}
+{{< leetcode 672 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-difference-between-largest-and-smallest-value-in-three-moves/description/)
 

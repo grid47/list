@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1396 >}}
+{{< leetcode 620 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-underground-system/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 743 >}}
+{{< leetcode 322 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/network-delay-time/description/)
 

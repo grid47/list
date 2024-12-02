@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 226 >}}
+{{< leetcode 125 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/invert-binary-tree/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 938 >}}
+{{< leetcode 426 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/range-sum-of-bst/description/)
 

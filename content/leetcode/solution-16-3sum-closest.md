@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 16 >}}
+{{< leetcode 13 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/3sum-closest/description/)
 

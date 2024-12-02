@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 611 >}}
+{{< leetcode 265 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/valid-triangle-number/description/)
 

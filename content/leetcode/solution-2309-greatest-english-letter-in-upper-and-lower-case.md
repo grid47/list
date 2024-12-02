@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2309 >}}
+{{< leetcode 1059 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/greatest-english-letter-in-upper-and-lower-case/description/)
 

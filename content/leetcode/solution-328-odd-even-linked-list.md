@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 328 >}}
+{{< leetcode 150 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/odd-even-linked-list/description/)
 

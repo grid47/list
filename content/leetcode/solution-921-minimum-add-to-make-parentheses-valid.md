@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 921 >}}
+{{< leetcode 419 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/description/)
 

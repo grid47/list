@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1457 >}}
+{{< leetcode 647 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/pseudo-palindromic-paths-in-a-binary-tree/description/)
 

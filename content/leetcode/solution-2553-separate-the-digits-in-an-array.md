@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2553 >}}
+{{< leetcode 1203 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/separate-the-digits-in-an-array/description/)
 

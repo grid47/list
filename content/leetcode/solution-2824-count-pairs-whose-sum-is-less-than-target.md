@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2824 >}}
+{{< leetcode 1330 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-pairs-whose-sum-is-less-than-target/description/)
 

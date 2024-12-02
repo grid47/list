@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1583 >}}
+{{< leetcode 699 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-unhappy-friends/description/)
 

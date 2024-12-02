@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2491 >}}
+{{< leetcode 1166 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/divide-players-into-teams-of-equal-skill/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2024 >}}
+{{< leetcode 916 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximize-the-confusion-of-an-exam/description/)
 

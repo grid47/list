@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2716 >}}
+{{< leetcode 1283 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimize-string-length/description/)
 

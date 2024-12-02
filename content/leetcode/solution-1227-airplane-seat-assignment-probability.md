@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1227 >}}
+{{< leetcode 548 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/airplane-seat-assignment-probability/description/)
 

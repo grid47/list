@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1498 >}}
+{{< leetcode 667 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/description/)
 

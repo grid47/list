@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2185 >}}
+{{< leetcode 995 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/counting-words-with-a-given-prefix/description/)
 

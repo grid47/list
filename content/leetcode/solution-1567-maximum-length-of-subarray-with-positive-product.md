@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1567 >}}
+{{< leetcode 693 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-length-of-subarray-with-positive-product/description/)
 

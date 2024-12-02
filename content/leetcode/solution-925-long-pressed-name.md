@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 925 >}}
+{{< leetcode 420 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/long-pressed-name/description/)
 

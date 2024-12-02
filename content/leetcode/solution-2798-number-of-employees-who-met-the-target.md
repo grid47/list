@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2798 >}}
+{{< leetcode 1318 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-employees-who-met-the-target/description/)
 

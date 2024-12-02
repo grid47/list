@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2466 >}}
+{{< leetcode 1151 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-ways-to-build-good-strings/description/)
 

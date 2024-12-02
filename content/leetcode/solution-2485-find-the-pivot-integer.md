@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2485 >}}
+{{< leetcode 1162 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-pivot-integer/description/)
 

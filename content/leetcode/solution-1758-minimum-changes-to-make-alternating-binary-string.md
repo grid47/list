@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1758 >}}
+{{< leetcode 782 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-changes-to-make-alternating-binary-string/description/)
 

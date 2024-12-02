@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 525 >}}
+{{< leetcode 236 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/contiguous-array/description/)
 

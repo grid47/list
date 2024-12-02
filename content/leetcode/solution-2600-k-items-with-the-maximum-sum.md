@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2600 >}}
+{{< leetcode 1238 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/k-items-with-the-maximum-sum/description/)
 

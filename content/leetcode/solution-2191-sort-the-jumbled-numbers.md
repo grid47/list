@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2191 >}}
+{{< leetcode 999 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sort-the-jumbled-numbers/description/)
 

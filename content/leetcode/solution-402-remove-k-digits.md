@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 402 >}}
+{{< leetcode 187 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-k-digits/description/)
 

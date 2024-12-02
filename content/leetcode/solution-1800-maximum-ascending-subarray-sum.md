@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1800 >}}
+{{< leetcode 802 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-ascending-subarray-sum/description/)
 

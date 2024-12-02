@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2069 >}}
+{{< leetcode 938 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/walking-robot-simulation-ii/description/)
 

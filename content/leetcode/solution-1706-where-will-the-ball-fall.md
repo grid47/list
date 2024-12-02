@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1706 >}}
+{{< leetcode 756 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/where-will-the-ball-fall/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2546 >}}
+{{< leetcode 1200 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/apply-bitwise-operations-to-make-strings-equal/description/)
 

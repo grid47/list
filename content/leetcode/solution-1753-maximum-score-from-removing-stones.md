@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1753 >}}
+{{< leetcode 780 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-score-from-removing-stones/description/)
 

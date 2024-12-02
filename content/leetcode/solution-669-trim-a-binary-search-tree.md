@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 669 >}}
+{{< leetcode 288 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/trim-a-binary-search-tree/description/)
 

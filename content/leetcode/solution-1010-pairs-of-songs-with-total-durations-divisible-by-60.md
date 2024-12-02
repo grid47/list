@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1010 >}}
+{{< leetcode 468 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/description/)
 

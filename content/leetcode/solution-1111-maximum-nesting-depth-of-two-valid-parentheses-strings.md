@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1111 >}}
+{{< leetcode 510 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-nesting-depth-of-two-valid-parentheses-strings/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2684 >}}
+{{< leetcode 1273 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-moves-in-a-grid/description/)
 

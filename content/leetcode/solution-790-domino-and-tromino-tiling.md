@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 790 >}}
+{{< leetcode 343 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/domino-and-tromino-tiling/description/)
 

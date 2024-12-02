@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2567 >}}
+{{< leetcode 1214 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-score-by-changing-two-elements/description/)
 

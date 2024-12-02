@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2481 >}}
+{{< leetcode 1159 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-cuts-to-divide-a-circle/description/)
 

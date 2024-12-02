@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 889 >}}
+{{< leetcode 403 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/description/)
 

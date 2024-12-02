@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1338 >}}
+{{< leetcode 591 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reduce-array-size-to-the-half/description/)
 

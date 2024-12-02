@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1832 >}}
+{{< leetcode 820 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-the-sentence-is-pangram/description/)
 

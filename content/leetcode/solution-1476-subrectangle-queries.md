@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1476 >}}
+{{< leetcode 655 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/subrectangle-queries/description/)
 

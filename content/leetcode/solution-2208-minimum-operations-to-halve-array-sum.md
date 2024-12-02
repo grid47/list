@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2208 >}}
+{{< leetcode 1006 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-operations-to-halve-array-sum/description/)
 

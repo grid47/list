@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1968 >}}
+{{< leetcode 884 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/array-with-elements-not-equal-to-average-of-neighbors/description/)
 

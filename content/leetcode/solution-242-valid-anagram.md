@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 242 >}}
+{{< leetcode 135 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/valid-anagram/description/)
 

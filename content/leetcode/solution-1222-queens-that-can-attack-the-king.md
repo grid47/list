@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1222 >}}
+{{< leetcode 546 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/queens-that-can-attack-the-king/description/)
 

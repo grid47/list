@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 395 >}}
+{{< leetcode 181 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/description/)
 

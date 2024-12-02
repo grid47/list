@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 542 >}}
+{{< leetcode 246 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/01-matrix/description/)
 

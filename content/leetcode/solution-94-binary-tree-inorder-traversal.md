@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 94 >}}
+{{< leetcode 64 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-tree-inorder-traversal/description/)
 

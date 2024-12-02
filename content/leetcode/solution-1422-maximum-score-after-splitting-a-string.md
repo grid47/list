@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1422 >}}
+{{< leetcode 631 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-score-after-splitting-a-string/description/)
 

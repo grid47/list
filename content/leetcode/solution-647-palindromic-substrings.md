@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 647 >}}
+{{< leetcode 278 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/palindromic-substrings/description/)
 

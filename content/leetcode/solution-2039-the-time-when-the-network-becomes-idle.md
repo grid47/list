@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2039 >}}
+{{< leetcode 924 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-time-when-the-network-becomes-idle/description/)
 

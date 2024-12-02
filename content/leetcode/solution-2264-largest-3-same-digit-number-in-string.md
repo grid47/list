@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2264 >}}
+{{< leetcode 1037 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-3-same-digit-number-in-string/description/)
 

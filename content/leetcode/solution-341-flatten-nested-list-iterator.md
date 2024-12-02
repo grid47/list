@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 341 >}}
+{{< leetcode 152 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/flatten-nested-list-iterator/description/)
 

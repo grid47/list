@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 875 >}}
+{{< leetcode 396 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/koko-eating-bananas/description/)
 

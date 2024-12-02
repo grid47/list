@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 474 >}}
+{{< leetcode 216 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/ones-and-zeroes/description/)
 

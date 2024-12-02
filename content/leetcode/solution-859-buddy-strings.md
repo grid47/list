@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 859 >}}
+{{< leetcode 384 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/buddy-strings/description/)
 

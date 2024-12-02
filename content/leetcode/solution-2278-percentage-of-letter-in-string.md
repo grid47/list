@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2278 >}}
+{{< leetcode 1046 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/percentage-of-letter-in-string/description/)
 

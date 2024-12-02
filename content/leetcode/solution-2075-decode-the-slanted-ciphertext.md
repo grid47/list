@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2075 >}}
+{{< leetcode 941 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/decode-the-slanted-ciphertext/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1391 >}}
+{{< leetcode 618 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-there-is-a-valid-path-in-a-grid/description/)
 

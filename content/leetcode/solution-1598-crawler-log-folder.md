@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1598 >}}
+{{< leetcode 705 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/crawler-log-folder/description/)
 

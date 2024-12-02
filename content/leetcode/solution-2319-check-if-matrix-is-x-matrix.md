@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2319 >}}
+{{< leetcode 1064 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-matrix-is-x-matrix/description/)
 

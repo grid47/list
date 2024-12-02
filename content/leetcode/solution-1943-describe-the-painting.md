@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1943 >}}
+{{< leetcode 874 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/describe-the-painting/description/)
 

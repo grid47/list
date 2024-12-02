@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2451 >}}
+{{< leetcode 1141 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/odd-string-difference/description/)
 

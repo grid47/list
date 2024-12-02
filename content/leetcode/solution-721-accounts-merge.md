@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 721 >}}
+{{< leetcode 311 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/accounts-merge/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1466 >}}
+{{< leetcode 652 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 809 >}}
+{{< leetcode 353 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/expressive-words/description/)
 

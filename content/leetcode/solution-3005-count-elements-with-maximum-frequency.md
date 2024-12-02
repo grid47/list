@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3005 >}}
+{{< leetcode 1405 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-elements-with-maximum-frequency/description/)
 

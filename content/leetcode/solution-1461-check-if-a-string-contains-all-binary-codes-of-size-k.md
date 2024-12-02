@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1461 >}}
+{{< leetcode 648 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-a-string-contains-all-binary-codes-of-size-k/description/)
 

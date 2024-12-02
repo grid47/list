@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2034 >}}
+{{< leetcode 921 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/stock-price-fluctuation/description/)
 

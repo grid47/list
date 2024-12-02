@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1986 >}}
+{{< leetcode 895 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks/description/)
 

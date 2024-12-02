@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2870 >}}
+{{< leetcode 1357 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-operations-to-make-array-empty/description/)
 

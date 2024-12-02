@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 735 >}}
+{{< leetcode 318 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/asteroid-collision/description/)
 

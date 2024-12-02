@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2958 >}}
+{{< leetcode 1398 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/length-of-longest-subarray-with-at-most-k-frequency/description/)
 

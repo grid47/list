@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1540 >}}
+{{< leetcode 683 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/can-convert-string-in-k-moves/description/)
 

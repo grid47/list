@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 900 >}}
+{{< leetcode 408 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rle-iterator/description/)
 

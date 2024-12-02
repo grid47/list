@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 865 >}}
+{{< leetcode 388 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 481 >}}
+{{< leetcode 219 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/magical-string/description/)
 

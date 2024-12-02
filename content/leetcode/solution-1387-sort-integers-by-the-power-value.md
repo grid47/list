@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1387 >}}
+{{< leetcode 615 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sort-integers-by-the-power-value/description/)
 

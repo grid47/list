@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1503 >}}
+{{< leetcode 669 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/last-moment-before-all-ants-fall-out-of-a-plank/description/)
 

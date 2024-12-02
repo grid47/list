@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2438 >}}
+{{< leetcode 1134 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/range-product-queries-of-powers/description/)
 

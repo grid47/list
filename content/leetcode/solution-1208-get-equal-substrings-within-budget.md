@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1208 >}}
+{{< leetcode 542 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/get-equal-substrings-within-budget/description/)
 

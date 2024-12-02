@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1545 >}}
+{{< leetcode 685 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-kth-bit-in-nth-binary-string/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2396 >}}
+{{< leetcode 1107 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/strictly-palindromic-number/description/)
 

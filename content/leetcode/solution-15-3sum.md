@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 15 >}}
+{{< leetcode 12 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/3sum/description/)
 

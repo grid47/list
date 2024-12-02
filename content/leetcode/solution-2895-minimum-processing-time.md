@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2895 >}}
+{{< leetcode 1363 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-processing-time/description/)
 

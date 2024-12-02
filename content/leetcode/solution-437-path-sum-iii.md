@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 437 >}}
+{{< leetcode 202 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/path-sum-iii/description/)
 

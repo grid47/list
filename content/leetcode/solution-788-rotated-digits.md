@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 788 >}}
+{{< leetcode 341 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rotated-digits/description/)
 

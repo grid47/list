@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1616 >}}
+{{< leetcode 713 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/split-two-strings-to-make-palindrome/description/)
 

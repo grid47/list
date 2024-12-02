@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2739 >}}
+{{< leetcode 1292 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/total-distance-traveled/description/)
 

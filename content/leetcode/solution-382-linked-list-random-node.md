@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 382 >}}
+{{< leetcode 170 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/linked-list-random-node/description/)
 

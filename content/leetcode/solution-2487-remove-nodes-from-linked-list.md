@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2487 >}}
+{{< leetcode 1164 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-nodes-from-linked-list/description/)
 

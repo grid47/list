@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 855 >}}
+{{< leetcode 381 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/exam-room/description/)
 

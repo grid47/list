@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2370 >}}
+{{< leetcode 1093 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-ideal-subsequence/description/)
 

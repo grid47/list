@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1742 >}}
+{{< leetcode 773 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-balls-in-a-box/description/)
 

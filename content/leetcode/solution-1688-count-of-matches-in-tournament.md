@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1688 >}}
+{{< leetcode 746 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-of-matches-in-tournament/description/)
 

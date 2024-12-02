@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1976 >}}
+{{< leetcode 889 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/description/)
 

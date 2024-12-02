@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2537 >}}
+{{< leetcode 1194 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-number-of-good-subarrays/description/)
 

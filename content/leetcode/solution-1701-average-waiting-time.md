@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1701 >}}
+{{< leetcode 752 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/average-waiting-time/description/)
 

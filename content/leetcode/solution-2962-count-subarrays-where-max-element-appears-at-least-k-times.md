@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2962 >}}
+{{< leetcode 1401 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times/description/)
 

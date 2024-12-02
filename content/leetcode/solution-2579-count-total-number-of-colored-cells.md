@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2579 >}}
+{{< leetcode 1223 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-total-number-of-colored-cells/description/)
 

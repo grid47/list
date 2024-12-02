@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 686 >}}
+{{< leetcode 296 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/repeated-string-match/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 985 >}}
+{{< leetcode 455 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-even-numbers-after-queries/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 775 >}}
+{{< leetcode 333 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/global-and-local-inversions/description/)
 

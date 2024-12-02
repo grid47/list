@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2295 >}}
+{{< leetcode 1054 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/replace-elements-in-an-array/description/)
 

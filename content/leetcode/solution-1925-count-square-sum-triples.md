@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1925 >}}
+{{< leetcode 865 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-square-sum-triples/description/)
 

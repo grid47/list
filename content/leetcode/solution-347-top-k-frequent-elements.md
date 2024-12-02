@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 347 >}}
+{{< leetcode 156 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/top-k-frequent-elements/description/)
 

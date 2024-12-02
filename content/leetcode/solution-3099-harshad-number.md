@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3099 >}}
+{{< leetcode 1412 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/harshad-number/description/)
 

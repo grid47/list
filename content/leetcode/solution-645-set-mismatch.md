@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 645 >}}
+{{< leetcode 276 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/set-mismatch/description/)
 

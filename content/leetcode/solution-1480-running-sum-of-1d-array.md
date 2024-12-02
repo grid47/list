@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1480 >}}
+{{< leetcode 657 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/running-sum-of-1d-array/description/)
 

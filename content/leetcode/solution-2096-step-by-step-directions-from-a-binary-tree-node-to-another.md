@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2096 >}}
+{{< leetcode 949 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/step-by-step-directions-from-a-binary-tree-node-to-another/description/)
 

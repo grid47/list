@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1390 >}}
+{{< leetcode 617 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/four-divisors/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2597 >}}
+{{< leetcode 1236 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-number-of-beautiful-subsets/description/)
 

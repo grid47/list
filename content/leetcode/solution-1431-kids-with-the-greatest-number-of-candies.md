@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1431 >}}
+{{< leetcode 634 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2000 >}}
+{{< leetcode 902 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reverse-prefix-of-word/description/)
 

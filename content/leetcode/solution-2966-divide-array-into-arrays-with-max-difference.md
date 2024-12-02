@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2966 >}}
+{{< leetcode 1403 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/divide-array-into-arrays-with-max-difference/description/)
 

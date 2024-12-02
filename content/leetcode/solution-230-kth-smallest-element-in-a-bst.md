@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 230 >}}
+{{< leetcode 128 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/)
 

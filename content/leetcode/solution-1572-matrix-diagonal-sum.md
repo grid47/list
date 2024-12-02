@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1572 >}}
+{{< leetcode 694 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/matrix-diagonal-sum/description/)
 

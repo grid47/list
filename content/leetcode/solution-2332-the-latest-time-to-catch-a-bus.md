@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2332 >}}
+{{< leetcode 1070 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-latest-time-to-catch-a-bus/description/)
 

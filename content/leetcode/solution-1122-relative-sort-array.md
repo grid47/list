@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1122 >}}
+{{< leetcode 514 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/relative-sort-array/description/)
 

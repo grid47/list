@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1170 >}}
+{{< leetcode 533 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/compare-strings-by-frequency-of-the-smallest-character/description/)
 

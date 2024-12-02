@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 894 >}}
+{{< leetcode 405 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/all-possible-full-binary-trees/description/)
 

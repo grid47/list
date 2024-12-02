@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1722 >}}
+{{< leetcode 763 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimize-hamming-distance-after-swap-operations/description/)
 

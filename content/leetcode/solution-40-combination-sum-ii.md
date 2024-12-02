@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 40 >}}
+{{< leetcode 30 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/combination-sum-ii/description/)
 

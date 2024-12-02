@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2150 >}}
+{{< leetcode 978 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-all-lonely-numbers-in-the-array/description/)
 

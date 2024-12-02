@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2017 >}}
+{{< leetcode 912 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/grid-game/description/)
 

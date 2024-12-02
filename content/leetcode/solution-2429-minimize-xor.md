@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2429 >}}
+{{< leetcode 1129 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimize-xor/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2259 >}}
+{{< leetcode 1034 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-digit-from-number-to-maximize-result/description/)
 

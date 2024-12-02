@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 70 >}}
+{{< leetcode 49 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/climbing-stairs/description/)
 

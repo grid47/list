@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 861 >}}
+{{< leetcode 386 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/score-after-flipping-matrix/description/)
 

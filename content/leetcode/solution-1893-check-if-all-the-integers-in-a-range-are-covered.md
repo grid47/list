@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1893 >}}
+{{< leetcode 850 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-all-the-integers-in-a-range-are-covered/description/)
 

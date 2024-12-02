@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2341 >}}
+{{< leetcode 1075 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-pairs-in-array/description/)
 

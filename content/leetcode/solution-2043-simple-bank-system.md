@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2043 >}}
+{{< leetcode 925 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/simple-bank-system/description/)
 

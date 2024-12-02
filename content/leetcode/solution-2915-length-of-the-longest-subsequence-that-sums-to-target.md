@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2915 >}}
+{{< leetcode 1376 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/length-of-the-longest-subsequence-that-sums-to-target/description/)
 

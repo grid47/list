@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2544 >}}
+{{< leetcode 1198 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/alternating-digit-sum/description/)
 

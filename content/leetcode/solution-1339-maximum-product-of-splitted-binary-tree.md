@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1339 >}}
+{{< leetcode 592 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-product-of-splitted-binary-tree/description/)
 

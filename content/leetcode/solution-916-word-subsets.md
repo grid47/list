@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 916 >}}
+{{< leetcode 416 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/word-subsets/description/)
 

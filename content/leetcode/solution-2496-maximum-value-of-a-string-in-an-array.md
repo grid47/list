@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2496 >}}
+{{< leetcode 1168 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-value-of-a-string-in-an-array/description/)
 

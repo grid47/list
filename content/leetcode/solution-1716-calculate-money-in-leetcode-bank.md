@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1716 >}}
+{{< leetcode 758 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/calculate-money-in-leetcode-bank/description/)
 

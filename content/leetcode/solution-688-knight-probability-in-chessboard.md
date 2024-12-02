@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 688 >}}
+{{< leetcode 298 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/knight-probability-in-chessboard/description/)
 

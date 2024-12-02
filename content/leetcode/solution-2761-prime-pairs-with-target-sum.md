@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2761 >}}
+{{< leetcode 1301 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/prime-pairs-with-target-sum/description/)
 

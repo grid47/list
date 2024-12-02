@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1310 >}}
+{{< leetcode 579 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/xor-queries-of-a-subarray/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2800 >}}
+{{< leetcode 1320 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shortest-string-that-contains-three-strings/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1046 >}}
+{{< leetcode 490 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/last-stone-weight/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 89 >}}
+{{< leetcode 60 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/gray-code/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1593 >}}
+{{< leetcode 703 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/split-a-string-into-the-max-number-of-unique-substrings/description/)
 

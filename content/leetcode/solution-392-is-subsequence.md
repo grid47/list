@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 392 >}}
+{{< leetcode 178 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/is-subsequence/description/)
 

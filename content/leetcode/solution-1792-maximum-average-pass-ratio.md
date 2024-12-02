@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1792 >}}
+{{< leetcode 798 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-average-pass-ratio/description/)
 

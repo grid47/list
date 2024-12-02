@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2192 >}}
+{{< leetcode 1000 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/all-ancestors-of-a-node-in-a-directed-acyclic-graph/description/)
 

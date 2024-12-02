@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2657 >}}
+{{< leetcode 1261 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-prefix-common-array-of-two-arrays/description/)
 

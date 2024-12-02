@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1807 >}}
+{{< leetcode 807 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/evaluate-the-bracket-pairs-of-a-string/description/)
 

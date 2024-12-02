@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1048 >}}
+{{< leetcode 491 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-string-chain/description/)
 

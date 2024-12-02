@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2769 >}}
+{{< leetcode 1307 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-maximum-achievable-number/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2320 >}}
+{{< leetcode 1065 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-number-of-ways-to-place-houses/description/)
 

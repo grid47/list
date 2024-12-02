@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1929 >}}
+{{< leetcode 867 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/concatenation-of-array/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2064 >}}
+{{< leetcode 936 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimized-maximum-of-products-distributed-to-any-store/description/)
 

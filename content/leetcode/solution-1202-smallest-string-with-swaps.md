@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1202 >}}
+{{< leetcode 540 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-string-with-swaps/description/)
 

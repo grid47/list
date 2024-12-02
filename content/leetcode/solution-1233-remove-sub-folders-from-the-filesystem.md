@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1233 >}}
+{{< leetcode 550 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-sub-folders-from-the-filesystem/description/)
 

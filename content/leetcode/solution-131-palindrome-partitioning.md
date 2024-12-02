@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 131 >}}
+{{< leetcode 86 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/palindrome-partitioning/description/)
 

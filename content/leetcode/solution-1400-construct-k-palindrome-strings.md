@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1400 >}}
+{{< leetcode 621 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/construct-k-palindrome-strings/description/)
 

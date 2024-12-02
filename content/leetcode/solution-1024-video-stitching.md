@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1024 >}}
+{{< leetcode 477 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/video-stitching/description/)
 

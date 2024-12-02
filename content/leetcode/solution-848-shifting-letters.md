@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 848 >}}
+{{< leetcode 377 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shifting-letters/description/)
 

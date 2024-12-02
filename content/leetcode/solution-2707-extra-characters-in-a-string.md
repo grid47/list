@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2707 >}}
+{{< leetcode 1278 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/extra-characters-in-a-string/description/)
 

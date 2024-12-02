@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 873 >}}
+{{< leetcode 395 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/length-of-longest-fibonacci-subsequence/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1026 >}}
+{{< leetcode 478 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/description/)
 

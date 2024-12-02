@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2095 >}}
+{{< leetcode 948 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/description/)
 

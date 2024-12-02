@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2265 >}}
+{{< leetcode 1038 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-nodes-equal-to-average-of-subtree/description/)
 

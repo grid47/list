@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 417 >}}
+{{< leetcode 192 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/pacific-atlantic-water-flow/description/)
 

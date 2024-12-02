@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2202 >}}
+{{< leetcode 1004 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximize-the-topmost-element-after-k-moves/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1042 >}}
+{{< leetcode 488 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/flower-planting-with-no-adjacent/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2670 >}}
+{{< leetcode 1265 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-distinct-difference-array/description/)
 

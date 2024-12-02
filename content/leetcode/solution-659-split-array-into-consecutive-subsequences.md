@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 659 >}}
+{{< leetcode 285 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/split-array-into-consecutive-subsequences/description/)
 

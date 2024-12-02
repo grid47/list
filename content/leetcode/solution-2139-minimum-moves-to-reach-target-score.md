@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2139 >}}
+{{< leetcode 971 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-moves-to-reach-target-score/description/)
 

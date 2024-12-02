@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 817 >}}
+{{< leetcode 358 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/linked-list-components/description/)
 

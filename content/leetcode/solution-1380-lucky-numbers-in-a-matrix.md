@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1380 >}}
+{{< leetcode 611 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/lucky-numbers-in-a-matrix/description/)
 

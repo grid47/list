@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 228 >}}
+{{< leetcode 126 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/summary-ranges/description/)
 

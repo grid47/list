@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2616 >}}
+{{< leetcode 1249 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/description/)
 

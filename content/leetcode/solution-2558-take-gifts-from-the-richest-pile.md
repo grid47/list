@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2558 >}}
+{{< leetcode 1207 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/take-gifts-from-the-richest-pile/description/)
 

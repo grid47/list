@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 419 >}}
+{{< leetcode 193 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/battleships-in-a-board/description/)
 

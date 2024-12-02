@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 75 >}}
+{{< leetcode 54 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sort-colors/description/)
 

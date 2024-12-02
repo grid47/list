@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1672 >}}
+{{< leetcode 738 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/richest-customer-wealth/description/)
 

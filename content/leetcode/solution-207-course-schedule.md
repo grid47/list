@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 207 >}}
+{{< leetcode 116 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/course-schedule/description/)
 

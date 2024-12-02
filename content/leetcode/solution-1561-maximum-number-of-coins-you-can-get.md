@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1561 >}}
+{{< leetcode 691 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-coins-you-can-get/description/)
 

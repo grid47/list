@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2515 >}}
+{{< leetcode 1179 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shortest-distance-to-target-string-in-a-circular-array/description/)
 

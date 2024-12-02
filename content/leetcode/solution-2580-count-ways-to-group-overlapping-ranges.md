@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2580 >}}
+{{< leetcode 1224 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-ways-to-group-overlapping-ranges/description/)
 

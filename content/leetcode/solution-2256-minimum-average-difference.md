@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2256 >}}
+{{< leetcode 1032 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-average-difference/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2733 >}}
+{{< leetcode 1289 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/neither-minimum-nor-maximum/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2305 >}}
+{{< leetcode 1058 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/fair-distribution-of-cookies/description/)
 

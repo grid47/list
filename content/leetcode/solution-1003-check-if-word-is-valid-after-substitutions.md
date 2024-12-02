@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1003 >}}
+{{< leetcode 463 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-word-is-valid-after-substitutions/description/)
 

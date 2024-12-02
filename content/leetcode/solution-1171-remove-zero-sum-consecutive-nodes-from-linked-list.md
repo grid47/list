@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1171 >}}
+{{< leetcode 534 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-zero-sum-consecutive-nodes-from-linked-list/description/)
 

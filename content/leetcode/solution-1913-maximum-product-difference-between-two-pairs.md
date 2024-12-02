@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1913 >}}
+{{< leetcode 860 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-product-difference-between-two-pairs/description/)
 

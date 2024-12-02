@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1760 >}}
+{{< leetcode 784 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-limit-of-balls-in-a-bag/description/)
 

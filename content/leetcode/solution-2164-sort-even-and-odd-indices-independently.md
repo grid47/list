@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2164 >}}
+{{< leetcode 983 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sort-even-and-odd-indices-independently/description/)
 

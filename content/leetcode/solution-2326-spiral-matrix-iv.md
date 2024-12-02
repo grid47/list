@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2326 >}}
+{{< leetcode 1067 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/spiral-matrix-iv/description/)
 

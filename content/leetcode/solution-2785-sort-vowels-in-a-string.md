@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2785 >}}
+{{< leetcode 1314 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sort-vowels-in-a-string/description/)
 

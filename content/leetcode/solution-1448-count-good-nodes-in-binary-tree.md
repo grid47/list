@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1448 >}}
+{{< leetcode 643 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-good-nodes-in-binary-tree/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2236 >}}
+{{< leetcode 1023 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/root-equals-sum-of-children/description/)
 

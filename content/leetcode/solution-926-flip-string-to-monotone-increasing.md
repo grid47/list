@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 926 >}}
+{{< leetcode 421 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/flip-string-to-monotone-increasing/description/)
 

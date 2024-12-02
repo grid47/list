@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 443 >}}
+{{< leetcode 204 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/string-compression/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 970 >}}
+{{< leetcode 445 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/powerful-integers/description/)
 

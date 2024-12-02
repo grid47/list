@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2523 >}}
+{{< leetcode 1185 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/closest-prime-numbers-in-range/description/)
 

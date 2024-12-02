@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 769 >}}
+{{< leetcode 332 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/max-chunks-to-make-sorted/description/)
 

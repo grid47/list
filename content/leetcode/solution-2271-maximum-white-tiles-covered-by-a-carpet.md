@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2271 >}}
+{{< leetcode 1042 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-white-tiles-covered-by-a-carpet/description/)
 

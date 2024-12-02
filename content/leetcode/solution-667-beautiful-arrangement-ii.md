@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 667 >}}
+{{< leetcode 287 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/beautiful-arrangement-ii/description/)
 

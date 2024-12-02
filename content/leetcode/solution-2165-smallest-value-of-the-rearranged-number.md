@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2165 >}}
+{{< leetcode 984 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-value-of-the-rearranged-number/description/)
 

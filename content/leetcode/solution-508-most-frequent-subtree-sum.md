@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 508 >}}
+{{< leetcode 225 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/most-frequent-subtree-sum/description/)
 

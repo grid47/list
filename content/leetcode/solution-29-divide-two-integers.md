@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 29 >}}
+{{< leetcode 22 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/divide-two-integers/description/)
 

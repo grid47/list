@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2384 >}}
+{{< leetcode 1101 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-palindromic-number/description/)
 

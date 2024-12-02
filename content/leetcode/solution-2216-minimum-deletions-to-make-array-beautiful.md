@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2216 >}}
+{{< leetcode 1011 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-deletions-to-make-array-beautiful/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2070 >}}
+{{< leetcode 939 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/most-beautiful-item-for-each-query/description/)
 

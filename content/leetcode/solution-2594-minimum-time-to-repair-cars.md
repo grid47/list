@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2594 >}}
+{{< leetcode 1233 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-time-to-repair-cars/description/)
 

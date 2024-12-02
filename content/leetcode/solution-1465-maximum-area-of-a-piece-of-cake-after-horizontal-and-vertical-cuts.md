@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1465 >}}
+{{< leetcode 651 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/description/)
 

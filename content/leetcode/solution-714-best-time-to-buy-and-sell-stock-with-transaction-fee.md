@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 714 >}}
+{{< leetcode 308 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/description/)
 

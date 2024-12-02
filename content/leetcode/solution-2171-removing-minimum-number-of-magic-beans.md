@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2171 >}}
+{{< leetcode 988 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/removing-minimum-number-of-magic-beans/description/)
 

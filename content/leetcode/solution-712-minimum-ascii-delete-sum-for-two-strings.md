@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 712 >}}
+{{< leetcode 306 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/description/)
 

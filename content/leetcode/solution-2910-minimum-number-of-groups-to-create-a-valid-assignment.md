@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2910 >}}
+{{< leetcode 1373 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-groups-to-create-a-valid-assignment/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1328 >}}
+{{< leetcode 586 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/break-a-palindrome/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1743 >}}
+{{< leetcode 774 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/restore-the-array-from-adjacent-pairs/description/)
 

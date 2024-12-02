@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 649 >}}
+{{< leetcode 280 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/dota2-senate/description/)
 

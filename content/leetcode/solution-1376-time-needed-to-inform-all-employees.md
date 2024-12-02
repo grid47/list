@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1376 >}}
+{{< leetcode 609 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/time-needed-to-inform-all-employees/description/)
 

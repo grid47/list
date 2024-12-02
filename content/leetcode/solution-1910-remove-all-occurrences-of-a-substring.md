@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1910 >}}
+{{< leetcode 858 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-all-occurrences-of-a-substring/description/)
 

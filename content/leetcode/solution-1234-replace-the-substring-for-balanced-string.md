@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1234 >}}
+{{< leetcode 551 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/replace-the-substring-for-balanced-string/description/)
 

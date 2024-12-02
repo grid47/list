@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2683 >}}
+{{< leetcode 1272 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/neighboring-bitwise-xor/description/)
 

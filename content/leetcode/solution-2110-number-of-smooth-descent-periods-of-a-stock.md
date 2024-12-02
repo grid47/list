@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2110 >}}
+{{< leetcode 957 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-smooth-descent-periods-of-a-stock/description/)
 

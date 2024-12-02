@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2875 >}}
+{{< leetcode 1361 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-size-subarray-in-infinite-array/description/)
 

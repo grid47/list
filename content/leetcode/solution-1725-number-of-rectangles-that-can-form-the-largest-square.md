@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1725 >}}
+{{< leetcode 764 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-rectangles-that-can-form-the-largest-square/description/)
 

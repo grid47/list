@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1974 >}}
+{{< leetcode 887 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-time-to-type-word-using-special-typewriter/description/)
 

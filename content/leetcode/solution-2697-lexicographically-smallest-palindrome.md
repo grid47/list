@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2697 >}}
+{{< leetcode 1276 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/lexicographically-smallest-palindrome/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2196 >}}
+{{< leetcode 1002 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/create-binary-tree-from-descriptions/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2343 >}}
+{{< leetcode 1077 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/query-kth-smallest-trimmed-number/description/)
 

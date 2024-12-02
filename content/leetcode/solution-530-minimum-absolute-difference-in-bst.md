@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 530 >}}
+{{< leetcode 239 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/)
 

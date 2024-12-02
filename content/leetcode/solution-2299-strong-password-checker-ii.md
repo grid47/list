@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2299 >}}
+{{< leetcode 1055 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/strong-password-checker-ii/description/)
 

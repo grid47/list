@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1423 >}}
+{{< leetcode 632 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/description/)
 

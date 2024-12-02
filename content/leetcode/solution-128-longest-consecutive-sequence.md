@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 128 >}}
+{{< leetcode 84 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-consecutive-sequence/description/)
 

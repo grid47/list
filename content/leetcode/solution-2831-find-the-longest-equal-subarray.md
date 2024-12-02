@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2831 >}}
+{{< leetcode 1336 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-longest-equal-subarray/description/)
 

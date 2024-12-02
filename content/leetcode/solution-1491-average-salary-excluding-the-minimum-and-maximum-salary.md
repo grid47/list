@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1491 >}}
+{{< leetcode 662 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/average-salary-excluding-the-minimum-and-maximum-salary/description/)
 

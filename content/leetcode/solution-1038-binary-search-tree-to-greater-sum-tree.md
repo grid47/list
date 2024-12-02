@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1038 >}}
+{{< leetcode 485 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/description/)
 

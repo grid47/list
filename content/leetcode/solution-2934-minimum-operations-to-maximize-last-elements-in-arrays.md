@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2934 >}}
+{{< leetcode 1385 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-operations-to-maximize-last-elements-in-arrays/description/)
 

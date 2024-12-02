@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1433 >}}
+{{< leetcode 636 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-a-string-can-break-another-string/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2201 >}}
+{{< leetcode 1003 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-artifacts-that-can-be-extracted/description/)
 

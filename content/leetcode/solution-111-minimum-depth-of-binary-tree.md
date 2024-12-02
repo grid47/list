@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 111 >}}
+{{< leetcode 77 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-depth-of-binary-tree/description/)
 

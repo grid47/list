@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1115 >}}
+{{< leetcode 512 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/print-foobar-alternately/description/)
 

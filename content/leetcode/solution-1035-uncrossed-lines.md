@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1035 >}}
+{{< leetcode 484 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/uncrossed-lines/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1040 >}}
+{{< leetcode 487 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/moving-stones-until-consecutive-ii/description/)
 

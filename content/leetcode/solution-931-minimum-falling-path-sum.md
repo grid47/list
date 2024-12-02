@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 931 >}}
+{{< leetcode 423 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-falling-path-sum/description/)
 

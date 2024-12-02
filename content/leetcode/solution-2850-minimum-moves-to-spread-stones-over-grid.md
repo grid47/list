@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2850 >}}
+{{< leetcode 1346 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-moves-to-spread-stones-over-grid/description/)
 

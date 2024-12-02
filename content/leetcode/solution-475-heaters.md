@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 475 >}}
+{{< leetcode 217 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/heaters/description/)
 

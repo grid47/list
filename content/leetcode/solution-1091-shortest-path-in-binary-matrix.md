@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1091 >}}
+{{< leetcode 504 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shortest-path-in-binary-matrix/description/)
 

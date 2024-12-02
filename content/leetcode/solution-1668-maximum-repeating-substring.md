@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1668 >}}
+{{< leetcode 735 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-repeating-substring/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 781 >}}
+{{< leetcode 336 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rabbits-in-forest/description/)
 

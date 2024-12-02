@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2903 >}}
+{{< leetcode 1367 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-indices-with-index-and-value-difference-i/description/)
 

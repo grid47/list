@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2160 >}}
+{{< leetcode 981 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-sum-of-four-digit-number-after-splitting-digits/description/)
 

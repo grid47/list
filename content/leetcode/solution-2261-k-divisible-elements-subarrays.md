@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2261 >}}
+{{< leetcode 1036 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/k-divisible-elements-subarrays/description/)
 

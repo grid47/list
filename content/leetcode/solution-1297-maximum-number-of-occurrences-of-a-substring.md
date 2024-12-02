@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1297 >}}
+{{< leetcode 574 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-occurrences-of-a-substring/description/)
 

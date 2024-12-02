@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1529 >}}
+{{< leetcode 679 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-suffix-flips/description/)
 

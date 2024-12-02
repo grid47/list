@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2257 >}}
+{{< leetcode 1033 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-unguarded-cells-in-the-grid/description/)
 

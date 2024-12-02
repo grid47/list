@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3100 >}}
+{{< leetcode 1413 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/water-bottles-ii/description/)
 

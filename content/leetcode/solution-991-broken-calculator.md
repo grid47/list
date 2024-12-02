@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 991 >}}
+{{< leetcode 458 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/broken-calculator/description/)
 

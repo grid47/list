@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1957 >}}
+{{< leetcode 878 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/delete-characters-to-make-fancy-string/description/)
 

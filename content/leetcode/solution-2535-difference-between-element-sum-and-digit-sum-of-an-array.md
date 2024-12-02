@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2535 >}}
+{{< leetcode 1192 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/difference-between-element-sum-and-digit-sum-of-an-array/description/)
 

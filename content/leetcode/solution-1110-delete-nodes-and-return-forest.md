@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1110 >}}
+{{< leetcode 509 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/delete-nodes-and-return-forest/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2575 >}}
+{{< leetcode 1220 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-divisibility-array-of-a-string/description/)
 

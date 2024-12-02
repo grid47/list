@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2182 >}}
+{{< leetcode 994 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/construct-string-with-repeat-limit/description/)
 

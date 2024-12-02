@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1011 >}}
+{{< leetcode 469 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/description/)
 

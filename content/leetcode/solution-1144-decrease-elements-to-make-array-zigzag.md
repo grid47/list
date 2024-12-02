@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1144 >}}
+{{< leetcode 525 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/decrease-elements-to-make-array-zigzag/description/)
 

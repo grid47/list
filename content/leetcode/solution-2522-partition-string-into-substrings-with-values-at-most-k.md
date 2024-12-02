@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2522 >}}
+{{< leetcode 1184 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/partition-string-into-substrings-with-values-at-most-k/description/)
 

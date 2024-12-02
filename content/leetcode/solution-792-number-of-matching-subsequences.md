@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 792 >}}
+{{< leetcode 345 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-matching-subsequences/description/)
 

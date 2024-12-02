@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2909 >}}
+{{< leetcode 1372 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-sum-of-mountain-triplets-ii/description/)
 

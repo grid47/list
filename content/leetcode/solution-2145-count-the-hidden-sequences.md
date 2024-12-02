@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2145 >}}
+{{< leetcode 974 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-hidden-sequences/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 948 >}}
+{{< leetcode 431 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/bag-of-tokens/description/)
 

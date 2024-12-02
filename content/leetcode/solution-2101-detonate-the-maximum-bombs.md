@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2101 >}}
+{{< leetcode 952 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/detonate-the-maximum-bombs/description/)
 

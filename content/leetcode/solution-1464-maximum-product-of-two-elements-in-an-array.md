@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1464 >}}
+{{< leetcode 650 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-product-of-two-elements-in-an-array/description/)
 

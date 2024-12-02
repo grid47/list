@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 791 >}}
+{{< leetcode 344 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/custom-sort-string/description/)
 

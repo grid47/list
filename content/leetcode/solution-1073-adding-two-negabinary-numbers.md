@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1073 >}}
+{{< leetcode 499 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/adding-two-negabinary-numbers/description/)
 

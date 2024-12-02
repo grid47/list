@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 896 >}}
+{{< leetcode 406 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/monotonic-array/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1936 >}}
+{{< leetcode 870 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/add-minimum-number-of-rungs/description/)
 

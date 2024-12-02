@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 535 >}}
+{{< leetcode 241 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/encode-and-decode-tinyurl/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2555 >}}
+{{< leetcode 1205 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximize-win-from-two-segments/description/)
 

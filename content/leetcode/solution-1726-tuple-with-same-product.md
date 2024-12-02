@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1726 >}}
+{{< leetcode 765 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/tuple-with-same-product/description/)
 

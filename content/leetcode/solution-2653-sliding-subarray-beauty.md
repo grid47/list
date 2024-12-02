@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2653 >}}
+{{< leetcode 1258 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sliding-subarray-beauty/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 427 >}}
+{{< leetcode 197 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/construct-quad-tree/description/)
 

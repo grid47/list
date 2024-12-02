@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2556 >}}
+{{< leetcode 1206 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/disconnect-path-in-a-binary-matrix-by-at-most-one-flip/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 201 >}}
+{{< leetcode 112 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/bitwise-and-of-numbers-range/description/)
 

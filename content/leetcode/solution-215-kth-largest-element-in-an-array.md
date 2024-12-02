@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 215 >}}
+{{< leetcode 122 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/kth-largest-element-in-an-array/description/)
 

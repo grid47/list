@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2830 >}}
+{{< leetcode 1335 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximize-the-profit-as-the-salesman/description/)
 

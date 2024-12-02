@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1882 >}}
+{{< leetcode 846 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/process-tasks-using-servers/description/)
 

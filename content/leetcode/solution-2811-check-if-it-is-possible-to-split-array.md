@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2811 >}}
+{{< leetcode 1325 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-it-is-possible-to-split-array/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1865 >}}
+{{< leetcode 838 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/finding-pairs-with-a-certain-sum/description/)
 

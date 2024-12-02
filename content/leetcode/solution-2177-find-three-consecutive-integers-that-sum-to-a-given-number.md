@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2177 >}}
+{{< leetcode 990 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-three-consecutive-integers-that-sum-to-a-given-number/description/)
 

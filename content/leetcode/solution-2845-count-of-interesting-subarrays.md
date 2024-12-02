@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2845 >}}
+{{< leetcode 1343 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-of-interesting-subarrays/description/)
 

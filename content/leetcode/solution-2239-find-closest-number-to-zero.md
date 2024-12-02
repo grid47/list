@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2239 >}}
+{{< leetcode 1024 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-closest-number-to-zero/description/)
 

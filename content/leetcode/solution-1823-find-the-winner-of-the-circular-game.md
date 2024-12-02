@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1823 >}}
+{{< leetcode 815 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-winner-of-the-circular-game/description/)
 

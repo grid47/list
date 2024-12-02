@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 409 >}}
+{{< leetcode 189 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-palindrome/description/)
 

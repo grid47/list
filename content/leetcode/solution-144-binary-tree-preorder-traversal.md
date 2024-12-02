@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 144 >}}
+{{< leetcode 96 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-tree-preorder-traversal/description/)
 

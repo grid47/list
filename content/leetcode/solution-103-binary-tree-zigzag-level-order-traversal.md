@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 103 >}}
+{{< leetcode 71 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/)
 

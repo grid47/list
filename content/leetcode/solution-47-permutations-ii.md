@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 47 >}}
+{{< leetcode 34 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/permutations-ii/description/)
 

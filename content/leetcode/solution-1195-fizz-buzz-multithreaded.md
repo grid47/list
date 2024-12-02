@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1195 >}}
+{{< leetcode 538 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/fizz-buzz-multithreaded/description/)
 

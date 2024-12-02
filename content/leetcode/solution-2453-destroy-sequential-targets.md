@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2453 >}}
+{{< leetcode 1143 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/destroy-sequential-targets/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2817 >}}
+{{< leetcode 1329 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-absolute-difference-between-elements-with-constraint/description/)
 

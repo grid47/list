@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 238 >}}
+{{< leetcode 134 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/product-of-array-except-self/description/)
 

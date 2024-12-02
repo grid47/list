@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2186 >}}
+{{< leetcode 996 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram-ii/description/)
 

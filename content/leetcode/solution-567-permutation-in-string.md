@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 567 >}}
+{{< leetcode 255 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/permutation-in-string/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2235 >}}
+{{< leetcode 1022 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/add-two-integers/description/)
 

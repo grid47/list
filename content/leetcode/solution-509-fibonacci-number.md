@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 509 >}}
+{{< leetcode 226 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/fibonacci-number/description/)
 

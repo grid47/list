@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2129 >}}
+{{< leetcode 964 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/capitalize-the-title/description/)
 

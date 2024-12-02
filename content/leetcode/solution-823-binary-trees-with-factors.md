@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 823 >}}
+{{< leetcode 361 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-trees-with-factors/description/)
 

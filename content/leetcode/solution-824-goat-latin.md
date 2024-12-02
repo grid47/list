@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 824 >}}
+{{< leetcode 362 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/goat-latin/description/)
 

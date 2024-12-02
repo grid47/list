@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1869 >}}
+{{< leetcode 839 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longer-contiguous-segments-of-ones-than-zeros/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2639 >}}
+{{< leetcode 1250 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-width-of-columns-of-a-grid/description/)
 

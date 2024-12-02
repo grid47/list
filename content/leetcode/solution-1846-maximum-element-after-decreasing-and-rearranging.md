@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1846 >}}
+{{< leetcode 828 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-element-after-decreasing-and-rearranging/description/)
 

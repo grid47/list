@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2855 >}}
+{{< leetcode 1347 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-right-shifts-to-sort-the-array/description/)
 

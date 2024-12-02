@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1899 >}}
+{{< leetcode 852 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/merge-triplets-to-form-target-triplet/description/)
 

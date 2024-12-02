@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 973 >}}
+{{< leetcode 447 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/k-closest-points-to-origin/description/)
 

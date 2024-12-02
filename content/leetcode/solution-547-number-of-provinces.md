@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 547 >}}
+{{< leetcode 248 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-provinces/description/)
 

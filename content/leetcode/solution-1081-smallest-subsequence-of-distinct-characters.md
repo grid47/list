@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1081 >}}
+{{< leetcode 502 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-subsequence-of-distinct-characters/description/)
 

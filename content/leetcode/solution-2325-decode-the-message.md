@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2325 >}}
+{{< leetcode 1066 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/decode-the-message/description/)
 

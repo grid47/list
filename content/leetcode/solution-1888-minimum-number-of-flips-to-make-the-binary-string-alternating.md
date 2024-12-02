@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1888 >}}
+{{< leetcode 849 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-flips-to-make-the-binary-string-alternating/description/)
 

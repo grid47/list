@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1824 >}}
+{{< leetcode 816 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-sideway-jumps/description/)
 

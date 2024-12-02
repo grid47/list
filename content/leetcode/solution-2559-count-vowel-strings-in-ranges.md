@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2559 >}}
+{{< leetcode 1208 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-vowel-strings-in-ranges/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 105 >}}
+{{< leetcode 73 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/)
 

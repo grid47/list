@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2706 >}}
+{{< leetcode 1277 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/buy-two-chocolates/description/)
 

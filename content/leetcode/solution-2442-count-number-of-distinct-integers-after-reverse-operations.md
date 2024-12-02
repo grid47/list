@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2442 >}}
+{{< leetcode 1137 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-number-of-distinct-integers-after-reverse-operations/description/)
 

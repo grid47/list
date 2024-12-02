@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1880 >}}
+{{< leetcode 845 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-word-equals-summation-of-two-words/description/)
 

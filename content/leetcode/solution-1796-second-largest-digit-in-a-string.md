@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1796 >}}
+{{< leetcode 799 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/second-largest-digit-in-a-string/description/)
 

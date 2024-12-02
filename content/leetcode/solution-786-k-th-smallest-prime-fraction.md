@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 786 >}}
+{{< leetcode 339 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/k-th-smallest-prime-fraction/description/)
 

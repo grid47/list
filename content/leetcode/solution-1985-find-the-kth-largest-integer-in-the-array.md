@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1985 >}}
+{{< leetcode 894 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-kth-largest-integer-in-the-array/description/)
 

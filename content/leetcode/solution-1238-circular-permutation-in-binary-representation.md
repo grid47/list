@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1238 >}}
+{{< leetcode 553 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/circular-permutation-in-binary-representation/description/)
 

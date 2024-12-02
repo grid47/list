@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2894 >}}
+{{< leetcode 1362 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/divisible-and-non-divisible-sums-difference/description/)
 

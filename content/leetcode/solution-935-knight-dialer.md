@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 935 >}}
+{{< leetcode 425 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/knight-dialer/description/)
 

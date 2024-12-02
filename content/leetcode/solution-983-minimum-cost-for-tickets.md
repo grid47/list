@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 983 >}}
+{{< leetcode 453 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-cost-for-tickets/description/)
 

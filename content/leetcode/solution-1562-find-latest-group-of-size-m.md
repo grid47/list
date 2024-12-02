@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1562 >}}
+{{< leetcode 692 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-latest-group-of-size-m/description/)
 

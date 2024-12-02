@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2222 >}}
+{{< leetcode 1015 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-ways-to-select-buildings/description/)
 

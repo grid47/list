@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1292 >}}
+{{< leetcode 572 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold/description/)
 

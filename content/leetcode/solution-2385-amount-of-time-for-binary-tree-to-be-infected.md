@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2385 >}}
+{{< leetcode 1102 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected/description/)
 

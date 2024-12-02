@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1557 >}}
+{{< leetcode 689 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/description/)
 

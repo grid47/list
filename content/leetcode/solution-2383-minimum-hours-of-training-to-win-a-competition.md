@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2383 >}}
+{{< leetcode 1100 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-hours-of-training-to-win-a-competition/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2871 >}}
+{{< leetcode 1358 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/split-array-into-maximum-number-of-subarrays/description/)
 

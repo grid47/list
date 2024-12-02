@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1020 >}}
+{{< leetcode 475 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-enclaves/description/)
 

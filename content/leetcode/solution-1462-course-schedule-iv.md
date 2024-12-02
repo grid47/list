@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1462 >}}
+{{< leetcode 649 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/course-schedule-iv/description/)
 

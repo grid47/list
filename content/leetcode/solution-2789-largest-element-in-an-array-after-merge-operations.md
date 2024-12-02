@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2789 >}}
+{{< leetcode 1317 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-element-in-an-array-after-merge-operations/description/)
 

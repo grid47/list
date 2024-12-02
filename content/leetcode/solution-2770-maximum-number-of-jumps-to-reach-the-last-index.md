@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2770 >}}
+{{< leetcode 1308 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-jumps-to-reach-the-last-index/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 200 >}}
+{{< leetcode 111 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-islands/description/)
 

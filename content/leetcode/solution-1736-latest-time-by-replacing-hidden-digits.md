@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1736 >}}
+{{< leetcode 770 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/latest-time-by-replacing-hidden-digits/description/)
 

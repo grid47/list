@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3128 >}}
+{{< leetcode 1420 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/right-triangles/description/)
 

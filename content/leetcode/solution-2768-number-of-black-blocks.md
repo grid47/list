@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2768 >}}
+{{< leetcode 1306 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-black-blocks/description/)
 

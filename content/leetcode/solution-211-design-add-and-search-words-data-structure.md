@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 211 >}}
+{{< leetcode 120 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-add-and-search-words-data-structure/description/)
 

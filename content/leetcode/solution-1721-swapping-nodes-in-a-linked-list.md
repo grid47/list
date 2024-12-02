@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1721 >}}
+{{< leetcode 762 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/swapping-nodes-in-a-linked-list/description/)
 

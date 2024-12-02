@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1981 >}}
+{{< leetcode 892 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimize-the-difference-between-target-and-chosen-elements/description/)
 

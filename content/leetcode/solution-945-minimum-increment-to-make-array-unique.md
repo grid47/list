@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 945 >}}
+{{< leetcode 428 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-increment-to-make-array-unique/description/)
 

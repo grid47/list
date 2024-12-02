@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 190 >}}
+{{< leetcode 107 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reverse-bits/description/)
 

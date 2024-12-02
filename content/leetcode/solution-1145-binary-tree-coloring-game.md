@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1145 >}}
+{{< leetcode 526 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-tree-coloring-game/description/)
 

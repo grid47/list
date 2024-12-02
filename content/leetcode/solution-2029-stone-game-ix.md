@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2029 >}}
+{{< leetcode 919 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/stone-game-ix/description/)
 

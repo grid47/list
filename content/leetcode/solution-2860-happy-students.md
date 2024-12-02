@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2860 >}}
+{{< leetcode 1351 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/happy-students/description/)
 

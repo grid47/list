@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 813 >}}
+{{< leetcode 355 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-sum-of-averages/description/)
 

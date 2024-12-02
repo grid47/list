@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 893 >}}
+{{< leetcode 404 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/groups-of-special-equivalent-strings/description/)
 

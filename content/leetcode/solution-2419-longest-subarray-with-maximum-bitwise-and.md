@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2419 >}}
+{{< leetcode 1122 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-subarray-with-maximum-bitwise-and/description/)
 

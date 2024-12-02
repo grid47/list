@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2447 >}}
+{{< leetcode 1140 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-subarrays-with-gcd-equal-to-k/description/)
 

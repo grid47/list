@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1764 >}}
+{{< leetcode 786 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/form-array-by-concatenating-subarrays-of-another-array/description/)
 

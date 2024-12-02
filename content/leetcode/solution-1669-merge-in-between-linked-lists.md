@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1669 >}}
+{{< leetcode 736 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/merge-in-between-linked-lists/description/)
 

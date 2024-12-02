@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3137 >}}
+{{< leetcode 1423 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-operations-to-make-word-k-periodic/description/)
 

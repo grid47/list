@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2961 >}}
+{{< leetcode 1400 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/double-modular-exponentiation/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 779 >}}
+{{< leetcode 335 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/k-th-symbol-in-grammar/description/)
 

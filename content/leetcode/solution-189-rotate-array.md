@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 189 >}}
+{{< leetcode 106 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rotate-array/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3146 >}}
+{{< leetcode 1425 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/permutation-difference-between-two-strings/description/)
 

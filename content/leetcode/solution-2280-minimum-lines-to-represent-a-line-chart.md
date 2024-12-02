@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2280 >}}
+{{< leetcode 1048 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-lines-to-represent-a-line-chart/description/)
 

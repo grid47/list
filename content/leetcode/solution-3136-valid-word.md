@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3136 >}}
+{{< leetcode 1422 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/valid-word/description/)
 

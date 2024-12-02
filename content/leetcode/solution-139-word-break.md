@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 139 >}}
+{{< leetcode 92 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/word-break/description/)
 

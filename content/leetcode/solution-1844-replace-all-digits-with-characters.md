@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1844 >}}
+{{< leetcode 826 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/replace-all-digits-with-characters/description/)
 

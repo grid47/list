@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2211 >}}
+{{< leetcode 1008 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-collisions-on-a-road/description/)
 

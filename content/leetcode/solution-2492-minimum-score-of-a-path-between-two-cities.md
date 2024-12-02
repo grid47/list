@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2492 >}}
+{{< leetcode 1167 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-score-of-a-path-between-two-cities/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1664 >}}
+{{< leetcode 734 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/ways-to-make-a-fair-array/description/)
 

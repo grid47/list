@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1052 >}}
+{{< leetcode 494 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/grumpy-bookstore-owner/description/)
 

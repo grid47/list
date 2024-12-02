@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2614 >}}
+{{< leetcode 1247 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/prime-in-diagonal/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 703 >}}
+{{< leetcode 302 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/kth-largest-element-in-a-stream/description/)
 

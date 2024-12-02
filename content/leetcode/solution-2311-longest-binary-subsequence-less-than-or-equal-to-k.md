@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2311 >}}
+{{< leetcode 1060 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-binary-subsequence-less-than-or-equal-to-k/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 852 >}}
+{{< leetcode 379 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/peak-index-in-a-mountain-array/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2861 >}}
+{{< leetcode 1352 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-alloys/description/)
 

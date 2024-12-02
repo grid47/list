@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2678 >}}
+{{< leetcode 1268 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-senior-citizens/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2844 >}}
+{{< leetcode 1342 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-operations-to-make-a-special-number/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2562 >}}
+{{< leetcode 1210 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-array-concatenation-value/description/)
 

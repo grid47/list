@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 519 >}}
+{{< leetcode 231 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/random-flip-matrix/description/)
 

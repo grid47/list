@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 494 >}}
+{{< leetcode 221 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/target-sum/description/)
 

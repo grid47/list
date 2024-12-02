@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 9 >}}
+{{< leetcode 8 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/palindrome-number/description/)
 

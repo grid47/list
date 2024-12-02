@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 969 >}}
+{{< leetcode 444 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/pancake-sorting/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 962 >}}
+{{< leetcode 440 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-width-ramp/description/)
 

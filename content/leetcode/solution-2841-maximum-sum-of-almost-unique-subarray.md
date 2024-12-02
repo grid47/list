@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2841 >}}
+{{< leetcode 1340 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-sum-of-almost-unique-subarray/description/)
 

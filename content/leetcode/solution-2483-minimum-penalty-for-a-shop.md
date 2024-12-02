@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2483 >}}
+{{< leetcode 1161 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-penalty-for-a-shop/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1079 >}}
+{{< leetcode 500 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/letter-tile-possibilities/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2933 >}}
+{{< leetcode 1384 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/high-access-employees/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1590 >}}
+{{< leetcode 702 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/make-sum-divisible-by-p/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2411 >}}
+{{< leetcode 1117 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-subarrays-with-maximum-bitwise-or/description/)
 

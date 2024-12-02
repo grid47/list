@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2170 >}}
+{{< leetcode 987 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-operations-to-make-the-array-alternating/description/)
 

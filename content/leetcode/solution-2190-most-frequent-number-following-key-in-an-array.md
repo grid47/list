@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2190 >}}
+{{< leetcode 998 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/most-frequent-number-following-key-in-an-array/description/)
 

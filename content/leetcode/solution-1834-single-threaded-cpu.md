@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1834 >}}
+{{< leetcode 822 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/single-threaded-cpu/description/)
 

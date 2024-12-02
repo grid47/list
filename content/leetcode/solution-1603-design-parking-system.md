@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1603 >}}
+{{< leetcode 708 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-parking-system/description/)
 

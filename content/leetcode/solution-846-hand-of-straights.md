@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 846 >}}
+{{< leetcode 376 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/hand-of-straights/description/)
 

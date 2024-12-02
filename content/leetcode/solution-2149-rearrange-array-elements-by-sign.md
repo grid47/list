@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2149 >}}
+{{< leetcode 977 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rearrange-array-elements-by-sign/description/)
 

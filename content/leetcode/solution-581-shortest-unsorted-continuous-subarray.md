@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 581 >}}
+{{< leetcode 258 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shortest-unsorted-continuous-subarray/description/)
 

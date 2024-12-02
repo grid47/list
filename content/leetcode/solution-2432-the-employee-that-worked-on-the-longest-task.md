@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2432 >}}
+{{< leetcode 1130 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-employee-that-worked-on-the-longest-task/description/)
 

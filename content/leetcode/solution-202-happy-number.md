@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 202 >}}
+{{< leetcode 113 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/happy-number/description/)
 

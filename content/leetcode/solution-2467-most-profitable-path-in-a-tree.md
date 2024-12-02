@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2467 >}}
+{{< leetcode 1152 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/most-profitable-path-in-a-tree/description/)
 

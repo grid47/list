@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 990 >}}
+{{< leetcode 457 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/satisfiability-of-equality-equations/description/)
 

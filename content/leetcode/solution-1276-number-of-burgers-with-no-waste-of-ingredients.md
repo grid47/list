@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1276 >}}
+{{< leetcode 565 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-burgers-with-no-waste-of-ingredients/description/)
 

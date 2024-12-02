@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 652 >}}
+{{< leetcode 281 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-duplicate-subtrees/description/)
 

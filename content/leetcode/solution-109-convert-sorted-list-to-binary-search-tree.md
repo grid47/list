@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 109 >}}
+{{< leetcode 75 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/description/)
 

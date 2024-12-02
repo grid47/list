@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2022 >}}
+{{< leetcode 914 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/convert-1d-array-into-2d-array/description/)
 

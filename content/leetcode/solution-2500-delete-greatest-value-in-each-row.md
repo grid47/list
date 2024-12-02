@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2500 >}}
+{{< leetcode 1171 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/delete-greatest-value-in-each-row/description/)
 

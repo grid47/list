@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 670 >}}
+{{< leetcode 289 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-swap/description/)
 

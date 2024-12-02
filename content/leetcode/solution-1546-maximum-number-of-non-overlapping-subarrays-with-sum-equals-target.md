@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1546 >}}
+{{< leetcode 686 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-non-overlapping-subarrays-with-sum-equals-target/description/)
 

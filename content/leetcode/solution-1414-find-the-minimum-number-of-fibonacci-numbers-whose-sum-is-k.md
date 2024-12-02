@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1414 >}}
+{{< leetcode 627 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k/description/)
 

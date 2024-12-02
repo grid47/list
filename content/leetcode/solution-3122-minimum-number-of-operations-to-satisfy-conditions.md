@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3122 >}}
+{{< leetcode 1418 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-operations-to-satisfy-conditions/description/)
 

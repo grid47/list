@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1447 >}}
+{{< leetcode 642 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/simplified-fractions/description/)
 

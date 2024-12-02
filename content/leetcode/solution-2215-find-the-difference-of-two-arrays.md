@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2215 >}}
+{{< leetcode 1010 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-difference-of-two-arrays/description/)
 

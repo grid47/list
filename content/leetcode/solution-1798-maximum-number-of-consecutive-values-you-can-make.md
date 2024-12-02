@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1798 >}}
+{{< leetcode 801 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-consecutive-values-you-can-make/description/)
 

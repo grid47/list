@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 808 >}}
+{{< leetcode 352 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/soup-servings/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2337 >}}
+{{< leetcode 1074 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/move-pieces-to-obtain-a-string/description/)
 

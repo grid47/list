@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 78 >}}
+{{< leetcode 56 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/subsets/description/)
 

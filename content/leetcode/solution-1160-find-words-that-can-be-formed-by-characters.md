@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1160 >}}
+{{< leetcode 530 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-words-that-can-be-formed-by-characters/description/)
 

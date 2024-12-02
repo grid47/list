@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2053 >}}
+{{< leetcode 930 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/kth-distinct-string-in-an-array/description/)
 

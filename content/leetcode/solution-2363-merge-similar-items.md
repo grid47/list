@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2363 >}}
+{{< leetcode 1087 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/merge-similar-items/description/)
 

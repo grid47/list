@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 435 >}}
+{{< leetcode 200 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/non-overlapping-intervals/description/)
 

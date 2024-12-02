@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 713 >}}
+{{< leetcode 307 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/subarray-product-less-than-k/description/)
 

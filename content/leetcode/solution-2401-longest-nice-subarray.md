@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2401 >}}
+{{< leetcode 1111 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-nice-subarray/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1438 >}}
+{{< leetcode 638 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/description/)
 

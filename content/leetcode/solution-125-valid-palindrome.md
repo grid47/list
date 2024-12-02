@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 125 >}}
+{{< leetcode 83 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/valid-palindrome/description/)
 

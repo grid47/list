@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 785 >}}
+{{< leetcode 338 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/is-graph-bipartite/description/)
 

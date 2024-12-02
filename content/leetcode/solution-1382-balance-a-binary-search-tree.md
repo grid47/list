@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1382 >}}
+{{< leetcode 613 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/balance-a-binary-search-tree/description/)
 

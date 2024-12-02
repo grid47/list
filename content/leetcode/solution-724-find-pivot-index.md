@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 724 >}}
+{{< leetcode 313 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-pivot-index/description/)
 

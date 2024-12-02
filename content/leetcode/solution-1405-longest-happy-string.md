@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1405 >}}
+{{< leetcode 624 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-happy-string/description/)
 

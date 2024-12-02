@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2816 >}}
+{{< leetcode 1328 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/double-a-number-represented-as-a-linked-list/description/)
 

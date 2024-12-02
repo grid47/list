@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2181 >}}
+{{< leetcode 993 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/merge-nodes-in-between-zeros/description/)
 

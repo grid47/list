@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1684 >}}
+{{< leetcode 743 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-number-of-consistent-strings/description/)
 

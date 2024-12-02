@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1647 >}}
+{{< leetcode 725 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-deletions-to-make-character-frequencies-unique/description/)
 

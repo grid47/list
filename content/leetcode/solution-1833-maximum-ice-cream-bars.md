@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1833 >}}
+{{< leetcode 821 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-ice-cream-bars/description/)
 

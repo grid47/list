@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 79 >}}
+{{< leetcode 57 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/word-search/description/)
 

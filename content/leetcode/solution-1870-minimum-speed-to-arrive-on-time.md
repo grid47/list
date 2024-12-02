@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1870 >}}
+{{< leetcode 840 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-speed-to-arrive-on-time/description/)
 

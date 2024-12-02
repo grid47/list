@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 24 >}}
+{{< leetcode 20 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/swap-nodes-in-pairs/description/)
 

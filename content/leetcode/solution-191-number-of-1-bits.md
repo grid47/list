@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 191 >}}
+{{< leetcode 108 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-1-bits/description/)
 

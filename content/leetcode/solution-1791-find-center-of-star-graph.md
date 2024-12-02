@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1791 >}}
+{{< leetcode 797 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-center-of-star-graph/description/)
 

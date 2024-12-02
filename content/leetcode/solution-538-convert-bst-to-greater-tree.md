@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 538 >}}
+{{< leetcode 243 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/convert-bst-to-greater-tree/description/)
 

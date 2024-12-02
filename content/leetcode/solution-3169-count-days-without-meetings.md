@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3169 >}}
+{{< leetcode 1429 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-days-without-meetings/description/)
 

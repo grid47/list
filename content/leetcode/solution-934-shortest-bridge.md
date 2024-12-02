@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 934 >}}
+{{< leetcode 424 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shortest-bridge/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2316 >}}
+{{< leetcode 1062 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-unreachable-pairs-of-nodes-in-an-undirected-graph/description/)
 

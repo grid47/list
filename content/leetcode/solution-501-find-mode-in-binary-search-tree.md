@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 501 >}}
+{{< leetcode 224 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-mode-in-binary-search-tree/description/)
 

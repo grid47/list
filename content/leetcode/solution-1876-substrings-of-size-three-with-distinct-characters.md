@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1876 >}}
+{{< leetcode 842 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/substrings-of-size-three-with-distinct-characters/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2044 >}}
+{{< leetcode 926 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-number-of-maximum-bitwise-or-subsets/description/)
 

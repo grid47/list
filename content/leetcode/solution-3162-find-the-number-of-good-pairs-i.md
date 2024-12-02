@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3162 >}}
+{{< leetcode 1426 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-number-of-good-pairs-i/description/)
 

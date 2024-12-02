@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 863 >}}
+{{< leetcode 387 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/description/)
 

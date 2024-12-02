@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1626 >}}
+{{< leetcode 718 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/best-team-with-no-conflicts/description/)
 

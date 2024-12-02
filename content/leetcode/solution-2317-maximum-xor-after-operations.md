@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2317 >}}
+{{< leetcode 1063 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-xor-after-operations/description/)
 

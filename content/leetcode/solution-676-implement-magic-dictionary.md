@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 676 >}}
+{{< leetcode 292 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/implement-magic-dictionary/description/)
 

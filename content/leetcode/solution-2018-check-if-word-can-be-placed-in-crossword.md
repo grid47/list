@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2018 >}}
+{{< leetcode 913 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-word-can-be-placed-in-crossword/description/)
 

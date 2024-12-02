@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2333 >}}
+{{< leetcode 1071 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-sum-of-squared-difference/description/)
 

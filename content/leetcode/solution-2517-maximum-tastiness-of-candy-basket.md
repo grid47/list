@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2517 >}}
+{{< leetcode 1181 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-tastiness-of-candy-basket/description/)
 

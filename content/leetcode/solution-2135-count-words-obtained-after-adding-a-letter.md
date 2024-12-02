@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2135 >}}
+{{< leetcode 969 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-words-obtained-after-adding-a-letter/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1609 >}}
+{{< leetcode 711 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/even-odd-tree/description/)
 

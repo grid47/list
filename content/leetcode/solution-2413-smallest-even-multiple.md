@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2413 >}}
+{{< leetcode 1118 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-even-multiple/description/)
 

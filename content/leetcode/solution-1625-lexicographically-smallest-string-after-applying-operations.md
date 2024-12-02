@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1625 >}}
+{{< leetcode 717 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/lexicographically-smallest-string-after-applying-operations/description/)
 

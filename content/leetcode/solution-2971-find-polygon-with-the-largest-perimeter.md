@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2971 >}}
+{{< leetcode 1404 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-polygon-with-the-largest-perimeter/description/)
 

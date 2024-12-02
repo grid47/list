@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 6 >}}
+{{< leetcode 5 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/zigzag-conversion/description/)
 

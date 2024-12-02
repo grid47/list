@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 593 >}}
+{{< leetcode 262 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/valid-square/description/)
 

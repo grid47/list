@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2353 >}}
+{{< leetcode 1083 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-a-food-rating-system/description/)
 

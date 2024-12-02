@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 67 >}}
+{{< leetcode 48 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/add-binary/description/)
 

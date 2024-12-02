@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2729 >}}
+{{< leetcode 1286 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-the-number-is-fascinating/description/)
 

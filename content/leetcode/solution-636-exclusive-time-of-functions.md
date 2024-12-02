@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 636 >}}
+{{< leetcode 272 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/exclusive-time-of-functions/description/)
 

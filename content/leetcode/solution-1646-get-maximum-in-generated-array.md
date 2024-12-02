@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1646 >}}
+{{< leetcode 724 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/get-maximum-in-generated-array/description/)
 

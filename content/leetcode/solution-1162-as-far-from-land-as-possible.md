@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1162 >}}
+{{< leetcode 532 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/as-far-from-land-as-possible/description/)
 

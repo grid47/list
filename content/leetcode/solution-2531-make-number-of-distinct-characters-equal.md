@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2531 >}}
+{{< leetcode 1191 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/make-number-of-distinct-characters-equal/description/)
 

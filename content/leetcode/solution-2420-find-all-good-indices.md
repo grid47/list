@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2420 >}}
+{{< leetcode 1123 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-all-good-indices/description/)
 

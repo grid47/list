@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2583 >}}
+{{< leetcode 1226 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/kth-largest-sum-in-a-binary-tree/description/)
 

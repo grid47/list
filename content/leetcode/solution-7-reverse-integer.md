@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 7 >}}
+{{< leetcode 6 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reverse-integer/description/)
 

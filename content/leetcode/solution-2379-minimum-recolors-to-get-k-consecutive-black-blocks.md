@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2379 >}}
+{{< leetcode 1097 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-recolors-to-get-k-consecutive-black-blocks/description/)
 

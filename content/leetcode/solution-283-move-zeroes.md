@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 283 >}}
+{{< leetcode 140 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/move-zeroes/description/)
 

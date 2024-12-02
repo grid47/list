@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2476 >}}
+{{< leetcode 1157 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/closest-nodes-queries-in-a-binary-search-tree/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2951 >}}
+{{< leetcode 1394 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-peaks/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2425 >}}
+{{< leetcode 1126 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/bitwise-xor-of-all-pairings/description/)
 

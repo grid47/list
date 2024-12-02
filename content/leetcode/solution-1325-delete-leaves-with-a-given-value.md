@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1325 >}}
+{{< leetcode 585 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/delete-leaves-with-a-given-value/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1750 >}}
+{{< leetcode 778 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-length-of-string-after-deleting-similar-ends/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 738 >}}
+{{< leetcode 319 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/monotone-increasing-digits/description/)
 

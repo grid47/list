@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2526 >}}
+{{< leetcode 1187 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-consecutive-integers-from-a-data-stream/description/)
 

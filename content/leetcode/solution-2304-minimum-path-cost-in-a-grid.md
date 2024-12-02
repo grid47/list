@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2304 >}}
+{{< leetcode 1057 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-path-cost-in-a-grid/description/)
 

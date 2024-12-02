@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2960 >}}
+{{< leetcode 1399 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-tested-devices-after-test-operations/description/)
 

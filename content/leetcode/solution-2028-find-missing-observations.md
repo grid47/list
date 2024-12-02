@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2028 >}}
+{{< leetcode 918 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-missing-observations/description/)
 

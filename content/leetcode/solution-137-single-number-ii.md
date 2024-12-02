@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 137 >}}
+{{< leetcode 90 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/single-number-ii/description/)
 

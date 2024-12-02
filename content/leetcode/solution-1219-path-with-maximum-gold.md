@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1219 >}}
+{{< leetcode 545 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/path-with-maximum-gold/description/)
 

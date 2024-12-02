@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 399 >}}
+{{< leetcode 185 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/evaluate-division/description/)
 

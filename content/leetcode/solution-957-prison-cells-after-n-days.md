@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 957 >}}
+{{< leetcode 437 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/prison-cells-after-n-days/description/)
 

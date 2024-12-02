@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 19 >}}
+{{< leetcode 16 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/)
 

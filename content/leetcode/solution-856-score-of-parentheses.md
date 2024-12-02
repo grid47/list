@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 856 >}}
+{{< leetcode 382 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/score-of-parentheses/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1774 >}}
+{{< leetcode 791 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/closest-dessert-cost/description/)
 

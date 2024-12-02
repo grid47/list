@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1995 >}}
+{{< leetcode 899 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-special-quadruplets/description/)
 

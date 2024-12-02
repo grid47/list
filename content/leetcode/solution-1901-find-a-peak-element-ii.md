@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1901 >}}
+{{< leetcode 853 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-a-peak-element-ii/description/)
 

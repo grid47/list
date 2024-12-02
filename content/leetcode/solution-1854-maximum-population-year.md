@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1854 >}}
+{{< leetcode 832 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-population-year/description/)
 

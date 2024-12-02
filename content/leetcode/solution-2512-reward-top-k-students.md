@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2512 >}}
+{{< leetcode 1177 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reward-top-k-students/description/)
 

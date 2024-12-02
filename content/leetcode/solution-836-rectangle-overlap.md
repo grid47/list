@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 836 >}}
+{{< leetcode 368 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rectangle-overlap/description/)
 

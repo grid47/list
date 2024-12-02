@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 454 >}}
+{{< leetcode 210 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/4sum-ii/description/)
 

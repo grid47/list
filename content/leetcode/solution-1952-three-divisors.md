@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1952 >}}
+{{< leetcode 877 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/three-divisors/description/)
 

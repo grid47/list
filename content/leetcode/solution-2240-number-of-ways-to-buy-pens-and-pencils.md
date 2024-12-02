@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2240 >}}
+{{< leetcode 1025 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-ways-to-buy-pens-and-pencils/description/)
 

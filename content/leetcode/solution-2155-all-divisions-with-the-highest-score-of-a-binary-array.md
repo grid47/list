@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2155 >}}
+{{< leetcode 980 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/all-divisions-with-the-highest-score-of-a-binary-array/description/)
 

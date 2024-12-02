@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1409 >}}
+{{< leetcode 625 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/queries-on-a-permutation-with-key/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1941 >}}
+{{< leetcode 872 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences/description/)
 

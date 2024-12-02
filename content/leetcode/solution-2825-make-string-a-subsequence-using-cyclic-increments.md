@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2825 >}}
+{{< leetcode 1331 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/make-string-a-subsequence-using-cyclic-increments/description/)
 

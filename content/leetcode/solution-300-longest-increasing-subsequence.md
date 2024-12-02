@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 300 >}}
+{{< leetcode 142 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-increasing-subsequence/description/)
 

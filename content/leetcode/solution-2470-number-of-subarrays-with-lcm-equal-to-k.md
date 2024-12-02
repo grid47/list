@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2470 >}}
+{{< leetcode 1154 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-subarrays-with-lcm-equal-to-k/description/)
 

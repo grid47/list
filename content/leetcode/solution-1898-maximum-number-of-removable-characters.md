@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1898 >}}
+{{< leetcode 851 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-removable-characters/description/)
 

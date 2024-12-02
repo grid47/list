@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1254 >}}
+{{< leetcode 559 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-closed-islands/description/)
 

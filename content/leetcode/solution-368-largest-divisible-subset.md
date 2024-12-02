@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 368 >}}
+{{< leetcode 161 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-divisible-subset/description/)
 

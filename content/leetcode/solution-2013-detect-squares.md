@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2013 >}}
+{{< leetcode 910 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/detect-squares/description/)
 

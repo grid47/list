@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1014 >}}
+{{< leetcode 470 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/best-sightseeing-pair/description/)
 

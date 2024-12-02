@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2570 >}}
+{{< leetcode 1216 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/merge-two-2d-arrays-by-summing-values/description/)
 

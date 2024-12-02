@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1314 >}}
+{{< leetcode 581 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/matrix-block-sum/description/)
 

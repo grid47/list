@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 981 >}}
+{{< leetcode 452 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/time-based-key-value-store/description/)
 

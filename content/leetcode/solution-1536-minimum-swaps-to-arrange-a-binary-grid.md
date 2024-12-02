@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1536 >}}
+{{< leetcode 682 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-swaps-to-arrange-a-binary-grid/description/)
 

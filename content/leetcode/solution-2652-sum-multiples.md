@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2652 >}}
+{{< leetcode 1257 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-multiples/description/)
 

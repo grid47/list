@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 958 >}}
+{{< leetcode 438 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-completeness-of-a-binary-tree/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2708 >}}
+{{< leetcode 1279 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-strength-of-a-group/description/)
 

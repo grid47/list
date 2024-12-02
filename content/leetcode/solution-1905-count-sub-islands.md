@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1905 >}}
+{{< leetcode 856 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-sub-islands/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2109 >}}
+{{< leetcode 956 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/adding-spaces-to-a-string/description/)
 

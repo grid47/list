@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3081 >}}
+{{< leetcode 1411 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/replace-question-marks-in-string-to-minimize-its-value/description/)
 

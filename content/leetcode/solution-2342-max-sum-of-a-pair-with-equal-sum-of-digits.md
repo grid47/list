@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2342 >}}
+{{< leetcode 1076 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/max-sum-of-a-pair-with-equal-sum-of-digits/description/)
 

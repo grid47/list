@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2828 >}}
+{{< leetcode 1333 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-a-string-is-an-acronym-of-words/description/)
 

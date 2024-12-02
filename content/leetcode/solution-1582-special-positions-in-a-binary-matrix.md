@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1582 >}}
+{{< leetcode 698 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/special-positions-in-a-binary-matrix/description/)
 

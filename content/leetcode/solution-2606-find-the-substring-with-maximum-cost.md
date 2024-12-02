@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2606 >}}
+{{< leetcode 1242 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-substring-with-maximum-cost/description/)
 

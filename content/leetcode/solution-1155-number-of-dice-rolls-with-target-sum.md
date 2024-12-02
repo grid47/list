@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1155 >}}
+{{< leetcode 528 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-dice-rolls-with-target-sum/description/)
 

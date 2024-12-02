@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 678 >}}
+{{< leetcode 294 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/valid-parenthesis-string/description/)
 

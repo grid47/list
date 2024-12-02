@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2610 >}}
+{{< leetcode 1245 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/convert-an-array-into-a-2d-array-with-conditions/description/)
 

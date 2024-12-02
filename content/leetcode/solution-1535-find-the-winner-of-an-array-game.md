@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1535 >}}
+{{< leetcode 681 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-winner-of-an-array-game/description/)
 

@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 77 >}}
+{{< leetcode 55 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/combinations/description/)
 

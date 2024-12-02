@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2938 >}}
+{{< leetcode 1387 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/separate-black-and-white-balls/description/)
 

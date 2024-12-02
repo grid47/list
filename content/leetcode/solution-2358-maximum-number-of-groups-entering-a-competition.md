@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2358 >}}
+{{< leetcode 1085 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-groups-entering-a-competition/description/)
 

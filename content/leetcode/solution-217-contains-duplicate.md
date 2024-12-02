@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 217 >}}
+{{< leetcode 123 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/contains-duplicate/description/)
 

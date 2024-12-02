@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1318 >}}
+{{< leetcode 583 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-flips-to-make-a-or-b-equal-to-c/description/)
 

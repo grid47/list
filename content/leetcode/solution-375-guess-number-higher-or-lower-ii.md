@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 375 >}}
+{{< leetcode 165 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/guess-number-higher-or-lower-ii/description/)
 

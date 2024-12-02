@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 762 >}}
+{{< leetcode 328 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/prime-number-of-set-bits-in-binary-representation/description/)
 

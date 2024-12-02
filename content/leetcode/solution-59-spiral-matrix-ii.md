@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 59 >}}
+{{< leetcode 43 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/spiral-matrix-ii/description/)
 

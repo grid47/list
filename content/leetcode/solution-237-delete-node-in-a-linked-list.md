@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 237 >}}
+{{< leetcode 133 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/delete-node-in-a-linked-list/description/)
 

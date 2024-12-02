@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 592 >}}
+{{< leetcode 261 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/fraction-addition-and-subtraction/description/)
 

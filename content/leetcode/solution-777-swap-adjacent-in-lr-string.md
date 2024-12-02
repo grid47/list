@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 777 >}}
+{{< leetcode 334 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/swap-adjacent-in-lr-string/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2919 >}}
+{{< leetcode 1379 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-increment-operations-to-make-array-beautiful/description/)
 

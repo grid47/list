@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2405 >}}
+{{< leetcode 1113 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/optimal-partition-of-string/description/)
 

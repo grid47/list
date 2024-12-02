@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 648 >}}
+{{< leetcode 279 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/replace-words/description/)
 

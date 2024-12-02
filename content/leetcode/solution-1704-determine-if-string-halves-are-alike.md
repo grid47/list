@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1704 >}}
+{{< leetcode 754 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/determine-if-string-halves-are-alike/description/)
 

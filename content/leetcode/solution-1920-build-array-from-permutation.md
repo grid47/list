@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1920 >}}
+{{< leetcode 863 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/build-array-from-permutation/description/)
 

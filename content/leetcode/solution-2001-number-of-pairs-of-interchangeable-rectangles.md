@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2001 >}}
+{{< leetcode 903 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-pairs-of-interchangeable-rectangles/description/)
 

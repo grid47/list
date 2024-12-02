@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 104 >}}
+{{< leetcode 72 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-depth-of-binary-tree/description/)
 

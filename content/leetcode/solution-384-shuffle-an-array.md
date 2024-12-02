@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 384 >}}
+{{< leetcode 172 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shuffle-an-array/description/)
 

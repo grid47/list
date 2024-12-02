@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 390 >}}
+{{< leetcode 177 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/elimination-game/description/)
 

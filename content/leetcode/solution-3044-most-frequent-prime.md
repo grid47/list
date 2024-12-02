@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 3044 >}}
+{{< leetcode 1409 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/most-frequent-prime/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2434 >}}
+{{< leetcode 1132 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/using-a-robot-to-print-the-lexicographically-smallest-string/description/)
 

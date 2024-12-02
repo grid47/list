@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1177 >}}
+{{< leetcode 535 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/can-make-palindrome-from-substring/description/)
 

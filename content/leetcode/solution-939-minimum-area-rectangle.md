@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 939 >}}
+{{< leetcode 427 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-area-rectangle/description/)
 

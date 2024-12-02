@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1138 >}}
+{{< leetcode 521 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/alphabet-board-path/description/)
 

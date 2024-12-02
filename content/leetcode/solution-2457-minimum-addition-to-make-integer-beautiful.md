@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2457 >}}
+{{< leetcode 1146 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-addition-to-make-integer-beautiful/description/)
 

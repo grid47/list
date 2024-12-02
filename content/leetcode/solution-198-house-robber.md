@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 198 >}}
+{{< leetcode 109 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/house-robber/description/)
 

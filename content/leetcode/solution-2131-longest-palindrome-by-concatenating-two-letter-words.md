@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2131 >}}
+{{< leetcode 966 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-palindrome-by-concatenating-two-letter-words/description/)
 

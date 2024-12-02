@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2226 >}}
+{{< leetcode 1018 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-candies-allocated-to-k-children/description/)
 

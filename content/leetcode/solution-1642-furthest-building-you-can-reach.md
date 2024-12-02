@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 1642 >}}
+{{< leetcode 723 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/furthest-building-you-can-reach/description/)
 

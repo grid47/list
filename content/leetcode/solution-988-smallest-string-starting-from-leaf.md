@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 988 >}}
+{{< leetcode 456 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-string-starting-from-leaf/description/)
 

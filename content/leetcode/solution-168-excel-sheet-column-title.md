@@ -28,7 +28,7 @@ comments = true
     captionColor="#555"
 >}}
 ---
-{{< leetcode 168 >}}
+{{< leetcode 104 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/excel-sheet-column-title/description/)
 

@@ -20,7 +20,7 @@ comments = true
 
 
 ---
-{{< leetcode 2374 >}}
+{{< leetcode 1095 >}}
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/node-with-highest-edge-score/description/)
 
